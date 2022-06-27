@@ -1,0 +1,73 @@
+.container {
+  height: 200px;
+  position: relative;
+  border: 3px solid green;
+}
+
+.vertical-center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.button-1 {
+  margin: 0;
+  position: absolute;
+  left: 30%;
+  -ms-transform: translateX(50%);
+  transform: translateX(50%);
+}
+
+.button-2 {
+  margin: 0;
+  position: absolute;
+  left: 40%;
+  -ms-transform: translateX(50%);
+  transform: translateX(50%);
+}
+
+.button-3 {
+  margin: 0;
+  position: absolute;
+  left: 50%;
+  -ms-transform: translateX(50%);
+  transform: translateX(50%);
+}
+
+.button-4 {
+  margin: 0;
+  position: absolute;
+  left: 60%;
+  -ms-transform: translateX(50%);
+  transform: translateX(50%);
+}
+
+html {
+    font-family:arial;    
+}
+
+a:link {
+  color: red;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:visited {
+  color: blue;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:hover {
+  color: purple;
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+a:active {
+  color: yellow;
+  background-color: transparent;
+  text-decoration: underline;
+}
