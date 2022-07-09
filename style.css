@@ -1,5 +1,5 @@
 .background_image {
-    background-image: url(pictures/b4_stars.png);
+    background-image: url(Pictures/b4_stars.png);
     height: 145px;
 /*    width: 300px;
 */    background-size: cover;
@@ -223,7 +223,7 @@ a:active {
 /* Footer */
 .footer {
   padding: 80px;
-  background-image: url(pictures/contactstars.png);
+  background-image: url(Pictures/contactstars.png);
   text-align: center;
 /*  background: #000; 
 */}
@@ -328,7 +328,7 @@ a:active {
     line-height: 1.5;
     color: #ffffff;
     text-align: left;
-    background-image: url(pictures/contactstars.png);
+    background-image: url(Pictures/contactstars.png);
     padding: 30px;
     padding-bottom: 10px;
     border: 1px solid #ced4da;
