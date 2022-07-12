@@ -2,7 +2,16 @@
     background-image: url(Pictures/b4_stars.png);
     height: 145px;
 /*    width: 300px;
-*/    background-size: cover;
+*/  background-size: cover;
+    overflow: visible;
+}
+
+.header {
+  padding: 0px;
+  text-align:left;
+  color: white;
+  overflow: visible;
+
 }
 
 .x {
@@ -23,17 +32,6 @@
     display: inline;
 }
 
-.header {
-  padding: 8px;
-  text-align:left;
-  color: white;
-}
-
-/*.container {
-  height: 200px;
-  position: relative;*/
-/*  border: 3px solid green;
-*/}
 
 .vertical-center {
   margin: 0;
@@ -222,7 +220,7 @@ a:active {
 
 /* Footer */
 .footer {
-  padding: 80px;
+  padding: 40px;
   background-image: url(Pictures/contactstars.png);
   text-align: center;
 /*  background: #000; 
@@ -538,4 +536,10 @@ display:block;
   background-color: #2196F3;
   opacity: 0.7;
   border-radius: 50%;
+}
+
+.bottom-right {
+  position: absolute;
+  bottom: 1%;
+  right: 0%;
 }
