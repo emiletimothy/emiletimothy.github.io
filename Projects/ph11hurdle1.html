@@ -2,11 +2,22 @@
 <html lang="en">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<body style="background-color:#f1f1f1;">
-<head>
+<body class="w3-light-grey">
 <title>Emile Timothy</title>
-<link rel="stylesheet" type="text/css" href="projects_stylesheet.css">  
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" type="text/css" href="../style.css">  
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open Sans">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head> 
+  <style>
+    h1,h2,h3,h4,h5,h6 {font-family: "Oswald"}
+    body {font-family: "Open Sans"}
+    html {
+      scroll-behavior: smooth;
+    }
+    </style>
+
 <div class="background_image">
 <div class="header">
     <div>
@@ -19,28 +30,93 @@
 </div>
 </div>
 
-<style>
-h3 {
-  text-align: center;
-}
-</style>
-
 <div class="navbar">
-  <a href="../index.html" class="active">Home</a>
+  <a href="../index.html">Home</a>
   <a href="../about-me.html">About Me</a>
-  <a href="../projects.html">Projects</a>
+  <a href="../projects.html" class="active">Projects</a>
   <a href="../blog.html">Blog</a>
   <a href="../talks.html">Talks</a>
+  <a href="../outreach.html">Outreach</a>
+  <a href="../gallery.html">Gallery</a>
   <a href="../CV.html">CV</a>
   <a href="../contact.html">Contact</a>
-</div><div class="container"> <a>
-<!-- <img src="blog_pics/ising_header4.png" style="width:100%;height:50%"><div class="centered" style="color:white";>Centered</div> -->
-
-<div class="centered main_column" style="color:black">
-Here we are
 </div>
 
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<style>
+.image-container {
+  background-image: url("../Pictures/caltech_pictures/annenberg_with_trees.jpg"); /* The image used - important! */
+  background-size: cover;
+  position: relative; /* Needed to position the cutout text in the middle of the image */
+  height: 100%; /* Some height */
+}
+
+.text {
+  background-color: white;
+  color: black;
+  font-size: 5vw; /* Responsive font size */
+  font-weight: bold;
+  margin: 0 auto; /* Center the text container */
+  padding: 10px;
+  width: 50%;
+  text-align: center; /* Center text */
+  position: absolute; /* Position text */
+  top: 15%; /* Position text in the middle */
+  left: 50%; /* Position text in the middle */
+  transform: translate(-50%, -50%); /* Position text in the middle */
+  mix-blend-mode: screen; /* This makes the cutout text possible */
+}
+
+.centerph11 {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+.centertitleph11 {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 58%;
+}
+
+.centertitle1ph11 {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 30%;
+}
+
+</style>
+
+<div class="image-container">
+  <div class="text">Physics 11 Hurdles</div>
+</div>
+<div class="w3-row w3-padding">
+  <div class="w3-col l9 s12">
+    <div class="w3-container w3-white w3-margin w3-padding-large">
+      <div class="w3">
+        <p1>There's a renowned freshman course at Caltech called "<a href="https://www.quora.com/What-is-it-like-to-take-Caltechs-Physics-11-class">Physics 11</a>", which is a kind of think tank to get students involved in research early, and to explore interesting ideas. The catch is that to get in, you'd have to submit solutions to two 'hurdles', which are open-ended questions that you're meant to think carefully about, and only the students with the most creative solutions are awarded entry into the class. Every year, about 50 students submit solutions to the hurdles, and only 4-6 people get in - so, I was shocked and delighted when I found out that my solutions had been accepted. During the 3-quarter sequence, we met every Tuesday evening to talk about current research across science, and would often create our own models which we sketched out on a blackboard. It was a privilege to learn from Professors <a href="https://www.rpgroup.caltech.edu/">Rob Phillips</a> and <a href="https://en.wikipedia.org/wiki/David_J._Stevenson">Dave Stevenson</a> about the methods by which new scientific research ideas originated and to get intuition for ways to develop them. I was also fortunate to get awarded with a Physics 11 fellowship to pursue a research project during the Summer of 2020 with <a href="https://www.ligo.caltech.edu/">LIGO</a> and <a href="https://labcit.ligo.caltech.edu/~rana/">Prof. Rana Adhikari</a>, where I worked on developing an "acoustic invisibility cloak" for the gravitational-wave detector. <br><br>Here, I present my solutions to the Physics 11 hurdles for the 2019-2020 academic year.<br><br></p1>
+      </div>
+
+      <h3 class="centertitleph11"> Hurdle 1: Airline Traffic at San Francisco International Airport</h3>
+      <div class="w3-justify">
+      <img src="ProjectPictures/ph11_airplane_coverpic.png" alt="Picture of me at Annenberg" style="width:40%;" class="w3-padding-16 centerph11 zoom">
+      </div>
+
+      <br><br><br>
+
+      <h3 class="centertitle1ph11"> Hurdle 2: Fire in the Serengeti</h3>
+      <div class="w3-justify">
+      <img src="ProjectPictures/ph11_rinderpest_coverpic.png" alt="Picture of me at Annenberg" style="width:40%;" class="w3-padding-16 centerph11 zoom">
+      </div>
+<br>
+    </div>
+  </div>
+</div>
+ 
+
+
 
 
 
