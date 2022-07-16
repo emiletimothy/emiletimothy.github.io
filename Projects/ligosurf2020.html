@@ -43,38 +43,6 @@
 </div>
 
 <style>
-.image-container {
-  background-image: url("../Pictures/caltech_pictures/annenberg_with_trees.jpg"); /* The image used - important! */
-  background-size: cover;
-  position: relative; /* Needed to position the cutout text in the middle of the image */
-  height: 80%; /* Some height */
-}
-
-.text {
-  background-color: white;
-  color: black;
-  font-size: 5vw; /* Responsive font size */
-  font-weight: bold;
-  margin: 0 auto; /* Center the text container */
-  padding: 10px;
-  width: 60%;
-  text-align: center; /* Center text */
-  position: absolute; /* Position text */
-  top: 15%; /* Position text in the middle */
-  left: 50%; /* Position text in the middle */
-  transform: translate(-50%, -50%); /* Position text in the middle */
-  mix-blend-mode: screen; /* This makes the cutout text possible */
-  font-family: "Oswald", sans-serif;
-  text-shadow: 3px 3px 3px #ababab;
-}
-
-.centerph11 {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 50%;
-}
-
 .centertitleph11 {
   display: block;
   margin-left: auto;
@@ -82,20 +50,47 @@
   text-align: center;
 }
 
-.centertitle1ph11 {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
+.container {
+  position: relative;
 }
 
-.center {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+
+.text {
+  background-color: white;
+  color: black;
+  font-size: 3vw; /* Responsive font size */
+  font-weight: bold;
+  margin: 0 auto; /* Center the text container */
+  padding: 10px;
   width: 50%;
+  text-align: center; /* Center text */
+  position: absolute; /* Position text */
+  top: 25%; /* Position text in the middle */
+  left: 50%; /* Position text in the middle */
+  transform: translate(-50%, -50%); /* Position text in the middle */
+  mix-blend-mode: screen; /* This makes the cutout text possible */
+  font-family: "Oswald", sans-serif;
+  text-shadow: 3px 3px 3px #ababab;
 }
 
+
+/* Bottom right text */
+.text-block {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background-color: black;
+  color: white;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.image-container {
+  background-image: url("ProjectPictures/sf.jpeg"); /* The image used - important! */
+  background-size: cover;
+  position: relative; /* Needed to position the cutout text in the middle of the image */
+  height: 60%; /* Some height */
+}
 </style>
 
 <div class="image-container">
@@ -103,31 +98,45 @@
 </div>
 
 
+
 <div class="w3-row w3-padding">
-  <div class="w3-col l9 s12" style="float:none !important; margin:auto; position:relative; z-index:10; margin-top:-10%;">
+  <div class="w3-col l7 s12" style="float:none !important; margin:auto; position:relative; z-index:10; margin-top:-10%;">
     <div class="w3-container w3-white w3-margin w3-padding-large">
       <div class="w3">
-        <h5>There's a renowned freshman course at Caltech called "<a href="https://www.quora.com/What-is-it-like-to-take-Caltechs-Physics-11-class">Physics 11</a>", which is a sort of think tank to get students involved in research early, and to explore interesting ideas. The catch is that to get in, you'd have to submit solutions to two 'hurdles', which are open-ended questions that you're meant to think carefully about, and only the students with the most creative solutions are awarded entry into the class.</h5>
+        <h5>
 
-        <h5>Every year, about 50 students submit solutions to the hurdles, and only 4-6 people get in - so, I was shocked and delighted when I found out that my solutions had been accepted. During the 3-quarter sequence, we would read a paper each week and meet every Tuesday evening to discuss the paper, which would often reflect new ways to model phenomena across Math, Physics, Biology, CS, and Finance. We often created our own models which we sketched out on a blackboard and discussed.</h5>
+<h5>During the Summer of 2020, I had the privilege of working with the Laser Interferometer Gravitational-Wave Observatory (LIGO) and Professor Rana Adhikari on a research project that was funded by the Richard Brewer Fellowship Prize. During this 10-week period, I worked on an element of the LIGO Voyager Cryo-Q upgrade: the gravitational-wave detector had started to get so sensitive that it was detecting the thermal noise from its own Silicon atoms located in the Fabry-Perot mirror cavity. So, my research project focused on finding a way to block the tranmission of noise (the natural vibrating frequency of Silicon atoms) using band-limiting filters, and exploring different acoustic design geometries which I simulated using finite element analysis on COMSOL.
 
-        <h5>It was a privilege to learn from Professors <a href="https://www.rpgroup.caltech.edu/">Rob Phillips</a> and <a href="https://en.wikipedia.org/wiki/David_J._Stevenson">Dave Stevenson</a> about the methods by which new scientific research ideas originated and to get intuition for ways to develop them. I was also fortunate to get awarded with a Physics 11 fellowship to pursue a research project during the Summer of 2020 with <a href="https://www.ligo.caltech.edu/">LIGO</a> and <a href="https://labcit.ligo.caltech.edu/~rana/">Prof. Rana Adhikari</a>, where I worked on developing an "acoustic invisibility cloak" for the gravitational-wave detector. Here, I present my solutions to the Physics 11 hurdles for the 2019-2020 academic year.</h5><br>
-      </div>
+</h5>
+<p align="center"><iframe src="https://drive.google.com/file/d/1eDuB884wasiRaMif3AJ1MNfD5oe5yF5z/preview" width="90%" height="720" allow="autoplay"></iframe></iframe></p>
 
-    <h5 class="centertitleph11"> <strong><a href="hurdle1.html">Hurdle 1: Airline Traffic at San Francisco International Airport</a></strong></h5>
-    <h5 class="centertitleph11"><strong><a href="hurdle2.html">Hurdle 2: Fire in the Serengeti</a></strong></h5>
-      <div class="w3-justify">
-          <a href="hurdle1.html"><img src="ProjectPictures/SFO_closure.jpeg" style="float: left; width: 53%; margin-right: 1%; margin-bottom: 0.5em; align-items:center" class="center zoom"></a>
-
-          <a href="hurdle2.html"><img src="ProjectPictures/serengeti_wildfires.jpeg" style="float: left; width: 45%; margin-right: 1%; margin-bottom: 0.5em; align-items:center" class="center zoom"></a>
-
-          <p style="clear: both;">
-        </div>
       </div>
     </div>
   </div>
 </div>
 
+<style>
+.rectangle {
+  height: 8%;
+  width: 55%;
+  background-color: black;
+  margin-left: auto;
+  margin-right: auto;
+  color: white;
+  display: flex;
+  justify-content:center;
+  align-items: center;
+}
+
+    .centertitleph112 {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+    }
+
+</style>
+</head>
 <div class="footer">
     <a href="#" class="w3-button w3-white w3-padding-large w3-margin-bottom"><i class="fa fa-arrow-up w3-margin-right"></i>To the top</a><br>
     <a href=https://www.instagram.com/emiletimothy/><img src="Pictures/icons/instagram-icon.png", alt="Instagram", style="width:25px;height:25px";></a>
@@ -137,6 +146,7 @@
     <a href=https://github.com/emiletimothy/><img src="Pictures/icons/github-icon.png", alt="Github Icon", style="width:35px;height:25px";></a>
 <p style="color: white">© 2023 by Emile Timothy</p>
 </div>
+
 
 
 </body>
