@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<body class="w3-light-grey">
+<title>Emile Timothy</title>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" type="text/css" href="../style.css">  
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open Sans">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head> 
+  <style>
+    h1,h2,h3,h4,h5,h6 {font-family: "Oswald"}
+    body {font-family: "Open Sans"}
+    html {
+      scroll-behavior: smooth;
+    }
+    </style>
+
+<div class="background_image">
+<div class="header">
+    <div>
+        <div style="float: left"><a href="../index.html"><img src="Pictures/icons/logo_background_nobackground.png", alt="Main Page", style="width:100px;height:100px";></a></div>
+        <div>
+            <div id="hed1"><br><h2>Projects</h2></div>
+            <div id="hed2"><a href="../index.html"><div class="x"><img src="Pictures/icons/x-mark.png", style="width:30px;height:30px;float:right";><img src="Pictures/icons/x-mark-2.png", class="img-top", style="width:30px;height:30px;float:right";></a></div></div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="navbar">
+  <a href="../index.html">Home</a>
+  <a href="../about-me.html">About Me</a>
+  <a href="../projects.html" class="active">Projects</a>
+  <a href="../blog.html">Blog</a>
+  <a href="../talks.html">Talks</a>
+  <a href="../outreach.html">Outreach</a>
+  <a href="../gallery.html">Gallery</a>
+  <a href="../CV.html">CV</a>
+  <a href="../contact.html">Contact</a>
+</div>
+
+<style>
+.centertitleph11 {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.container {
+  position: relative;
+}
+
+
+.text {
+  background-color: white;
+  color: black;
+  font-size: 3vw; /* Responsive font size */
+  font-weight: bold;
+  margin: 0 auto; /* Center the text container */
+  padding: 10px;
+  width: 70.5%;
+  text-align: center; /* Center text */
+  position: absolute; /* Position text */
+  top: 25%; /* Position text in the middle */
+  left: 50%; /* Position text in the middle */
+  transform: translate(-50%, -50%); /* Position text in the middle */
+  mix-blend-mode: screen; /* This makes the cutout text possible */
+  font-family: "Oswald", sans-serif;
+  text-shadow: 3px 3px 3px #ababab;
+}
+
+
+/* Bottom right text */
+.text-block {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background-color: black;
+  color: white;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.image-container {
+  background-image: url("ProjectPictures/covidpic2.jpeg"); /* The image used - important! */
+  background-size: cover;
+  position: relative; /* Needed to position the cutout text in the middle of the image */
+  height: 70%; /* Some height */
+}
+</style>
+
+<div class="image-container">
+  <div class="text">Correlating COVID-19 outbreaks to COVID-19 Vaccine Efficacy</div>
+</div>
+
+
+
+<div class="w3-row w3-padding">
+  <div class="w3-col l7 s12" style="float:none !important; margin:auto; position:relative; z-index:10; margin-top:-10%;">
+    <div class="w3-container w3-white w3-margin w3-padding-large">
+      <div class="w3">
+        <h5>
+
+<h5>During the spring quarter of my sophomore year at Caltech, I took CS 156b (Learning from Data), which was a project-based class on Machine Learning taught by Professor <a href="https://work.caltech.edu/">Yaser Abu-Mostafa</a>. Since this was during the peak of the COVID-19 pandemic, he asked us to pursue a ML project of our choice using any available data to produce novel and meaningful insights about COVID-19. So, my friends (Julen, Andrew, and Basel, who are really smart guys) and I, decided to use existing data to determine how effective the COVID-19 vaccine was against the dominant variants at the time (B.1.1.7, P.1, B.1.351, B.1.427, B.1.429).<br><br>
+
+We used GISAID-scraped data and data from Outbreak.info, OWID, CDC, which represented regularly-updating COVID-19 variant outbreaks in different states in the United States. We used this data to train a couple of models: LSTM (Long Short-term Memory), VAR (Vector Auto-Regression), SIR (Susceptible, Infectious, Recovered) model, ARIMA (Autoregressive Integrated Moving Average), and GPR (gaussian process regression). Specifically, we looked at vaccine-delivery data and variant-outbreaks to see if we could find a negative correlation. My contribution to this project was the development of the ARIMA and GPR models, which are tools used primarily in modeling highly volatile data, like stocks. I also looked at XGBoost, but decided against using it due its lack of scalability since the data changed so sporadically. Our final machine-learning model ensembled the ARIMA, LSTM, and VAR models, to yield a pretty accurate estimate of the COVID-19 vaccine efficacy.<br><br>
+
+Here, I have attached a couple of things to showcase our work throughout the quarter. <br> 1) A GitHub page that features my work on the <a href="https://github.com/emiletimothy/cs156bproj/blob/main/ARIMA_model.ipynb"> ARIMA model</a>, which is also embedded below. <br> 2) Our <a href="https://drive.google.com/file/d/1qblcNkcmsOotH3E9LwouM1p6O93vNdNK/view?usp=sharing">first</a> and <a href="https://drive.google.com/file/d/14Q5EPkHPstp0fpmfVioqt_EeTs_uGCdL/view?usp=sharing">second</a> progress report and our <a href="https://drive.google.com/file/d/1kBlUD-OBhqrQ4gW0z6W-6JHB7LLRXAGr/view?usp=sharing">final presentation</a>, which I have also embedded below. Over the course of the quarter, we gave these three virtual talks to present our progress.<br><br>
+
+This was a really enjoyable class, and even though it was entirely virtual, Professor Abu-Mostafa made it very memorable. I'd also like to acknowledge TAs Chris Wang, Dominic Yurk, and Alexander Zlokapa for the constructive feedback which they gave us during the quarter.</h5>
+
+<p align="center"><script src="https://gist.github.com/emiletimothy/220a95a143e4b10b387bb86a76d179f3.js"></script></p>
+
+<p align="center"><iframe src="https://drive.google.com/file/d/1qblcNkcmsOotH3E9LwouM1p6O93vNdNK/preview" width="90%" height="720" allow="autoplay"></iframe></iframe></p>
+<br>
+<p align="center"><iframe src="https://drive.google.com/file/d/14Q5EPkHPstp0fpmfVioqt_EeTs_uGCdL/preview" width="90%" height="720" allow="autoplay"></iframe></p>
+<br>
+<p align="center"><iframe src="https://drive.google.com/file/d/1kBlUD-OBhqrQ4gW0z6W-6JHB7LLRXAGr/preview" width="90%" height="720" allow="autoplay"></iframe></p>
+
+<h5>A side-note: </h5>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.rectangle {
+  height: 8%;
+  width: 55%;
+  background-color: black;
+  margin-left: auto;
+  margin-right: auto;
+  color: white;
+  display: flex;
+  justify-content:center;
+  align-items: center;
+}
+
+    .centertitleph112 {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+    }
+
+</style>
+</head>
+<div class="footer">
+    <a href="#" class="w3-button w3-white w3-padding-large w3-margin-bottom"><i class="fa fa-arrow-up w3-margin-right"></i>To the top</a><br>
+    <a href=https://www.instagram.com/emiletimothy/><img src="Pictures/icons/instagram-icon.png", alt="Instagram", style="width:25px;height:25px";></a>
+    <a href=https://www.linkedin.com/in/emiletimothy/><img src="Pictures/icons/linkedin-icon.png", alt="Linkedin", style="width:25px;height:25px";></a>
+    <a href=https://orcid.org/my-orcid?orcid=0000-0003-2893-9469https://orcid.org/my-orcid?orcid=0000-0003-2893-9469/><img src="Pictures/icons/orcid-icon.png", alt="Orcid", style="width:25px;height:25px";></a>
+    <a href=https://scholar.google.com/citations?user=nUXwVU8AAAAJ&hl=en/><img src="Pictures/icons/googlescholar-icon.png", alt="Google Scholar", style="width:25px;height:25px";></a>
+    <a href=https://github.com/emiletimothy/><img src="Pictures/icons/github-icon.png", alt="Github Icon", style="width:35px;height:25px";></a>
+<p style="color: white">© 2023 by Emile Timothy</p>
+</div>
+
+
+
+</body>
+
+</html>
