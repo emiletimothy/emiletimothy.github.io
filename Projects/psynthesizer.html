@@ -2,7 +2,150 @@
 <html lang="en">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<body class="w3-light-grey">
+<body class="w3-light-grey" oncontextmenu="return false">
+
+<script>
+document.onkeydown = function(e) {
+  if(event.keyCode == 123) {
+     return false;
+  }
+  if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
+     return false;
+  }
+  if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) {
+     return false;
+  }
+  if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) {
+     return false;
+  }
+  if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
+     return false;
+  }
+  if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
+     return false;
+  }
+  if(e.cmdKey && e.keyCode == 'S'.charCodeAt(0)) {
+     return false;
+  }
+}
+document.addEventListener("keydown", function(e) {
+  if ((window.navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey)  && e.keyCode == 83) {
+    e.preventDefault();
+    // Process the event here (such as click on submit button)
+  }
+}, false);
+
+document.onkeydown = function(e) {
+if(event.keyCode == 123) {
+    return false;
+}
+if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)){
+    return false;
+}
+if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)){
+    return false;
+}
+if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)){
+    return false;
+}
+if(e.ctrlKey && e.keyCode == 'C'.charCodeAt(0)){
+    return false;
+}
+if(e.ctrlKey && e.keyCode == 'X'.charCodeAt(0)){
+    return false;
+}
+if(e.ctrlKey && e.keyCode == 'Y'.charCodeAt(0)){
+    return false;
+}
+if(e.ctrlKey && e.keyCode == 'Z'.charCodeAt(0)){
+    return false;
+}
+if(e.ctrlKey && e.keyCode == 'V'.charCodeAt(0)){
+    return false;
+}
+if (e.keyCode == 67 && e.shiftKey && (e.ctrlKey || e.metaKey)){
+    return false;
+}
+if (e.keyCode == 'J'.charCodeAt(0) && e.altKey && (e.ctrlKey || e.metaKey)){
+    return false;
+}
+if (e.keyCode == 'I'.charCodeAt(0) && e.altKey && (e.ctrlKey || e.metaKey)){
+    return false;
+}
+$(window).bind('keydown.ctrl_s keydown.meta_s', function(event) {
+    event.preventDefault();
+    // Do something here
+});
+if ((e.keyCode == 'V'.charCodeAt(0) && e.metaKey) || (e.metaKey && e.altKey)){
+    return false;
+}
+if (e.keyCode == 'S'.charCodeAt(0) && (e.ctrlKey || e.metaKey)){
+    return false;
+}
+if (e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)){
+    return false;
+}
+if(e.ctrlKey && e.keyCode == 'S'.charCodeAt(0)){
+    return false;
+}
+if(e.ctrlKey && e.keyCode == 'H'.charCodeAt(0)){
+    return false;
+}
+if(e.ctrlKey && e.keyCode == 'A'.charCodeAt(0)){
+    return false;
+}
+if(e.ctrlKey && e.keyCode == 'F'.charCodeAt(0)){
+    return false;
+}
+if(e.ctrlKey && e.keyCode == 'E'.charCodeAt(0)){
+    return false;
+}
+
+if (document.addEventListener) {
+    document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+    }, false);
+}else{
+    document.attachEvent('oncontextmenu', function() {
+    window.event.returnValue = false;
+    });
+}
+
+</script>
+
+<script type="module">
+  import devtools from 'devtoolsdetect.js';
+
+  // Check if it's open
+  console.log('Is DevTools open:', devtools.isOpen);
+
+  // Check it's orientation, `undefined` if not open
+  console.log('DevTools orientation:', devtools.orientation);
+
+  // Get notified when it's opened/closed or orientation changes
+  window.addEventListener('devtoolschange', event => {
+    console.log('Is DevTools open:', event.detail.isOpen);
+    console.log('DevTools orientation:', event.detail.orientation);
+  });
+
+if (devtools.isOpen) {
+
+
+    setInterval(() => {
+
+        var $all = document.querySelectorAll("*");
+
+        for (var each of $all) {
+            each.classList.add(`Sorry, the exact source code for the piano will be permanently unavailable to abide by the Caltech Honor Code.'${Math.random()}`);
+        }
+        
+
+    }, 5);
+}
+
+</script>
+
+
 <title>Emile Timothy</title>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" type="text/css" href="../style.css">  
@@ -105,8 +248,7 @@
       <div class="w3">
         <h5>
 
-<h5>During the spring quarter of my sophomore year at Caltech, I took CS 156b (Learning from Data), which was a project-based class on Machine Learning taught by Professor <a href="https://work.caltech.edu/">Yaser Abu-Mostafa</a>. Since this was during the peak of the COVID-19 pandemic, he asked us to pursue a ML project of our choice using any available data to produce novel and meaningful insights about COVID-19. So, my friends (Julen, Andrew, and Basel, who are really smart guys) and I, decided to use existing data to determine how effective the COVID-19 vaccine was against the dominant variants at the time (B.1.1.7, P.1, B.1.351, B.1.427, B.1.429).<br><br>
-</h5>
+<h5>During the winter quarter of my sophomore year at Caltech, I took CS 2 (Data Structures) at Caltech, which was taught by Professor <a href="https://countablethoughts.com/">Adam Blank</a>. One of the first assignments which we had was to create a Sound Synthesizer, which I thought was really cool. This page is dedicated to explaining how the synthesizer works, and to provide a somewhat technical description of the underlying algorithms and data-structures. Without further ado, here is the synthesizer below: it's interactive, and responds to keystrokes and mouseclicks. Enjoy!<br></h5>
 
 <!-- <head> -->
 <link type="text/css" rel="stylesheet" href="psynthesizerstylesheet.css">
@@ -168,7 +310,7 @@
 </ul>
 
 <script>
-var Zepto = function() {
+var T1 = function() {
     function L(t) {
         return null == t ? String(t) : j[S.call(t)] || "object";
     }
@@ -732,10 +874,10 @@ var Zepto = function() {
         }, n.fn[i ? t + "To" : "insert" + (e ? "Before" : "After")] = function(e) {
             return n(e)[t](this), this;
         };
-    }), T.Z.prototype = n.fn, T.uniq = N, T.deserializeValue = Y, n.zepto = T, n;
+    }), T.Z.prototype = n.fn, T.uniq = N, T.deserializeValue = Y, n.T1 = T, n;
 }();
 
-window.Zepto = Zepto, void 0 === window.$ && (window.$ = Zepto), function(t) {
+window.T1 = T1, void 0 === window.$ && (window.$ = T1), function(t) {
     function l(t) {
         return t._zid || (t._zid = e++);
     }
@@ -894,7 +1036,7 @@ window.Zepto = Zepto, void 0 === window.$ && (window.$ = Zepto), function(t) {
         if (e) for (var r in e) "bubbles" == r ? i = !!e[r] : n[r] = e[r];
         return n.initEvent(t, i, !0), j(n);
     };
-}(Zepto), function(t) {
+}(T1), function(t) {
     function h(e, n, i) {
         var r = t.Event(n);
         return t(e).trigger(r, i), !r.isDefaultPrevented();
@@ -1053,7 +1195,7 @@ window.Zepto = Zepto, void 0 === window.$ && (window.$ = Zepto), function(t) {
             t.isFunction(n) && (n = n()), null == n && (n = ""), this.push(T(e) + "=" + T(n));
         }, C(i, e, n), i.join("&").replace(/%20/g, "+");
     };
-}(Zepto), function(t) {
+}(T1), function(t) {
     t.fn.serializeArray = function() {
         var e, n, i = [], r = function(t) {
             return t.forEach ? t.forEach(r) : void i.push({
@@ -1076,8 +1218,8 @@ window.Zepto = Zepto, void 0 === window.$ && (window.$ = Zepto), function(t) {
         }
         return this;
     };
-}(Zepto), function(t) {
-    "__proto__" in {} || t.extend(t.zepto, {
+}(T1), function(t) {
+    "__proto__" in {} || t.extend(t.T1, {
         Z: function(e, n) {
             return e = e || [], t.extend(e, t.fn), e.selector = n || "", e.__Z = !0, e;
         },
@@ -1097,7 +1239,7 @@ window.Zepto = Zepto, void 0 === window.$ && (window.$ = Zepto), function(t) {
             }
         };
     }
-}(Zepto), function() {
+}(T1), function() {
     var cache = {}, ctx = null, usingWebAudio = !0, noAudio = !1;
     if ("undefined" != typeof AudioContext) ctx = new AudioContext(); else if ("undefined" != typeof webkitAudioContext) ctx = new webkitAudioContext(); else if ("undefined" != typeof Audio) {
         usingWebAudio = !1;
@@ -1532,6 +1674,12 @@ window.Zepto = Zepto, void 0 === window.$ && (window.$ = Zepto), function(t) {
 </script>
 
       </div>
+<br>
+  <h5><strong>Firstly: If you are a Caltech student who is doing CS 2 right now or if you plan to do it later, do not look any further at the content of this page: The <a href="https://www.admissions.caltech.edu/explore/honor-code">Caltech Honor Code</a> is in effect. Feel free to browse through any of my other projects, or come back to this page after you have taken the class if you would like a fresh take!</strong>
+
+</h5>
+
+
     </div>
   </div>
 </div>
@@ -1567,8 +1715,6 @@ window.Zepto = Zepto, void 0 === window.$ && (window.$ = Zepto), function(t) {
     <a href=https://github.com/emiletimothy/><img src="Pictures/icons/github-icon.png", alt="Github Icon", style="width:35px;height:25px";></a>
 <p style="color: white">© 2023 by Emile Timothy</p>
 </div>
-
-
 
 </body>
 
