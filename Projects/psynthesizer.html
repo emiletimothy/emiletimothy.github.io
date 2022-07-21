@@ -147,11 +147,11 @@ if (devtools.isOpen) {
 
 
 <title>Emile Timothy</title>
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="../CSS/prime_stylesheet.css">
 <link rel="stylesheet" type="text/css" href="../style.css">  
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open Sans">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../CSS/oswald.css">
+    <link rel="stylesheet" href="../CSS/opensans.css">
+    <link rel="stylesheet" href="../CSS/awesomemin.css">
 </head> 
   <style>
     h1,h2,h3,h4,h5,h6 {font-family: "Oswald"}
@@ -248,8 +248,7 @@ if (devtools.isOpen) {
       <div class="w3">
         <h5>
 
-<h5>During the winter quarter of my sophomore year at Caltech, I took CS 2 (Data Structures) at Caltech, which was taught by Professor <a href="https://countablethoughts.com/">Adam Blank</a>. One of the first assignments which we had was to create a Sound Synthesizer, which I thought was really cool. This page is dedicated to explaining how the synthesizer works, and to provide a somewhat technical description of the underlying algorithms and data-structures. Without further ado, here is the synthesizer below: it's interactive, and responds to keystrokes and mouseclicks. Enjoy!<br></h5>
-
+<h5>During the winter quarter of my sophomore year at Caltech, I took CS 2 (Data Structures) at Caltech, which was taught by Professor <a href="https://countablethoughts.com/">Adam Blank</a>. One of the first assignments of this class was to create a sound synthesizer, which I thought was really cool. This page is dedicated to explaining how the synthesizer works, and to provide a somewhat technical description of the underlying algorithms and data-structures. Without further ado, here is the synthesizer below: it's interactive, and responds to keystrokes and mouseclicks. Enjoy!<br></h5>
 <!-- <head> -->
 <link type="text/css" rel="stylesheet" href="psynthesizerstylesheet.css">
 <!-- </head> -->
@@ -1675,7 +1674,40 @@ window.T1 = T1, void 0 === window.$ && (window.$ = T1), function(t) {
 
       </div>
 <br>
-  <h5><strong>Firstly: If you are a Caltech student who is doing CS 2 right now or if you plan to do it later, do not look any further at the content of this page: The <a href="https://www.admissions.caltech.edu/explore/honor-code">Caltech Honor Code</a> is in effect. Feel free to browse through any of my other projects, or come back to this page after you have taken the class if you would like a fresh take!</strong>
+  <h5><strong>Firstly: If you are a Caltech student who is doing CS 2 right now or if you plan to do it later, do not look any further at the contents of this page: the <a href="https://www.admissions.caltech.edu/explore/honor-code">Caltech Honor Code</a> is in effect. However, feel free to browse through any of my other projects!</strong>
+<br><br></h5>
+
+<h5>I shall first describe the robust data structures that the algorithm necessitated. Essentially, I implemented a circular array fixed-size queue, which is a slightly complex structure that I'll describe in more detail later. To do this, I abstracted the process by starting with a fairly simple data-structure, called a deque, and incrementally added layers of complexity to it until I had a circular array fixed-size queue. To briefly digress, the process of abstraction (which is all about starting easy and adding complexity), when used with deliberate thought, is an excellent way to write complex chunks of code, which MIT Computer Science Professor Barbara Liskov speaks about in her lecture, <a href="https://www.youtube.com/watch?v=GDVAHA0oyJU&ab_channel=NCState">'The Power of Abstraction.'</a><br><br></h5>
+
+<h5 style="text-align:center;">Implementing an Array Deque<br></h5>
+
+<p> A deque (pronounced as 'deck') is a double-ended queue: it allows a user to add and remove data from both ends. Another way of looking at deques is that they are concurrently stacks and queues, thus allowing them to combine the LIFO (last-in first-out) and FIFO (first-in first-out) functionalities.
+<br><img src="pnotes/arraydeque1.png"><br><br>
+
+Putting it explicitly, an array deque has the capability of performing the following operations on each end:<br><br>
+
+1) <code>Peek: </code>You can look at the very first and last elements (entries of data) in the array-deque with a time-complexity of <code>O(1)</code>.<br><br>
+
+2) <code>Insert: </code> You can insert ('push') an element to the back of the array deque with a time-complexity of <code>O(1)</code>. To do this, the underlying algorithm just adds another element to the end of the array deque and updates the Tail to make it point to the last element in the deque. Somewhat similarly, you can insert an element to the front of the array deque with a time-complexity of <code>O(n)</code>. To do this, the underlying algorithm just shifts all the elements in the array deque to the right by one position, and inserts the new element at the first entry.<br><br>
+
+3) <code>Delete: </code> You can delete ('pop') an element from the front and back of the array deque with a time complexity of <code>O(1)</code> by simply shifting the Head pointer by +1 or the Tail pointer by -1.
+
+<br><br>
+<h5 style="text-align:center;">Implementing a Linked-List Deque<br></h5>
+
+<img src="pnotes/linkedlistdeque.jpeg">
+<br><br>
+</p>
+<h5>
+
+
+Finally, implemented a circular array fixed-size queue.<br>
+<img src="pnotes/circulararray1.jpeg">
+<br><br>
+
+Karplus-Strong algorithm
+<img src="pnotes/karplus-strong.png">
+
 
 </h5>
 
@@ -1707,7 +1739,7 @@ window.T1 = T1, void 0 === window.$ && (window.$ = T1), function(t) {
 </style>
 </head>
 <div class="footer">
-    <a href="#" class="w3-button w3-white w3-padding-large w3-margin-bottom"><i class="fa fa-arrow-up w3-margin-right"></i>To the top</a><br>
+    <a href="#" class="w3-button w3-white w3-padding-large w3-margin-bottom"><img src="../up_arrow.png", style="width: 25px;height:25px";></i>To the top</a><br>
     <a href=https://www.instagram.com/emiletimothy/><img src="Pictures/icons/instagram-icon.png", alt="Instagram", style="width:25px;height:25px";></a>
     <a href=https://www.linkedin.com/in/emiletimothy/><img src="Pictures/icons/linkedin-icon.png", alt="Linkedin", style="width:25px;height:25px";></a>
     <a href=https://orcid.org/my-orcid?orcid=0000-0003-2893-9469https://orcid.org/my-orcid?orcid=0000-0003-2893-9469/><img src="Pictures/icons/orcid-icon.png", alt="Orcid", style="width:25px;height:25px";></a>

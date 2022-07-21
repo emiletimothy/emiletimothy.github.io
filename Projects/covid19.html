@@ -4,11 +4,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <body class="w3-light-grey">
 <title>Emile Timothy</title>
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="../CSS/prime_stylesheet.css">
 <link rel="stylesheet" type="text/css" href="../style.css">  
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open Sans">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../CSS/oswald.css">
+    <link rel="stylesheet" href="../CSS/opensans.css">
+    <link rel="stylesheet" href="../CSS/awesomemin.css">
 </head> 
   <style>
     h1,h2,h3,h4,h5,h6 {font-family: "Oswald"}
@@ -16,6 +16,50 @@
     html {
       scroll-behavior: smooth;
     }
+
+/* Style the button that is used to open and close the collapsible content */
+.collapsible {
+  background-color: #000000;
+  color: #ffffff;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  outline: 10px white;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+.collapsible:after {
+  background-color: #000000;
+  content: '+'; /* Unicode character for "plus" sign (+) */
+  font-size: 13px;
+  outline: #000000;
+  color: #ffffff;
+  float: right;
+  margin-left: 5px;
+}
+
+.b1-active:after {
+  color: #ffffff;
+  font-size:10px;
+  content: "-"; /* Unicode character for "minus" sign (-) */
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.b1-active, .collapsible:hover {
+  background-color: #000000;
+}
+
+.content {
+  padding: 0 18px;
+  color: white;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+
     </style>
 
 <div class="background_image">
@@ -109,19 +153,30 @@
 
 We used GISAID-scraped data and data from Outbreak.info, OWID, CDC, which represented regularly-updating COVID-19 variant outbreaks in different states in the United States. We used this data to train a couple of models: LSTM (Long Short-term Memory), VAR (Vector Auto-Regression), SIR (Susceptible, Infectious, Recovered) model, ARIMA (Autoregressive Integrated Moving Average), and GPR (gaussian process regression). Specifically, we looked at vaccine-delivery data and variant-outbreaks to see if we could find a negative correlation. My contribution to this project was the development of the ARIMA and GPR models, which are tools used primarily in modeling highly volatile data, like stocks. I also looked at XGBoost, but decided against using it due its lack of scalability since the data changed so sporadically. Our final machine-learning model ensembled the ARIMA, LSTM, and VAR models, to yield a pretty accurate estimate of the COVID-19 vaccine efficacy.<br><br>
 
-Here, I have attached a couple of things to showcase our work throughout the quarter. <br> 1) A GitHub page that features my work on the <a href="https://github.com/emiletimothy/cs156bproj/blob/main/ARIMA_model.ipynb"> ARIMA model</a>, which is also embedded below. <br> 2) Our <a href="https://drive.google.com/file/d/1qblcNkcmsOotH3E9LwouM1p6O93vNdNK/view?usp=sharing">first</a> and <a href="https://drive.google.com/file/d/14Q5EPkHPstp0fpmfVioqt_EeTs_uGCdL/view?usp=sharing">second</a> progress report and our <a href="https://drive.google.com/file/d/1kBlUD-OBhqrQ4gW0z6W-6JHB7LLRXAGr/view?usp=sharing">final presentation</a>, which I have also embedded below. Over the course of the quarter, we gave these three virtual talks to present our progress.<br><br>
+Here, you'll see my raw source-code for developing the ARIMA model, as well as the mostly self-contained slides for the three virtual presentations that we gave over the course of the quarter.<br><br></h5>
 
-This was a really enjoyable class, and even though it was entirely virtual, Professor Abu-Mostafa made it very memorable. I'd also like to acknowledge TAs Chris Wang, Dominic Yurk, and Alexander Zlokapa for the constructive feedback which they gave us during the quarter.</h5>
+<button type="button" class="collapsible centertitleph11">Implementation of the ARIMA model</button>
+<div class="content">
+  <p align="center"><script src="https://gist.github.com/emiletimothy/220a95a143e4b10b387bb86a76d179f3.js"></script></p>
+</div><br>
 
-<p align="center"><script src="https://gist.github.com/emiletimothy/220a95a143e4b10b387bb86a76d179f3.js"></script></p>
+<button type="button" class="collapsible centertitleph11">First Progress Presentation</button>
+<div class="content">
+<p align="center"><iframe src="https://drive.google.com/file/d/1qblcNkcmsOotH3E9LwouM1p6O93vNdNK/preview" width="90%" height="720" allow="autoplay"></iframe></p></div>
 
-<p align="center"><iframe src="https://drive.google.com/file/d/1qblcNkcmsOotH3E9LwouM1p6O93vNdNK/preview" width="90%" height="720" allow="autoplay"></iframe></iframe></p>
-<br>
-<p align="center"><iframe src="https://drive.google.com/file/d/14Q5EPkHPstp0fpmfVioqt_EeTs_uGCdL/preview" width="90%" height="720" allow="autoplay"></iframe></p>
-<br>
-<p align="center"><iframe src="https://drive.google.com/file/d/1kBlUD-OBhqrQ4gW0z6W-6JHB7LLRXAGr/preview" width="90%" height="720" allow="autoplay"></iframe></p>
+<button type="button" class="collapsible centertitleph11">Second Progress Presentation</button>
+<div class="content">
+<p align="center"><iframe src="https://drive.google.com/file/d/14Q5EPkHPstp0fpmfVioqt_EeTs_uGCdL/preview" width="90%" height="720" allow="autoplay"></iframe></p></div>
 
-<h5>A quick digression: While other groups in the class had elaborate names like 'Super Unsupervised' or 'Indecision Trees', we decided to name ourselves as 'Group 23' for an odd, though funny, reason. The story is that we were given a google sheets form to register our group and its name. However, we decided that instead of going to the trouble of choosing a witty (and potentially, awkward) name, we would be happier messing with another group. So, we registered our group as 'Group 23' on row 24 on the spreadsheet in the hopes that the Group that signed up on row 23 of the spreadsheet would be confused... Alas, it turned out that the group that signed up on row 23 never looked at the spreadsheet again, which was quite unfortunate. Moral of the story: Our collective prank game needs to get stronger.</h5>
+<button type="button" class="collapsible centertitleph11">Final Presentation</button>
+<div class="content">
+<p align="center"><iframe src="https://drive.google.com/file/d/1kBlUD-OBhqrQ4gW0z6W-6JHB7LLRXAGr/preview" width="90%" height="720" allow="autoplay"></iframe></p></div><br>
+
+
+<h5>A quick digression: While other groups in the class had elaborate names like 'Super Unsupervised' or 'Indecision Trees', we decided to name ourselves as 'Group 23' for an odd, though funny, reason. The story is that we were given a google sheets form to register our group and its name. However, we decided that instead of going to the trouble of choosing a witty (and potentially, awkward) name, we would be happier messing with another group. So, we registered our group as 'Group 23' on row 24 on the spreadsheet in the hopes that the Group that signed up on row 23 of the spreadsheet would be thrown into confusion ... Alas, it turned out that the group that signed up on row 23 never looked at the spreadsheet again, which was quite unfortunate. Moral of the story: our collective prank game needs to get stronger.<br><br>
+
+This was a really enjoyable class; and, even though it was entirely virtual, Professor Abu-Mostafa made it very memorable. I'd also like to acknowledge TAs Chris Wang, Dominic Yurk, and Alexander Zlokapa for their feedback throughout the class.
+</h5>
 
       </div>
     </div>
@@ -151,7 +206,7 @@ This was a really enjoyable class, and even though it was entirely virtual, Prof
 </style>
 </head>
 <div class="footer">
-    <a href="#" class="w3-button w3-white w3-padding-large w3-margin-bottom"><i class="fa fa-arrow-up w3-margin-right"></i>To the top</a><br>
+    <a href="#" class="w3-button w3-white w3-padding-large w3-margin-bottom"><img src="../up_arrow.png", style="width: 25px;height:25px";></i>To the top</a><br>
     <a href=https://www.instagram.com/emiletimothy/><img src="Pictures/icons/instagram-icon.png", alt="Instagram", style="width:25px;height:25px";></a>
     <a href=https://www.linkedin.com/in/emiletimothy/><img src="Pictures/icons/linkedin-icon.png", alt="Linkedin", style="width:25px;height:25px";></a>
     <a href=https://orcid.org/my-orcid?orcid=0000-0003-2893-9469https://orcid.org/my-orcid?orcid=0000-0003-2893-9469/><img src="Pictures/icons/orcid-icon.png", alt="Orcid", style="width:25px;height:25px";></a>
@@ -160,8 +215,23 @@ This was a really enjoyable class, and even though it was entirely virtual, Prof
 <p style="color: white">© 2023 by Emile Timothy</p>
 </div>
 
-
-
 </body>
 
 </html>
+
+<script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("b1-active");
+    var content = this.nextElementSibling;
+    if (content.style.maxHeight){
+      content.style.maxHeight = null;
+    } else {
+      content.style.maxHeight = content.scrollHeight + "px";
+    }
+  });
+}
+</script>
