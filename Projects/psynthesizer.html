@@ -4,6 +4,29 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <body class="w3-light-grey" oncontextmenu="return false">
 
+<!-- red style bar -->
+<style>
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: black; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #b30000; 
+}
+</style>
+
 <script>
 document.onkeydown = function(e) {
   if(event.keyCode == 123) {
@@ -229,7 +252,7 @@ if (devtools.isOpen) {
 }
 
 .image-container {
-  background-image: url("ProjectPictures/covidpic2.jpeg"); /* The image used - important! */
+  background-image: url("pnotes/border_img.jpeg"); /* The image used - important! */
   background-size: cover;
   position: relative; /* Needed to position the cutout text in the middle of the image */
   height: 70%; /* Some height */
@@ -246,9 +269,7 @@ if (devtools.isOpen) {
   <div class="w3-col l7 s12" style="float:none !important; margin:auto; position:relative; z-index:10; margin-top:-10%;">
     <div class="w3-container w3-white w3-margin w3-padding-large">
       <div class="w3">
-        <h5>
-
-<h5>During the winter quarter of my sophomore year at Caltech, I took CS 2 (Data Structures) at Caltech, which was taught by Professor <a href="https://countablethoughts.com/">Adam Blank</a>. One of the first assignments of this class was to create a sound synthesizer, which I thought was really cool. This page is dedicated to explaining how the synthesizer works, and to provide a somewhat technical description of the underlying algorithms and data-structures. Without further ado, here is the synthesizer below: it's interactive, and responds to keystrokes and mouseclicks. Enjoy!<br></h5>
+<p>During the winter quarter of my sophomore year at Caltech, I took CS 2 (Data Structures) at Caltech, which was taught by Professor <a href="https://countablethoughts.com/">Adam Blank</a>. One of the first assignments of this class was to create a sound synthesizer, which I thought was really cool. This page is dedicated to explaining how the synthesizer works, and to provide a somewhat technical description of the underlying algorithms and data-structures. Without further ado, here is the synthesizer below: it's interactive, and responds to keystrokes and mouseclicks. Enjoy!</p>
 <!-- <head> -->
 <link type="text/css" rel="stylesheet" href="psynthesizerstylesheet.css">
 <!-- </head> -->
@@ -1672,19 +1693,85 @@ window.T1 = T1, void 0 === window.$ && (window.$ = T1), function(t) {
 }();
 </script>
 
+<style>
+/* Style the button that is used to open and close the collapsible content */
+.collapsible {
+  background-color: #000000;
+  color: #ffffff;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  outline: 10px white;
+  border: none;
+  text-align: center;
+  outline: none;
+  font-size: 15px;
+}
+
+.collapsible:after {
+  background-color: #000000;
+  content: '+'; /* Unicode character for "plus" sign (+) */
+  font-size: 13px;
+  outline: #000000;
+  color: #ffffff;
+  float: right;
+  margin-left: 5px;
+}
+
+.b1-active:after {
+  color: #ffffff;
+  font-size:10px;
+  content: "-"; /* Unicode character for "minus" sign (-) */
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.b1-active, .collapsible:hover {
+  background-color: #000000;
+}
+
+.content {
+  padding: 0 18px;
+  color: black;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+</style>
+
+
+<script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.maxHeight){
+      content.style.maxHeight = null;
+    } else {
+      content.style.maxHeight = content.scrollHeight + "px";
+    } 
+  });
+}
+</script>
+
       </div>
 <br>
-  <h5><strong>Firstly: If you are a Caltech student who is doing CS 2 right now or if you plan to do it later, do not look any further at the contents of this page: the <a href="https://www.admissions.caltech.edu/explore/honor-code">Caltech Honor Code</a> is in effect. However, feel free to browse through any of my other projects!</strong>
-<br><br></h5>
+  <p><strong>Firstly: If you are a Caltech student who is doing CS 2 right now or if you plan to do it later, do not look any further at the contents of this page: the <a href="https://www.admissions.caltech.edu/explore/honor-code">Caltech Honor Code</a> is in effect.</strong>
+<br></p>
 
-<h5>I shall first describe the robust data structures that the algorithm necessitated. Essentially, I implemented a circular array fixed-size queue, which is a slightly complex structure that I'll describe in more detail later. To do this, I abstracted the process by starting with a fairly simple data-structure, called a deque, and incrementally added layers of complexity to it until I had a circular array fixed-size queue. To briefly digress, the process of abstraction (which is all about starting easy and adding complexity), when used with deliberate thought, is an excellent way to write complex chunks of code, which MIT Computer Science Professor Barbara Liskov speaks about in her lecture, <a href="https://www.youtube.com/watch?v=GDVAHA0oyJU&ab_channel=NCState">'The Power of Abstraction.'</a><br><br></h5>
+<p>I shall first describe the robust data structures that the algorithm necessitated. Essentially, I implemented a circular array fixed-size queue, which is a slightly complex structure that I'll describe in more detail later. To do this, I abstracted the process by starting with a fairly simple data-structure, called a deque, and incrementally added layers of complexity to it until I had a circular array fixed-size queue. I'll then describe the algorithm and go a bit into the physics of it, and will conclude by saying something about how I got the synthesizer above to work.<br></p>
 
-<h5 style="text-align:center;">Implementing an Array Deque<br></h5>
+<button class="collapsible"><strong>Data Structures: Building a Circular Array Fixed-Size Queue</strong></button>
+  <div class="content">
+<br><h5 style="text-align:center;"><u>Implementing an Array Deque</u></h5>
 
-<p> A deque (pronounced as 'deck') is a double-ended queue: it allows a user to add and remove data from both ends. Another way of looking at deques is that they are concurrently stacks and queues, thus allowing them to combine the LIFO (last-in first-out) and FIFO (first-in first-out) functionalities.
-<br><img src="pnotes/arraydeque1.png"><br><br>
+<p> A deque (pronounced as 'deck') is a double-ended queue: it allows a user to add and remove data from both ends. Another way of looking at deques is that they are concurrently stacks and queues, thus allowing them to combine the LIFO (last-in first-out) and FIFO (first-in first-out) functionalities.<br><br>
 
-Putting it explicitly, an array deque has the capability of performing the following operations on each end:<br><br>
+  <img src="pnotes/arraydeque1.png"><br><br>
+
+Explicitly, an array deque has the capability of performing the following operations on each end:<br><br>
 
 1) <code>Peek: </code>You can look at the very first and last elements (entries of data) in the array-deque with a time-complexity of <code>O(1)</code>.<br><br>
 
@@ -1693,24 +1780,88 @@ Putting it explicitly, an array deque has the capability of performing the follo
 3) <code>Delete: </code> You can delete ('pop') an element from the front and back of the array deque with a time complexity of <code>O(1)</code> by simply shifting the Head pointer by +1 or the Tail pointer by -1.
 
 <br><br>
-<h5 style="text-align:center;">Implementing a Linked-List Deque<br></h5>
+<h5 style="text-align:center;"><u>Implementing a Doubly Linked-List Deque</u></h5>
+I then did my first layer of abstraction - converting the array-deque to a doubly linked-list deque. A doubly linked-list deque has the same functionalities as the array-deque, but is so much more efficient. Firstly, each data element is stored in a node. The node, in addition to containing the data, also contains a pointer to the node preceding it and the node following it, thus defining a natural ordering for the data contained in the structure. The two exceptions to this rule are the Head and Tail nodes which only have pointers to the start-point and end-point of the deque. <br><br>
 
-<img src="pnotes/linkedlistdeque.jpeg">
+<img src="pnotes/linkedlist1.png"><br><br>
+
+
+
+A doubly linked-list deque has the capability of performing the following operations on each end:<br><br>
+
+1) <code>Peek: </code>As before, you can look at the very first and last elements (entries of data) in the doubly linked-list deque with a time-complexity of <code>O(1)</code>.<br><br>
+
+2) <code>Insert: </code> You can insert ('push') an element to the back of the doubly linked-list deque with a time-complexity of <code>O(1)</code>. To do this, the underlying algorithm starts by creating a node that contains the new element. It then uses the Tail pointer node to access the 'last data-storing node' in the deque, and changes the pointers of both these nodes to point to the new node. It finally changes the pointers of the new node to point to the previous last node and the Tail pointer node, respectively. Similarly, you can insert an element to the front of the array deque with a time-complexity of <code>O(1)</code>. To do this, the underlying algorithm similarly starts by creating a node that contains the new element. It then uses the Head pointer node to access the 'first data-storing node' in the deque, and changes the pointers of both these nodes to point to the new node. It finally changes the pointers of the new node to point to the Head pointer node and the previous first note, respectively. Thus, the new node is inserted into the data-structure.<br><br>
+
+3) <code>Delete: </code> You can delete ('pop') an element from the front and back of the doubly linked-list deque with a time complexity of <code>O(1)</code> by simply altering the pointers such that the Head (Tail) pointer points to the node after (before) 'the node to be deleted', so that the node in after (before) of the 'node to be deleted' instead points to the Head (Tail) pointer.<br><br>
+
+<h5 style="text-align:center;"><u>Implementing a Circular Array Fixed-Size Queue</u></h5>
+
+I then wrote my second (and final) layer of abstraction - converting the doubly linked-list deque to the circular array fixed-size queue that I needed to implement the algorithm for the sound synthesizer. A circular array fixed-size queue uses the doubly linked-list functionality to perform the tasks of enqueuing at the Tail node and dequeuing at the Head node, while ensuring that there are atmost a fixed number of elements in the queue. The static size of the queue is not a constraint of the queue; rather, it is a feature: restricting the size of the queue can be done by storing its size and using a conditional statement to ensure that the capacity is not exceeded. Whenever an element in inserted to (deleted from) the queue, we move the tail index (head index) forward, while wrapping around the queue; so, the first (last) positional node is not necessarily the first (last) node in terms of the ordering of the data in the queue.<br>
+
+<img src="pnotes/circularbuffer.png">
 <br><br>
+
+A circular array fixed-size queue has the capability of performing all of the operations described above; but here, I will only describe the functionalities that are necessary for the algorithm:<br><br>
+
+1) <code>Peek: </code>You can look at the very first element in the queue with a time-complexity of <code>O(1)</code>.<br><br>
+
+2) <code>Insert: </code> You can insert ('push') an element to the back of the queue with a time-complexity of <code>O(1)</code>. To do this, the underlying algorithm starts by creating a node that contains the new element. It then uses the Tail pointer node to access the last data-storing node in the deque, and changes the pointers of both these nodes to point to the new node. It finally changes the pointers of the new node to point to the previous last node and the Tail pointer node, respectively. Thus, the new node is inserted into the data-structure.<br><br>
+
+3) <code>Delete: </code>Finally, you can delete ('pop') an element from the front of the doubly linked-list deque with a time complexity of <code>O(1)</code> by altering the pointers such that the Head pointer points to the node after the 'node to be deleted', so that the node in front of 'the node to be deleted' instead points to the Head pointer.<br><br>
+
+</p></div>
+
+<br>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+
+<button class="collapsible"><strong>Algorithms: Implementing the Karplus-Strong algorithm</strong></button>
+  <div class="content">
+    <br>
+<h5 style="text-align:center;"><u>Implementing the Karplus-Strong algorithm</u></h5>
+
+<p>When a guitar string is plucked, the string vibrates and creates sound. The length of the string determines its fundamental frequency of vibration. So, we first created a guitar string of the specified frequency, using a sampling rate of 44,100. We initialized our circular array fixed-size queue with a fixed capacity of \(n=\)\(44100\over f\), where \(f\) is the frequency of the note being played, rounded up to to the nearest integer, and then enqueued \(n\) zeros to the queue.<br><br>
+
+
+  We model a guitar string by sampling its displacement (a real number between -\(1\over 2\) and +\( 1\over 2\) at \(n\) equally spaced points in time. The vibrations that result from plucking the string spread wave-like over time. This spreading can be simulated using the Karplus-Strong algorithm. To simulate the initial pluck of the string, all the values in the queue were initialized with white noise from uniformly random values between -0.5 and 0.5. We simulate one time-step of the string vibration by applying the Karplus-Strong algorithm to the queue.<br><br>
+
+  In each step of the Karplus-Strong algorithm, the first sample is deleted from the queue, and a new value is added to the end of the queue - here, the new value is the average of the deleted sample and the new first sample, scaled by an energy decay factor of 0.996. Over multiple time-steps, the Karplus-Strong algorithm simulates a gentle low-pass filter (which attenuates the transmission of higher frequencies while allowing lower frequencies to pass). The figure below illustrates the transition of the queue during a single time-step when acted upon by the Karplus-Strong algorithm. <br><br>
+
+<img src="pnotes/karplus-strong.png"><br><br>
+
+The Karplus-Strong algorithm essentially approximates a solution of the 1D wave equation, which describes the transverse motion of the string as a function of time. The length of the cyclic queue determines the fundamental frequency of the resulting sound. Sonically, the feedback mechanism reinforces only the fundamental frequency and its harmonics (frequencies at integer multiples of the fundamental). The energy decay factor of 0.996 models the ever-so-slight dissipation in energy as the wave makes a roundtrip through the string.<br><br>
+
+A more physical interpretation of what's happening here is as follows: when you pluck a guitar string at its center, it sends oscillations of travelling waves on both sides until the tension on the string regulates and dampens these oscillations until they die down. One immediate implication of this is that strings which are tightened to characterize high-frequency notes have a greater tension, which allows them to vibrate faster but also die down faster under its dampening tension. Similarly, low-frequency notes have a lower tension and so vibrate longer since there is no immediate dampening force. <br><br>
+
+So, when you simulate the string by considering nodes in the cyclic queue as the displacements of the center of the string over time, there are two physical intepretations from the algorithm. Firstly, initializing the queue with white noise from (-0.5 to 0.5) is equivalent to simulating the initial (unpredictable) oscillation of the string with traveling waves on each side from the center. Secondly, averaging adjacent samples from the queue bring them closer to each other, which describes how the string loses energy through the dampening process. <br><br>
 </p>
-<h5>
+</div>
+<br>
 
 
-Finally, implemented a circular array fixed-size queue.<br>
-<img src="pnotes/circulararray1.jpeg">
-<br><br>
+<button class="collapsible">
+  <strong>Embedding the Synthesizer
+</strong></button>
+  <div class="content">
+    <br>
+<h5 style="text-align:center;"><u>Code Execution</u></h5>
 
-Karplus-Strong algorithm
-<img src="pnotes/karplus-strong.png">
+I ran this code through the GuitarHero package: it creates a simulator that supports a total of 37 notes on the chromatic scale from 110 Hz to 880 Hz. The GuitarHero keyboard imitates a piano, such that the white keys are on the asdfghjkl; row and the black keys are on the qwertyuiop[]\ row. However, this software was unfortunately incompatible with HTML, so I found a better alternative:<br><br>
+
+I used an existing CSS/JS prepackage of a <a href="https://mczak.com/code/piano/">pretty cool piano</a> with 24 keys (with note transitions) but excluded the inbuilt tones from the set-up. I then pre-recorded each note through GuitarHero.<br><br>
+<img src="pnotes/allthenotespic.png"><br><br>
+ Finally, I wrote a JavaScript command to play these sounds (results from the Karplus-Strong algorithm) upon pressing the corresponding keys. I should comment that I lost 13 additional keys that I generated from the Karplus-Strong algorithm since the pre-existing CSS embedding of the piano only renders 24 keys, but I think it's a pretty good rendition of a piano, so I won't complain about it! This concludes everything I had to say about the constructiono of the synthesizer.
 
 
-</h5>
+</div>
 
+<br>
+
+<p>To briefly digress, since I mentioned it earlier, the process of abstraction (which is all about starting easy and adding complexity through stepwise refinement), when used with deliberate thought, is an excellent way to write complex chunks of code, which MIT Computer Science Professor Barbara Liskov speaks about in her lecture, <a href="https://www.youtube.com/watch?v=GDVAHA0oyJU&ab_channel=NCState">'The Power of Abstraction.'</a> I would definitely recommend watching her lecture.</p>
 
     </div>
   </div>
@@ -1745,9 +1896,28 @@ Karplus-Strong algorithm
     <a href=https://orcid.org/my-orcid?orcid=0000-0003-2893-9469https://orcid.org/my-orcid?orcid=0000-0003-2893-9469/><img src="Pictures/icons/orcid-icon.png", alt="Orcid", style="width:25px;height:25px";></a>
     <a href=https://scholar.google.com/citations?user=nUXwVU8AAAAJ&hl=en/><img src="Pictures/icons/googlescholar-icon.png", alt="Google Scholar", style="width:25px;height:25px";></a>
     <a href=https://github.com/emiletimothy/><img src="Pictures/icons/github-icon.png", alt="Github Icon", style="width:35px;height:25px";></a>
-<p style="color: white">© 2023 by Emile Timothy</p>
+
+<p style="color: white"><br>© 2023 by Emile Timothy</p>
 </div>
 
 </body>
 
 </html>
+
+
+<script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("b1-active");
+    var content = this.nextElementSibling;
+    if (content.style.maxHeight){
+      content.style.maxHeight = null;
+    } else {
+      content.style.maxHeight = content.scrollHeight + "px";
+    }
+  });
+}
+</script>
