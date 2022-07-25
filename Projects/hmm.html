@@ -117,6 +117,49 @@
   text-shadow: 3px 3px 3px #ababab;
 }
 
+/* Style the button that is used to open and close the collapsible content */
+.collapsible {
+  background-color: #000000;
+  color: #ffffff;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  outline: 10px white;
+  border: none;
+  text-align: center;
+  outline: none;
+  font-size: 15px;
+}
+
+.collapsible:after {
+  background-color: #000000;
+  content: '+'; /* Unicode character for "plus" sign (+) */
+  font-size: 13px;
+  outline: #000000;
+  color: #ffffff;
+  float: right;
+  margin-left: 5px;
+}
+
+.b1-active:after {
+  color: #ffffff;
+  font-size:10px;
+  content: "-"; /* Unicode character for "minus" sign (-) */
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.b1-active, .collapsible:hover {
+  background-color: #000000;
+}
+
+.content {
+  padding: 0 18px;
+  color: black;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+
 
 /* Bottom right text */
 .text-block {
@@ -130,7 +173,7 @@
 }
 
 .image-container {
-  background-image: url("ProjectPictures/covidpic2.jpeg"); /* The image used - important! */
+  background-image: url("ProjectPictures/hmm.jpeg"); /* The image used - important! */
   background-size: cover;
   position: relative; /* Needed to position the cutout text in the middle of the image */
   height: 70%; /* Some height */
@@ -138,7 +181,7 @@
 </style>
 
 <div class="image-container">
-  <div class="text">Correlating COVID-19 outbreaks to COVID-19 Vaccine Efficacy</div>
+  <div class="text">Hidden Markov Models to Generate Shakespearean Sonnets</div>
 </div>
 
 
@@ -148,34 +191,73 @@
     <div class="w3-container w3-white w3-margin w3-padding-large">
       <div class="w3">
 
-<p>During the spring quarter of my sophomore year at Caltech, I took CS 156b (Learning from Data), which is a graduate-level project-based class on Machine Learning taught by Professor <a href="https://work.caltech.edu/">Yaser Abu-Mostafa</a>. Since this was during the peak of the COVID-19 pandemic, Prof. Abu-Mostafa asked us to pursue a ML project of our choice using any available data to produce novel and meaningful insights about COVID-19. So, my friends (Julen, Andrew, and Basel, who are really smart guys) and I, decided to use existing data to determine how effective the COVID-19 vaccine was against the dominant variants at the time (B.1.1.7, P.1, B.1.351, B.1.427, B.1.429).<br><br>
-
-We used GISAID-scraped data and data from Outbreak.info, OWID, CDC, which represented regularly-updating COVID-19 variant outbreaks in different states in the United States. We used this data to train a couple of models: LSTM (Long Short-term Memory), VAR (Vector Auto-Regression), SIR (Susceptible, Infectious, Recovered) model, ARIMA (Autoregressive Integrated Moving Average), and GPR (gaussian process regression). Specifically, we looked at vaccine-delivery data and variant-outbreaks to see if we could find a negative correlation. My contribution to this project was the development of the ARIMA and GPR models, which are tools used primarily in modeling highly volatile data, like stocks. I also looked at XGBoost, but decided against using it due its lack of scalability since the data changed so sporadically. Our final machine-learning model ensembled the ARIMA, LSTM, and VAR models, to yield a pretty accurate estimate of the COVID-19 vaccine efficacy.<br><br>
-
-Here, you'll see my raw source-code for developing the ARIMA model, as well as the mostly self-contained slides for the three virtual presentations that we gave over the course of the quarter.<br><br></p>
-
-<button type="button" class="collapsible centertitleph11">Implementation of the ARIMA model</button>
-<div class="content">
-  <p align="center"><script src="https://gist.github.com/emiletimothy/220a95a143e4b10b387bb86a76d179f3.js"></script></p>
-</div><br>
-
-<button type="button" class="collapsible centertitleph11">First Progress Presentation</button>
-<div class="content">
-<p align="center"><iframe src="https://drive.google.com/file/d/1qblcNkcmsOotH3E9LwouM1p6O93vNdNK/preview" width="90%" height="720" allow="autoplay"></iframe></p></div>
-
-<button type="button" class="collapsible centertitleph11">Second Progress Presentation</button>
-<div class="content">
-<p align="center"><iframe src="https://drive.google.com/file/d/14Q5EPkHPstp0fpmfVioqt_EeTs_uGCdL/preview" width="90%" height="720" allow="autoplay"></iframe></p></div>
-
-<button type="button" class="collapsible centertitleph11">Final Presentation</button>
-<div class="content">
-<p align="center"><iframe src="https://drive.google.com/file/d/1kBlUD-OBhqrQ4gW0z6W-6JHB7LLRXAGr/preview" width="90%" height="720" allow="autoplay"></iframe></p></div><br>
+<p>During the winter quarter of my sophomore year at Caltech, I took CS 155 which is a graduate class on Machine Learning and Data Mining, taught by Professor <a href="http://www.yisongyue.com/">Yisong Yue</a>. One of our last week-long assignments was to individually create a Hidden Markov Model (HMM) using the Viterbi, backpropagation, and feedforward algorithms. Following this, I formed a group with my friends (Andrew, Basel, and Julen), and we used the HMM's we had individually constructed to find the transition and emission matrices of Shakespearean words from a corpus of texts using the CMU Pronouncing Dictionary. We then used the Baum-Welch algorithm, to generate somewhat meaningful Shakespearean sonnets while preserving the stress-unstress syllable pattern invariant. Here, I have showcased some of the sonnets generated by our algorithm, explained (to some technical details) the underlying algorithms involved in these tasks, and embedded the final reports that we presented to the class.<br><br></p>
 
 
-<p>A quick digression: While other groups in the class had elaborate names like 'Super Unsupervised' or 'Indecision Trees', we decided to name ourselves as 'Group 23' for an odd, though funny, reason. The story is that we were given a google sheets form to register our group and its name. However, we decided that instead of going to the trouble of choosing a witty (and potentially, awkward) name, we would be happier messing with another group. So, we registered our group as 'Group 23' on row 24 on the spreadsheet in the hopes that the Group that signed up on row 23 of the spreadsheet would be thrown into confusion ... Alas, it turned out that the group that signed up on row 23 never looked at the spreadsheet again, which was quite unfortunate. Moral of the story: our collective prank game needs to get stronger.<br><br>
+<button class="collapsible centertitleph11"><strong>Showcase: Synthetic Shakespearean Sonnets</strong></button>
+  <div class="content">
+<br><h5 style="text-align:center;"><u>Sonnet 1</u></h5>
 
-This was a really enjoyable class; and, even though it was entirely virtual, Professor Abu-Mostafa made it very memorable. I'd also like to acknowledge TAs Chris Wang, Dominic Yurk, and Alexander Zlokapa for their feedback throughout the class.
-</p>
+<p>Sonnet 1 goes here</p>
+
+<br><h5 style="text-align:center;"><u>Sonnet 2</u></h5>
+<p>Sonnet 2 goes here</p>
+
+<br><h5 style="text-align:center;"><u>Sonnet 3</u></h5>
+<p>Sonnet 3 goes here</p>
+</div>
+
+<br>
+
+
+<button class="collapsible centertitleph11"><strong>Building a Hidden Markov Model</strong></button>
+  <div class="content">
+<br><h5 style="text-align:center;"><u>Implementing the Viterbi Algorithm</u></h5>
+
+<p> some text goes here</p>
+
+<br><h5 style="text-align:center;"><u>Implementing the Backpropagation Algorithm</u></h5>
+<p> some text goes here</p>
+
+<br><h5 style="text-align:center;"><u>Implementing the Feedforward Algorithm</u></h5>
+<p> some text goes here</p>
+
+<!--   <p align="center"><script src="https://gist.github.com/emiletimothy/220a95a143e4b10b387bb86a76d179f3.js"></script></p> -->
+
+</div>
+
+
+<br>
+
+<button class="collapsible centertitleph11"><strong>Final Report: Hidden Markov Model</strong></button>
+  <div class="content">
+<br><h5 style="text-align:center;"><u>Implementing the Viterbi Algorithm</u></h5>
+
+<p> some text goes here</p>
+
+<br><h5 style="text-align:center;"><u>Implementing the Backpropagation Algorithm</u></h5>
+<p> some text goes here</p>
+
+<br><h5 style="text-align:center;"><u>Implementing the Feedforward Algorithm</u></h5>
+<p> some text goes here</p>
+
+</div>
+<br>
+
+<button class="collapsible centertitleph11"><strong>Final Report: Generating Shakespearean Sonnets</strong></button>
+  <div class="content">
+<br><h5 style="text-align:center;"><u>Implementing the Viterbi Algorithm</u></h5>
+
+<p> some text goes here</p>
+
+<br><h5 style="text-align:center;"><u>Implementing the Backpropagation Algorithm</u></h5>
+<p> some text goes here</p>
+
+<br><h5 style="text-align:center;"><u>Implementing the Feedforward Algorithm</u></h5>
+<p> some text goes here</p>
+
+</div>
+
 
       </div>
     </div>

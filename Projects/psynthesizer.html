@@ -206,7 +206,7 @@ if (devtools.isOpen) {
   font-weight: bold;
   margin: 0 auto; /* Center the text container */
   padding: 10px;
-  width: 70.5%;
+  width: 40%;
   text-align: center; /* Center text */
   position: absolute; /* Position text */
   top: 25%; /* Position text in the middle */
@@ -247,7 +247,7 @@ if (devtools.isOpen) {
   <div class="w3-col l7 s12" style="float:none !important; margin:auto; position:relative; z-index:10; margin-top:-10%;">
     <div class="w3-container w3-white w3-margin w3-padding-large">
       <div class="w3">
-<p>During the winter quarter of my sophomore year at Caltech, I took CS 2 (Data Structures) at Caltech, which was taught by Professor <a href="https://countablethoughts.com/">Adam Blank</a>. One of the first assignments of this class was to create a sound synthesizer, which I thought was really cool. This page is dedicated to explaining how the synthesizer works, and to provide a somewhat technical description of the underlying algorithms and data-structures. Without further ado, here is the synthesizer below: it's interactive, and responds to keystrokes and mouseclicks. Enjoy!</p>
+<p>During the winter quarter of my sophomore year at Caltech, I took CS 2 (Data Structures) at Caltech, which was taught by Professor <a href="https://countablethoughts.com/">Adam Blank</a>. One of the first week-long assignments of this class was to create a sound synthesizer, which I thought was really cool, even though it only took ~3 hours to implement. This page is dedicated to explaining how the synthesizer works, and to provide a somewhat technical description of the underlying algorithms and data-structures. Without further ado, here is the synthesizer below: it's interactive, and responds to keystrokes and mouseclicks. Enjoy!</p>
 <!-- <head> -->
 <link type="text/css" rel="stylesheet" href="psynthesizerstylesheet.css">
 <!-- </head> -->
@@ -1832,19 +1832,30 @@ I ran this code through the GuitarHero package: it creates a simulator that supp
 
 I used an existing CSS/JS prepackage of a <a href="https://mczak.com/code/piano/">pretty cool piano</a> with 24 keys (with note transitions) but excluded the inbuilt tones from the set-up. I then pre-recorded each note through GuitarHero.<br><br>
 <img src="pnotes/allthenotespic.png"><br><br>
- Finally, I wrote a JavaScript command to play these sounds (results from the Karplus-Strong algorithm) upon pressing the corresponding keys. I should comment that I lost 13 additional keys that I generated from the Karplus-Strong algorithm since the pre-existing CSS embedding of the piano only renders 24 keys, but I think it's a pretty good rendition of a piano, so I won't complain about it! This concludes everything I had to say about the constructiono of the synthesizer.
+ Finally, I wrote a JavaScript command to play these sounds (results from the Karplus-Strong algorithm) upon pressing the corresponding keys. I should comment that I lost 13 additional keys that I generated from the Karplus-Strong algorithm since the pre-existing CSS embedding of the piano only renders 24 keys, but I think it's a pretty good rendition of a piano, so I won't complain about it! This concludes everything I had to say about the construction of of the synthesizer.
 
 
 </div>
 
+<br><br><br>
+
+<button type="button" class="collapsible centertitleph11">Code: Array Deque</button>
+<div class="content">
+  <p align="center"><script src="https://gist.github.com/emiletimothy/49435f65bb69b39eb67b636b6b7de762.js"></script></p>
+</div>
 <br>
 
+<button type="button" class="collapsible centertitleph11">Code: Doubly Linked-List Deque</button>
+<div class="content">
+  <p align="center"><script src="https://gist.github.com/emiletimothy/b96e31ab3a517ebef51a6bed098c66e3.js"></script></p>
+</div>
+<br>
 
 <button type="button" class="collapsible centertitleph11">Code: Circular Array Fixed-Size Queue</button>
 <div class="content">
   <p align="center"><script src="https://gist.github.com/emiletimothy/9dbd557b5d4914e652f896a89160e038.js"></script></p>
 </div>
-<br>
+<br><br>
 
 <button type="button" class="collapsible centertitleph11">Code: Karplus-Strong Algorithm</button>
 <div class="content">
