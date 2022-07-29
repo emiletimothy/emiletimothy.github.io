@@ -332,10 +332,25 @@ thee so all all so then<br>
 
 <br>
 
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
 
 <button class="collapsible centertitleph11">Building a Hidden Markov Model</button>
-  <div class="content">
+  <div class="content"><br>
+Consider the following set-up. It's actually the simplest Hidden Markov Model. It initializes itself to one state (or one vertex), and then stays at itself with probability \(P(A|A)\) or \(P(B|B)\) and transitions to the other vertex with probability \(P(A|B)\) or \(P(B|A)\). In this model, vertex A represents the uniform distribution from \(\{1,...,6\}\), and vertex B represents the uniform distribution from \(\{1,...,4\}\). So, we write that the initial distribution is \(\pi = (\pi_A, \pi_B)\). In real-world applications, the vertices of the Hidden Markov Model are categories that describe how the output of the model evolves over iterations.<br><br>
 
+<img src="ProjectPictures/easyHMM.png" style="width:100%">
+The question that the Hidden Markov Model answers is that if you're given an observed sequence upon sampling from this Markov distribution, say \(1,4,3,6,6,4\), can you predict the most likely sequence and what is the probability of this sequence occurring? Finally, for any element in the distribution that could have belonged to either \(A\) or \(B\), for instance any number from \(\{1,2,3,4\}\), what is the probability that the element belonged to \(A\) (and by contrast, \(B\))?<br><br>
+
+These questions are actually well-answered by the Hidden Markov Model algorithms. The most likely sequence, given some observations, is predicted by the <i>Viterbi algorithm</i>, and its corresponding likelihood is determined by the <i>Forward algorithm</i>. Finally, the probability that an element from an observation belonged to a specific 'vertex' can be determined by the <i>Backward algorithm</i>. To explain these solutions (the forward, backward and Viterbi algorithms) better, we develop some essential notation.
+
+$$\alpha^t(i) = \mathbb{P}(\text{observed sequence, ending in state i at w/t})$$
+$$\beta^t(i) = \mathbb{P}(\text{observation after t | ending in state i at w/t})$$
+$$\delta^t(i) = \max(\mathbb{P}(\text{observation ending in state i at w/t}))$$
+<br>
+Before I continue, there is one natural question to ask: this 2-vertex Hidden Markov Model is pretty cool, but obviously it doesn't capture the complexity of large datasets. So, maybe consider the \(m\)-vertex Hidden Markov Model. Is there even a unique or existing solution for the most likely forecasted sequence given some  predictions? Turns out that the answer to this question is yes! The Hammersley-Clifford Theorem (or the fundamental theorem of random fields) states that the directed graphical model \(V_\Delta(M_D)\) is equal to the image of the parameter space \(\theta\) under the map \(F_D\). Specifically, it states that a probability distribution has a strictly positive mass if and only if it it is a Gibbs random field: its probability density must be factorizable over the cliques (or complete subgraphs) of the graph. The implication of this result is that for all m and for any observed sequence, the \(m\)-vertex Hidden Markov Model has a unique solution for a predicted future sequence, which can be approximated by common algorithmic tools with neat twists.<br>
 
 <br><h5 style="text-align:center;"><u>Implementing the Viterbi Algorithm</u></h5>
 
