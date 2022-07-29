@@ -348,18 +348,54 @@ These questions are actually well-answered by the Hidden Markov Model algorithms
 
 $$\alpha^t(i) = \mathbb{P}(\text{observed sequence, ending in state i at w/t})$$
 $$\beta^t(i) = \mathbb{P}(\text{observation after t | ending in state i at w/t})$$
-$$\delta^t(i) = \max(\mathbb{P}(\text{observation ending in state i at w/t}))$$
+$$\delta^t(i) = \max\limits_{\text{observations}}(\mathbb{P}(\text{observation ending in state i at w/t}))$$
+Before I continue, there is one natural question to ask: this 2-vertex Hidden Markov Model is pretty cool, but obviously it doesn't capture the complexity of large datasets. So, maybe consider the \(m\)-vertex Hidden Markov Model. Is there even a unique or existing solution for the most likely forecasted sequence given some  predictions? Turns out that the answer to this question is yes! The Hammersley-Clifford Theorem (or the fundamental theorem of random fields) states that the directed graphical model \(V_\Delta(M_D)\) is equal to the image of the parameter space \(\theta\) under the map \(F_D\). Specifically, it states that a probability distribution has a strictly positive mass if and only if it it is a Gibbs random field: its probability density must be factorizable over the cliques (or complete subgraphs) of the graph. The implication of this result is that for all m and for any observed sequence, the \(m\)-vertex Hidden Markov Model has a unique solution for a predicted future sequence, which can be approximated by common algorithmic tools with neat twists.<br><br>
+
+So, first things first, how do we convert knowledge of our observations to knowledge about the hidden variables behind their system? Can we find out which vertex each of these elements came from? Yes again, and that's exactly what the Viterbi algorithm does.
+<img src="ProjectPictures/hmmv1.png" style="width:100%"><br>
+
+
+
+<img src="ProjectPictures/hmmv2.png" style="width:100%">
+
 <br>
-Before I continue, there is one natural question to ask: this 2-vertex Hidden Markov Model is pretty cool, but obviously it doesn't capture the complexity of large datasets. So, maybe consider the \(m\)-vertex Hidden Markov Model. Is there even a unique or existing solution for the most likely forecasted sequence given some  predictions? Turns out that the answer to this question is yes! The Hammersley-Clifford Theorem (or the fundamental theorem of random fields) states that the directed graphical model \(V_\Delta(M_D)\) is equal to the image of the parameter space \(\theta\) under the map \(F_D\). Specifically, it states that a probability distribution has a strictly positive mass if and only if it it is a Gibbs random field: its probability density must be factorizable over the cliques (or complete subgraphs) of the graph. The implication of this result is that for all m and for any observed sequence, the \(m\)-vertex Hidden Markov Model has a unique solution for a predicted future sequence, which can be approximated by common algorithmic tools with neat twists.<br>
 
 <br><h5 style="text-align:center;"><u>Implementing the Viterbi Algorithm</u></h5>
+The Viterbi algorithm first uses the observations to find the path of maximum probability, which is characterized by:
+$$ \text{Path} = \theta'_{\sigma_1 \tau_1}\theta_{\sigma_1 \sigma_2} \theta'_{\sigma_2 \tau_2} \theta_{\sigma_2 \sigma_3} \theta'_{\sigma_3 \tau_3} \theta_{\sigma_3 \sigma_4} \theta'_{\sigma_4 \tau_4}$$
 
+<img src="ProjectPictures/viterbimain.png" style="width:100%"><br><br>
+
+Essentially, the Viterbi algorithm seeks to find the \(\arg\max\limits_y P(y|x)\). We can actually write an explicit formula for this value.<br>
+$$\begin{aligned}
+  \arg\max\limits_y P(y|x) &= \arg\max\limits_y \frac{P(y,x)}{P(x)}\\
+  &= \arg\max\limits_y P(y,x) \\
+  &= \arg\max\limits_y \log P(x|y) + \log P(y)
+\end{aligned}
+$$
+So, for \(k=1,...,M\), we can use Dynamic Programming to iteratively solve for each \(\log(\hat{Y}^k(Z))\), where Z loops over every possible probability of state, to produce the best \(\hat{Y}^M(Z)\), which is also known as the Mean A Posteriori (MAP) inference. So, the Viterbi algorithm models the pairwise transitions between states. The reason it works is completely justified by the Bayesian principle. For instance, consider a 1st order HMM, characterized by the joint probability distribution
+$$
+\begin{aligned}
+P(x,y) &= P(\text{End}|y^M) \prod\limits_{i=1}^M P(y^i | y^{i-1}) \prod\limits_{i=1}^M P(x^i | y^i) \\
+P(x|y) &= \prod\limits_{i=1}^M P(x^i | y^i)
+\end{aligned}
+$$
+Since we know that \(P(y) = P(\text{End}|y^M)\prod\limits_{i=1}^M P(y^i | y^{i-1})\), we can use this characterization to recover the original Bayes' formula, which states that:
+$$ P(x|y) = \frac{P(x,y)}{P(y)} $$
+
+So, what is the actual algorithm? Given an input of the observation space \(O = \{o_1, ..., o_N\} \subseteq S\), a state space \(S = \{s_1, ..., s_K\}\), an array of initial possibilities \(\Pi = (\pi_1,...\pi_K)\) such that \(x_1 = s_i\), a sequence of observations \(Y = (y_1, ..., y_T)\) such that \(y_t = o_i\) if the observation at time \(t\) is \(o_i\), a transition matrix \(A\) of size \(K\times K\) such that \(A_{ij}\) stores the transition probability of transiting from state \(s_i\) to state \(s_j\), and an emission matrix \(B\) of size \(K\times N\) such that \(B_{ij}\) stores the probability of observing \(o_j\) from state \(s_i\), the Viterbi algorithm outputs the most likely hidden state sequence \(X = (x_1, ..., x_T)\). Below is the pseudocode from Wikipedia for the general HMM solution, and I've embedded my code for the Viterbi algorithm to generate Shakespearean sonnets in the later sections below.<br>
+
+
+<img src="ProjectPictures/Viterbi.png" style="width:100%;"></p>
+
+<br><h5 style="text-align:center;"><u>Implementing the Viterbi Forward Algorithm</u></h5>
 <p> some text goes here</p>
 
-<br><h5 style="text-align:center;"><u>Implementing the Feedforward Algorithm</u></h5>
-<p> some text goes here</p>
 
-<br><h5 style="text-align:center;"><u>Implementing the Backpropagation Algorithm</u></h5>
+
+
+
+<br><h5 style="text-align:center;"><u>Implementing the Viterbi Backward Algorithm</u></h5>
 <p> some text goes here</p>
 
 <br><h5 style="text-align:center;"><u>Supervised Learning</u></h5>
