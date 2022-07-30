@@ -354,8 +354,6 @@ Before I continue, there is one natural question to ask: this 2-vertex Hidden Ma
 So, first things first, how do we convert knowledge of our observations to knowledge about the hidden variables behind their system? Can we find out which vertex each of these elements came from? Yes again, and that's exactly what the Viterbi algorithm does.
 <img src="ProjectPictures/hmmv1.png" style="width:100%"><br>
 
-
-
 <img src="ProjectPictures/hmmv2.png" style="width:100%">
 
 <br>
@@ -388,57 +386,303 @@ So, what is the actual algorithm? Given an input of the observation space \(O = 
 
 <img src="ProjectPictures/Viterbi.png" style="width:100%;"></p>
 
-<br><h5 style="text-align:center;"><u>Implementing the Viterbi Forward Algorithm</u></h5>
-<p> some text goes here</p>
+<br><h5 style="text-align:center;"><u>Implementing the Viterbi Forward and Backward Algorithm</u></h5><br>
 
 
+Here are some conceptual ideas of what happens in the Forward and Backward algorithms, respectively.<br><br>
 
 
+<img src="ProjectPictures/Viterbiforward.png" style="width:100%;"></p><br><br>
 
-<br><h5 style="text-align:center;"><u>Implementing the Viterbi Backward Algorithm</u></h5>
-<p> some text goes here</p>
 
-<br><h5 style="text-align:center;"><u>Supervised Learning</u></h5>
-<p> some text goes here</p>
+<img src="ProjectPictures/Viterbibackward.png" style="width:100%;"></p><br>
+
+
+So, for the forward algorithm, the goal is to solve for every \(\alpha_z(i) = P(x^{1:i},y^i=Z|A,O)\). One naive (exponential time) solution is to let
+$$ \alpha_z(i) = P(x^{1:i},y^i=Z|A,O) = \sum\limits_{y^{1:i-1}} P(x^{1:i},y^i=Z,y^{1:i-1}|A,O)$$
+A better solution is to use DP and recursively solve for \(\alpha_z(i) \). So,
+$$ 
+\begin{aligned}
+\alpha_z(1) &= P(y^1 = z|y^0) P(x^1 | y^1 = z) = O_{x^1, z} A_{\text{z,start}} \\
+\alpha_z(i+1) &= O_{x^{i+1},z} \sum\limits_{j=1}^L \alpha_j(i) A_{z,j}
+\end{aligned}
+$$
+
+Similarly, for the backward algorithm, the goal is to solve for every \(\beta_z(i) = P(x^{1+i:M}|y^i=Z,A,O)\). The naive (exponential time) solution is to let
+$$ \beta_z(i) = P(x^{i+1:M}|y^i=Z|A,O) = \sum\limits_{y^{i+1:L}} P(x^{i+1:M},y^{i+1:M} | y^i = Z, A, O)$$
+A better solution is to use DP and recursively solve for \(\beta_z(i) \). So,
+$$ 
+\begin{aligned}
+\beta_z(M) &= 1 \\
+\beta_z(i) &= \sum\limits_{j=1}^L \beta_j(i+1) A_{j,z} O_{x^{i+1},j}
+\end{aligned}
+$$
+
+Here's the code that computes these functions:<br>
+<code>    
+<pre>  def forward(self, x, normalize=False)
+        alphas = [[0. for _ in range(self.L)] for _ in range(len(x) + 1)]
+        for state in range(len(self.A_start)):
+          alphas[1][state] = self.O[state][x[0]] * self.A_start[state]
+        for a, b in enumerate(x[1:]):
+          for state in range(self.L):
+            for previous_state in range(self.L):
+              alphas[a + 2][state] += self.A[previous_state][state] * 
+                     self.O[state][b] * alphas[a + 1][previous_state]
+          if normalize:
+            if (sum(alphas[a + 2]) > 0):
+              alphas[a + 2] = [val / sum(alphas[a + 2]) for val in 
+                    alphas[a + 2]]
+        return alphas<br>
+</pre>
+
+
+<pre>
+    def backward(self, x, normalize=False):
+        betas = [[0. for _ in range(self.L)] for _ in range(len(x) + 1)]
+        betas[M] = [1 for _ in range(self.L)]
+        for a, b in reversed(list(enumerate(x))):
+          for current_state in range(self.L):
+            for transition_state in range(self.L):
+              betas[a][current_state] += betas[a + 1][transition_state] * 
+              self.A[current_state][transition_state] * 
+              self.O[transition_state][b]
+          if normalize:
+            if (sum(betas[a]) > 0):
+              betas[a] = [val / sum(betas[a]) for val in betas[a]]
+        return betas
+</pre>
+</code>
+
+<br>
+
+<h5 style="text-align:center;"><u>Supervised Learning</u></h5>
+
+We can use the supervised learning framework to train the HMM. So, given \(S = \{(x_i,y_i)\}_{i=1}^N\), our goal is to use \(S\) to estimate the maximum likelihood \(P(x,y)\), where
+$$P(x,y) = P(\text{End}|y^M)\prod\limits_{i=1}^M P(y^i | y^{i-1}) \prod\limits_{i=1}^M P(x^i | y^i)$$
+
+So, to do this, we define the Transition matrix \(A\) and the Observation matrix \(O\), where
+
+$$ A_{ab} = P(y^{i+1}=a|y^i = b)$$
+$$ O_{wz} = P(x^i=w|y^i=z)$$
+
+Using this notation, we have that
+$$ \begin{aligned}
+P(x,y) &= P(\text{End}|y^M)\prod\limits_{i=1}^M P(y^i|y^{i-1})\prod\limits_{i=1}^M P(x^i|y^i) \\
+&= A_{\text{End},y^M}\prod\limits_{i=1}^M A_{y^i,y^{i-1}} \prod\limits_{i=1}^M O_{x^i,y^i}
+\end{aligned}
+$$
+
+To find the maximum likelihood probability, we have that
+
+$$ \arg\max\limits_{A,O} \prod\limits_{(x,y)\in S} P(x,y) = \arg \max\limits_{A,O} \prod\limits_{(x,y)\in S} P(\text{End}|y^M)\prod\limits_{i=1}^M P(y^i|y^{i-1})\prod\limits_{i=1}^M P(x^i | y^i)$$
+
+We can use supervised learning to estimate each component separately. So,
+
+$$ A_{ab} = \frac{\sum\limits_{j=1}^N \sum\limits_{i=0}^{M_j} \mathbb{1}_{[(y_j^{i+1}=a)\wedge (y_j^i=b)]}}{\sum\limits_{j=1}^N \sum\limits_{i=0}^{M_j}\mathbb{1}_{[y^i_j=b]}}$$
+
+$$ O_{wz} = \frac{\sum\limits_{j=1}^N \sum\limits_{i=1}^{M_j} \mathbb{1}_{[(x_j^{i}=w)\wedge (y_j^i=z)]}}{\sum\limits_{j=1}^N \sum\limits_{i=1}^{M_j}\mathbb{1}_{[y^i_j=z]}}$$
+
+Here's the code that executes the supervised learning framework for the Hidden Markov Model:<br>
+<code>
+<pre>    def supervised_learning(self, X, Y):
+        A = np.zeros((self.L, self.L))
+        B = np.zeros((self.L, self.L))
+        for state_seq in Y:
+          for i in range(len(state_seq) - 1):
+            A[state_seq[i]][state_seq[i+1]] += 1
+        for i in range(len(A[0])):
+          B[:,i] = [probability/sum(A[:,i]) for probability in A[:,i]]
+        self.A = B
+        O = [[0 for _ in range(self.D)] for _ in range(self.L)]
+        for a in range(len(list(X))):
+          for state in range(len(list(Y[a]))):
+            O[Y[a][state]][X[a][state]] += 1
+        for i in range(len(O)):
+          self.O[i] = [probability/sum(O[i]) for probability in O[i]]
+</pre></code>
+There are some glaring assumptions that go along with the supervised learning framework, that are, in most cases, undesirable. For instance, we assume that everything can be decomposed to a pair of products: that \(P(y^{i+1}=a|y^i=b)\) is independent. This is a crucial assumption since it gives us that 
+$$P(x,y) = P(\text{End}|y^M)\prod\limits_{i=1}^M P(y^i | y^{i-1}) \prod\limits_{i=1}^M P(x^i | y^i)$$
+
+Another crucial, albeit undesirable, assumption is that we assume that the model can easily learn (to an arbitrarily high precision) the frequentist statistics of how often \(y^{i+1}=a\) when \(y^i=b\) over the training set.
 
 <br><h5 style="text-align:center;"><u>Unsupervised Learning</u></h5>
-<p> some text goes here</p>
 
-<br><h5 style="text-align:center;"><u>Generate Emission</u></h5>
-<p> some text goes here</p>
+Due to undesirable assumptions of supervised learning that are mentioned in the previous paragraph, we instead consider the framework of unsupervised learning. Consider the case in which there are no y's. So, \(S = \{x_i\}_{i=1}^N\). Can we still estimate \(P(x,y)\)? Again, the answer is yes! Note that
 
-<br><h5 style="text-align:center;"><u>Probabilities - alpha and beta</u></h5>
-<p> some text goes here</p>
+$$ \arg \max \prod\limits_i P(x_i) = \arg \max \prod\limits_i \sum\limits_y P(x_i, y)$$
 
-<br><h5 style="text-align:center;"><u>Supervised HMM</u></h5>
-<p> some text goes here</p>
+So, we now re-define our matrix protagonists \(A\) and \(O\) to:
 
-<br><h5 style="text-align:center;"><u>Unsupervised HMM</u></h5>
-<p> some text goes here</p>
+$$ A_{ab} = P(y^{i+1}=a|y^i = b)$$
+$$ O_{wz} = P(x^i=w|y^i=z)$$
 
-<br><h5 style="text-align:center;"><u>Predicting Sequences and Probabilities</u></h5>
-<p> some text goes here</p>
+We then use the Unsupervised Learning equivalent of the Viterbi algorithm - the Baum-Welch algorithm - to train the Hidden Markov Model. Basically, it initializes \(A\) and \(O\) randomly using the framework above. It then predicts the probabilities of \(y\) for each training \(x\), in what's called the expectation step. In then uses the \(y's\) to estimate the new \(A\) and \(O\) in what's called the maximization step. It then repeats this procedure until the estimates converge onto a value.<br><br>
 
-<br><h5 style="text-align:center;"><u>Generating Sample Sentences</u></h5>
-<p> some text goes here</p>
+So, in the expectation step, we are given \(A,O\) and \(x=(x^1,...,x^M)\) and need to predict \(P(y^i)\) for each \(y=(y^1,...,y^M)\), while encoding the current model's beliefs and marginal distribution about \(y\).<br>
+<br>
+
+Next, in the maximization step, we seek to find the maximum likelihood over the marginal distribution using a dynamic programming approach:
+
+$$ A_{ab} = \frac{\sum\limits_{j=1}^N \sum\limits_{i=0}^{M_j} P(y_j^i=b, y_j^{i+1}=a)}{\sum\limits_{j=1}^N \sum\limits_{i=0}^{M_j} P(y^i_j=b)}$$
+
+$$ O_{wz} = \frac{\sum\limits_{j=1}^N \sum\limits_{i=1}^{M_j} \mathbb{1}_{[x_j^{i}=w]} P(y_j^i=z)}{\sum\limits_{j=1}^N \sum\limits_{i=1}^{M_j} P(y^i_j=z)}$$
+
+To explain the underlying algorithm further, we introduce some notation. Let \(\alpha_z(i)\) be the probability of observing prefix \(x^{1:i}\) and having the i-th state be \(y^i=z\), and let \(\beta_z(i)\) be the probability of observing suffix \(x^{1+i:m}\) given the i-th state being \(y^i = z\), where
+
+$$ \alpha_z(i) = P(x^{1:i},y^i=Z|A,O)$$
+$$ \beta_z(i) = P(x^{1+i:M}|y^i=Z,A,O)$$
+
+So, to compute the marginals, we can combine these two terms to get:
+
+$$P(y^i = z | x) = \frac{\alpha_z(i) \beta_z(i)}{\sum\limits_{z'} a_{z'}(i)\beta_{z'}(i)}$$
+$$P(y^i = b, y^{i-1}=a | x) =  \frac{a_a(i-1)P(y^i=b|y^{i-1}=a)P(x^i|y^i=b)\beta_b(i)}{\sum\limits_{a',b'}a_{a'}(i-1)P(y^i=b'|y^{i-1}=a')P(x^i|y^i=b')\beta_{b'}(i)}$$
+
+Here's the code that does exactly that:<br>
+<code>
+  <pre>
+    def unsupervised_learning(self, X, N_iters):
+      bar = progressbar.ProgressBar(max_value=N_iters)
+      for iter in range(N_iters):
+        bar.update(iter)
+        temp_A = np.zeros((self.L, self.L))
+        temp_O = np.zeros((self.L, self.D))
+        A_col = np.zeros(self.L)
+        O_col = np.zeros(self.L)
+        for x in X:
+          M = len(x)
+          x_state = np.zeros((M, self.L, self.L))
+          alphas = np.array(self.forward(x, normalize=True))
+          betas = np.array(self.backward(x, normalize=True))
+          c = (alphas * betas)[1:]
+          for t in range(len(list(c))):
+            b = c[t] / np.sum(c[t])
+            O_col += b
+            if (M - 1 > t):
+              A_col += b
+            for i in range(self.L):
+              temp_O[i][x[t]] += b[i]
+          for t in range(1, M):
+            for a in range(self.L):
+             for b in range(self.L):
+                x_state[t][a][b] += alphas[t][a] * self.A[a][b]
+                   * betas[t + 1][b] * self.O[b][x[t]]
+          for x_state_i in x_state[1:]:
+            temp_A += x_state_i/np.sum(x_state_i) 
+        temp_A /= A_col[:,None]
+        temp_O /= O_col[:,None]
+        self.A = temp_A
+        self.O = temp_O
+  </pre>
+</code>
+
+<h5 style="text-align:center;"><u>Forward-Backward Algorithm</u></h5>
+
+We use the unsupervised learning framework in conjunction with the forward-backward algorithm, instead of the separate forward and backward algorithm that is typically used in conjunction with the Viterbi algorithm. The forward-backward algorithm has 3 key traits:<br><br>
+
+It runs forward: \(\alpha_z(i) = P(x^{1:i},y^i=Z|A,O)\) <br>
+It runs backward: \(\beta_z(i) = P(x^{1+i:M}|y^i=Z,A,O)\)<br><br>
+
+For each training \(x = (x^1,...,x^M)\), it computes each \(P(y^i)\) for each \(y = (y^1, ..., y^M)\)
+$$ P(y^i=z|x) = \frac{\alpha_z(i)\beta_z(i)}{\sum\limits_{z'}\alpha_{z'}(i)\beta_{z'}(i)}$$
+
+<h5 style="text-align:center;"><u>Generate Emission</u></h5>
+
+We then use these above algorithms to determine the probabilities of forecasted sequences to find the maximum-likelihood sequence:
+
+<code>
+  <pre>
+    def generate_emission(self, M):
+        emission = []
+        states = []
+        new_state = np.random.choice(self.L, p=self.A_start)
+        for i in range(M):
+          states.append(new_state)
+          emission.append(np.random.choice(self.D, p=self.O[new_state]))
+          new_state = np.random.choice(self.L, p=self.A[new_state])
+        return emission, state
+  </pre>
+</code>
+
+<h5 style="text-align:center;"><u>Probabilities - alpha and beta</u></h5>
+
+Similarly, we use the forward and backward (or the forward-backward) algorithm to find the probabilities of the alpha or beta.
+
+<code><pre>
+    def probability_alphas(self, x):
+        alphas = self.forward(x)
+        prob = sum(alphas[-1])
+        return prob
+</pre></code>
+
+<code><pre>    def probability_betas(self, x):
+        betas = self.backward(x)
+        prob = sum([betas[1][j] * self.A_start[j] * self.O[j][x[0]] \
+                    for j in range(self.L)])
+        return prob
+</pre></code>
+
+<h5 style="text-align:center;"><u>Generating Sample Sentences</u></h5>
+
+We then trained the HMM on the corpus of the constitution of the United States, and generated some sample sentences.<br>
+
+
+<h5 style="text-align:center"> Sample Sentence 1</h5> <code>
+
+  Hundred and not its public states shall statebetween number of thing but approved their common prescribe consequence iv he shall regulate the conventions and no...
+</code><br>
+
+
+<h5 style="text-align:center"> Sample Sentence 2</h5> <code>
+A they state of no have but thereof declare of in of such be laws shall a to day entitled proceedings of enumeration any privileged...
+  </code><br><br>
+
+<h5 style="text-align:center"> Sample Sentence 3</h5> <code>
+From foreign of all two to prescribed as whereof laws and to not first states objections elected publish south state and senator prince all no...
+  </code><br><br>
+
+<h5 style="text-align:center"> Sample Sentence 4</h5> <code>
+  Electors shall jersey taken have thousand on whose and the officer constitute to be weights the privilege a for of the the bill adhering subject...
+  </code><br><br>
+
+<h5 style="text-align:center"> Sample Sentence 5</h5> <code>
+  From be shall given under if shall reserving the united may public and on both protect to any united of the constitution shall as of...
+  </code><br>
+
 
 <br><h5 style="text-align:center;"><u>Comments about the Sparsity of the A and O matrix</u></h5>
-<p> some text goes here</p>
+
+Some interesting insights about the transition matrices \(A\) and \(O\) are that they are extremely sparse. This is actually an expected result, since the HMM enforces a strong regularization through the Baum-Welch (and, even Viterbi) algorithms. The sparsity of these matrices confirms that these algorithms are not overfitting on the dataset particularly, and are thus still capable of generating unique samples from the distribution.
+
+<img src="ProjectPictures/sparsityA.png" style="width:100%;"></p>
+
+
+<img src="ProjectPictures/sparsityO.png" style="width:100%;"></p>
 
 <br><h5 style="text-align:center;"><u>Visualizations: The Data Wordcloud and How the HMM Transitions between Genres</u></h5>
-<p> some text goes here</p>
+Here is a word-cloud that we generated of the dataset (the corpus of the United States constitution).
+<img src="ProjectPictures/datawordcloud.png" style="width:100%;"></p>
 
-<!--   <p align="center"><script src="https://gist.github.com/emiletimothy/220a95a143e4b10b387bb86a76d179f3.js"></script></p> -->
+We then generated a word-cloud of the genres of the dataset and categories of words, allowing the HMM to discover 10 hidden states from the corpus.<br>
+
+
+<img src="ProjectPictures/statewordcloud.png" style="width:100%;"></p>
+
+Finally, we mapped the process of how the HMM transitioned between categories of words when it began the process of generating unique phrases.
+<video width="100%" controls>
+  <source src="ProjectPictures/datacloud.mov"type="video/mp4">
+  <source src="ProjectPictures/datacloud.mov" type="video/ogg">
+  Your browser does not support the video tag.
+</video>
 
 </div>
 
 <br>
 
 <button class="collapsible centertitleph11"><strong>Leveraging the HMM to Compose Sonnets</strong></button>
-  <div class="content">
-<br><h5 style="text-align:center;"><u>Implementing the Viterbi Algorithm</u></h5>
+  <div class="content"><br>
 
-<p> some text goes here</p>
+We then applied the Hidden Markov Model to a new dataset - a corpus of everything Shakespeare ever wrote. We applied it in conjunction with the CMU pronouncing dictionary to determine the stresses of each word to apply further constraints (a 10-syllable count per phrase, a stress-unstress pattern, and an iambic pentameter). We then used an RNN (recurrent neural network) to build a LSTM (long short-term memory) to check that collections of words that were moderately longer made sense (within sufficiently large windows).
 </div>
 
 <br>
