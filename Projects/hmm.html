@@ -339,19 +339,19 @@ thee so all all so then<br>
 
 <button class="collapsible centertitleph11">Building a Hidden Markov Model</button>
   <div class="content"><br>
-Consider the following set-up. It's actually the simplest Hidden Markov Model. It initializes itself to one state (or one vertex), and then stays at itself with probability \(P(A|A)\) or \(P(B|B)\) and transitions to the other vertex with probability \(P(A|B)\) or \(P(B|A)\). In this model, vertex A represents the uniform distribution from \(\{1,...,6\}\), and vertex B represents the uniform distribution from \(\{1,...,4\}\). So, we write that the initial distribution is \(\pi = (\pi_A, \pi_B)\). In real-world applications, the vertices of the Hidden Markov Model are categories that describe how the output of the model evolves over iterations.<br><br>
+Consider the following set-up. It's actually the simplest Hidden Markov Model. It initializes itself to one state (or one vertex), and then stays at itself with probability \(P(A|A)\) or \(P(B|B)\) and transitions to the other vertex with probability \(P(A|B)\) or \(P(B|A)\). In this model, vertex A represents the uniform distribution from \(\{1,...,6\}\), and vertex B represents the uniform distribution from \(\{1,...,4\}\). So, the initial distribution is \(\pi = (\pi_A, \pi_B)\). In real-world applications, the vertices of the Hidden Markov Model are categories that describe how the output of the model evolves over iterations.<br><br>
 
 <img src="ProjectPictures/easyHMM.png" style="width:100%">
 The question that the Hidden Markov Model answers is that if you're given an observed sequence upon sampling from this Markov distribution, say \(1,4,3,6,6,4\), can you predict the most likely sequence and what is the probability of this sequence occurring? Finally, for any element in the distribution that could have belonged to either \(A\) or \(B\), for instance any number from \(\{1,2,3,4\}\), what is the probability that the element belonged to \(A\) (and by contrast, \(B\))?<br><br>
 
-These questions are actually well-answered by the Hidden Markov Model algorithms. The most likely sequence, given some observations, is predicted by the <i>Viterbi algorithm</i>, and its corresponding likelihood is determined by the <i>Forward algorithm</i>. Finally, the probability that an element from an observation belonged to a specific 'vertex' can be determined by the <i>Backward algorithm</i>. To explain these solutions (the forward, backward and Viterbi algorithms) better, we develop some essential notation.
+These questions are actually well-answered by the Hidden Markov Model algorithms. The most likely sequence, given some observations, is predicted by the <i>Viterbi algorithm</i>, and its corresponding likelihood is determined by the <i>Forward algorithm</i>. Finally, the probability that an element from an observation belonged to a specific 'vertex' can be determined by the <i>Backward algorithm</i>. To explain these solutions (the forward, backward and Viterbi algorithms) better, I'm going to introduce some essential notation.
 
 $$\alpha^t(i) = \mathbb{P}(\text{observed sequence, ending in state i at w/t})$$
 $$\beta^t(i) = \mathbb{P}(\text{observation after t | ending in state i at w/t})$$
 $$\delta^t(i) = \max\limits_{\text{observations}}(\mathbb{P}(\text{observation ending in state i at w/t}))$$
 Before I continue, there is one natural question to ask: this 2-vertex Hidden Markov Model is pretty cool, but obviously it doesn't capture the complexity of large datasets. So, maybe consider the \(m\)-vertex Hidden Markov Model. Is there even a unique or existing solution for the most likely forecasted sequence given some  predictions? Turns out that the answer to this question is yes! The Hammersley-Clifford Theorem (or the fundamental theorem of random fields) states that the directed graphical model \(V_\Delta(M_D)\) is equal to the image of the parameter space \(\theta\) under the map \(F_D\). Specifically, it states that a probability distribution has a strictly positive mass if and only if it it is a Gibbs random field: its probability density must be factorizable over the cliques (or complete subgraphs) of the graph. The implication of this result is that for all m and for any observed sequence, the \(m\)-vertex Hidden Markov Model has a unique solution for a predicted future sequence, which can be approximated by common algorithmic tools with neat twists.<br><br>
 
-So, first things first, how do we convert knowledge of our observations to knowledge about the hidden variables behind their system? Can we find out which vertex each of these elements came from? Yes again, and that's exactly what the Viterbi algorithm does.
+So, first things first, can we convert our knowledge of these observations to knowledge about the hidden variables behind their system? Can we find out which vertex each of these elements came from? Yes again, and that's exactly what the Viterbi algorithm does.
 <img src="ProjectPictures/hmmv1.png" style="width:100%"><br>
 
 <img src="ProjectPictures/hmmv2.png" style="width:100%">
@@ -364,7 +364,7 @@ $$ \text{Path} = \theta'_{\sigma_1 \tau_1}\theta_{\sigma_1 \sigma_2} \theta'_{\s
 
 <img src="ProjectPictures/viterbimain.png" style="width:100%"><br><br>
 
-Essentially, the Viterbi algorithm seeks to find the \(\arg\max\limits_y P(y|x)\). We can actually write an explicit formula for this value.<br>
+Essentially, the Viterbi algorithm seeks to find the \(\arg\max\limits_y P(y|x)\). There's actually an explicit formula for this value.<br>
 $$\begin{aligned}
   \arg\max\limits_y P(y|x) &= \arg\max\limits_y \frac{P(y,x)}{P(x)}\\
   &= \arg\max\limits_y P(y,x) \\
@@ -504,7 +504,7 @@ Here's the code that executes the supervised learning framework for the Hidden M
 There are some glaring assumptions that go along with the supervised learning framework, that are, in most cases, undesirable. For instance, we assume that everything can be decomposed to a pair of products: that \(P(y^{i+1}=a|y^i=b)\) is independent. This is a crucial assumption since it gives us that 
 $$P(x,y) = P(\text{End}|y^M)\prod\limits_{i=1}^M P(y^i | y^{i-1}) \prod\limits_{i=1}^M P(x^i | y^i)$$
 
-Another crucial, albeit undesirable, assumption is that we assume that the model can easily learn (to an arbitrarily high precision) the frequentist statistics of how often \(y^{i+1}=a\) when \(y^i=b\) over the training set.
+Another crucial, albeit undesirable, assumption is that the model can easily learn (to an arbitrarily high precision) the frequentist statistics of how often \(y^{i+1}=a\) when \(y^i=b\) over the training set.
 
 <br><h5 style="text-align:center;"><u>Unsupervised Learning</u></h5>
 
@@ -528,7 +528,7 @@ $$ A_{ab} = \frac{\sum\limits_{j=1}^N \sum\limits_{i=0}^{M_j} P(y_j^i=b, y_j^{i+
 
 $$ O_{wz} = \frac{\sum\limits_{j=1}^N \sum\limits_{i=1}^{M_j} \mathbb{1}_{[x_j^{i}=w]} P(y_j^i=z)}{\sum\limits_{j=1}^N \sum\limits_{i=1}^{M_j} P(y^i_j=z)}$$
 
-To explain the underlying algorithm further, we introduce some notation. Let \(\alpha_z(i)\) be the probability of observing prefix \(x^{1:i}\) and having the i-th state be \(y^i=z\), and let \(\beta_z(i)\) be the probability of observing suffix \(x^{1+i:m}\) given the i-th state being \(y^i = z\), where
+To explain the underlying algorithm further, I'm going to introduce some notation. Let \(\alpha_z(i)\) be the probability of observing prefix \(x^{1:i}\) and having the i-th state be \(y^i=z\), and let \(\beta_z(i)\) be the probability of observing suffix \(x^{1+i:m}\) given the i-th state being \(y^i = z\), where
 
 $$ \alpha_z(i) = P(x^{1:i},y^i=Z|A,O)$$
 $$ \beta_z(i) = P(x^{1+i:M}|y^i=Z,A,O)$$
@@ -668,7 +668,7 @@ We then generated a word-cloud of the genres of the dataset and categories of wo
 
 <img src="ProjectPictures/statewordcloud.png" style="width:100%;"></p>
 
-Finally, we mapped the process of how the HMM transitioned between categories of words when it began the process of generating unique phrases.
+Finally, I mapped the process of how the HMM transitioned between categories of words when it began the process of generating unique phrases.
 <video width="100%" controls>
   <source src="ProjectPictures/datacloud.mov"type="video/mp4">
   <source src="ProjectPictures/datacloud.mov" type="video/ogg">
@@ -682,7 +682,7 @@ Finally, we mapped the process of how the HMM transitioned between categories of
 <button class="collapsible centertitleph11"><strong>Leveraging the HMM to Compose Sonnets</strong></button>
   <div class="content"><br>
 
-We then applied the Hidden Markov Model to a new dataset - a corpus of everything Shakespeare ever wrote. We applied it in conjunction with the CMU pronouncing dictionary to determine the stresses of each word to apply further constraints (a 10-syllable count per phrase, a stress-unstress pattern, and an iambic pentameter). We then used an RNN (recurrent neural network) to build a LSTM (long short-term memory) to check that collections of words that were moderately longer made sense (within sufficiently large windows).
+Finally, we applied the Hidden Markov Model to a new dataset - a corpus of everything Shakespeare ever wrote. We applied it in conjunction with the CMU pronouncing dictionary to determine the stresses of each word to apply further constraints (a 10-syllable count per phrase, a stress-unstress pattern, and an iambic pentameter). We then used an RNN (recurrent neural network) to build a LSTM (long short-term memory) to check that collections of words that were moderately longer made sense (within sufficiently large windows).
 </div>
 
 <br>
