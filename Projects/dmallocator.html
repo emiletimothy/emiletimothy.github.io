@@ -211,7 +211,7 @@ if (devtools.isOpen) {
   font-weight: bold;
   margin: 0 auto; /* Center the text container */
   padding: 10px;
-  width: 56%;
+  width: 69%;
   text-align: center; /* Center text */
   position: absolute; /* Position text */
   top: 25%; /* Position text in the middle */
@@ -243,7 +243,7 @@ if (devtools.isOpen) {
 </style>
 
 <div class="image-container">
-  <div class="text">Dynamic Memory Allocator and Address Sanitizer</div>
+  <div class="text">Optimized Dynamic Memory Allocator and Address Sanitizer</div>
 </div>
 
 
@@ -252,20 +252,41 @@ if (devtools.isOpen) {
   <div class="w3-col l7 s12" style="float:none !important; margin:auto; position:relative; z-index:10; margin-top:-10%;">
     <div class="w3-container w3-white w3-margin w3-padding-large">
       <div class="w3">
-<p>During the fall quarter of my sophomore year at Caltech, I took CS 24 (Computing Systems) at Caltech, which was taught by Professor <a href="https://countablethoughts.com/">Adam Blank</a>. One of the more notorious week-long assignments in the class was to build a dynamic memory allocator and an address sanitizer in C through some pretty cool techniques that I'd like to describe in this seection. These projects took a total of ~30 hours to implement in total, and while it was pretty challenging, it was also incredibly rewarding and fun! So, in this page, I'll describe what a memory allocator and address sanitizer is, and then go into details about how I optimized it using explicit free-lists, coalescing, and block-splitting to minimize calls to the sbrk() function.</p>
+<p>During the fall quarter of my sophomore year at Caltech, I took CS 24 (Computing Systems) at Caltech, which was taught by Professor <a href="https://countablethoughts.com/">Adam Blank</a>. One of the more notorious week-long assignments in the class was to build an optimized dynamic memory allocator and an address sanitizer in C through some pretty cool techniques that I'd like to describe in this seection. These projects took a total of ~30 hours to implement in total, and while it was pretty challenging, it was also incredibly rewarding and fun! So, in this page, I'll describe what a memory allocator and address sanitizer is, and then go into details about how I optimized it using explicit free-lists, coalescing, and block-splitting to minimize calls to the sbrk() function.</p>
       </div>
 
 
-<button class="collapsible"><strong>Static Memory Allocator</strong></button>
+<button class="collapsible"><strong>Dynamic Memory Allocator</strong></button>
   <div class="content">
-<br><h5 style="text-align:center;"><u>title</u></h5>
+<br><h5 style="text-align:center;"><u>Malloc, Calloc, Realloc, Free</u></h5>
 
-<p> text here<br><br>
+<p>
+  In the C programming language, the size of an array cannot be changed in the same way it is changed in Python. In Python, list manipulation commands like slicing and appending easily allow you to resize arrays until they have an appropriate size. However, in C, this task is slightly more roundabout - you have to use the stdlib.h library. The relevant functions in the stdlib.h library which allow you to get more storage space for your data (or trim your storage space if you don't have as much data) are <code>malloc, calloc, realloc, </code>and <code>free</code>. Before anything else, I'm going to briefly describe these four functions in terms of their purposes, functionalities, and working mechanisms.<br><br>
+
+<code>1) Malloc </code>(Memory Allocation): Malloc is a method in C that is used to dynamically allocate a single large block of memory with the specified size. It returns a pointer of type void which can be cast into a pointer of any form. It doesn’t initialize memory at execution time so that it has initialized each block with the default garbage value initially.
+<br><br>
+
+<code>2) Calloc </code>(Contiguous Allocation): Calloc is a method in C that is used to dynamically allocate the specified number of blocks of memory of the specified type. It is very similar to malloc() but has two different points and these are:<br>
+<pre>    1) It initializes each block with a default value ‘0’.
+    2) It has two parameters or arguments as compare to malloc().
+</pre>
+
+<code>3) Realloc </code>(Reallocation): Realloc is used to dynamically change the memory allocation of a previously allocated memory. In other words, if the memory previously allocated with the help of malloc or calloc is insufficient, realloc can be used to dynamically re-allocate memory. Re-allocation of memory maintains the already present value and new blocks will be initialized with the default garbage value.
+<br><br>
+
+<code>4) Free </code>(Deallocation): Free in C is used to dynamically de-allocate the memory. The memory allocated using functions malloc() and calloc() is not de-allocated on their own. Hence the free() method is used, whenever the dynamic memory allocation takes place. It helps to reduce wastage of memory by freeing it.
+<br><br>
+
+
+
+</p>
+
+
+
 </div><br>
 
 
-
-<button class="collapsible"><strong>Dynamic Memory Allocator</strong></button>
+<button class="collapsible"><strong>Optimized Dynamic Memory Allocator</strong></button>
   <div class="content">
 <br><h5 style="text-align:center;"><u>title</u></h5>
 
