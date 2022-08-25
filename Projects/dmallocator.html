@@ -9,6 +9,10 @@
           src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
   </script>
 
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
 
 <script>
 document.onkeydown = function(e) {
@@ -211,7 +215,7 @@ if (devtools.isOpen) {
   font-weight: bold;
   margin: 0 auto; /* Center the text container */
   padding: 10px;
-  width: 69%;
+  width: 50%;
   text-align: center; /* Center text */
   position: absolute; /* Position text */
   top: 25%; /* Position text in the middle */
@@ -238,96 +242,81 @@ if (devtools.isOpen) {
   background-image: url("ProjectPictures/dmpic.jpeg"); /* The image used - important! */
   background-size: cover;
   position: relative; /* Needed to position the cutout text in the middle of the image */
-  height: 70%; /* Some height */
+  height: 80%; /* Some height */
 }
 </style>
 
 <div class="image-container">
-  <div class="text">Optimized Dynamic Memory Allocator and Address Sanitizer</div>
+  <div class="text">Optimized Dynamic Memory Allocator</div>
 </div>
 
 
 
 <div class="w3-row w3-padding">
-  <div class="w3-col l7 s12" style="float:none !important; margin:auto; position:relative; z-index:10; margin-top:-10%;">
+  <div class="w3-col l8 s12" style="float:none !important; margin:auto; position:relative; z-index:10; margin-top:-10%;">
     <div class="w3-container w3-white w3-margin w3-padding-large">
       <div class="w3">
-<p>During the fall quarter of my sophomore year at Caltech, I took CS 24 (Computing Systems) at Caltech, which was taught by Professor <a href="https://countablethoughts.com/">Adam Blank</a>. One of the more notorious week-long assignments in the class was to build an optimized dynamic memory allocator and an address sanitizer in C through some pretty cool techniques that I'd like to describe in this seection. These projects took a total of ~30 hours to implement in total, and while it was pretty challenging, it was also incredibly rewarding and fun! So, in this page, I'll describe what a memory allocator and address sanitizer is, and then go into details about how I optimized it using explicit free-lists, coalescing, and block-splitting to minimize calls to the sbrk() function.</p>
+<p>During the fall quarter of my sophomore year at Caltech, I took CS 24 (Computing Systems) at Caltech, which was taught by Professor <a href="https://countablethoughts.com/">Adam Blank</a>. One of the more notorious week-long assignments in the class was to build an optimized dynamic memory allocator in C through some pretty cool techniques that I'd like to describe in this page. It took ~20 hours to implement these projects, and while it was pretty challenging, it was also incredibly rewarding and fun! So, in this page, I'll describe what a memory allocator is, and then go into details about how I optimized it by using explicit free-lists, coalescing, and block-splitting to minimize calls to the <i>sbrk()</i> function.</p>
       </div>
 
 
 <button class="collapsible"><strong>Dynamic Memory Allocator</strong></button>
   <div class="content">
-<br><h5 style="text-align:center;"><u>Malloc, Calloc, Realloc, Free</u></h5>
+<br><h5 style="text-align:center;"><u>Malloc, Calloc, Free, Realloc</u></h5>
 
 <p>
-  In the C programming language, the size of an array cannot be changed in the same way it is changed in Python. In Python, list manipulation commands like slicing and appending easily allow you to resize arrays until they have an appropriate size. However, in C, this task is slightly more roundabout - you have to use the stdlib.h library. The relevant functions in the stdlib.h library which allow you to get more storage space for your data (or trim your storage space if you don't have as much data) are <code>malloc, calloc, realloc, </code>and <code>free</code>. Before anything else, I'm going to briefly describe these four functions in terms of their purposes, functionalities, and working mechanisms.<br><br>
+  In the C programming language, the size of an array cannot be changed in the same way as it is changed in Python. In Python, list manipulation commands like slicing and appending easily allow you to resize arrays until they have an appropriate size. However, in C, this task is less straightforward - you have to use the stdlib.h library. The relevant functions in the stdlib.h library that allow you to resize the storage space for your data are <i>malloc</i>, <i>calloc</i>, <i>free</i>, and <i>realloc</i>. Firstly, I'm going to briefly describe these four functions in terms of their purposes, functionalities, and working mechanisms - after all, it is important to know the weaknesses of a function before embarking on the task of optimizing the function.<br><br>
 
-<code>1) Malloc </code>(Memory Allocation): Malloc is a method in C that is used to dynamically allocate a single large block of memory with the specified size. It returns a pointer of type void which can be cast into a pointer of any form. It doesn’t initialize memory at execution time so that it has initialized each block with the default garbage value initially.
+1) <i>Malloc (Memory Allocation): </i> Malloc is a function in C that dynamically allocates a large contiguous block of memory with a size that is specified by the user when they call the function. Malloc first calls a low-level system memory management function called <i>sbrk()</i> which finds available space in the system's heap that it can allocate to the usr. <i>Sbrk()</i> then returns a pointer (of type <emph>void</emph>) which can later be cast by the user program into a pointer of any other type. Malloc then returns a pointer of the memory space to the user, where the memory space is initialized with default garbage values.<br>
+
+<div style="background-color:black;color:white;"><code>ptr = (<code style="color:turquoise">void</code>*) <code style="color:orange">malloc</code>(<code style="color:turquoise">size_t</code> size);</code></div>
+<br>
+
+2) <i>Calloc (Contiguous Allocation): </i> Calloc is a function in C that is used to dynamically allocate a user-specified number of blocks of memory of a specific type which it returns to the user. It is functionally similar to <i>malloc()</i> since it also uses the <i>sbrk()</i> function, but differs because Calloc initializes each block with a default value of 0, and because it has two parameters whereas Malloc only has one parameter.<br><br>
+
+<div style="background-color:black;color:white;"><code>ptr = <code style="color:turquoise">void</code> *<code style="color:orange">calloc</code>(<code style="color:turquoise">size_t</code> number_of_blocks, <code style="color:turquoise">size_t</code> size_of_each_block);
+</code></div>
+<br>
+
+3) <i>Free (Deallocation): </i> Free is a function in C that is used to dynamically deallocate memory to the heap that has been previously allocated to the user. This function is necessary since memory from <i>malloc()</i> and <i>calloc()</i> do not deallocate themselves after the user has finished using them. Freeing memory after using it is an imperative coding practice since it helps mitigate memory wastage. Once the memory space is freed, the pointer can never be used again: it would be pointing to restricted space in the system which would lead to an error.
 <br><br>
 
-<code>2) Calloc </code>(Contiguous Allocation): Calloc is a method in C that is used to dynamically allocate the specified number of blocks of memory of the specified type. It is very similar to malloc() but has two different points and these are:<br>
-<pre>    1) It initializes each block with a default value ‘0’.
-    2) It has two parameters or arguments as compare to malloc().
-</pre>
+<div style="background-color:black;color:white;"><code>ptr = <code style="color:turquoise">void</code> <code style="color:orange">free</code>(<code style="color:turquoise">void</code> *ptr);</code></div>
+<br>
 
-<code>3) Realloc </code>(Reallocation): Realloc is used to dynamically change the memory allocation of a previously allocated memory. In other words, if the memory previously allocated with the help of malloc or calloc is insufficient, realloc can be used to dynamically re-allocate memory. Re-allocation of memory maintains the already present value and new blocks will be initialized with the default garbage value.
-<br><br>
+4) <i>Realloc (Reallocation): </i> Realloc is a function in C that is used to dynamically change the memory allocation of a previously allocated memory. In other words, if the memory previously allocated to the user (through malloc or calloc) is too small or too large for the user's wishes, realloc can be used to dynamically reallocate memory to the user. Realloc works by allocating (through malloc) the memory space with the size specified by the user, copying the data from the old memory space to the new memory space, freeing the pointer associated to the old memory space, and finally returning the new pointer to the user. The reallocation of memory retains as much of the existing data as possible. Specifically, if the storage space is increased from <i>n</i> bytes to <i>m</i> bytes, the last <i>m-n</i> new bytes will be initialized with default garbage values. Similarly, if the storage size is decreased to <i>n</i> bytes, the first <i>n</i> bytes of the initial memory space will be copied to the new memory space. <br><br>
 
-<code>4) Free </code>(Deallocation): Free in C is used to dynamically de-allocate the memory. The memory allocated using functions malloc() and calloc() is not de-allocated on their own. Hence the free() method is used, whenever the dynamic memory allocation takes place. It helps to reduce wastage of memory by freeing it.
-<br><br>
-
-
+<div style="background-color:black;color:white;"><code>ptr = <code style="color:turquoise">void</code> *<code style="color:orange">realloc</code>(<code style="color:turquoise">void</code> *ptr, <code style="color:turquoise">size_t</code> size);</code></div>
 
 </p>
-
-
-
 </div><br>
-
 
 <button class="collapsible"><strong>Optimized Dynamic Memory Allocator</strong></button>
   <div class="content">
-<br><h5 style="text-align:center;"><u>title</u></h5>
+<br><h5 style="text-align:center;"><u>Faults in Malloc, Calloc, Free, and Realloc</u></h5>
 
-<p> text here<br><br>
+<p>To paint a picture of the current dynamic memory allocation set-up, it is worth noting that <i>sbrk()</i> and <i>free()</i> are extremely slow functions to call since they run at the system level. Let's quantiify this more precisely now. Let \(T_1(n)\) denote the time it takes for <i>sbrk()</i> to allocate <i>n</i> bytes of memory, and let \(T_2(n)\) denote the time it takes for <i>free()</i> to dellocate <i>n</i> bytes of memory. Then, the time it takes to run <i>malloc()</i> must be \(T_1(n)\), the time it takese to un <i>calloc()</i> must be \(T_1(n)+O(n)\), the time it takes to run <i>free()</i> must be \(T_2(n)\), and the time it takes to run <i>realloc()</i> for a pointer that currently points to a space of size n with the command to reshape the space to size <i>m</i> must be \(T_2(n)+O(n)+T_1(m)\). The bottleneck in this system is simply the fact that \(T_1(n)\) and \(T_2(n)\) are steep functions. So, calling <i>malloc()</i>, <i>calloc()</i>, <i>realloc()</i>, or <i>free()</i> whenever some memory is desired or undesired is just too expensive.
+</p>
+
+<h5 style="text-align:center;"><u>Optimization Plan</u></h5>
+So, how can we minimize calls to <i>sbrk()</i> and <i>free()?</i> Here's the plan: if we call <i>sbrk()</i> to allocate memory and then free the memory, store a pointer to the storage space in a linked-list at the program-level. Then, if the user requests memory again in the future, we first check the linked-list to see if it contains pointers to any block in memory space that is atleast the size of the space that the user is asking for. If the memory space has more space than the user asks for, we segment it by splitting the block (<i>block-splitting</i>) and allocate the space to the user while adding the residual space as a separate block of memory in the free list. Conversely, if there is no other block of memory in the free-list, we make another call to <i>sbrk()</i>. Additionally, we add in some other optimizations: Every time we free some memory, we check if the blocks to its left or right are also free. If they are free, we <i>coalesce</i> the blocks together to make them contiguous. If not, we just add the block as a separate node on the linked-list. An additional design decision to make was how to search through the free-list to find blocks of optimal size: it was decided that a LIFO (last-in first-out) strategy would be used: this meant that blocks would be added to the head of the linked-list, and removed from its tail. Additionally, to store the sizes of the blocks, we added a header for each block, where the header stated the size of its corresponding memory block. Finally, we denote the head and tail of the free-list with blocks called the prologue and epilogue, where the pointers to the prologue and epilogue are stored as global variables.
+
+
+<br><h5 style="text-align:center;"><u>Results</u></h5>
+
+As expected, this turned out to be a strong optimization. It increased the speed and utility of the initial dynamic memory allocation by roughly 200%. One way to increase the speed and utility of the code further would be to use an alternative datastructure rather than linked-lists: using a balanced binary search tree (BST) would allow for a faster way to find blocks of the correct size, which would avoid unnecessary block-splitting (followed by future coalescing).
+
+
 </div><br>
-
-<button class="collapsible"><strong>Address Sanitizer</strong></button>
-  <div class="content">
-<br><h5 style="text-align:center;"><u>title</u></h5>
-
-<p> text here<br><br>
-</div><br><br>
-
-
-<button class="collapsible"><strong>Code: Static Memory Allocator</strong></button>
-  <div class="content">
-<br><h5 style="text-align:center;"><u>title</u></h5>
-
-<p> text here<br><br>
-</div><br>
-
 
 
 <button class="collapsible"><strong>Code: Dynamic Memory Allocator</strong></button>
   <div class="content">
-<br><h5 style="text-align:center;"><u>title</u></h5>
-
-<p> text here<br><br>
-</div><br>
-
-
-
-<button class="collapsible"><strong>Code: Address Sanitizer</strong></button>
-  <div class="content">
-<br><h5 style="text-align:center;"><u>title</u></h5>
-
-<p> text here<br><br>
-</div><br>
-
 <br>
+<script src="https://gist.github.com/emiletimothy/4819416ce0437928662614b102e78d4c.js"></script>
+</div><br>
 
+</p>
 
     </div>
   </div>
