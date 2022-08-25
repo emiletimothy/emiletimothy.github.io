@@ -304,7 +304,7 @@ So, how can we minimize calls to <i>sbrk()</i> and <i>free()?</i> Here's the pla
 
 <br><h5 style="text-align:center;"><u>Results</u></h5>
 
-As expected, this turned out to be a strong optimization. It increased the speed and utility of the initial dynamic memory allocation by roughly 200%. One way to increase the speed and utility of the code further would be to use an alternative datastructure rather than linked-lists: using a balanced binary search tree (BST) would allow for a faster way to find blocks of the correct size, which would avoid unnecessary block-splitting (followed by future coalescing).
+As expected, this turned out to be a strong optimization. It increased the speed and utility of the initial dynamic memory allocation by roughly 200%. One way to increase the speed and utility of the code further would be to use an alternative datastructure rather than linked-lissts: using a balanced binary search tree (BST) would allow for a faster way to find blocks of the correct size, which would avoid unnecessary block-splitting (followed by future coalescing).
 
 
 </div><br>
