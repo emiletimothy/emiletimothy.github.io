@@ -62,13 +62,13 @@
   font-weight: bold;
   margin: 0 auto; /* Center the text container */
   padding: 10px;
-  width: 30%;
+  width: 50%;
   text-align: center; /* Center text */
   position: absolute; /* Position text */
-  top: 25%; /* Position text in the middle */
+  top: 15%; /* Position text in the middle */
   left: 50%; /* Position text in the middle */
   transform: translate(-50%, -50%); /* Position text in the middle */
-  mix-blend-mode: screen; /* This makes the cutout text possible */
+/*  mix-blend-mode: screen;  /*This makes the cutout text possible */
   font-family: "Oswald", sans-serif;
   text-shadow: 3px 3px 3px #ababab;
 }
@@ -85,27 +85,33 @@
   padding-right: 20px;
 }
 
-.image-container {
-  background-image: url("ProjectPictures/serengeti_wildfires.jpeg"); /* The image used - important! */
+.image-container { /* serengeti_wildfires*/
+  background-image: url("ProjectPictures/serengeti3.webp"); /* The image used - important! */
   background-size: cover;
   position: relative; /* Needed to position the cutout text in the middle of the image */
-  height: 60%; /* Some height */
+  height:100%; /* Some height */
 }
 </style>
 
 <div class="image-container">
-  <div class="text">Physics 11 Hurdle 2</div>
+  <div class="text">Physics 11 Hurdle 2: Fire in the Serengeti</div>
 </div>
 
 
 
 <div class="w3-row w3-padding">
-  <div class="w3-col l8 s12" style="float:none !important; margin:auto; position:relative; z-index:10; margin-top:-10%;">
+  <div class="w3-col l8 s12" style="float:none !important; margin:auto; position:relative; z-index:10; margin-top:-25%;">
     <div class="w3-container w3-white w3-margin w3-padding-large">
       <div class="w3">
-        <h5>
 
-<h3 class="centertitleph11"> Physics 11 Hurdle 2: Fire in the Serengeti</h3>
+<!-- <h3 class="centertitleph11"> Physics 11 Hurdle 2: Fire in the Serengeti</h3>
+ -->
+ <p>For the second hurdle into the Physics 11 class at Caltech, Professors Rob Phillips and Dave Stevenson asked us to model the relation between the number of rinderpest virus', wildebests, lions, elephants, and trees in the Serengeti ecosystem, and to predict the locations of wildfire outbreaks (which is dependent on the actions of other species in the ecosystem). <br><br>
+
+  Essentially, the spectacular migration of wildebeests within the Serengeti implies that the Wildebeests would consume the grass which in turn fuels the spontaneous wildfire outbreaks, so the Wildebeests played a role in mitigating forest fires by consuming the source of their fuel. However, the presence of the Rinderpest virus which solely targets Wildebests meant that there were fewer Wildebeests available to eat the grass, which caused the number of wildfires to increase. However, another confounding factor in this problem was the existence of predators in the ecosystem. The Serengeti lions are known for eating the Wildebests and Elephants; however, many of them die in the wildfires which implies a temporarily drop in the rate of decrease number of Wildebeests and Elephants being eaten. <br><br>
+
+  This problem was quite stressful since my first two computational approaches failed to work; however, I had a lot of fun thinking about this problem, and even had some luck by using a neat perturbation idea with a linear-algebraic approach (the adomian decompositon of the Leslie matrix where a time-dependent population histogram of the species were modeled as vectors at each discrete time step). I've attached my submission to this problem below.
+  </p>
 <p align="center"><iframe src="https://drive.google.com/file/d/1UYXY1j7I0LJJftKqsRfIxS33XqwwiXQY/preview" width="90%" height="720" allow="autoplay"></iframe></p>
 
       </div>
