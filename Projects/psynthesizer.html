@@ -212,7 +212,7 @@ if (devtools.isOpen) {
   top: 25%; /* Position text in the middle */
   left: 50%; /* Position text in the middle */
   transform: translate(-50%, -50%); /* Position text in the middle */
-  mix-blend-mode: screen; /* This makes the cutout text possible */
+  /* mix-blend-mode: screen; /* This makes the cutout text possible */
   font-family: "Oswald", sans-serif;
   text-shadow: 3px 3px 3px #ababab;
 }
@@ -229,11 +229,13 @@ if (devtools.isOpen) {
   padding-right: 20px;
 }
 
-.image-container {
-  background-image: url("pnotes/border_img.jpeg"); /* The image used - important! */
+
+.image-container { 
+  background-image: url("ProjectPictures/piano_back5.png"); /* pnotes/border_img - The image used - important! */
   background-size: cover;
   position: relative; /* Needed to position the cutout text in the middle of the image */
-  height: 70%; /* Some height */
+  height: 80%;
+  width: 100%;
 }
 </style>
 
@@ -244,7 +246,7 @@ if (devtools.isOpen) {
 
 
 <div class="w3-row w3-padding">
-  <div class="w3-col l7 s12" style="float:none !important; margin:auto; position:relative; z-index:10; margin-top:-10%;">
+  <div class="w3-col l8 s12" style="float:none !important; margin:auto; position:relative; z-index:10; margin-top:-10%;">
     <div class="w3-container w3-white w3-margin w3-padding-large">
       <div class="w3">
 <p>During the winter quarter of my sophomore year at Caltech, I took CS 2 (Data Structures) at Caltech, which was taught by Professor <a href="https://countablethoughts.com/">Adam Blank</a>. One of the first week-long assignments of this class was to create a sound synthesizer, which I thought was really cool, even though it only took ~3 hours to implement. This page is dedicated to explaining how the synthesizer works, and to provide a somewhat technical description of the underlying algorithms and data-structures. Without further ado, here is the synthesizer below: it's interactive, and responds to keystrokes and mouseclicks. Enjoy!</p>
