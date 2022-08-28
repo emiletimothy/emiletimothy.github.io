@@ -253,7 +253,7 @@ if (devtools.isOpen) {
 
 
 <div class="w3-row w3-padding">
-  <div class="w3-col l8 s12" style="float:none !important; margin:auto; position:relative; z-index:10; margin-top:-10%;">
+  <div class="w3-col l9 s12" style="float:none !important; margin:auto; position:relative; z-index:10; margin-top:-10%;">
     <div class="w3-container w3-white w3-margin w3-padding-large">
       <div class="w3">
 <p>During the fall quarter of my sophomore year at Caltech, I took CS 24 (Computing Systems) at Caltech, which was taught by Professor <a href="https://countablethoughts.com/">Adam Blank</a>. One of the more notorious week-long assignments in the class was to build an optimized dynamic memory allocator in C through some pretty cool techniques that I'd like to describe in this page. It took ~20 hours to implement these projects, and while it was pretty challenging, it was also incredibly rewarding and fun! So, in this page, I'll describe what a memory allocator is, and then go into details about how I optimized it by using explicit free-lists, coalescing, and block-splitting to minimize calls to the <i>sbrk()</i> function.</p>

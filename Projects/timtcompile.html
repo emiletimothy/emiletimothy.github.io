@@ -241,6 +241,18 @@ if (devtools.isOpen) {
   position: relative; /* Needed to position the cutout text in the middle of the image */
   height: 70%; /* Some height */
 }
+
+
+.code_blocks {
+  background-color:black;
+  color:white;
+  border-top-left-radius:5px;
+  border-top-right-radius:5px;
+  border-bottom-left-radius:5px;
+  border-bottom-right-radius:5px;
+  padding:5px;
+}
+
 </style>
 
 <div class="image-container">
@@ -250,7 +262,7 @@ if (devtools.isOpen) {
 
 
 <div class="w3-row w3-padding">
-  <div class="w3-col l8 s12" style="float:none !important; margin:auto; position:relative; z-index:10; margin-top:-10%;">
+  <div class="w3-col l9 s12" style="float:none !important; margin:auto; position:relative; z-index:10; margin-top:-10%;">
     <div class="w3-container w3-white w3-margin w3-padding-large">
       <div class="w3">
 <p>I created a simplistic programming language during the winter of 2020, and named it Tim. Along with it, I built a compiler named TCompiler, which I built using self-written parsing code, node extractors, and stack registers in the assembly language X86-64. In this page, I'm going to describe some of the main components of what went into building the language and the compiler.</p>
@@ -259,24 +271,148 @@ if (devtools.isOpen) {
 
 <button class="collapsible"><strong>The Tim Syntax and Documentation</strong></button>
   <div class="content">
-<br><h5 style="text-align:center;"><u>title1</u></h5>
+<br>
+This project was motivated by an assignment I did in CS 24 (Computing Systems) during my Sophomore year at Caltech, where we had to create an assembly generator (<code>asmgen</code>) for the <b>TEENY-BASIC</b> programming language. After this, it occurred to me that I could simply expand the code-base for the language to include some additional simplistic features.<br><br>
+
+Firstly, in the original <b>TEENY-BASIC</b> programming language, variables are defined with the <code>LET</code> command, and all variables have to be single-character uppercase letters, and these variables strictly denote either integers or floating point numbers. So, for instance, the syntax for setting a variable \(X\) to 3 or setting a variable \(Y\) to \(3.14\) would be:
+
+<br><br>
+<div class="code_blocks"><code style="color:turquoise; border-radius: 15px;">LET </code><code>X = 3;</code><br><code style="color:turquoise; border-radius: 15px;">LET </code><code>Y = 3.14;</code></div>
+<br>
+
+Secondly, <b>TEENY-BASIC</b> also allows users to print strings, numbers, and even the values of variables through the <code>PRINT</code> command. For instance, the snippets of code below would allow you to print the value of \(X\), print "Hello, World.", and print the number \(1729\), respectively.<br><br>
+
+<div class="code_blocks"><code style="color:turquoise">PRINT </code><code>X;</code><br>
+  <code style="color:turquoise">PRINT </code><code>"Hello, World.";</code><br>
+  <code style="color:turquoise">PRINT </code><code>1729;</code>
+</div><br>
+
+Thirdly, <b>TEENY-BASIC</b> allows conditionals as a functionality through the <code>IF </code> command. For example, define the variables \(A=3\) and \(B=6\). Then, the code below uses the <code>IF </code> command to allow you to check whether A is greater than, less than, or equal to B. It then uses the <code>PRINT </code> command to output an appropriate message to the user.<br><br>
+
+<div class="code_blocks"><code style="color:turquoise">LET </code><code>A = 3;</code><br>
+<code style="color:turquoise">LET </code><code>B = 6;</code><br>
+<code style="color:turquoise">IF </code><code>A < B, </code><code style="color:turquoise">THEN PRINT </code><code>"A is less than B.";</code><br>
+<code style="color:turquoise">IF </code><code>A = B, </code><code style="color:turquoise">THEN PRINT </code><code>"A is equal to B.";</code><br>
+<code style="color:turquoise">IF </code><code>A > B, </code><code style="color:turquoise">THEN PRINT </code><code>"A is greater than B.";</code>
+</div><br>
+
+<b>TEENY-BASIC</b> additionally supports the use of nested conditionals (<code>IF </code>commands nested within <code>IF</code> commands). For instance, given variables \(A = -2\) and \(B = 3\), the code below uses nested conditional statements to tell you which variables are positive.<br><br>
+
+<div class="code_blocks"><code style="color:turquoise">LET </code><code>A = -2;</code><br>
+  <code style="color:turquoise">LET </code><code>B = 3;</code><br>
+  <code style="color:turquoise">IF </code><code>A > 0, </code><code style="color:turquoise">THEN IF </code><code>B > 0, </code><code style="color:turquoise">PRINT </code><code>"A is less than B.";</code><br>
+  <code style="color:turquoise">IF </code><code>A = B, </code><code style="color:turquoise">THEN PRINT </code><code>"A is equal to B.";</code><br>
+  <code style="color:turquoise">IF </code><code>A > B, </code><code style="color:turquoise">THEN PRINT </code><code>"A is greater than B.";</code>
+</div><br>
+
+The final, and most computationally powerful, functionality of <b>TEENY-BASIC</b> is the <code>WHILE </code>command. The <code>WHILE</code> command repetitively runs a segment of code until a condition is met. The segment of code (called a sequence) is defined as all the code after the line containing the while statement that is also before a closing <code>ENDWHILE</code> command for the loop. For instance, the following snippet of code can be used to print the message "Hello, World!" 20 times.<br><br>
+
+<div class="code_blocks"><code style="color:turquoise">LET </code><code>I = 0;</code><br>
+  <code style="color:turquoise">WHILE </code><code>I < 20 </code><code style="color:turquoise">DO </code><br>
+  <code style="color:turquoise">PRINT </code><code>"Hello, World!";</code><br>
+  <code style="color:turquoise">ENDWHILE</code>
+</div>
+<br>
+
+The applications of <code>WHILE</code> loops are endless. The above code snippet shows how it can automate a fundamentally simple task of printing a message instead of forcing the user to type the same line 20 times, which is terribly space-inefficient. A more practical application of the while loop can be to compute and print the factorial of a non-negative integer stored in variable \(X\).<br><br>
+
+<div class="code_blocks"><code style="color:turquoise">IF </code><code>X <= 1, </code><code style="color:turquoise">THEN PRINT </code><code>1;</code><br>
+  <code style="color:turquoise">LET </code><code>P = 1;</code><br>
+  <code style="color:turquoise">WHILE </code><code>X > 1 </code><code style="color:turquoise">DO </code><br>
+    <code style="color:turquoise">LET </code><code>P = P * X;</code><br>
+        <code style="color:turquoise">LET </code><code>X = X - 1;</code><br>
+  <code style="color:turquoise">ENDWHILE</code><br>
+    <code style="color:turquoise">PRINT </code><code>P;</code><br>
+</div>
+<br>
+
+However, here is where the <b>TEENY-BASIC</b> functionality ends. The <b>Tim</b> programming language adds onto <b>TEENY-BASIC</b> through the fundamental addition of some obvious commands such as the <code>FOR</code> loop and <code>REPEAT</code> loop. Additionally, <b>Tim</b> supports the exponentiation, modulo, and quotient operators. Furthermore, <b>Tim</b> has an in-built list feature that can allow users to perform basic array operations such as sorting and frequency-counting. Moreover, <b>Tim</b> allows more complex choices of variable names, as long as they are not a pre-defined <b>Tim</b> keyword. Finally, <b>Tim</b> allows to directly view the <code>TYPE</code> of a variable. The remainder of this section explains these functionalities, and finally provides some examples of robust and versatile algorithms that <b>Tim</b> is capable of executing.<br><br>
+
+In <b>Tim</b>, the <code>FOR</code> loop can be executed using the <code>FOR...TO...NEXT</code> command. The <code>FOR</code> loop instantiates a local counting variable that is not accessible within the code of the program, and runs the code sequence as many times as it takes for the counting variable to traverse from the start value to the end value while it increments by 1 each time. For instance, the following code snippet prints all the numbers between \(5\) and \(20\).<br><br>
+
+
+<div class="code_blocks"><code style="color:turquoise">FOR </code><code>I = 5 </code><code style="color:turquoise">TO </code><code>20</code><br> 
+<code style="color:turquoise">PRINT </code><code>I</code>;<br>
+<code style="color:turquoise">ENDFOR</code>
+</div>
+<br>
+
+Next, <b>Tim</b> supports the execution of <code>REPEAT</code> loops using the <code>REPEAT...UNTIL</code> command. The original <code>WHILE</code> command is a pre-condition loop: it first checks that a condition is met. If the condition is met, it runs the code sequence, and then continues to keep re-running the code sequence as long as the original condition is met. However, the <code>REPEAT...UNTIL</code> command is a post-condition loop: it runs the code sequence first, and then checks that the condition is not met, and then repeats this process until the condition is met. For instance, the code below prints the first \(N\) Fibonaccci numbers.<br><br>
+
+<div class="code_blocks"><code style="color:turquoise">LET </code><code>A = 0;</code><br>
+  <code style="color:turquoise">PRINT </code><code>A;</code><br>
+<code style="color:turquoise">LET </code><code>B = 1;</code><br>
+  <code style="color:turquoise">PRINT </code><code>B;</code><br>
+<code style="color:turquoise">LET </code><code>Count = 2;</code><br>
+<code style="color:turquoise">REPEAT</code><br>
+<code style="color:turquoise">LET </code><code>C = A;</code><br>
+<code style="color:turquoise">LET </code><code>A = B;</code><br>
+<code style="color:turquoise">LET </code><code>B = A + B;</code><br>
+<code style="color:turquoise">PRINT </code><code>B;</code><br>
+<code style="color:turquoise">LET </code><code>Count = Count + 1;</code><br>
+<code style="color:turquoise">UNTIL </code><code>Count = 20;</code>
+</div>
+<br>
+
+Next, in addition to addition, subtraction, multiplication, and division, <b>Tim</b> performs some fundamental operations such as exponentiation with integer powers, as well as finding modulos and quotients. The code snippets below can be used to calculate and print the outputs of \(0.5^2, 2^{10}, 3^{-2}\), and \(6^0\), respectively.  <br><br>
+
+<div class="code_blocks">
+<code style="color:turquoise">PRINT </code><code>0.5^2</code>;<br>
+<code style="color:turquoise">PRINT </code><code>2^10</code>;<br>
+<code style="color:turquoise">PRINT </code><code>3^(-2)</code>;<br>
+<code style="color:turquoise">PRINT </code><code>6^0</code>;<br>
+</div>
+<br><br>
+Similarly, the code snippet below can be used to calculate and print the remainders (after division) of 1) \(3\) with \(5\), 2) \(8\) with \(5\), 3) \(0.2\) with \(0.1\), and 4) \(-0.4\) with \(0.1\).
+
+<!-- modulos, quotients, in-built list, find type -->
+
+<!-- describe all the functionalities in the above paragraph -->
+
+
+
+<br><br><br>
+
+
+<h5 style="text-align:center;"><u>Example Algorithms</u></h5>
+<!-- write a sorting algorithm here -->
+<!-- write the 2-sum leetcode problem here -->
+<!-- write a e-approximation algorithm here -->
+<!-- write a prime number detector -->
+<!-- write a palindrome detector -->
 
 <p>text here<br><br></p>
 </div><br>
 
-<button class="collapsible"><strong>Parsing Code and Node Extractors</strong></button>
+<button class="collapsible"><strong>Parser Extractor and Node Formation</strong></button>
   <div class="content">
-<br><h5 style="text-align:center;"><u>title1</u></h5>
+<br><h5 style="text-align:center;"><u>Parser Extractor</u></h5>
+
+NUM, BINARY_OP, VAR, SEQUENCE, PRINT, LET, IF, WHILE<br><br>
+
+Variable Types: <br>
+NUM, BINARY_OP, VAR, SEQUENCE<br><br>
 
 <p>text here<br><br></p>
+<!-- code for parser and ast (modified) -->
+
+
+<br><h5 style="text-align:center;"><u>Node Formation</u></h5><br><br>
+<!-- code for compile (modified) -->
+
+
 </div><br>
 
 <button class="collapsible"><strong>Modeling Commands in Assembly Language: X86-64</strong></button>
   <div class="content">
-<br><h5 style="text-align:center;"><u>title1</u></h5>
+<br><h5 style="text-align:center;"><u>X86-64 Commands</u></h5>
 
-<p>text here<br><br></p>
+<!-- basic x86-64 commands from the book -->
+<!-- explain what is a rdi & rax register/stack? -->
+
+<p>text here</p><br>
 </div><br>
+
 
 
     </div>
