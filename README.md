@@ -1,2 +1,2 @@
-# emiletimothy.giithub.io
+# emiletimothy.github.io
 Personal website.
