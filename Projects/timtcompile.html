@@ -580,19 +580,21 @@ Finally, we present a code snippet that checks if a string is a palindrome.<br><
 
 <button class="collapsible"><strong>Parser Extractor and Node Formation</strong></button>
   <div class="content">
-<br><h5 style="text-align:center;"><u>Parser Extractor</u></h5>
+<br><br>
+The conceptual ideas behind the parser and forming nodes to represent parts of the <b>Tim</b> code are really straightforward. By enforcing spaces around keywords or non-functional operators, <b>T-Compiler</b> can identify keywords by doing a simple traversal algorithm that identifies each word and determines the underlying keyword.<br><br>
 
-NUM, BINARY_OP, VAR, SEQUENCE, PRINT, LET, IF, WHILE<br><br>
-
-Variable Types: <br>
-NUM, BINARY_OP, VAR, SEQUENCE<br><br>
-
-<p>text here<br><br></p>
-<!-- code for parser and ast (modified) -->
+Then, depending on the keyword, the word is either stand-alone-keyword or a loop that has a corresponding end-symbol (such as <code>ENDIF</code>, <code>ENDFOR</code>, <code>ENDWHILE</code>, and <code>UNTIL</code>). <br><br>
 
 
-<br><h5 style="text-align:center;"><u>Node Formation</u></h5><br><br>
-<!-- code for compile (modified) -->
+If the word is a stand-alone-keyword, the program scans ahead until it either reaches the end of the code or the next keyword, and groups these tasks as a node that corresponds to the meaning of the keyword. If the word is a loop symbol, the program scans ahead until it either reaches the ending demarcation, and groups these tasks as a node that corresponds to the meaning of the keyword. <br><br>
+
+For each sequence that the algorithm has identified, it recursively breaks these tasks to smaller tasks, which it passes to the compiler. I've attached the corresponding code for the parser and node-formation algorithms (which are self-equipped with more technical descriptions) below.
+
+<br><br>
+<script src="https://gist.github.com/emiletimothy/fe91f275ddd0a049288b5e31c1e326d8.js"></script>
+<script src="https://gist.github.com/emiletimothy/11876c790303f3debfad80fd0192960f.js"></script>
+<script src="https://gist.github.com/emiletimothy/77ab52cd6fa45036384a428d50bd579f.js"></script>
+<script src="https://gist.github.com/emiletimothy/c4bf1399848c0b46eb5a50062e0ce481.js"></script>
 
 
 </div><br>
@@ -600,11 +602,15 @@ NUM, BINARY_OP, VAR, SEQUENCE<br><br>
 <button class="collapsible"><strong>Modeling Commands in Assembly Language: X86-64</strong></button>
   <div class="content">
 <br><h5 style="text-align:center;"><u>X86-64 Commands</u></h5>
+Next, to execute the tasks, the compiler converts each task into a statement in assembly-language through a simple X86-64 command conversion, which is compiled by a simple assembly-language interpreter. The key details to note here are that variables, local values, and lists are stored on recursive stack-frames, and that operations are executed using a stack. So, for instance, to add 2 and 2 together. One would first <i>push</i> 2 onto the stack, then <i>push</i> another 2 onto the stack, and then finally <i>push</i> a <code>+</code> onto the stack. This would cause the '+,2,2' to become a 4. Typically, more complex tasks might involve computing intermediary values or results. These results are stored in the relatively high-speed <i>rdi</i> or <i>rsi</i> registers, whereas final results are typically stored in the relatively low-speed <i>rax</i> stack, from where the result is often inputted to the user or used somewhere else.
+ 
+<br><h5 style="text-align:center;"><u>Compiler Code</u></h5>
 
-<!-- basic x86-64 commands from the book -->
-<!-- explain what is a rdi & rax register/stack? -->
 
-<p>text here</p><br>
+<script src="https://gist.github.com/emiletimothy/f71980c3adbf5c17396cf938372b3696.js"></script>
+<script src="https://gist.github.com/emiletimothy/1e5ce70486bc7667fb5c51f8c869274a.js"></script>
+
+
 </div><br>
 
 
