@@ -1,0 +1,76 @@
+<html>
+  <head>
+    <title>Emile Timothy</title>
+    <link rel="stylesheet" href="isitditchday.css">
+  </head>
+  
+  <body>
+    <div id="container">
+      <h2 id="titlething"></h2>
+      <div id="quoteContainer"></div>
+    </div>
+  </body>
+</html>
+
+<script type = 'text/javascript' src="https://code.jquery.com/jquery-latest.min.js"></script>
+
+<script>
+  function converter(date) {    
+    newDate = new Date(date.getTime() + 60 * 60 * 24 * 1000);
+    return months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"][newDate.getMonth(1)] + " " + (newDate.getDate());
+  }
+  var now = new Date();
+  var chance = "0";
+  if (now.getMonth() == 4){
+    if (now.getDate() == 12) {chance = "1.96";}
+    else if (now.getDate() == 13) {chance = "4.08";}
+    else if (now.getDate() == 14) {chance = "5.48";}
+    else if (now.getDate() == 15) {chance = "18.0";}
+    else if (now.getDate() == 19) {chance = "4.38";}
+    else if (now.getDate() == 20) {chance = "9.07";}
+    else if (now.getDate() == 21) {chance = "12.20";}
+    else if (now.getDate() == 22) {chance = "40.05";}
+    else if (now.getDate() == 26) {chance = "0.32";}
+    else if (now.getDate() == 27) {chance = "0.66";}
+    else if (now.getDate() == 28) {chance = "0.88";}
+    else if (now.getDate() == 29) {chance = "2.90";}
+  }
+  var chancenum = parseInt(chance.replace('.',''), 10);
+  console.log(chancenum);
+
+  chance += "%";
+  var title = "NO"
+  if (chancenum != 0){
+    if (chancenum < 100){title = "VERY LIKELY NO"}
+    else if (chancenum < 500){title = "PROBABLY NOT"}
+    else if (chancenum < 1500){title = "POSSIBLY"}
+    else if (chancenum < 2500){title = "LIKELY"}
+    else if (chancenum < 5000){title = "PROBABLY"}
+  }
+
+  var timeAnimation = 500;
+  var quoteContainer = $('#quoteContainer');
+
+  $("body").toggleClass();
+  quoteContainer.fadeOut(timeAnimation, function(){
+    quoteContainer.html('');
+    quoteContainer.append('<p style = "font-size:60px">'+title+'</p>'+'<p id="quoteGenius">'+'Based on historical data from 2003-2022, the chance that Ditch Day is tomorrow, ' +
+    converter(now) + ', is <b style = "font-size:20px">~'+chance+'</b></p><hr style="border-color:black"/><p><b><p>  If someone tells you it\'s tomorrow, feel free to respond with "ok boomer." Go to bed! Ditch Day is tomorrow.</b></p>');
+    quoteContainer.fadeIn(timeAnimation);
+  });
+
+
+(function(i, s, o, g, r, a, m) {
+i['GoogleAnalyticsObject'] = r;
+i[r] = i[r] || function() {
+  (i[r].q = i[r].q || []).push(arguments)
+}, i[r].l = 1 * new Date();
+a = s.createElement(o),
+  m = s.getElementsByTagName(o)[0];
+a.async = 1;
+a.src = g;
+m.parentNode.insertBefore(a, m)
+})(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+ga('create', 'UA-81423107-1', 'auto');
+ga('send', 'pageview');
+</script>
