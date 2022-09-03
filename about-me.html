@@ -21,6 +21,35 @@
     <link rel="stylesheet" type="text/css" href="style.css">  
     </head>
 
+<style>
+.content_img_1 div{
+ position: absolute;
+ bottom: -10px;
+ right: 0;
+ background: black;
+ color: white;
+ margin-bottom: 5px;
+ opacity: 0;
+ visibility: hidden;
+ -webkit-transition: visibility 0s, opacity 0.5s linear; 
+ transition: visibility 0s, opacity 0.5s linear;
+}
+
+.content_img_1:hover{
+ cursor: pointer;
+}
+
+.content_img_1:hover div{
+ width: 50%;
+ padding: 8px 15px;
+ visibility: visible;
+ opacity: 0.7; 
+}
+
+.content_img_1{
+ position: relative;
+}
+</style>
 
 <body class="w3-light-grey">
 
@@ -61,12 +90,15 @@
         </div>
  
         <div class="w3-justify">
-<img src="Pictures/headshots/sk4.jpeg" alt="Picture of me at Annenberg" style="width:100%" class="w3-padding-16">
+          <div class="content_img_1">
+            <img src="Pictures/headshots/sk4.jpeg" alt="Picture of me at Annenberg" style="width:100%" class="w3-padding-16">
+            <div>"Looking outside Annenberg" by Kim Fox Photography</div>
+          </div>
            <p><strong>
     Hello! My name is Emile Timothy, and I'm a senior at Caltech majoring in Computer Science. On campus, I do research at the Theory of Computation (ToC) Group and the Rigorous Systems Research Group (RSRG), and am a member of the Caltech Data Science team. My other interests include working on research or coding projects, playing the Piano, thinking about wild hypothetical scenarios, and exploring boba stores and running trails around Pasadena and Los Angeles. I occasionally post pictures and share my thoughts on 
     <a href=https://www.instagram.com/emiletimothy/>Instagram</a> and <a href="https://twitter.com/emile217">Twitter</a>.<br>
 
-        <p>My research with Prof. Umans focuses on constructing a framework to study the model of <a href="https://en.wikipedia.org/wiki/Expander_walk_sampling">random walks on expander graphs</a>. A prior result shows that the sticky random walk can be a useful model to understand the full-scale expander graph. My research is devoted to generalizing the <a href="https://drops.dagstuhl.de/opus/volltexte/2021/13587/">sticky random walk</a> from 2 symbols to m symbols, using a generalized Krawtchouk function and combinatorial arguments. My research with Prof. Wierman focuses on using <a href="https://arxiv.org/abs/2106.10497">perturbation analysis</a> to prove stability bounds on using model-predictive control on linear time-varying (LTV) systems in which the predictions of the disturbances are noisy, and extending this to linear feedback policies on the <a href="https://arxiv.org/abs/1905.12776">regularized online balanced descent (R-OBD)</a> algorithm. I am also creating simulations to show that perturbing the target parameters of noisy LTV systems leads to large deviations from the optimal cost. My research with Prof. Abu-Mostafa focuses on explaining why <a href="https://en.wikipedia.org/wiki/Multiclass_classification">multi-classifiers</a> sometimes outperform <a href="https://en.wikipedia.org/wiki/Binary_classification">binary classifiers</a>. To explain this, we are developing a theory of mutual cross-<a href="https://towardsdatascience.com/regularization-in-machine-learning-76441ddcf99a">regularization</a> between classes to prove a higher learning bound for multi-classifiers and training neural networks on large datasets (MNIST) to find the scope of this theory.</p>
+    <p>My research with Prof. Umans focuses on constructing a framework to study the model of <a href="https://en.wikipedia.org/wiki/Expander_walk_sampling">random walks on expander graphs</a>. A prior result shows that the sticky random walk can be a useful model to understand the full-scale expander graph. My research is devoted to generalizing the <a href="https://drops.dagstuhl.de/opus/volltexte/2021/13587/">sticky random walk</a> from 2 symbols to m symbols, using a generalized Krawtchouk function and combinatorial arguments. My research with Prof. Wierman focuses on using <a href="https://arxiv.org/abs/2106.10497">perturbation analysis</a> to prove stability bounds on using model-predictive control on linear time-varying (LTV) systems in which the predictions of the disturbances are noisy, and extending this to linear feedback policies on the <a href="https://arxiv.org/abs/1905.12776">regularized online balanced descent (R-OBD)</a> algorithm. I am also creating simulations to show that perturbing the target parameters of noisy LTV systems leads to large deviations from the optimal cost. My research with Prof. Abu-Mostafa focuses on explaining why <a href="https://en.wikipedia.org/wiki/Multiclass_classification">multi-classifiers</a> sometimes outperform <a href="https://en.wikipedia.org/wiki/Binary_classification">binary classifiers</a>. To explain this, we are developing a theory of mutual cross-<a href="https://towardsdatascience.com/regularization-in-machine-learning-76441ddcf99a">regularization</a> between classes to prove a higher learning bound for multi-classifiers and training neural networks on large datasets (MNIST) to find the scope of this theory.</p>
         </div>
       </div>
       <hr>
@@ -79,9 +111,10 @@
         </div>
 
         <div class="w3-justify">
-
+<div class="content_img_1">
  <img src="Pictures/headshots/sk3.jpeg" alt="Picture of me at Moore Walk" style="width:100%" class="w3-padding-16">
-
+ <div>"Coding on Moore Walk" by Kim Fox Photography</div>
+</div>
  <p>In <a href="https://www.gemscis-dubai.com/en">High School</a>, I represented the UAE in the <a href="https://ipho-unofficial.org/">International Physics Olympiad</a> where I specialized in the thermal and statistical physics section - it was a defining moment for me: the study of stochasticity and noise in the context of physics seemed like something I would enjoy working on. <br><br>
 
 However, at <a href="https://www.cms.caltech.edu/">Caltech</a>, the study of randomness as studied in Computer Science allured me. There are several open-problems in computational complexity, a field that studies classes of problems and how they relate to each other in terms of computational resources, one of which is whether BPP = P. BPP is the class of "bounded-error probabilistic time", which means that a probabilistic algorithm can solve any problem in BPP with arbitrarily high precision in a polynomial amount of time. Conversely, P is the class of "polynomial time", which means that any algorithm can solve a problem in P in a polynomial amount of time. As of today, the question of whether BPP = P is an open problem, but the implications of this equality would be <a href="https://www.wisdom.weizmann.ac.il/~oded/COL/bpp-p.pdf">enormous and far-reaching</a>. Most notably, it would imply that randomness can be simulated. True randomness is an expensive resource, and we get truly random bits by measuring fluctuations in background radiation and air temperature. Therefore, in cryptography and computational physics, computer today instead use <a href="https://en.wikipedia.org/wiki/Pseudorandomness#:~:text=A%20pseudorandom%20sequence%20of%20numbers,completely%20deterministic%20and%20repeatable%20process.">pseudorandom bits</a> which are seeded from a fewer number of truly random bits but can be distinguished by large ad-hoc statistical tests and large circuits. It would be revolutionary if algorithms could instead generate truly random bits without any seed, since it would imply 1) that BPP = P, and 2) that randomness is not a special resource since we can create randomness in polynomial time. My research on expander graphs stems from <a href="https://dl.acm.org/doi/10.1145/28395.28410">Szemerèdi's (1987) theorem</a> that a short random walk on an expander graph can efficiently simulate a uniformly random sampling of its vertices with an exponentially high probability, since it decreases the number of random bits k needed to generate n random bits from O(k log n) to log(n) + O(k): it's an absurdly useful theorem for the derandomization of probabilistic algorithms. The problem is that we don't really have a consistent way to analyze expander graphs, given their ubiquitiousness (error-correcting codes, probabilistically-checkable proofs, derandomization) and complexity at the asymptotic limit (when it has a large number of vertices). Therefore, I'm studying the <a href="https://drops.dagstuhl.de/opus/volltexte/2021/13587/">sticky random walk</a> to see if it tells us anything about random walks on expander graphs as the bias goes to 0. I'm hopeful that it might reveal something special about the underlying nature of randomness.<br><br>
@@ -98,7 +131,10 @@ Randomness, in the form of stochasticity, also rears itself quite unpredictably 
           <h5>Why I Do What I Do, <span class="w3-opacity">July 5, 2022</span></h5>
         </div>
         <div class="w3-justify">
-          <img src="Pictures/caltechgrouppic2.jpg" alt="Commencement picture of the Caltech class of 2023" style="width:100%" class="w3-padding-16">
+          <div class="content_img_1">
+            <img src="Pictures/caltech_commencent_2023.jpeg" alt="Commencement picture of the Caltech class of 2023" style="width:100%" class="w3-padding-16">
+            <div>Caltech Class of '23 Commencement Picture</div>
+          </div>
 
 <p>I grew up in <a href="https://www.visitdubai.com/en/articles/new-attractions-in-dubai">Dubai</a> as the child of immigrant parents from India who left their families and social-circles and worked hard to make a living. Given the different culture of the Middle-East, it wasn’t easy for them to adapt. My
 Mom worked as a Chemistry Teacher, managing extraordinary shifts while carrying me, and my Dad balanced job instability. After she gave birth, he traveled 100 kilometers every day just to see me. Today, my Dad teaches next-generation technology to a wide base of change-makers as a <a href="https://firstmiletc.com/">Telecom Instructor</a>, and my Mom inspires the lives of thousands of students as a <a href="https://www.gemsnewmillenniumschool-alkhail.com/About-Us/Welcome-Message">Principal</a>. I have an indelible impression from my parents, my superheros, of what it takes to strive towards success: the collective power of drive and resolve. I take the road less traveled, the wicket gate, to make an impact, knowing that it takes commitment to push the frontiers of Computer Science: create ideas, prove theories, break barriers, and serve humanity. From all of this, I've learnt the importance of humility. <a href="https://calvinrosser.com/notes/surely-joking-mr-feynman-richard-feynman/">Richard Feynman</a> once said that "the more you know, the more you know what you don't know". I'm truly reminded every day of just how little I really know and how many global problems there are out there that are just waiting to be solved. Yet, my thirst for problem solving and my hunger to understand the unknown is letting me rise to this challenge.
@@ -109,14 +145,15 @@ Mom worked as a Chemistry Teacher, managing extraordinary shifts while carrying 
     </div>
 
 
-    <!-- About/Information menu -->
+
+    <!-- Sidebar -->
     <div class="w3-col l4">
-      <!-- About Card -->
       <div class="w3-white w3-margin">
-<!--         class="w3-grayscale" 
- --><!--         <img src="Pictures/posterpic3.png" alt="Poster Picture" style="width:100%">-->
-<img src="Pictures/headshots/sk1.jpeg" alt="Poster Picture" style="width:100%">
-       <div class="w3-container w3-black">
+        <div class="content_img_1">
+          <img src="Pictures/headshots/sk1.jpeg" alt="Poster Picture" style="width:100%">
+          <div>"Facing North" by Kim Fox Photography</div>
+        </div>
+        <div class="w3-container w3-black">
           <h4>Emile Timothy Anand</h4>
           <p>An explorer of the unknown. I'm interested in creating robust machine learning algorithms and pushing the frontiers of computational limits, especially those concerning pseudorandomness.
           </p>
@@ -124,48 +161,48 @@ Mom worked as a Chemistry Teacher, managing extraordinary shifts while carrying 
       </div>
       <hr>
 
+      <!-- Recent Books -->
       <div class="w3-white w3-margin">
         <div class="w3-container w3-padding w3-black">
           <h4>Recent Books</h4>
         </div>
         <ul class="w3-ul w3-hoverable w3-white">
           <li class="w3-padding-16">
-            <img src="Pictures/blog/heard.jpeg" alt="Heard" class="w3-left w3-margin-right" style="width:50px">
+            <img src="Pictures/blog/heard.jpeg" alt="Heard" class="w3-left w3-margin-right" style="width:50px; height:50px">
             <span class="w3-large">Heard On The Street</span>
             <br>
             <span>Timothy Falcon</span>
           </li>
           <li class="w3-padding-16">
-            <img src="Pictures/blog/bushido1.png" alt="Bushido" class="w3-left w3-margin-right" style="width:50px">
-            <span class="w3-large">Bushido</span>
+            <img src="Pictures/fooled_by_randomness.jpeg" alt="fooled_by_randomness" class="w3-left w3-margin-right" style="width:40px; height:50px">
+            <span class="w3-large">Fooled By Randomness</span>
             <br>
-            <span>Inazõ Nitobe</span>
+            <span>Nassim Taleb</span>
           </li>
           <li class="w3-padding-16">
-            <img src="Pictures/blog/re1.png" alt="Complex Analysis" class="w3-left w3-margin-right" style="width:50px">
-            <span class="w3-large">Basic Complex Analysis</span>
+            <img src="Pictures/bed_of_procrustes.jpeg" alt="bed_of_procrustes" class="w3-left w3-margin-right" style="width:40px; height:50px">
+            <span class="w3-large">The Bed of Procrustes</span>
             <br>
-            <span>Barry Simon</span>
+            <span>Nassim Taleb</span>
           </li>
           <li class="w3-padding-16">
-            <img src="Pictures/blog/re1.png" alt="Real Analysis" class="w3-left w3-margin-right w3-sepia" style="width:50px">
-            <span class="w3-large">Real Analysis</span>
+            <img src="Pictures/surely_youre_joking.jpeg" alt="Heard" class="w3-left w3-margin-right" style="width:40px; height:50px">
+            <span class="w3-large">Surely You're Joking Mr. Feynman: </span>
             <br>
-            <span>Barry Simon</span>
+            <span>Richard Feynman</span>
           </li>
         </ul>
       </div>
       <hr>
 
-
-      <!-- Posts -->
+      <!-- Recent Music -->
       <div class="w3-white w3-margin">
         <div class="w3-container w3-padding w3-black">
           <h4>Favorite Music</h4>
         </div>
         <ul class="w3-ul w3-hoverable w3-white">
           <li class="w3-padding-16">
-            <a href="https://www.youtube.com/watch?v=xEeFrLSkMm8&ab_channel=HYBELABELS"><img src="Pictures/blog/springday.jpeg" alt="Spring Day" class="w3-left w3-margin-right" style="width:50px"></a>
+            <a href="https://www.youtube.com/watch?v=xEeFrLSkMm8&ab_channel=HYBELABELS"><img src="Pictures/blog/springday.jpeg" alt="Spring Day" class="w3-left w3-margin-right" style="width:50px; height:50px"></a>
             <span class="w3-large">Spring Day</span>
             <br>
             <span>BTS</span>
@@ -183,26 +220,34 @@ Mom worked as a Chemistry Teacher, managing extraordinary shifts while carrying 
             <span>Coldplay</span>
           </li>
           <li class="w3-padding-16">
-            <a href="https://www.youtube.com/watch?v=aatr_2MstrI&ab_channel=CleanBandit"><img src="Pictures/blog/symphony.jpeg" alt="Symphony" class="w3-left w3-margin-right w3-sepia" style="width:50px"></a>
-            <span class="w3-large">Symphony</span>
+            <a href="https://www.youtube.com/watch?v=gdZLi9oWNZg&ab_channel=HYBELABELS"><img src="Pictures/dynamite.jpeg" alt="dynamite" class="w3-left w3-margin-right" style="width:50px; height:50px"></a>
+            <span class="w3-large">Dynamite</span>
             <br>
-            <span>Clean Bandit (ft. Zara Larsson)</span>
+            <span>BTS</span>
           </li>
         </ul>
       </div>
       <hr>
 
+      <!-- Recent Projects -->
       <div class="w3-white w3-margin">
         <div class="w3-container w3-padding w3-black">
           <h4>Recent Projects</h4>
         </div>
         <div class="w3-container w3-white">
           <div class="w3-container w3-display-container w3-white w3-section" style="height:200px">
-            <span class="w3-display-middle"><div class="zoom"><a href="Projects/dimensionalityreduction.html"><img src="Pictures/blog/tSNE.png" alt="Toda's theorem" style="width:100%;"></div></span>
+            <span class="w3-display-middle">
+              <a href="Projects/dimensionalityreduction.html">
+              <div class="zoom content_img_1">
+                <img src="Pictures/blog/tSNE.png" alt="Toda's theorem" style="width:100%;">
+                <div>Manifolds</div>
+              </div>
+            </span>
           </div>
         </div>
       </div>
 
+      <!-- Recent Blog Posts -->
       <div class="w3-white w3-margin">
         <div class="w3-container w3-padding w3-black">
           <h4>Recent Blog Posts</h4>
@@ -221,19 +266,48 @@ Mom worked as a Chemistry Teacher, managing extraordinary shifts while carrying 
           <h4>Tags</h4>
         </div>
         <div class="w3-container w3-white">
-          <p>
-<!--             <span class="w3-tag w3-black w3-margin-bottom">Complexity Theory</span>
- -->           
-            <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Complexity Theory</span>
-            <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Machine Learning</span>
-            <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Derandomization</span>
-            <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Convex Optimization</span>
-            <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Control Theory</span>
-            <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Expanders</span>
+          <p> 
+            <span class="w3-tag w3-orange w3-small w3-margin-bottom">Complexity Theory</span>
+            <span class="w3-tag w3-deep-purple w3-small w3-margin-bottom">Machine Learning</span>
+            <span class="w3-tag w3-teal w3-small w3-margin-bottom">Derandomization</span>
+            <span class="w3-tag w3-lime w3-small w3-margin-bottom">Convex Optimization</span>
+            <span class="w3-tag w3-indigo w3-small w3-margin-bottom">Control Theory</span>
+            <span class="w3-tag w3-khaki w3-small w3-margin-bottom">Expanders</span>
+            <span class="w3-tag w3-light-blue w3-small w3-margin-bottom">PRGs</span>
           </p>
         </div>
       </div>
       <hr>
+
+<style>
+.content_img div{
+ position: absolute;
+ bottom: 0;
+ right: 0;
+ background: black;
+ color: white;
+ margin-bottom: 5px;
+ opacity: 0;
+ visibility: hidden;
+ -webkit-transition: visibility 0s, opacity 0.5s linear; 
+ transition: visibility 0s, opacity 0.5s linear;
+}
+
+.content_img:hover{
+ cursor: pointer;
+}
+
+.content_img:hover div{
+ width: 150px;
+ padding: 8px 15px;
+ visibility: visible;
+ opacity: 0.7; 
+}
+
+.content_img{
+ position: relative;
+}
+</style>
 
 
       <!-- Inspiration -->
@@ -241,15 +315,62 @@ Mom worked as a Chemistry Teacher, managing extraordinary shifts while carrying 
         <div class="w3-container w3-padding w3-black"><h4>Inspirations</h4></div>        
         <div class="w3-row-padding w3-white">
           <div class="w3-col s6">
-            <p><a href="https://en.wikipedia.org/wiki/Claude_Shannon"><div class="zoom"><img src="Pictures/blog/shannon.jpeg" alt="Shannon" style="width:100%"></div></a></p>
-            <p><a href="https://www.theverge.com/2019/12/4/20994361/google-alphabet-larry-page-sergey-brin-sundar-pichai-co-founders-ceo-timeline"><div class="zoom"><img src="Pictures/blog/goog.jpg" alt="Larry Page and Sergey Brin" style="width:100%"></div></p></a>
-            <p><a href="https://en.wikipedia.org/wiki/Tim_Berners-Lee"><div class="zoom"><img src="Pictures/blog/www.jpeg" alt="Tim Berners Lee" style="width:100%"></div></a></p>
+            <p>
+              <a href="https://en.wikipedia.org/wiki/Claude_Shannon">
+                <div class="zoom content_img">
+                  <img src="Pictures/blog/shannon.jpeg" alt="Shannon" style="width:100%">
+                  <div>Claude Shannon</div>
+                </div>
+              </a>
+            </p>
+
+            <p>
+              <a href="https://www.theverge.com/2019/12/4/20994361/google-alphabet-larry-page-sergey-brin-sundar-pichai-co-founders-ceo-timeline">
+                <div class="zoom content_img">
+                  <img src="Pictures/blog/goog.jpg" alt="Larry Page and Sergey Brin" style="width:100%">
+                  <div>Sergey Brin and Larry Page</div>
+                </div>
+              </p>
+            </a>
+
+            <p>
+              <a href="https://en.wikipedia.org/wiki/Tim_Berners-Lee">
+                <div class="zoom content_img">
+                  <img src="Pictures/blog/www.jpeg" alt="Tim Berners Lee" style="width:100%">
+                  <div>Tim Berners Lee</div>
+                </div>
+              </a>
+            </p>
           </div>
 
           <div class="w3-col s6">
-            <p><a href="https://en.wikipedia.org/wiki/Alan_Turing"><div class="zoom"><img src="Pictures/blog/turing.jpeg" alt="Alan Turing" style="width:100%" class="w3-grayscale"></div></a></p>
-            <p><a href="https://en.wikipedia.org/wiki/Bernard_Lagat"><div class="zoom"><img src="Pictures/blog/lagat.jpg" alt="Bernard Lagat" style="width:100%"></div></a></p>
-            <p><a href="https://www.smithsonianmag.com/smithsonian-institution/thank-world-war-ii-era-film-star-your-wi-fi-180971584/"><div class="zoom"><img src="Pictures/blog/lamarr.webp" alt="Lamarr" style="width:100%"></div></a></p>
+            <p>
+              <a href="https://en.wikipedia.org/wiki/Alan_Turing">
+                <div class="zoom content_img">
+                  <img src="Pictures/blog/turing.jpeg" alt="Alan Turing" style="width:100%" class="w3-grayscale">
+                  <div>Alan Turing</div>
+                </div>
+              </a>
+            </p>
+
+            <p>
+              <a href="https://www.wkyt.com/2022/06/26/mclaughlin-does-it-again-breaks-own-world-record-us-championships/">
+                <div class="zoom content_img">
+                  <img src="Pictures/sydney_mclaughlin.jpeg" alt="sydney Mclaughlin" style="width:100%">
+                  <div>Sydney McLaughlin</div>
+                </div>
+              </a>
+            </p>
+
+            <p>
+              <a href="https://www.smithsonianmag.com/smithsonian-institution/thank-world-war-ii-era-film-star-your-wi-fi-180971584/">
+                <div class="zoom content_img">
+                  <img src="Pictures/blog/lamarr.webp" alt="Lamarr" style="width:100%">
+                  <div>Hedy Lamarr</div>      
+                </div>
+              </a>
+            </p>
+
          </div>
 
         </div>
@@ -258,29 +379,50 @@ Mom worked as a Chemistry Teacher, managing extraordinary shifts while carrying 
 
       <div class="w3-white w3-margin">
         <div class="w3-container w3-padding w3-black">
-          <h4>Follow Me</h4>
-        </div class="center">
-        <div class="w3-container w3-xlarge w3-center w3-padding">
-          <a href="https://www.instagram.com/emiletimothy/"><img src="Pictures/icons/instagram-icon.png" style="width:5%"></a>
-          <a href="https://www.linkedin.com/in/emiletimothy/"><img src="Pictures/icons/linkedin-icon.png" style="width:5%"></a>
-          <a href="https://orcid.org/my-orcid?orcid=0000-0003-2893-9469"><img src="Pictures/icons/orcid-icon.png" style="width:5%"></a>
-          <a href="https://scholar.google.com/citations?user=nUXwVU8AAAAJ&hl=en"><img src="Pictures/icons/googlescholar-icon.png" style="width:5%"></a>
-          <a href="https://github.com/emiletimothy"><img src="Pictures/icons/github-icon.svg" style="width:5%"></a>
+          <h4>Find Me Online On</h4>        
         </div>
+
+<style> 
+  .single_indent{
+  text-indent: 15px;
+}
+</style>
+        <ul class="w3-ul w3-hoverable w3-white">
+          <li class="w3-padding-16">
+            <a href="https://www.linkedin.com/in/emiletimothy/"><img src="Pictures/icons/linkedin-svgrepo-com.svg" alt="linkedin" class="w3-left w3-margin-right" style="width:40px; height:40px"></a>
+            <span class="w3-large">LinkedIn</span>
+            <br>
+            <span>@emiletimothy</span>
+          </li>
+          <li class="w3-padding-16">
+            <a href="https://www.instagram.com/emiletimothy/"><img src="Pictures/icons/instagram-svgrepo-com.svg" alt="instagram" class="w3-left w3-margin-right" style="width:40px"></a>
+            <span class="w3-large">Instagram</span>
+            <br>
+            <span>@emiletimothy</span>
+          </li>
+          <li class="w3-padding-16">
+            <a href="https://twitter.com/emile217"><img src="Pictures/icons/twitter-svgrepo-com.svg" alt="twitter" class="w3-left w3-margin-right" style="width:40px"></a>
+            <span class="w3-large">Twitter</span>
+            <br>
+            <span>@emile217</span>
+          </li>
+          <li class="w3-padding-16">
+            <a href="https://github.com/emiletimothy"><img src="Pictures/icons/git.svg" alt="github" class="w3-left github" style="width:40px;"></a>
+            <span class="w3-large"><div class="single_indent"> Github</div></span>
+            <span><div class="single_indent">@emiletimothy</div></span>
+          </li>
+          <li class="w3-padding-16">
+            <a href="https://www.facebook.com/FlashPointMultiverse"><img src="Pictures/icons/facebook-svgrepo-com.svg" alt="facebook" class="w3-left w3-margin-right" style="width:40px; height:40px"></a>
+            <span class="w3-large">Facebook</span>
+            <br>
+            <span>@FlashPointMultiverse</span>
+          </li>
+        </ul>
       </div>
-      <hr>
+
+      <br>
       
-      <!-- Subscribe -->
-      <div class="w3-white w3-margin">
-        <div class="w3-container w3-padding w3-black">
-          <h4>Subscribe</h4>
-        </div>
-        <div class="w3-container w3-white">
-          <p>Enter your e-mail below and get notified on my latest blog posts.</p>
-          <p><input class="w3-input w3-border" type="text" placeholder="Enter e-mail" style="width:100%"></p>
-          <p><button type="button" onclick="document.getElementById('subscribe').style.display='block'" class="w3-button w3-block w3-red">Subscribe</button></p>
-        </div>
-      </div>
+
 
     <!-- END About/Intro Menu -->
     </div>
@@ -289,19 +431,6 @@ Mom worked as a Chemistry Teacher, managing extraordinary shifts while carrying 
   </div>
 
 <!-- END w3-content -->
-</div>
-
-<!-- Subscribe Modal -->
-<div id="subscribe" class="w3-modal w3-animate-opacity">
-  <div class="w3-modal-content" style="padding:32px">
-    <div class="w3-container w3-white">
-      <i onclick="document.getElementById('subscribe').style.display='none'" class="fa fa-remove w3-transparent w3-button w3-xlarge w3-right"></i>
-      <h2 class="w3-wide">SUBSCRIBE</h2>
-      <p>Join my mailing list to receive updates on the latest blog posts and other things.</p>
-      <p><input class="w3-input w3-border" type="text" placeholder="Enter e-mail"></p>
-      <button type="button" class="w3-button w3-block w3-padding-large w3-red w3-margin-bottom" onclick="document.getElementById('subscribe').style.display='none'">Subscribe</button>
-    </div>
-  </div>
 </div>
 
 
