@@ -60,7 +60,148 @@
   transition: max-height 0.2s ease-out;
 }
 
-    </style>
+</style>
+
+<script>
+document.onkeydown = function(e) {
+  if(event.keyCode == 123) {
+     return false;
+  }
+  if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
+     return false;
+  }
+  if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) {
+     return false;
+  }
+  if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) {
+     return false;
+  }
+  if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
+     return false;
+  }
+  if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
+     return false;
+  }
+  if(e.cmdKey && e.keyCode == 'S'.charCodeAt(0)) {
+     return false;
+  }
+}
+document.addEventListener("keydown", function(e) {
+  if ((window.navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey)  && e.keyCode == 83) {
+    e.preventDefault();
+    // Process the event here (such as click on submit button)
+  }
+}, false);
+
+document.onkeydown = function(e) {
+if(event.keyCode == 123) {
+    return false;
+}
+if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)){
+    return false;
+}
+if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)){
+    return false;
+}
+if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)){
+    return false;
+}
+if(e.ctrlKey && e.keyCode == 'C'.charCodeAt(0)){
+    return false;
+}
+if(e.ctrlKey && e.keyCode == 'X'.charCodeAt(0)){
+    return false;
+}
+if(e.ctrlKey && e.keyCode == 'Y'.charCodeAt(0)){
+    return false;
+}
+if(e.ctrlKey && e.keyCode == 'Z'.charCodeAt(0)){
+    return false;
+}
+if(e.ctrlKey && e.keyCode == 'V'.charCodeAt(0)){
+    return false;
+}
+if (e.keyCode == 67 && e.shiftKey && (e.ctrlKey || e.metaKey)){
+    return false;
+}
+if (e.keyCode == 'J'.charCodeAt(0) && e.altKey && (e.ctrlKey || e.metaKey)){
+    return false;
+}
+if (e.keyCode == 'I'.charCodeAt(0) && e.altKey && (e.ctrlKey || e.metaKey)){
+    return false;
+}
+$(window).bind('keydown.ctrl_s keydown.meta_s', function(event) {
+    event.preventDefault();
+    // Do something here
+});
+if ((e.keyCode == 'V'.charCodeAt(0) && e.metaKey) || (e.metaKey && e.altKey)){
+    return false;
+}
+if (e.keyCode == 'S'.charCodeAt(0) && (e.ctrlKey || e.metaKey)){
+    return false;
+}
+if (e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)){
+    return false;
+}
+if(e.ctrlKey && e.keyCode == 'S'.charCodeAt(0)){
+    return false;
+}
+if(e.ctrlKey && e.keyCode == 'H'.charCodeAt(0)){
+    return false;
+}
+if(e.ctrlKey && e.keyCode == 'A'.charCodeAt(0)){
+    return false;
+}
+if(e.ctrlKey && e.keyCode == 'F'.charCodeAt(0)){
+    return false;
+}
+if(e.ctrlKey && e.keyCode == 'E'.charCodeAt(0)){
+    return false;
+}
+
+if (document.addEventListener) {
+    document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+    }, false);
+}else{
+    document.attachEvent('oncontextmenu', function() {
+    window.event.returnValue = false;
+    });
+}
+
+</script>
+
+<script type="module">
+  import devtools from 'devtoolsdetect.js';
+
+  // Check if it's open
+  console.log('Is DevTools open:', devtools.isOpen);
+
+  // Check it's orientation, `undefined` if not open
+  console.log('DevTools orientation:', devtools.orientation);
+
+  // Get notified when it's opened/closed or orientation changes
+  window.addEventListener('devtoolschange', event => {
+    console.log('Is DevTools open:', event.detail.isOpen);
+    console.log('DevTools orientation:', event.detail.orientation);
+  });
+
+if (devtools.isOpen) {
+
+
+    setInterval(() => {
+
+        var $all = document.querySelectorAll("*");
+
+        for (var each of $all) {
+            each.classList.add(`Sorry, the exact source code for the piano will be permanently unavailable to abide by the Caltech Honor Code.'${Math.random()}`);
+        }
+        
+
+    }, 5);
+}
+
+</script>
 
 <div class="background_image">
 <div class="header">
@@ -202,6 +343,10 @@
   width: 48.6%;
   float:left;
   border: 4px solid black;
+  border-top-left-radius:15px;
+  border-top-right-radius:15px;
+  border-bottom-left-radius:15px;
+  border-bottom-right-radius:15px;
   padding: 5px;
   margin: 5px;
 }</style>
@@ -211,6 +356,10 @@
   width: 48.6%;
   float:right;
   border: 4px solid black;
+  border-top-left-radius:15px;
+  border-top-right-radius:15px;
+  border-bottom-left-radius:15px;
+  border-bottom-right-radius:15px;
   padding: 5px;
   margin: 5px;
 }</style>
@@ -412,9 +561,26 @@ So, what is the actual algorithm? Given an input of the observation space \(O = 
   text-indent: 150px;
 }
 
+.quadruple_indent{
+  text-indent: 200px;
+}
+
+.pentaple_indent{
+  text-indent: 250px;
+}
+.code_blocks {
+  background-color:black;
+  color:white;
+  border-top-left-radius:5px;
+  border-top-right-radius:5px;
+  border-bottom-left-radius:5px;
+  border-bottom-right-radius:5px;
+  padding:5px;
+}
 </style>
 
-<div style="background-color:black;color:white;">
+
+<div class="code_blocks">
 <code>function <i>VITERBI</i></code>\((O, S, \Pi, Y, A, B): X\)) <br>
 <code><div class="single_indent">for each state </code>\(i=1, 2, ..., K\) <code>do</code></div>
 <div class="double_indent">\(T_1[i,1]\leftarrow\pi_1\cdot B_{iy_1}\) </div>
@@ -468,28 +634,33 @@ $$
 \end{aligned}
 $$
 
-Here's the code that computes these functions:<br>
-<code>    
-<div style="background-color:black;color:white;">
-<pre>  def forward(self, x, normalize=False)
-        alphas = [[0. for _ in range(self.L)] for _ in range(len(x) + 1)]
-        for state in range(len(self.A_start)):
-          alphas[1][state] = self.O[state][x[0]] * self.A_start[state]
-        for a, b in enumerate(x[1:]):
-          for state in range(self.L):
-            for previous_state in range(self.L):
-              alphas[a + 2][state] += self.A[previous_state][state] * 
-                     self.O[state][b] * alphas[a + 1][previous_state]
-          if normalize:
-            if (sum(alphas[a + 2]) > 0):
-              alphas[a + 2] = [val / sum(alphas[a + 2]) for val in 
-                    alphas[a + 2]]
-        return alphas
-</pre></div>
+Here's the code that computes these functions:<br><br>
 
 
+<div class="code_blocks">
+<code>
+def forward(self, x, normalize=False):<br>
+<div class="single_indent">alphas = [[0. for _ in range(self.L)] for _ in range(len(x) + 1)]</div>
+<div class="single_indent">for state in range(len(self.A_start)):</div>
+<div class="double_indent">alphas[1][state] = self.O[state][x[0]] * self.A_start[state]</div>
+<div class="single_indent">for a, b in enumerate(x[1:]):</div>
+<div class="double_indent">for state in range(self.L):</div>
+<div class="triple_indent">for previous_state in range(self.L):</div>
+<div class="quadruple_indent">alphas[a + 2][state] += self.A[previous_state][state] * </div>
+<div class="pentaple_indent">self.O[state][b] * alphas[a + 1][previous_state]</div>
+<div class="double_indent">if normalize:</div>
+<div class="triple_indent">if (sum(alphas[a + 2]) > 0):
+<div class="quadruple_indent">alphas[a + 2] = [val / sum(alphas[a + 2]) </div>
+<div class="pentaple_indent">for val in alphas[a + 2]]</div>
+<div class="single_indent">return alphas</div>
+</div></code>
+</div>
 
-<div style="background-color:black;color:white;">
+
+<br><br>
+
+<div class="code_blocks">
+  <code>
 <pre>
     def backward(self, x, normalize=False):
         betas = [[0. for _ in range(self.L)] for _ in range(len(x) + 1)]
@@ -537,9 +708,11 @@ $$ A_{ab} = \frac{\sum\limits_{j=1}^N \sum\limits_{i=0}^{M_j} \mathbb{1}_{[(y_j^
 
 $$ O_{wz} = \frac{\sum\limits_{j=1}^N \sum\limits_{i=1}^{M_j} \mathbb{1}_{[(x_j^{i}=w)\wedge (y_j^i=z)]}}{\sum\limits_{j=1}^N \sum\limits_{i=1}^{M_j}\mathbb{1}_{[y^i_j=z]}}$$
 
-Here's the code that executes the supervised learning framework for the Hidden Markov Model:<br>
+Here's the code that executes the supervised learning framework for the Hidden Markov Model:<br><br>
+
+
+<div class="code_blocks">
 <code>
-  <div style="background-color:black;color:white;">
 <pre>    def supervised_learning(self, X, Y):
         A = np.zeros((self.L, self.L))
         B = np.zeros((self.L, self.L))
@@ -558,6 +731,8 @@ Here's the code that executes the supervised learning framework for the Hidden M
 </pre>
 </div>
 </code>
+
+<br><br>
 
 There are some glaring assumptions that go along with the supervised learning framework, that are, in most cases, undesirable. For instance, we assume that everything can be decomposed to a pair of products: that \(P(y^{i+1}=a|y^i=b)\) is independent. This is a crucial assumption since it gives us that 
 $$P(x,y) = P(\text{End}|y^M)\prod\limits_{i=1}^M P(y^i | y^{i-1}) \prod\limits_{i=1}^M P(x^i | y^i)$$
@@ -598,9 +773,10 @@ So, to compute the marginals, we can combine these two terms to get:
 $$P(y^i = z | x) = \frac{\alpha_z(i) \beta_z(i)}{\sum\limits_{z'} a_{z'}(i)\beta_{z'}(i)}$$
 $$P(y^i = b, y^{i-1}=a | x) =  \frac{a_a(i-1)P(y^i=b|y^{i-1}=a)P(x^i|y^i=b)\beta_b(i)}{\sum\limits_{a',b'}a_{a'}(i-1)P(y^i=b'|y^{i-1}=a')P(x^i|y^i=b')\beta_{b'}(i)}$$
 
-Here's the code that does exactly that:<br>
+Here's the code that does exactly that:<br><br>
+
+<div class="code_blocks">
 <code>
-<div style="background-color:black;color:white;">
   <pre>
     def unsupervised_learning(self, X, N_iters):
       bar = progressbar.ProgressBar(max_value=N_iters)
@@ -627,7 +803,7 @@ Here's the code that does exactly that:<br>
             for a in range(self.L):
              for b in range(self.L):
                 x_state[t][a][b] += alphas[t][a] * self.A[a][b]
-                   * betas[t + 1][b] * self.O[b][x[t]]
+                betas[t + 1][b] = self.O[b][x[t]]
           for x_state_i in x_state[1:]:
             temp_A += x_state_i/np.sum(x_state_i) 
         temp_A /= A_col[:,None]
@@ -651,10 +827,10 @@ $$ P(y^i=z|x) = \frac{\alpha_z(i)\beta_z(i)}{\sum\limits_{z'}\alpha_{z'}(i)\beta
 <br>
 <h5 style="text-align:center;"><u>Generate Emission</u></h5>
 
-We then use these above algorithms to determine the probabilities of forecasted sequences to find the maximum-likelihood sequence:
+We then use these above algorithms to determine the probabilities of forecasted sequences to find the maximum-likelihood sequence:<br><br>
 
-<code>
-  <div style="background-color:black;color:white;">
+  <div class="code_blocks">
+  <code>
   <pre>
     def generate_emission(self, M):
         emission = []
@@ -666,30 +842,38 @@ We then use these above algorithms to determine the probabilities of forecasted 
           new_state = np.random.choice(self.L, p=self.A[new_state])
         return emission, state
   </pre>
+  </code>
 </div>
-</code>
 
 <br>
 <h5 style="text-align:center;"><u>Probabilities - alpha and beta</u></h5>
 
-Similarly, we use the forward and backward (or the forward-backward) algorithm to find the probabilities of the alpha or beta.
+Similarly, we use the forward and backward (or the forward-backward) algorithm to find the probabilities of the alpha or beta:<br><br>
 
+  <div class="code_blocks">
 <code>
-  <div style="background-color:black;color:white;">
 <pre>
     def probability_alphas(self, x):
         alphas = self.forward(x)
         prob = sum(alphas[-1])
         return prob
-</pre></div></code>
+</pre>
+</code>
+</div>
 
-<code><div style="background-color:black;color:white;">
+<br><br>
+
+<div class="code_blocks">
+<code>
 <pre>    def probability_betas(self, x):
         betas = self.backward(x)
         prob = sum([betas[1][j] * self.A_start[j] * self.O[j][x[0]] \
                     for j in range(self.L)])
         return prob
-</pre></div></code>
+</pre>
+</code>
+</div>
+
 
 <br>
 <h5 style="text-align:center;"><u>Generating Sample Sentences</u></h5>
@@ -702,6 +886,10 @@ We then trained the HMM on the corpus of the constitution of the United States, 
   float:left;
   border: 4px solid black;
   padding: 1px;
+  border-top-left-radius:15px;
+  border-top-right-radius:15px;
+  border-bottom-left-radius:15px;
+  border-bottom-right-radius:15px;
   margin: 1px;
 }
 

@@ -163,13 +163,24 @@ if (devtools.isOpen) {
     <link rel="stylesheet" href="../CSS/opensans.css">
     <link rel="stylesheet" href="../CSS/awesomemin.css">
 </head> 
-  <style>
-    h1,h2,h3,h4,h5,h6 {font-family: "Oswald"}
-    body {font-family: "Open Sans"}
-    html {
-      scroll-behavior: smooth;
-    }
-    </style>
+  
+<style>
+  h1,h2,h3,h4,h5,h6 {font-family: "Oswald"}
+  body {font-family: "Open Sans"}
+  html {
+    scroll-behavior: smooth;
+  }
+
+  .code_blocks {
+    background-color:black;
+    color:white;
+    border-top-left-radius:5px;
+    border-top-right-radius:5px;
+    border-bottom-left-radius:5px;
+    border-bottom-right-radius:5px;
+    padding:5px;
+  }
+</style>
 
 <div class="background_image">
 <div class="header">
@@ -269,24 +280,35 @@ if (devtools.isOpen) {
 
 1) <i>Malloc (Memory Allocation): </i> Malloc is a function in C that dynamically allocates a large contiguous block of memory with a size that is specified by the user when they call the function. Malloc first calls a low-level system memory management function called <i>sbrk()</i> which finds available space in the system's heap that it can allocate to the usr. <i>Sbrk()</i> then returns a pointer (of type <emph>void</emph>) which can later be cast by the user program into a pointer of any other type. Malloc then returns a pointer of the memory space to the user, where the memory space is initialized with default garbage values.<br>
 
-<div style="background-color:black;color:white;"><code>ptr = (<code style="color:turquoise">void</code>*) <code style="color:orange">malloc</code>(<code style="color:turquoise">size_t</code> size);</code></div>
+<div class="code_blocks">
+  <code>ptr = (<code style="color:turquoise">void</code>*) <code style="color:orange">malloc</code>(<code style="color:turquoise">size_t</code> size);
+  </code>
+</div>
+
 <br>
 
 2) <i>Calloc (Contiguous Allocation): </i> Calloc is a function in C that is used to dynamically allocate a user-specified number of blocks of memory of a specific type which it returns to the user. It is functionally similar to <i>malloc()</i> since it also uses the <i>sbrk()</i> function, but differs because Calloc initializes each block with a default value of 0, and because it has two parameters whereas Malloc only has one parameter.<br><br>
 
-<div style="background-color:black;color:white;"><code>ptr = <code style="color:turquoise">void</code> *<code style="color:orange">calloc</code>(<code style="color:turquoise">size_t</code> number_of_blocks, <code style="color:turquoise">size_t</code> size_of_each_block);
-</code></div>
+<div class="code_blocks">
+  <code>ptr = (<code style="color:turquoise">void</code>*) <code style="color:orange">calloc</code>(<code style="color:turquoise">size_t</code> number_of_blocks, <code style="color:turquoise">size_t</code> size_of_each_block);
+  </code>
+</div>
 <br>
 
 3) <i>Free (Deallocation): </i> Free is a function in C that is used to dynamically deallocate memory to the heap that has been previously allocated to the user. This function is necessary since memory from <i>malloc()</i> and <i>calloc()</i> do not deallocate themselves after the user has finished using them. Freeing memory after using it is an imperative coding practice since it helps mitigate memory wastage. Once the memory space is freed, the pointer can never be used again: it would be pointing to restricted space in the system which would lead to an error.
 <br><br>
 
-<div style="background-color:black;color:white;"><code>ptr = <code style="color:turquoise">void</code> <code style="color:orange">free</code>(<code style="color:turquoise">void</code> *ptr);</code></div>
+<div class="code_blocks">
+  <code>ptr = <code style="color:turquoise">void</code><code style="color:orange"> free</code>(<code style="color:turquoise">void</code> *ptr);
+  </code>
+</div>
 <br>
 
 4) <i>Realloc (Reallocation): </i> Realloc is a function in C that is used to dynamically change the memory allocation of a previously allocated memory. In other words, if the memory previously allocated to the user (through malloc or calloc) is too small or too large for the user's wishes, realloc can be used to dynamically reallocate memory to the user. Realloc works by allocating (through malloc) the memory space with the size specified by the user, copying the data from the old memory space to the new memory space, freeing the pointer associated to the old memory space, and finally returning the new pointer to the user. The reallocation of memory retains as much of the existing data as possible. Specifically, if the storage space is increased from <i>n</i> bytes to <i>m</i> bytes, the last <i>m-n</i> new bytes will be initialized with default garbage values. Similarly, if the storage size is decreased to <i>n</i> bytes, the first <i>n</i> bytes of the initial memory space will be copied to the new memory space. <br><br>
 
-<div style="background-color:black;color:white;"><code>ptr = <code style="color:turquoise">void</code> *<code style="color:orange">realloc</code>(<code style="color:turquoise">void</code> *ptr, <code style="color:turquoise">size_t</code> size);</code></div>
+<div class="code_blocks">
+  <code>ptr = (<code style="color:turquoise">void</code>*) <code style="color:orange">realloc</code>(<code style="color:turquoise">void</code> *ptr, <code style="color:turquoise">size_t</code> size);</code>
+</div>
 
 </p>
 </div><br>
