@@ -277,59 +277,59 @@ This project was motivated by an assignment I did in CS 24 (Computing Systems) d
 Firstly, in the original <b>TEENY-BASIC</b> programming language, variables are defined with the <code>LET</code> command, and all variables have to be single-character uppercase letters, and these variables strictly denote either strings, integers, or floating point numbers. So, for instance, the syntax for setting a variable \(X\) to 3 or setting a variable \(Y\) to \(3.14\) or setting a variable \(Z\) to "Hello, World!" would be:
 
 <br><br>
-<div class="code_blocks"><code style="color:turquoise; border-radius: 15px;">LET </code><code>X = 3;</code><br>
-  <code style="color:turquoise; border-radius: 15px;">LET </code><code>Y = 3.14;</code><br>
-  <code style="color:turquoise; border-radius: 15px;">LET </code><code>Z = "Hello, World!";</code>
+<div class="code_blocks"><code style="color:aqua; border-radius: 15px;">LET </code><code>X = 3;</code><br>
+  <code style="color:aqua; border-radius: 15px;">LET </code><code>Y = 3.14;</code><br>
+  <code style="color:aqua; border-radius: 15px;">LET </code><code>Z = "Hello, World!";</code>
   </div>
 <br>
 
 Secondly, <b>TEENY-BASIC</b> also allows users to print strings, numbers, and even the values of variables through the <code>PRINT</code> command. For instance, the snippets of code below would allow you to print the value of \(X\), print "Hello, World.", and print the number \(1729\), respectively.<br><br>
 
-<div class="code_blocks"><code style="color:turquoise">PRINT </code><code>X;</code><br>
-  <code style="color:turquoise">PRINT </code><code>"Hello, World.";</code><br>
-  <code style="color:turquoise">PRINT </code><code>1729;</code>
+<div class="code_blocks"><code style="color:aqua">PRINT </code><code>X;</code><br>
+  <code style="color:aqua">PRINT </code><code>"Hello, World.";</code><br>
+  <code style="color:aqua">PRINT </code><code>1729;</code>
 </div><br>
 
 Thirdly, <b>TEENY-BASIC</b> allows conditionals as a functionality through the <code>IF...THEN...ENDIF </code> command. For example, define the variables \(A=3\) and \(B=6\). It is only valid to compare strings to other strings, and to compare integers or floats to each other. The code below uses the <code>IF </code> command to allow you to check whether A is greater than, less than, or equal to B. It then uses the <code>PRINT </code> command to output an appropriate message to the user.<br><br>
 
-<div class="code_blocks"><code style="color:turquoise">LET </code><code>A = 3;</code><br>
-<code style="color:turquoise">LET </code><code>B = 6;</code><br>
+<div class="code_blocks"><code style="color:aqua">LET </code><code>A = 3;</code><br>
+<code style="color:aqua">LET </code><code>B = 6;</code><br>
 <br>
-<code style="color:turquoise">IF </code><code>A < B, </code><code style="color:turquoise">THEN PRINT </code><code>"A is less than B." <code style="color:turquoise">ENDIF</code>;</code><br>
-<code style="color:turquoise">IF </code><code>A = B, </code><code style="color:turquoise">THEN PRINT </code><code>"A is equal to B." <code style="color:turquoise">ENDIF</code>;</code><br>
-<code style="color:turquoise">IF </code><code>A > B, </code><code style="color:turquoise">THEN PRINT </code><code>"A is greater than B." <code style="color:turquoise">ENDIF</code>;</code>
+<code style="color:aqua">IF </code><code>A < B, </code><code style="color:aqua">THEN PRINT </code><code>"A is less than B." <code style="color:aqua">ENDIF</code>;</code><br>
+<code style="color:aqua">IF </code><code>A = B, </code><code style="color:aqua">THEN PRINT </code><code>"A is equal to B." <code style="color:aqua">ENDIF</code>;</code><br>
+<code style="color:aqua">IF </code><code>A > B, </code><code style="color:aqua">THEN PRINT </code><code>"A is greater than B." <code style="color:aqua">ENDIF</code>;</code>
 </div><br>
 
 <b>TEENY-BASIC</b> additionally supports the use of nested conditionals (<code>IF </code>commands nested within <code>IF</code> commands). For instance, given variables \(A = -2\) and \(B = 3\), the code below uses nested conditional statements to tell you which variables are positive.<br><br>
 
-<div class="code_blocks"><code style="color:turquoise">LET </code><code>A = -2;</code><br>
-  <code style="color:turquoise">LET </code><code>B = 3;</code><br>
+<div class="code_blocks"><code style="color:aqua">LET </code><code>A = -2;</code><br>
+  <code style="color:aqua">LET </code><code>B = 3;</code><br>
   <br>
-  <code style="color:turquoise">IF </code><code>A > 0, </code><code style="color:turquoise">THEN IF </code><code>B > 0, </code><code style="color:turquoise">THEN PRINT </code><code>"A and B are positive." <code style="color:turquoise">ENDIF ENDIF</code>;</code><br>
-  <code style="color:turquoise">IF </code><code>A > 0, </code><code style="color:turquoise">THEN IF </code><code>B <= 0, </code><code style="color:turquoise">THEN PRINT </code><code>"A is positive, B is not positive." <code style="color:turquoise">ENDIF ENDIF</code>;</code><br>
-  <code style="color:turquoise">IF </code><code>A <= 0, </code><code style="color:turquoise">THEN IF </code><code>B > 0, </code><code style="color:turquoise">THEN PRINT </code><code>"A is not positive, B is positive." <code style="color:turquoise">ENDIF ENDIF</code>;</code><br>
-  <code style="color:turquoise">IF </code><code>A <= 0, </code><code style="color:turquoise">THEN IF </code><code>B <= 0, </code><code style="color:turquoise">THEN PRINT </code><code>"A andd B are not positive." <code style="color:turquoise">ENDIF ENDIF</code>;</code><br>
+  <code style="color:aqua">IF </code><code>A > 0, </code><code style="color:aqua">THEN IF </code><code>B > 0, </code><code style="color:aqua">THEN PRINT </code><code>"A and B are positive." <code style="color:aqua">ENDIF ENDIF</code>;</code><br>
+  <code style="color:aqua">IF </code><code>A > 0, </code><code style="color:aqua">THEN IF </code><code>B <= 0, </code><code style="color:aqua">THEN PRINT </code><code>"A is positive, B is not positive." <code style="color:aqua">ENDIF ENDIF</code>;</code><br>
+  <code style="color:aqua">IF </code><code>A <= 0, </code><code style="color:aqua">THEN IF </code><code>B > 0, </code><code style="color:aqua">THEN PRINT </code><code>"A is not positive, B is positive." <code style="color:aqua">ENDIF ENDIF</code>;</code><br>
+  <code style="color:aqua">IF </code><code>A <= 0, </code><code style="color:aqua">THEN IF </code><code>B <= 0, </code><code style="color:aqua">THEN PRINT </code><code>"A andd B are not positive." <code style="color:aqua">ENDIF ENDIF</code>;</code><br>
 
 </div><br>
 
 The final, and most computationally powerful, functionality of <b>TEENY-BASIC</b> is the <code>WHILE </code>command. The <code>WHILE</code> command repetitively runs a segment of code until a condition is met. The segment of code (called a sequence) is defined as all the code after the line containing the while statement that is also before a closing <code>ENDWHILE</code> command for the loop. For instance, the following snippet of code can be used to print the message "Hello, World!" 20 times.<br><br>
 
-<div class="code_blocks"><code style="color:turquoise">LET </code><code>I = 0;</code><br>
-  <code style="color:turquoise">WHILE </code><code>I < 20 </code><code style="color:turquoise">DO </code><br>
-  <code style="color:turquoise">PRINT </code><code>"Hello, World!";</code><br>
-  <code style="color:turquoise">ENDWHILE</code>
+<div class="code_blocks"><code style="color:aqua">LET </code><code>I = 0;</code><br>
+  <code style="color:aqua">WHILE </code><code>I < 20 </code><code style="color:aqua">DO </code><br>
+  <code style="color:aqua">PRINT </code><code>"Hello, World!";</code><br>
+  <code style="color:aqua">ENDWHILE</code>
 </div>
 <br>
 
 The applications of <code>WHILE</code> loops are endless. The above code snippet shows how it can automate a fundamentally simple task of printing a message instead of forcing the user to type the same line 20 times, which is terribly space-inefficient. A more practical application of the while loop can be to compute and print the factorial of a non-negative integer stored in variable \(X\).<br><br>
 
-<div class="code_blocks"><code style="color:turquoise">IF </code><code>X <= 1, </code><code style="color:turquoise">THEN PRINT </code><code>1</code><code style="color:turquoise"> ENDIF;</code><br>
-  <code style="color:turquoise">LET </code><code>P = 1;</code><br>
-  <code style="color:turquoise">WHILE </code><code>X > 1 </code><code style="color:turquoise">DO </code><br>
-    <code style="color:turquoise">LET </code><code>P = P * X;</code><br>
-        <code style="color:turquoise">LET </code><code>X = X - 1;</code><br>
-  <code style="color:turquoise">ENDWHILE</code><br>
-    <code style="color:turquoise">PRINT </code><code>P;</code><br>
+<div class="code_blocks"><code style="color:aqua">IF </code><code>X <= 1, </code><code style="color:aqua">THEN PRINT </code><code>1</code><code style="color:aqua"> ENDIF;</code><br>
+  <code style="color:aqua">LET </code><code>P = 1;</code><br>
+  <code style="color:aqua">WHILE </code><code>X > 1 </code><code style="color:aqua">DO </code><br>
+    <code style="color:aqua">LET </code><code>P = P * X;</code><br>
+        <code style="color:aqua">LET </code><code>X = X - 1;</code><br>
+  <code style="color:aqua">ENDWHILE</code><br>
+    <code style="color:aqua">PRINT </code><code>P;</code><br>
 </div>
 <br>
 
@@ -338,115 +338,115 @@ However, here is where the <b>TEENY-BASIC</b> functionality ends. The <b>Tim</b>
 In <b>Tim</b>, the <code>FOR</code> loop can be executed using the <code>FOR...TO...NEXT</code> command. The <code>FOR</code> loop instantiates a local counting variable that is not accessible within the code of the program, and runs the code sequence as many times as it takes for the counting variable to traverse from the start value to the end value while it increments by 1 each time. For instance, the following code snippet prints all the numbers between \(5\) and \(20\).<br><br>
 
 
-<div class="code_blocks"><code style="color:turquoise">FOR </code><code>I = 5 </code><code style="color:turquoise">TO </code><code>20</code><br> 
-<code style="color:turquoise">PRINT </code><code>I</code>;<br>
-<code style="color:turquoise">ENDFOR</code>
+<div class="code_blocks"><code style="color:aqua">FOR </code><code>I = 5 </code><code style="color:aqua">TO </code><code>20</code><br> 
+<code style="color:aqua">PRINT </code><code>I</code>;<br>
+<code style="color:aqua">ENDFOR</code>
 </div>
 <br>
 
 Next, <b>Tim</b> supports the execution of <code>REPEAT</code> loops using the <code>REPEAT...UNTIL</code> command. The original <code>WHILE</code> command is a pre-condition loop: it first checks that a condition is met. If the condition is met, it runs the code sequence, and then continues to keep re-running the code sequence as long as the original condition is met. However, the <code>REPEAT...UNTIL</code> command is a post-condition loop: it runs the code sequence first, and then checks that the condition is not met, and then repeats this process until the condition is met. For instance, the code below prints the first \(N\) Fibonaccci numbers.<br><br>
 
-<div class="code_blocks"><code style="color:turquoise">LET </code><code>A = 0;</code><br>
-  <code style="color:turquoise">PRINT </code><code>A;</code><br>
-<code style="color:turquoise">LET </code><code>B = 1;</code><br>
-  <code style="color:turquoise">PRINT </code><code>B;</code><br>
-<code style="color:turquoise">LET </code><code>Count = 2;</code><br>
-<code style="color:turquoise">REPEAT</code><br>
-<code style="color:turquoise">LET </code><code>C = A;</code><br>
-<code style="color:turquoise">LET </code><code>A = B;</code><br>
-<code style="color:turquoise">LET </code><code>B = A + B;</code><br>
-<code style="color:turquoise">PRINT </code><code>B;</code><br>
-<code style="color:turquoise">LET </code><code>Count = Count + 1;</code><br>
-<code style="color:turquoise">UNTIL </code><code>Count = 20;</code>
+<div class="code_blocks"><code style="color:aqua">LET </code><code>A = 0;</code><br>
+  <code style="color:aqua">PRINT </code><code>A;</code><br>
+<code style="color:aqua">LET </code><code>B = 1;</code><br>
+  <code style="color:aqua">PRINT </code><code>B;</code><br>
+<code style="color:aqua">LET </code><code>Count = 2;</code><br>
+<code style="color:aqua">REPEAT</code><br>
+<code style="color:aqua">LET </code><code>C = A;</code><br>
+<code style="color:aqua">LET </code><code>A = B;</code><br>
+<code style="color:aqua">LET </code><code>B = A + B;</code><br>
+<code style="color:aqua">PRINT </code><code>B;</code><br>
+<code style="color:aqua">LET </code><code>Count = Count + 1;</code><br>
+<code style="color:aqua">UNTIL </code><code>Count = 20;</code>
 </div>
 <br>
 
 Next, in addition to addition, subtraction, multiplication, and division, <b>Tim</b> performs some fundamental operations such as exponentiation with integer powers, as well as finding modulos and quotients. The code snippets below can be used to calculate and print the outputs of \(0.5^2, 2^{10}, 3^{-2}\), and \(6^0\), respectively.  <br><br>
 
 <div class="code_blocks">
-<code style="color:turquoise">PRINT </code><code>0.5^2</code>;<br>
-<code style="color:turquoise">PRINT </code><code>2^10</code>;<br>
-<code style="color:turquoise">PRINT </code><code>3^(-2)</code>;<br>
-<code style="color:turquoise">PRINT </code><code>6^0</code>;<br>
+<code style="color:aqua">PRINT </code><code>0.5^2</code>;<br>
+<code style="color:aqua">PRINT </code><code>2^10</code>;<br>
+<code style="color:aqua">PRINT </code><code>3^(-2)</code>;<br>
+<code style="color:aqua">PRINT </code><code>6^0</code>;<br>
 </div>
 <br>
 Similarly, the code snippet below can be used to calculate and print the remainders (after division) of 1) \(3\) with \(5\), 2) \(8\) with \(5\), 3) \(0.2\) with \(0.1\), and 4) \(-0.4\) with \(0.1\), respectively.<br><br>
 
 <div class="code_blocks">
-<code style="color:turquoise">PRINT </code><code>3%5</code>;<br>
-<code style="color:turquoise">PRINT </code><code>8%5</code>;<br>
-<code style="color:turquoise">PRINT </code><code>0.2%0.1</code>;<br>
-<code style="color:turquoise">PRINT </code><code>(-0.4)%0.1</code>;<br>
+<code style="color:aqua">PRINT </code><code>3%5</code>;<br>
+<code style="color:aqua">PRINT </code><code>8%5</code>;<br>
+<code style="color:aqua">PRINT </code><code>0.2%0.1</code>;<br>
+<code style="color:aqua">PRINT </code><code>(-0.4)%0.1</code>;<br>
 </div>
 <br>
 Likewise, the code snippet below can be used to calculate and print the quotients of 1) \(3\) with \(5\), 2) \(8\) with \(5\), 3) \(0.2\) with \(0.1\), and 4) \(-0.4\) with \(0.1\), respectively. <br><br>
 <div class="code_blocks">
-<code style="color:turquoise">PRINT </code><code>3//5</code>;<br>
-<code style="color:turquoise">PRINT </code><code>8//5</code>;<br>
-<code style="color:turquoise">PRINT </code><code>0.2//0.1</code>;<br>
-<code style="color:turquoise">PRINT </code><code>(-0.4)//0.1</code>;<br>
+<code style="color:aqua">PRINT </code><code>3//5</code>;<br>
+<code style="color:aqua">PRINT </code><code>8//5</code>;<br>
+<code style="color:aqua">PRINT </code><code>0.2//0.1</code>;<br>
+<code style="color:aqua">PRINT </code><code>(-0.4)//0.1</code>;<br>
 </div>
 <br>
 
 In addition to the string, integer, and float type, <b>Tim</b> also supports the implementation of lists of either strings, integers, or floats (though not more at once). The <b>Tim</b> lists can be stored as variables by the regular <b>Tim</b> syntax, and must be instantiated with a fixed type and size. Elements in Lists of <code>TYPE</code> string as instantiated with "", whereas elements in Lists of <code>TYPE</code> integer and float are instantiated with 0 and 0.0 respectively. The following code snippets illustrates how to create <b>Tim</b> lists of strings, integers, and floats, respectively, of size \(N=10\).<br><br>
 <div class="code_blocks">
-<code style="color:turquoise">LET </code><code>N = 10;</code><br>
-<code style="color:turquoise">LET </code><code>X = </code><code style="color:turquoise">LIST</code><code>(<code style="color:turquoise">STRING</code>, N);</code><br>
-<code style="color:turquoise">LET </code><code>Y = </code><code style="color:turquoise">LIST</code><code>(<code style="color:turquoise">INTEGER</code>, N);</code><br>
-<code style="color:turquoise">LET </code><code>Z = </code><code style="color:turquoise">LIST</code><code>(<code style="color:turquoise">FLOAT</code>, N);</code><br>
+<code style="color:aqua">LET </code><code>N = 10;</code><br>
+<code style="color:aqua">LET </code><code>X = </code><code style="color:aqua">LIST</code><code>(<code style="color:aqua">STRING</code>, N);</code><br>
+<code style="color:aqua">LET </code><code>Y = </code><code style="color:aqua">LIST</code><code>(<code style="color:aqua">INTEGER</code>, N);</code><br>
+<code style="color:aqua">LET </code><code>Z = </code><code style="color:aqua">LIST</code><code>(<code style="color:aqua">FLOAT</code>, N);</code><br>
 </div>
 <br>
 
 Additionally, the <b>Tim</b> <code>TYPE</code> command can allow users to find the type of a specific variable. For instance, an exhaustive list of <b>Tim</b> types are <code>STRING</code>, <code>INTEGER</code>, <code>FLOAT</code>, <code>LIST_STRING</code>, <code>LIST_INT</code>, <code>LIST_FLOAT</code>, and <code>NONE</code>. The code snippets below use the <code>TYPE</code> command to find the types of various variables, and then prints these types to the user.<br><br>
 <div class="code_blocks">
-<code style="color:turquoise">LET </code><code>A = 10;</code><br>
-<code style="color:turquoise">LET </code><code>B = "Hello, World!";</code><br>
-<code style="color:turquoise">LET </code><code>C = 0.502;</code><br>
-<code style="color:turquoise">LET </code><code>D = <code style="color:turquoise">LIST</code>(<code style="color:turquoise">STRING</code>, 10);</code><br>
-<code style="color:turquoise">LET </code><code>E = <code style="color:turquoise">LIST</code>(<code style="color:turquoise">INTEGER</code>, 10);</code><br>
-<code style="color:turquoise">LET </code><code>F = <code style="color:turquoise">LIST</code>(<code style="color:turquoise">FLOAT</code>, 10);</code><br>
+<code style="color:aqua">LET </code><code>A = 10;</code><br>
+<code style="color:aqua">LET </code><code>B = "Hello, World!";</code><br>
+<code style="color:aqua">LET </code><code>C = 0.502;</code><br>
+<code style="color:aqua">LET </code><code>D = <code style="color:aqua">LIST</code>(<code style="color:aqua">STRING</code>, 10);</code><br>
+<code style="color:aqua">LET </code><code>E = <code style="color:aqua">LIST</code>(<code style="color:aqua">INTEGER</code>, 10);</code><br>
+<code style="color:aqua">LET </code><code>F = <code style="color:aqua">LIST</code>(<code style="color:aqua">FLOAT</code>, 10);</code><br>
 <br>
-<code style="color:turquoise">PRINT </code><code><code style="color:turquoise">TYPE</code>(A);</code><br>
-<code style="color:turquoise">PRINT </code><code><code style="color:turquoise">TYPE</code>(B);</code><br>
-<code style="color:turquoise">PRINT </code><code><code style="color:turquoise">TYPE</code>(C);</code><br>
-<code style="color:turquoise">PRINT </code><code><code style="color:turquoise">TYPE</code>(D;</code><br>
-<code style="color:turquoise">PRINT </code><code><code style="color:turquoise">TYPE</code>(E);</code><br>
-<code style="color:turquoise">PRINT </code><code><code style="color:turquoise">TYPE</code>(F);</code><br>
-<code style="color:turquoise">PRINT </code><code><code style="color:turquoise">TYPE</code>();</code><br>
+<code style="color:aqua">PRINT </code><code><code style="color:aqua">TYPE</code>(A);</code><br>
+<code style="color:aqua">PRINT </code><code><code style="color:aqua">TYPE</code>(B);</code><br>
+<code style="color:aqua">PRINT </code><code><code style="color:aqua">TYPE</code>(C);</code><br>
+<code style="color:aqua">PRINT </code><code><code style="color:aqua">TYPE</code>(D;</code><br>
+<code style="color:aqua">PRINT </code><code><code style="color:aqua">TYPE</code>(E);</code><br>
+<code style="color:aqua">PRINT </code><code><code style="color:aqua">TYPE</code>(F);</code><br>
+<code style="color:aqua">PRINT </code><code><code style="color:aqua">TYPE</code>();</code><br>
 </div>
 
 <br>
 Furthermore, <b>Tim</b> <code>lists</code> have three key features. Firstly, it allows 0-valued indexing. So, for instance, the code below can be used to initialize an integer list \(A\) with 3 elements, and sets them to 60, 65, and 70, respectively.<br><br> 
 
 <div class="code_blocks">
-<code style="color:turquoise">LET </code><code>X = <code style="color:turquoise">LIST</code>(<code style="color:turquoise">INTEGER</code>, 3);</code><br>
-<code style="color:turquoise">LET </code><code>X[0] = 60;</code><br>
-<code style="color:turquoise">LET </code><code>X[1] = 65;</code><br>
-<code style="color:turquoise">LET </code><code>X[2] = 70;</code><br>
+<code style="color:aqua">LET </code><code>X = <code style="color:aqua">LIST</code>(<code style="color:aqua">INTEGER</code>, 3);</code><br>
+<code style="color:aqua">LET </code><code>X[0] = 60;</code><br>
+<code style="color:aqua">LET </code><code>X[1] = 65;</code><br>
+<code style="color:aqua">LET </code><code>X[2] = 70;</code><br>
 </div><br>
 
 Secondly, <b>Tim</b> <code>lists</code> allow full-stack operations. So, <b>Tim</b> allows operations between an integer or float array and a scalar float or integer, where it uniformly applies the operation with the scalar parameter to every value in the array. For instance, the code snippet below demonstrates the result of full-stack addition of 7.0 to a <code>LIST_FLOAT</code>, the full-stack product of a <code>LIST_INT</code> by 5, the full-stack exponentiation of a <code>LIST_INT</code> from 2, and finally, the full-stack exponentiation of a LIST_INT by 2.0.<br><br>
  
 <div class="code_blocks">
-<code style="color:turquoise">LET </code><code>X = <code style="color:turquoise">LIST</code>(<code style="color:turquoise">INTEGER</code>, 3);</code><br>
-<code style="color:turquoise">LET </code><code>Y = <code style="color:turquoise">LIST</code>(<code style="color:turquoise">FLOAT</code>, 3);</code><br>
-<code style="color:turquoise">LET </code><code>z = <code style="color:turquoise">LIST</code>(<code style="color:turquoise">INTEGER</code>, 3);</code><br>
+<code style="color:aqua">LET </code><code>X = <code style="color:aqua">LIST</code>(<code style="color:aqua">INTEGER</code>, 3);</code><br>
+<code style="color:aqua">LET </code><code>Y = <code style="color:aqua">LIST</code>(<code style="color:aqua">FLOAT</code>, 3);</code><br>
+<code style="color:aqua">LET </code><code>z = <code style="color:aqua">LIST</code>(<code style="color:aqua">INTEGER</code>, 3);</code><br>
 <br>
-<code style="color:turquoise">LET </code><code>X[0] = 60;</code><br>
-<code style="color:turquoise">LET </code><code>X[1] = 65;</code><br>
-<code style="color:turquoise">LET </code><code>X[2] = 70;</code><br>
-<code style="color:turquoise">LET </code><code>Y[0] = 3.2;</code><br>
-<code style="color:turquoise">LET </code><code>Y[1] = 3.1;</code><br>
-<code style="color:turquoise">LET </code><code>Y[2] = 2.8;</code><br>
-<code style="color:turquoise">LET </code><code>Z[0] = 3;</code><br>
-<code style="color:turquoise">LET </code><code>Z[1] = 4;</code><br>
-<code style="color:turquoise">LET </code><code>Z[2] = 5;</code><br>
+<code style="color:aqua">LET </code><code>X[0] = 60;</code><br>
+<code style="color:aqua">LET </code><code>X[1] = 65;</code><br>
+<code style="color:aqua">LET </code><code>X[2] = 70;</code><br>
+<code style="color:aqua">LET </code><code>Y[0] = 3.2;</code><br>
+<code style="color:aqua">LET </code><code>Y[1] = 3.1;</code><br>
+<code style="color:aqua">LET </code><code>Y[2] = 2.8;</code><br>
+<code style="color:aqua">LET </code><code>Z[0] = 3;</code><br>
+<code style="color:aqua">LET </code><code>Z[1] = 4;</code><br>
+<code style="color:aqua">LET </code><code>Z[2] = 5;</code><br>
 
 <br>
-<code style="color:turquoise">PRINT </code><code>Y = Y + 0.70;</code><br>
-<code style="color:turquoise">PRINT </code><code>X = X * 5;</code><br>
-<code style="color:turquoise">PRINT </code><code>X = X ^ 2;</code><br>
-<code style="color:turquoise">PRINT </code><code>2 ^ Z;</code><br>
+<code style="color:aqua">PRINT </code><code>Y = Y + 0.70;</code><br>
+<code style="color:aqua">PRINT </code><code>X = X * 5;</code><br>
+<code style="color:aqua">PRINT </code><code>X = X ^ 2;</code><br>
+<code style="color:aqua">PRINT </code><code>2 ^ Z;</code><br>
 
 </div><br>
 The output of these <code>PRINT</code> commands are [3.90, 3.80, 3.50], [300, 325, 350], [3600, 4225, 4900], and [8, 16, 32], respectively.
@@ -457,27 +457,27 @@ The output of these <code>PRINT</code> commands are [3.90, 3.80, 3.50], [300, 32
 Thirdly, <b>Tim</b> <code>lists</code> allow pointwise operations. So, for instance, given either two <code>LIST_INT</code>'s or two <code>LIST_FLOAT</code>'s, <b>Tim</b> allows pointwise operations between the operators by adding a <code>.</code> after the operation. For instance, the code snippet below demonstrates the result of a pointwise addition of two <code>LIST_INT</code>'s, the pointwise product of two <code>LIST_FLOAT</code>'s, and the modulo operator between two <code>LIST_FLOAT</code>'s.<br><br>
 
 <div class="code_blocks">
-<code style="color:turquoise">LET </code><code>A = <code style="color:turquoise">LIST</code>(<code style="color:turquoise">INTEGER</code>, 3);</code><br>
-<code style="color:turquoise">LET </code><code>B = <code style="color:turquoise">LIST</code>(<code style="color:turquoise">INTEGER</code>, 3);</code><br>
-<code style="color:turquoise">LET </code><code>X = <code style="color:turquoise">LIST</code>(<code style="color:turquoise">FLOAT</code>, 3);</code><br>
-<code style="color:turquoise">LET </code><code>Y = <code style="color:turquoise">LIST</code>(<code style="color:turquoise">FLOAT</code>, 3);</code><br>
+<code style="color:aqua">LET </code><code>A = <code style="color:aqua">LIST</code>(<code style="color:aqua">INTEGER</code>, 3);</code><br>
+<code style="color:aqua">LET </code><code>B = <code style="color:aqua">LIST</code>(<code style="color:aqua">INTEGER</code>, 3);</code><br>
+<code style="color:aqua">LET </code><code>X = <code style="color:aqua">LIST</code>(<code style="color:aqua">FLOAT</code>, 3);</code><br>
+<code style="color:aqua">LET </code><code>Y = <code style="color:aqua">LIST</code>(<code style="color:aqua">FLOAT</code>, 3);</code><br>
 <br>
-<code style="color:turquoise">LET </code><code>A[0] = 60;</code><br>
-<code style="color:turquoise">LET </code><code>A[1] = 65;</code><br>
-<code style="color:turquoise">LET </code><code>A[2] = 70;</code><br>
-<code style="color:turquoise">LET </code><code>B[0] = 6;</code><br>
-<code style="color:turquoise">LET </code><code>B[1] = 9;</code><br>
-<code style="color:turquoise">LET </code><code>B[2] = 12;</code><br>
-<code style="color:turquoise">LET </code><code>X[0] = 6.2;</code><br>
-<code style="color:turquoise">LET </code><code>X[1] = 9.2;</code><br>
-<code style="color:turquoise">LET </code><code>X[2] = 12.2;</code><br>
-<code style="color:turquoise">LET </code><code>Y[0] = 2.4;</code><br>
-<code style="color:turquoise">LET </code><code>Y[1] = 2.25;</code><br>
-<code style="color:turquoise">LET </code><code>Y[2] = 1.987;</code><br>
+<code style="color:aqua">LET </code><code>A[0] = 60;</code><br>
+<code style="color:aqua">LET </code><code>A[1] = 65;</code><br>
+<code style="color:aqua">LET </code><code>A[2] = 70;</code><br>
+<code style="color:aqua">LET </code><code>B[0] = 6;</code><br>
+<code style="color:aqua">LET </code><code>B[1] = 9;</code><br>
+<code style="color:aqua">LET </code><code>B[2] = 12;</code><br>
+<code style="color:aqua">LET </code><code>X[0] = 6.2;</code><br>
+<code style="color:aqua">LET </code><code>X[1] = 9.2;</code><br>
+<code style="color:aqua">LET </code><code>X[2] = 12.2;</code><br>
+<code style="color:aqua">LET </code><code>Y[0] = 2.4;</code><br>
+<code style="color:aqua">LET </code><code>Y[1] = 2.25;</code><br>
+<code style="color:aqua">LET </code><code>Y[2] = 1.987;</code><br>
 <br>
-<code style="color:turquoise">LET </code><code>C = A +. B;</code><br>
-<code style="color:turquoise">LET </code><code>D = X *. Y;</code><br>
-<code style="color:turquoise">LET </code><code>E = X %. Y;</code><br>
+<code style="color:aqua">LET </code><code>C = A +. B;</code><br>
+<code style="color:aqua">LET </code><code>D = X *. Y;</code><br>
+<code style="color:aqua">LET </code><code>E = X %. Y;</code><br>
 
 </div><br>
 The output of these <code>PRINT</code> commands are [66, 74, 82], [14.88, 20.7, 24.2414], and [1.4, 0.2, 0.278], respectively.<br><br>
@@ -488,23 +488,23 @@ The output of these <code>PRINT</code> commands are [66, 74, 82], [14.88, 20.7, 
 This section provides the implementation of several notorious algorithms that can be implemented in <b>Tim</b>. Firstly, we present a code snippet for the insertion-sort algorithm.<br><br>
 
 <div class="code_blocks">
-  <code style="color:turquoise">LET </code><code>N = 5;</code><br>
-  <code style="color:turquoise">LET </code><code>A = <code style="color:turquoise">LIST</code>(<code style="color:turquoise">INTEGER</code>, N);</code><br>
-    <code style="color:turquoise">LET </code><code>A[0] = 12;</code><br>
-    <code style="color:turquoise">LET </code><code>A[1] = 11;</code><br>
-    <code style="color:turquoise">LET </code><code>A[2] = 13;</code><br>
-    <code style="color:turquoise">LET </code><code>A[3] = 5;</code><br>
-    <code style="color:turquoise">LET </code><code>A[4] = 6;</code><br>
-    <code style="color:turquoise">FOR </code><code>I = 1 </code><code style="color:turquoise">TO </code><code>N</code><br>
-    <code style="color:turquoise">LET </code><code>K = A[I];</code><br>
-    <code style="color:turquoise">LET </code><code>J = I - 1;</code><br>
-    <code style="color:turquoise">WHILE </code><code>(J >= 0) * (K < A[J]) </code><code style="color:turquoise">DO</code><br>
-    <code style="color:turquoise">LET </code><code>A[J + 1] = A[J];</code><br>
-    <code style="color:turquoise">LET </code><code>J = J - 1;</code><br>
-          <code style="color:turquoise">ENDWHILE</code><br>
-    <code style="color:turquoise">LET </code><code>A[J + 1] = K;</code><br>
-          <code style="color:turquoise">ENDFOR</code><br>
-    <code style="color:turquoise">PRINT </code><code>A;</code><br>
+  <code style="color:aqua">LET </code><code>N = 5;</code><br>
+  <code style="color:aqua">LET </code><code>A = <code style="color:aqua">LIST</code>(<code style="color:aqua">INTEGER</code>, N);</code><br>
+    <code style="color:aqua">LET </code><code>A[0] = 12;</code><br>
+    <code style="color:aqua">LET </code><code>A[1] = 11;</code><br>
+    <code style="color:aqua">LET </code><code>A[2] = 13;</code><br>
+    <code style="color:aqua">LET </code><code>A[3] = 5;</code><br>
+    <code style="color:aqua">LET </code><code>A[4] = 6;</code><br>
+    <code style="color:aqua">FOR </code><code>I = 1 </code><code style="color:aqua">TO </code><code>N</code><br>
+    <code style="color:aqua">LET </code><code>K = A[I];</code><br>
+    <code style="color:aqua">LET </code><code>J = I - 1;</code><br>
+    <code style="color:aqua">WHILE </code><code>(J >= 0) * (K < A[J]) </code><code style="color:aqua">DO</code><br>
+    <code style="color:aqua">LET </code><code>A[J + 1] = A[J];</code><br>
+    <code style="color:aqua">LET </code><code>J = J - 1;</code><br>
+          <code style="color:aqua">ENDWHILE</code><br>
+    <code style="color:aqua">LET </code><code>A[J + 1] = K;</code><br>
+          <code style="color:aqua">ENDFOR</code><br>
+    <code style="color:aqua">PRINT </code><code>A;</code><br>
 
 
 </div><br>
@@ -513,65 +513,65 @@ This section provides the implementation of several notorious algorithms that ca
 Secondly, we present a code snippet for an approximation of Euler's constant, \(e\), which is defined as \(e^x = \sum\limits_{k=0}^\infty \frac{x^k}{k!}\). Thus, \(e = \sum\limits_{k=0}^\infty \frac{1}{k!}\). We define the n-pproximation of \(e\) as the sum of first \(n\) terms in the summand, \(e_n = \sum\limits_{k=0}^n \frac{1}{k!}\)<br><br>
 
 <div class="code_blocks">
-  <code style="color:turquoise">LET </code><code>N = 3;</code><br>
-    <code style="color:turquoise">LET </code><code>S = 0.0;</code><br>
-        <code style="color:turquoise">FOR </code> <code>K = 0 </code> <code style="color:turquoise"> TO </code> <cod>N</code><br>
-          <code style="color:turquoise">IF </code><code>K = 0, </code><code style="color:turquoise">THEN </code><code>S = S + 1</code><code style="color:turquoise"> ENDIF</code><code>;</code><br>
-          <code style="color:turquoise">IF </code><code>K = 1, </code><code style="color:turquoise">THEN </code><code>S = S + 1</code><code style="color:turquoise"> ENDIF</code><code>;</code><br>
+  <code style="color:aqua">LET </code><code>N = 3;</code><br>
+    <code style="color:aqua">LET </code><code>S = 0.0;</code><br>
+        <code style="color:aqua">FOR </code> <code>K = 0 </code> <code style="color:aqua"> TO </code> <cod>N</code><br>
+          <code style="color:aqua">IF </code><code>K = 0, </code><code style="color:aqua">THEN </code><code>S = S + 1</code><code style="color:aqua"> ENDIF</code><code>;</code><br>
+          <code style="color:aqua">IF </code><code>K = 1, </code><code style="color:aqua">THEN </code><code>S = S + 1</code><code style="color:aqua"> ENDIF</code><code>;</code><br>
 
-          <code style="color:turquoise">LET </code><code>P = 1;</code><br>
-          <code style="color:turquoise">IF </code><code>K > 1, </code><code style="color:turquoise">THEN </code><code>
-            <code style="color:turquoise">FOR</code> F = 1 <code style="color:turquoise">TO</code> K</code><br>
-          <code style="color:turquoise">LET </code><code>P = P * F;</code><br>
-          <code style="color:turquoise">ENDFOR</code><br>
-          <code style="color:turquoise">LET </code><code>S = S + 1/P;</code><br>
-          <code style="color:turquoise">ENDIF</code><br>
-          <code style="color:turquoise">PRINT </code><code>S;</code><br>
+          <code style="color:aqua">LET </code><code>P = 1;</code><br>
+          <code style="color:aqua">IF </code><code>K > 1, </code><code style="color:aqua">THEN </code><code>
+            <code style="color:aqua">FOR</code> F = 1 <code style="color:aqua">TO</code> K</code><br>
+          <code style="color:aqua">LET </code><code>P = P * F;</code><br>
+          <code style="color:aqua">ENDFOR</code><br>
+          <code style="color:aqua">LET </code><code>S = S + 1/P;</code><br>
+          <code style="color:aqua">ENDIF</code><br>
+          <code style="color:aqua">PRINT </code><code>S;</code><br>
 </div><br>
 
 
 Thirdly, we present a code snippet that detects prime numbers.<br><br>
 
-<div class="code_blocks"><code style="color:turquoise">PRINT </code><code>X;</code><br>
-  <code style="color:turquoise">LET </code><code>N = 17;</code><br>
-            <code style="color:turquoise">IF </code><code>N = 0, </code><code style="color:turquoise">THEN </code><code style="color:turquoise">PRINT </code><code>"NOT PRIME"</code><code style="color:turquoise"> ENDIF </code><br>
-            <code style="color:turquoise">IF </code><code>N = 1, </code><code style="color:turquoise">THEN </code><code style="color:turquoise">PRINT </code><code>"NOT PRIME"</code><code style="color:turquoise"> ENDIF </code><br>
-            <code style="color:turquoise">LET </code><code>Prime = 1;</code><br>
-            <code style="color:turquoise">IF </code><code>N > 1, </code><code style="color:turquoise">THEN </code><code style="color:turquoise">FOR</code><code> F = 2 </code> <code style="color:turquoise">TO </code><code>N - 1</code><br>
-            <code style="color:turquoise">IF TYPE</code><code>(N/F) = <code style="color:turquoise">TYPE</code>(0), </code><code style="color:turquoise">THEN </code><br>
-            <code style="color:turquoise">PRINT </code><code>"NOT PRIME";</code><br>
-            <code style="color:turquoise">LET </code><code>Prime = 0;</code><br>
-            <code style="color:turquoise"> ENDIF</code><br>
-            <code style="color:turquoise"> ENDFOR</code><br>
-      <code style="color:turquoise">IF </code><code>Prime = 1, </code><code style="color:turquoise">THEN PRINT </code><code> "PRIME" </code><code style="color:turquoise"> ENDIF</code><br>
-          <code style="color:turquoise">ENDIF</code><br>
+<div class="code_blocks"><code style="color:aqua">PRINT </code><code>X;</code><br>
+  <code style="color:aqua">LET </code><code>N = 17;</code><br>
+            <code style="color:aqua">IF </code><code>N = 0, </code><code style="color:aqua">THEN </code><code style="color:aqua">PRINT </code><code>"NOT PRIME"</code><code style="color:aqua"> ENDIF </code><br>
+            <code style="color:aqua">IF </code><code>N = 1, </code><code style="color:aqua">THEN </code><code style="color:aqua">PRINT </code><code>"NOT PRIME"</code><code style="color:aqua"> ENDIF </code><br>
+            <code style="color:aqua">LET </code><code>Prime = 1;</code><br>
+            <code style="color:aqua">IF </code><code>N > 1, </code><code style="color:aqua">THEN </code><code style="color:aqua">FOR</code><code> F = 2 </code> <code style="color:aqua">TO </code><code>N - 1</code><br>
+            <code style="color:aqua">IF TYPE</code><code>(N/F) = <code style="color:aqua">TYPE</code>(0), </code><code style="color:aqua">THEN </code><br>
+            <code style="color:aqua">PRINT </code><code>"NOT PRIME";</code><br>
+            <code style="color:aqua">LET </code><code>Prime = 0;</code><br>
+            <code style="color:aqua"> ENDIF</code><br>
+            <code style="color:aqua"> ENDFOR</code><br>
+      <code style="color:aqua">IF </code><code>Prime = 1, </code><code style="color:aqua">THEN PRINT </code><code> "PRIME" </code><code style="color:aqua"> ENDIF</code><br>
+          <code style="color:aqua">ENDIF</code><br>
 
 </div><br>
 
 
 Finally, we present a code snippet that checks if a string is a palindrome.<br><br>
 
-<div class="code_blocks"><code style="color:turquoise">LET </code><code>X = "TACOCAT";</code><br>
-    <code style="color:turquoise">LET </code><code>Length = 0;</code><br>
-    <code style="color:turquoise">LET </code><code>Value = -1;</code><br>
-    <code style="color:turquoise">WHILE TYPE</code><code>(X[Length]) != </code><code style="color:turquoise">NONE DO</code><br>
-          <code style="color:turquoise">LET </code><code>Length = Length + 1;</code><br>
+<div class="code_blocks"><code style="color:aqua">LET </code><code>X = "TACOCAT";</code><br>
+    <code style="color:aqua">LET </code><code>Length = 0;</code><br>
+    <code style="color:aqua">LET </code><code>Value = -1;</code><br>
+    <code style="color:aqua">WHILE TYPE</code><code>(X[Length]) != </code><code style="color:aqua">NONE DO</code><br>
+          <code style="color:aqua">LET </code><code>Length = Length + 1;</code><br>
 
-  <code style="color:turquoise">ENDWHILE</code><br>
-              <code style="color:turquoise">LET </code><code>Not = 1;</code><br>
-            <code style="color:turquoise">LET </code><code>Start = 0;</code><br>
-    <code style="color:turquoise">WHILE </code><code>(Start < Length) * (Not = 1)</code><code style="color:turquoise"> DO</code><br>
-              <code style="color:turquoise">IF </code><code>X[Start] != X[Length] <code style="color:turquoise">THEN<br> PRINT</code> "Not a Palindrome."</code><br>
-                          <code style="color:turquoise">LET </code><code>Not = 0;</code><br>
-                        <code style="color:turquoise">ENDIF</code><br>
-    <code style="color:turquoise">LET </code><code>Length = Length - 1;</code><br>
-    <code style="color:turquoise">LET </code><code>Start = Start + 1;</code><br>
-  <code style="color:turquoise">ENDWHILE</code><br>
-      <code style="color:turquoise">IF </code><code>Not = 1, </code><code style="color:turquoise">THEN PRINT </code><code> "Palindrome" </code><code style="color:turquoise"> ENDIF</code><br>
+  <code style="color:aqua">ENDWHILE</code><br>
+              <code style="color:aqua">LET </code><code>Not = 1;</code><br>
+            <code style="color:aqua">LET </code><code>Start = 0;</code><br>
+    <code style="color:aqua">WHILE </code><code>(Start < Length) * (Not = 1)</code><code style="color:aqua"> DO</code><br>
+              <code style="color:aqua">IF </code><code>X[Start] != X[Length] <code style="color:aqua">THEN<br> PRINT</code> "Not a Palindrome."</code><br>
+                          <code style="color:aqua">LET </code><code>Not = 0;</code><br>
+                        <code style="color:aqua">ENDIF</code><br>
+    <code style="color:aqua">LET </code><code>Length = Length - 1;</code><br>
+    <code style="color:aqua">LET </code><code>Start = Start + 1;</code><br>
+  <code style="color:aqua">ENDWHILE</code><br>
+      <code style="color:aqua">IF </code><code>Not = 1, </code><code style="color:aqua">THEN PRINT </code><code> "Palindrome" </code><code style="color:aqua"> ENDIF</code><br>
 
 
 
-  <code style="color:turquoise">ENDWHILE</code>
+  <code style="color:aqua">ENDWHILE</code>
 
 </div><br>
 

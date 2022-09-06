@@ -568,6 +568,11 @@ So, what is the actual algorithm? Given an input of the observation space \(O = 
 .pentaple_indent{
   text-indent: 250px;
 }
+
+.hexaple_indent{
+  text-indent: 300px;
+}
+
 .code_blocks {
   background-color:black;
   color:white;
@@ -577,29 +582,34 @@ So, what is the actual algorithm? Given an input of the observation space \(O = 
   border-bottom-right-radius:5px;
   padding:5px;
 }
+
+.txt_green {
+  color:green;
+}
+
 </style>
 
 
 <div class="code_blocks">
-<code>function <i>VITERBI</i></code>\((O, S, \Pi, Y, A, B): X\)) <br>
-<code><div class="single_indent">for each state </code>\(i=1, 2, ..., K\) <code>do</code></div>
+<code><code style="color:aqua">function</code> <i>VITERBI</i></code>\((O, S, \Pi, Y, A, B): X\)) <br>
+<code><div class="single_indent"><code style="color:orange">for</code> <code style="color:orange">each</code> state </code>\(i=1, 2, ..., K\) <code><code style="color:orange">do</code></code></div>
 <div class="double_indent">\(T_1[i,1]\leftarrow\pi_1\cdot B_{iy_1}\) </div>
 <div class="double_indent">\(T_2[i,1]\leftarrow 0\) </div>
-<code><div class="single_indent">end for</div></code>
-<div class="single_indent"><code>for each observation </code>\(j=2, 3, ..., T\) <code>do</code></div>
-<div class="double_indent"><code>for each state </code>\(i=1, 2, ..., K\) <code>do</code></div>
+<code><div class="single_indent"><code style="color:orange">end for</code></div></code>
+<div class="single_indent"><code><code style="color:orange">for</code> <code style="color:orange">each</code> observation </code>\(j=2, 3, ..., T\) <code><code style="color:orange">do</code></code></div>
+<div class="double_indent"><code><code style="color:orange">for</code> <code style="color:orange">each</code> state </code>\(i=1, 2, ..., K\) <code><code style="color:orange">do</code></code></div>
 <div class="triple_indent">\(T_1[i, j] \leftarrow \max\limits_k (T_1[k, j-1]\cdot A_{ki}\cdot B_{i_{y_j}})\)</div>
 <div class="triple_indent">\(T_2[i, j] \leftarrow \arg \max\limits_k (T_1[k, j-1]\cdot A_{ki}\cdot B_{i_{y_j}})\)</div>
-<code><div class="double_indent">end for</div></code>
-<code><div class="single_indent">end for</div></code>
+<code><div class="double_indent"><code style="color:orange">end for</code></div></code>
+<code><div class="single_indent"><code style="color:orange">end for</code></div></code>
 <div class="single_indent">\(z_T \leftarrow \arg\max\limits_k (T_1[k,T])\)</div>
 <div class="single_indent">\(x_T \leftarrow s_{z_T}\)</div>
-<code><div class="single_indent">for </code>\(j=T,T-1, ..., 2\) <code>do</code></div>
+<code><div class="single_indent"><code style="color:orange">for</code> </code>\(j=T,T-1, ..., 2\) <code><code style="color:orange">do</code></code></div>
 <div class="double_indent">\(z_{j-1}\leftarrow T_2[z_j, j]\)</div>
 <div class="double_indent">\(x_{j-1}\leftarrow s_{z_j-1}\)</div>
-<code><div class="single_indent">end for</div></code>
-<code><div class="single_indent">return X</div></code>
-<code>end function</code>
+<code><div class="single_indent"><code style="color:orange">end for</code></div></code>
+<code><div class="single_indent"><code style="color:aqua">return</code> X</div></code>
+<code><code style="color:aqua">end function</code></code>
 </div>
 
 <br><br><h5 style="text-align:center;"><u>Implementing the Viterbi Forward and Backward Algorithm</u></h5><br>
@@ -639,20 +649,20 @@ Here's the code that computes these functions:<br><br>
 
 <div class="code_blocks">
 <code>
-def forward(self, x, normalize=False):<br>
-<div class="single_indent">alphas = [[0. for _ in range(self.L)] for _ in range(len(x) + 1)]</div>
-<div class="single_indent">for state in range(len(self.A_start)):</div>
-<div class="double_indent">alphas[1][state] = self.O[state][x[0]] * self.A_start[state]</div>
-<div class="single_indent">for a, b in enumerate(x[1:]):</div>
-<div class="double_indent">for state in range(self.L):</div>
-<div class="triple_indent">for previous_state in range(self.L):</div>
-<div class="quadruple_indent">alphas[a + 2][state] += self.A[previous_state][state] * </div>
-<div class="pentaple_indent">self.O[state][b] * alphas[a + 1][previous_state]</div>
-<div class="double_indent">if normalize:</div>
-<div class="triple_indent">if (sum(alphas[a + 2]) > 0):
-<div class="quadruple_indent">alphas[a + 2] = [val / sum(alphas[a + 2]) </div>
-<div class="pentaple_indent">for val in alphas[a + 2]]</div>
-<div class="single_indent">return alphas</div>
+<code style="color:aqua">def</code> forward(<code style="color:aqua">self</code>, x, normalize=<code style="color:magenta">False</code>):<br>
+<div class="single_indent">alphas = [[0. <code style="color:orange">for</code> _ <code style="color:orange">in range</code>(<code style="color:aqua">self</code>.L)] <code style="color:orange">for</code> _ <code style="color:orange">in range</code>(<code style="color:red">len</code>(x) + 1)]</div>
+<div class="single_indent"><code style="color:orange">for</code> state <code style="color:orange">in range</code>(<code style="color:red">len</code>(<code style="color:aqua">self</code>.A_start)):</div>
+<div class="double_indent">alphas[1][state] = <code style="color:aqua">self</code>.O[state][x[0]] * <code style="color:aqua">self</code>.A_start[state]</div>
+<div class="single_indent"><code style="color:orange">for</code> a, b <code style="color:orange">in</code><code style="color:red"> enumerate</code>(x[1:]):</div>
+<div class="double_indent"><code style="color:orange">for</code> state <code style="color:orange">in range</code>(<code style="color:aqua">self</code>.L):</div>
+<div class="triple_indent"><code style="color:orange">for</code> previous_state <code style="color:orange">in range</code>(<code style="color:aqua">self</code>.L):</div>
+<div class="quadruple_indent">alphas[a + 2][state] += <code style="color:aqua">self</code>.A[previous_state][state] * </div>
+<div class="pentaple_indent"><code style="color:aqua">self</code>.O[state][b] * alphas[a + 1][previous_state]</div>
+<div class="double_indent"><code style="color:orange">if</code> normalize:</div>
+<div class="triple_indent"><code style="color:orange">if</code> (<code style="color:red">sum</code>(alphas[a + 2]) > 0):
+<div class="quadruple_indent">alphas[a + 2] = [val / <code style="color:red">sum</code>(alphas[a + 2]) </div>
+<div class="pentaple_indent"><code style="color:orange">for</code> val <code style="color:orange">in</code> alphas[a + 2]]</div>
+<div class="single_indent"><code style="color:aqua">return</code> alphas</div>
 </div></code>
 </div>
 
@@ -661,21 +671,19 @@ def forward(self, x, normalize=False):<br>
 
 <div class="code_blocks">
   <code>
-<pre>
-    def backward(self, x, normalize=False):
-        betas = [[0. for _ in range(self.L)] for _ in range(len(x) + 1)]
-        betas[M] = [1 for _ in range(self.L)]
-        for a, b in reversed(list(enumerate(x))):
-          for current_state in range(self.L):
-            for transition_state in range(self.L):
-              betas[a][current_state] += betas[a + 1][transition_state] * 
-              self.A[current_state][transition_state] * 
-              self.O[transition_state][b]
-          if normalize:
-            if (sum(betas[a]) > 0):
-              betas[a] = [val / sum(betas[a]) for val in betas[a]]
-        return betas
-</pre>
+<code style="color:aqua">def</code> backward(<code style="color:aqua">self</code>, x, normalize=False):
+    <div class="single_indent">betas = [[0. <code style="color:orange">for</code> _ <code style="color:orange">in range</code>(<code style="color:aqua">self</code>.L)] <code style="color:orange">for</code> _ <code style="color:orange">in range</code>(<code style="color:red">len</code>(x) + 1)]</div>
+    <div class="single_indent">betas[M] = [1 <code style="color:orange">for</code> _ <code style="color:orange">in range</code>(<code style="color:aqua">self</code>.L)]</div>
+    <div class="single_indent"><code style="color:orange">for</code> a, b <code style="color:orange">in</code> <code style="color:red">reversed</code>(<code style="color:red">list</code>(<code style="color:red">enumerate</code>(x))):</div>
+    <div class="double_indent"><code style="color:orange">for</code> current_state <code style="color:orange">in range</code>(<code style="color:aqua">self</code>.L):</div>
+    <div class="triple_indent"><code style="color:orange">for</code> transition_state <code style="color:orange">in range</code>(<code style="color:aqua">self</code>.L):</div>
+    <div class="quadruple_indent">betas[a][current_state] += betas[a + 1][transition_state] *</div> 
+    <div class="pentaple_indent"><code style="color:aqua">self</code>.A[current_state][transition_state] * </div>
+    <div class="pentaple_indent"><code style="color:aqua">self</code>.O[transition_state][b]</div>
+    <div class="double_indent"><code style="color:orange">if</code> normalize:</div>
+    <div class="triple_indent"><code style="color:orange">if</code> (<code style="color:red">sum</code>(betas[a]) > 0):</div>
+    <div class="quadruple_indent">betas[a] = [val / <code style="color:red">sum</code>(betas[a]) <code style="color:orange">for</code> val <code style="color:orange">in</code> betas[a]]</div>
+    <div class="single_indent"><code style="color:aqua">return</code> betas</div>
 </code>
 </div>
 
@@ -713,22 +721,22 @@ Here's the code that executes the supervised learning framework for the Hidden M
 
 <div class="code_blocks">
 <code>
-<pre>    def supervised_learning(self, X, Y):
-        A = np.zeros((self.L, self.L))
-        B = np.zeros((self.L, self.L))
-        for state_seq in Y:
-          for i in range(len(state_seq) - 1):
-            A[state_seq[i]][state_seq[i+1]] += 1
-        for i in range(len(A[0])):
-          B[:,i] = [probability/sum(A[:,i]) for probability in A[:,i]]
-        self.A = B
-        O = [[0 for _ in range(self.D)] for _ in range(self.L)]
-        for a in range(len(list(X))):
-          for state in range(len(list(Y[a]))):
-            O[Y[a][state]][X[a][state]] += 1
-        for i in range(len(O)):
-          self.O[i] = [probability/sum(O[i]) for probability in O[i]]
-</pre>
+<code style="color:aqua">def</code> supervised_learning(<code style="color:aqua">self</code>, X, Y):<br>
+<div class='single_indent'>A = np.zeros((<code style="color:aqua">self</code>.L, <code style="color:aqua">self</code>.L))</div>
+<div class='single_indent'>B = np.zeros((<code style="color:aqua">self</code>.L, <code style="color:aqua">self</code>.L))</div>
+<div class='single_indent'><code style="color:orange">for</code> state_seq <code style="color:orange">in</code> Y:</div>
+<div class='double_indent'><code style="color:orange">for</code> i <code style="color:orange">in range</code>(<code style="color:red">len</code>(state_seq) - 1):</div>
+<div class="triple_indent">A[state_seq[i]][state_seq[i+1]] += 1</div>
+<div class='single_indent'><code style="color:orange">for</code> i <code style="color:orange">in range</code>(<code style="color:red">len</code>(A[0])):</div>
+<div class='double_indent'>B[:,i] = [probability/<code style="color:red">sum</code>(A[:,i]) <code style="color:orange">for</code> probability <code style="color:orange">in</code> A[:,i]]</div>
+<div class='single_indent'><code style="color:aqua">self</code>.A = B</div>
+<div class='single_indent'>O = [[0 <code style="color:orange">for</code> _ <code style="color:orange">in range</code>(<code style="color:aqua">self</code>.D)] <code style="color:orange">for</code> _ <code style="color:orange">in range</code>(<code style="color:aqua">self</code>.L)]</div>
+<div class='single_indent'><code style="color:orange">for</code> a <code style="color:orange">in range</code>(<code style="color:red">len</code>(<code style="color:orange">list</code>(X))):</div>
+<div class='double_indent'><code style="color:orange">for</code> state <code style="color:orange">in range</code>(<code style="color:red">len</code>(<code style="color:orange">list</code>(Y[a]))):</div>
+<div class="triple_indent">O[Y[a][state]][X[a][state]] += 1</div>
+<div class='single_indent'><code style="color:orange">for</code> i <code style="color:orange">in range</code>(<code style="color:red">len</code>(O)):</div>
+<div class='double_indent'><code style="color:aqua">self</code>.O[i] = [probability/<code style="color:red">sum</code>(O[i]) <code style="color:orange">for</code> probability <code style="color:orange">in</code> O[i]]</div>
+
 </div>
 </code>
 
@@ -777,40 +785,38 @@ Here's the code that does exactly that:<br><br>
 
 <div class="code_blocks">
 <code>
-  <pre>
-    def unsupervised_learning(self, X, N_iters):
-      bar = progressbar.ProgressBar(max_value=N_iters)
-      for iter in range(N_iters):
-        bar.update(iter)
-        temp_A = np.zeros((self.L, self.L))
-        temp_O = np.zeros((self.L, self.D))
-        A_col = np.zeros(self.L)
-        O_col = np.zeros(self.L)
-        for x in X:
-          M = len(x)
-          x_state = np.zeros((M, self.L, self.L))
-          alphas = np.array(self.forward(x, normalize=True))
-          betas = np.array(self.backward(x, normalize=True))
-          c = (alphas * betas)[1:]
-          for t in range(len(list(c))):
-            b = c[t] / np.sum(c[t])
-            O_col += b
-            if (M - 1 > t):
-              A_col += b
-            for i in range(self.L):
-              temp_O[i][x[t]] += b[i]
-          for t in range(1, M):
-            for a in range(self.L):
-             for b in range(self.L):
-                x_state[t][a][b] += alphas[t][a] * self.A[a][b]
-                betas[t + 1][b] = self.O[b][x[t]]
-          for x_state_i in x_state[1:]:
-            temp_A += x_state_i/np.sum(x_state_i) 
-        temp_A /= A_col[:,None]
-        temp_O /= O_col[:,None]
-        self.A = temp_A
-        self.O = temp_O
-  </pre>
+<code style="color:aqua">def</code> unsupervised_learning(<code style="color:aqua">self</code>, X, N_iters):<br>
+<div class="single_indent">bar = progressbar.ProgressBar(max_value=N_iters)</div>
+<div class="single_indent"><code style="color:orange">for</code> iter <code style="color:orange">in range</code>(N_iters):</div>
+<div class="double_indent">bar.update(iter)</div>
+<div class="double_indent">temp_A = np.zeros((<code style="color:aqua">self</code>.L, <code style="color:aqua">self</code>.L))</div>
+<div class="double_indent">temp_O = np.zeros((<code style="color:aqua">self</code>.L, <code style="color:aqua">self</code>.D))</div>
+<div class="double_indent">A_col = np.zeros(<code style="color:aqua">self</code>.L)</div>
+<div class="double_indent">O_col = np.zeros(<code style="color:aqua">self</code>.L)</div>
+<div class="double_indent"><code style="color:orange">for</code> x <code style="color:orange">in</code> X:</div>
+<div class="triple_indent">M = <code style="color:red">len</code>(x)</div>
+<div class="triple_indent">x_state = np.zeros((M, <code style="color:aqua">self</code>.L, <code style="color:aqua">self</code>.L))</div>
+<div class="triple_indent">alphas = np.array(<code style="color:aqua">self</code>.forward(x, normalize=<code style="color:magenta">True</code>))</div>
+<div class="triple_indent">betas = np.array(<code style="color:aqua">self</code>.backward(x, normalize=<code style="color:magenta">True</code>))</div>
+<div class="triple_indent">c = (alphas * betas)[1:]</div>
+<div class="triple_indent"><code style="color:orange">for</code> t <code style="color:orange">in range</code>(<code style="color:red">len</code>(<code style="color:red">list</code>(c))):</div>
+<div class="quadruple_indent">b = c[t] / np.<code style="color:red">sum</code>(c[t])</div>
+<div class="quadruple_indent">O_col += b</div>
+<div class="quadruple_indent">if (M - 1 > t):</div>
+<div class="pentaple_indent">A_col += b</div>
+<div class="quadruple_indent"><code style="color:orange">for</code> i <code style="color:orange">in range</code>(<code style="color:aqua">self</code>.L):</div>
+<div class="pentaple_indent">temp_O[i][x[t]] += b[i]</div>
+<div class="triple_indent"><code style="color:orange">for</code> t <code style="color:orange">in range</code>(1, M):</div>
+<div class="quadruple_indent"><code style="color:orange">for</code> a <code style="color:orange">in range</code>s(<code style="color:aqua">self</code>.L):</div>
+<div class="pentaple_indent"><code style="color:orange">for</code> b <code style="color:orange">in range</code>(<code style="color:aqua">self</code>.L):</div>
+<div class="hexaple_indent">x_state[t][a][b] += alphas[t][a] * <code style="color:aqua">self</code>.A[a][b]</div>
+<div class="hexaple_indent">betas[t + 1][b] = <code style="color:aqua">self</code>.O[b][x[t]]</div>
+<div class="triple_indent"><code style="color:orange">for</code> x_state_i <code style="color:orange">in</code> x_state[1:]:</div>
+<div class="quadruple_indent">temp_A += x_state_i/np.<code style="color:orange">sum</code>(x_state_i)</div>
+<div class="double_indent">temp_A /= A_col[:,<code style="color:magenta">None</code>]</div>
+<div class="double_indent">temp_O /= O_col[:,<code style="color:magenta">None</code>]</div>
+<div class="double_indent"><code style="color:aqua">self</code>.A = temp_A</div>
+<div class="double_indent"><code style="color:aqua">self</code>.O = temp_O</div>
 </div>
 </code>
 <br>
@@ -831,17 +837,15 @@ We then use these above algorithms to determine the probabilities of forecasted 
 
   <div class="code_blocks">
   <code>
-  <pre>
-    def generate_emission(self, M):
-        emission = []
-        states = []
-        new_state = np.random.choice(self.L, p=self.A_start)
-        for i in range(M):
-          states.append(new_state)
-          emission.append(np.random.choice(self.D, p=self.O[new_state]))
-          new_state = np.random.choice(self.L, p=self.A[new_state])
-        return emission, state
-  </pre>
+<code style="color:aqua">def</code> generate_emission(<code style="color:aqua">self</code>, M):<br>
+<div class='single_indent'>emission = []</div>
+<div class='single_indent'>states = []</div>
+<div class='single_indent'>new_state = np.random.choice(<code style="color:aqua">self</code>.L, p=<code style="color:aqua">self</code>.A_start)</div>
+<div class='single_indent'><code style="color:orange">for</code> i <code style="color:orange">in range</code>(M):</div>
+<div class='double_indent'>states.append(new_state)</div>
+<div class='double_indent'>emission.append(np.random.choice(<code style="color:aqua">self</code>.D, p=<code style="color:aqua">self</code>.O[new_state]))</div>
+<div class='double_indent'>new_state = np.random.choice(<code style="color:aqua">self</code>.L, p=<code style="color:aqua">self</code>.A[new_state])</div>
+<div class='single_indent'><code style="color:aqua">return</code> emission, state</div>
   </code>
 </div>
 
@@ -852,12 +856,10 @@ Similarly, we use the forward and backward (or the forward-backward) algorithm t
 
   <div class="code_blocks">
 <code>
-<pre>
-    def probability_alphas(self, x):
-        alphas = self.forward(x)
-        prob = sum(alphas[-1])
-        return prob
-</pre>
+<code style="color:aqua">def</code> probability_alphas(<code style="color:aqua">self</code>, x):<br>
+<div class='single_indent'>alphas = <code style="color:aqua">self</code>.forward(x)</div>
+<div class='single_indent'>prob = <code style="color:red">sum</code>(alphas[-1])</div>
+<div class='single_indent'><code style="color:aqua">return</code> prob</div>
 </code>
 </div>
 
@@ -865,12 +867,11 @@ Similarly, we use the forward and backward (or the forward-backward) algorithm t
 
 <div class="code_blocks">
 <code>
-<pre>    def probability_betas(self, x):
-        betas = self.backward(x)
-        prob = sum([betas[1][j] * self.A_start[j] * self.O[j][x[0]] \
-                    for j in range(self.L)])
-        return prob
-</pre>
+<code style="color:aqua">def</code> probability_betas(<code style="color:aqua">self</code>, x):<br>
+<div class='single_indent'>betas = <code style="color:aqua">self</code>.backward(x)</div>
+<div class='single_indent'>prob = <code style="color:red">sum</code>([betas[1][j] * <code style="color:aqua">self</code>.A_start[j] * <code style="color:aqua">self</code>.O[j][x[0]] \</div>
+<div class='triple_indent'><code style="color:orange">for</code> j <code style="color:orange">in</code> <code style="color:orange">range</code>(<code style="color:aqua">self</code>.L)])</div>
+<div class='single_indent'><code style="color:aqua">return</code> prob</div>
 </code>
 </div>
 
