@@ -217,8 +217,8 @@ if (devtools.isOpen) {
   top: 25%; /* Position text in the middle */
   left: 50%; /* Position text in the middle */
   transform: translate(-50%, -50%); /* Position text in the middle */
-  mix-blend-mode: screen; /* This makes the cutout text possible */
-  font-family: "Oswald", sans-serif;
+/*  mix-blend-mode: screen;  This makes the cutout text possible 
+*/  font-family: "Oswald", sans-serif;
   text-shadow: 3px 3px 3px #ababab;
 }
 
@@ -240,43 +240,173 @@ if (devtools.isOpen) {
   position: relative; /* Needed to position the cutout text in the middle of the image */
   height: 70%; /* Some height */
 }
+
+  .single_indent{
+  text-indent: 50px;
+}
+.double_indent{
+  text-indent: 100px;
+}
+.triple_indent{
+  text-indent: 150px;
+}
+
+.quadruple_indent{
+  text-indent: 200px;
+}
+
+.pentaple_indent{
+  text-indent: 250px;
+}
+
+.hexaple_indent{
+  text-indent: 300px;
+}
 </style>
+
+
 
 <div class="image-container">
   <div class="text">Showing that the VC-dimension is \(\Sigma_3^P\)-complete</div>
 </div>
 
 
-
 <div class="w3-row w3-padding">
-  <div class="w3-col l7 s12" style="float:none !important; margin:auto; position:relative; z-index:10; margin-top:-10%;">
+  <div class="w3-col l9 s12" style="float:none !important; margin:auto; position:relative; z-index:10; margin-top:-10%;">
     <div class="w3-container w3-white w3-margin w3-padding-large">
       <div class="w3">
 <p> 
+The <strong>VC (Vapnik–Chervonenkis) dimension</strong> is a measure of complexity of a set of functions that can be learned by a simple binary classification algorithm. To define it more formally, we need the concept of <i>shattering</i>.<br><br>
+
+Given a collection \(S = S_1, ..., S_M\) of subsets of a finite set \(U\), the VC-dimension of \(S\) is the size of the largest set \(X \subseteq U\) such that for every \(X' \subseteq X\), there is an \(i\) for which \(S_i \cap X = X'\). For this \(i\), we can write that \(X\) is shattered by \(S\). So, a Boolean circuit \(C\) that computes a function \(f:\{0, 1\}^m \times \{0, 1\}^n \rightarrow \{0, 1\}\) succinctly represents a collection \(S\) of \(𝟐^𝒎\) subsets of \(𝑼 = \{𝟎, 𝟏\}^𝒏\) as follows: the set \(𝑺_𝒊\) consists of exactly those elements \(x\) for which \(𝑪(𝒊, 𝒙) = 𝟏\).<br><br>
+
+Using this notion, the language <strong>VC-DIMENSION</strong> is the set of pairs \((C, k)\) for which \(C\) represents a collection of subsets \(S\) whose VC dimension is at least \(k\). The purpose of this blog post is to show that this language has an intricate relationship with the polynomial hierarchy in computational complexity.<br><br> 
+
+To explain this better, I'm going to introduce some notation: <br>
+<div class="single_indent">Let \(\text{P}^A\) be the set of problems solvable in poly-time with a TM that uses an oracle for a problem in \(A\).</div>
+<div class="single_indent">Let \(\text{NP}^A\) be the set of problems solvable in nondeterministic poly-time with a TM that uses an oracle for a problem in \(A\).</div>
+<div class="single_indent">Let \(\text{coNP}^A\) be the set of problems solvable in co-nondeterministic poly-time with a TM that uses an oracle for a problem in \(A\).</div><br>
+
+Then, define \(\Delta_0^P := \Sigma_0^P := \prod_0^P:=P\), where \(P\) is the set of problems that can be solved in poly-time. Then, for all \(i \geq 0\), define:
+
+$$\Delta_{i+1}^P:=\text{P}^{\Sigma_i^P}$$
+$$\Sigma_{i+1}^P:=\text{NP}^{\Sigma_i^P}$$
+$$\prod_{i+1}^P:=\text{coNP}^{\Sigma_i^P}$$
+
+The result that I want to show here is that the VC-dimension is in \(\Sigma_3^P\), and that is the strongest form of problem in \(\Sigma_3^P\). So, any solution that can compute the VC-dimension can be used to compute any other problem in \(\Sigma_3^P\). The complexity-theoretic word for this phenomenon is <i>completenesss</i>. That is to say, the V-dimension is \(\Sigma_3^P\)-complete.
 
 </p>
       </div>
 
 
-<button class="collapsible"><strong>Lemma 1: Arguing that the VC-dimension is in \(\Sigma_3^P\).</strong></button>
+<button class="collapsible"><strong>Lemma 1: The size of the largest possible set \(X\) shattered by a collection of \(2^𝑚\) subsets is \(m\).</strong></button>
   <div class="content">
-<br><h5 style="text-align:center;"><u>Coming Soon!</u></h5>
+<br>
+By definition, \(X\) being shattered by a collection of sets \(S\) means that \(∀𝑋′ ⊆ 𝑋, ∃𝑖 s.t. 𝑆𝑖 ∩ 𝑋 = 𝑋′\). This is the same thing as writing that \(X\) is shattered by a collection of sets \(C\) if and only if
+$$𝑃(𝐴) = \{𝑋 ∩ 𝑆_𝑖 | S_i ∈ 𝐶\}$$
+However, since a set of size \(m\) has a power set of size \(2^𝑚\), no set of size \(> m\) will have \(2^𝑚\) possible subsets (a set of size \(m + 1\) will have a power set of size \(2^{𝑚+1} = 2 \cdot 2^𝑚 > 2^𝑚\)). Therefore, a set \(X\) that is shattered by a collection of \(2^𝑚\) subsets will have a size atmost \(m\). <br><br>
 
-<p><br><br></p>
-</div><br>
+
+Hence, the largest possible \(X\) will have size \(m\).
+
+<br><br></div><br>
 
 
 
-<button class="collapsible"><strong>Lemma 2: Arguing that the VC-dimension is \(\Sigma_3^P\)-complete through a reduction from \(QSAT_3\).</strong></button>
+<button class="collapsible"><strong>Lemma 2: Arguing that the VC-dimension is in \(\Sigma_3^P\).</strong></button>
   <div class="content">
-<br><h5 style="text-align:center;"><u>Coming Soon!</u></h5>
+    <br>
+A Boolean circuit \(C\) that computes a function \(f: \{0, 1\}^𝑚 × \{0, 1\}^𝑛 → \{0, 1\}\) succinctly represents a collection \(s\) of \(2^𝑚\) subsets of \(𝑈 = \{0, 1\}^𝑛\). However, if the Boolean circuit represents \(2^𝑚\) possible subsets, then (by lemma 1) the VC-DIMENSION of \(C\) is \(𝑚\).<br><br>
 
-<p><br><br></p>
-</div><br>
+Note then that by definition:
+
+$$Σ_3^𝑃 = \text{NP}^{Σ_2^P} = \text{NP}^{\text{NP}^{\Sigma_1^P}} = \text{NP}^{\text{NP}^{\text{NP}}}$$
+
+Therefore, we can now define instances of the 𝑉𝐶-dimension decision problem by phrasing the question as whether whether there is a “\(\{(𝐶, 𝑚) \text{ s.t. } VC(C) ≥ 𝑚\}\)”?” where \(C\) is the collection of circuits which succinctly represent the collection of subsets \(S\).<br><br>
+
+
+The “yes” instance (using the \(NP^{NP^{NP}}\) notation) of the VC-dimension problem would then be:
+
+$$\text{VC−DIMENSION}=\{(𝐶,𝑚): ∃X,X≥m \text{ s.t. }∀X' ⊆𝑋,∃𝑖\text{ s.t. }Si∩𝑋=𝑋'\}$$
+$$\text{VC−DIMENSION}=\{(𝐶,𝑚):∃X,|X|≥m \text{ s.t. }∀X' ⊆𝑋,∃𝑖\text{ s.t. }∀x∈X',C(i,x)=1\}$$
+
+Since every certificate would also need a certificate which would in turn need a proof of membership (just by the nature of this representation), where \(i, X, X'\) are polynomially large in \(m\), the nondeterminism can just act on every subset knowing that each subset would be polynomially large since \(𝑝𝑜𝑙𝑦 (𝑝𝑜𝑙𝑦(𝑝𝑜𝑙𝑦(𝑚))) ∈ 𝑝𝑜𝑙𝑦(𝑚)\).<br><br>
+
+Therefore, we can decide a language in polynomial time since atleast one of the (polynomially long) computation paths would lead to an “ACCEPT” state if it is a “yes” instance and none of the (polynomially long) computation paths would lead to a “REJECT” state if it is a “no” instance.<br><br>
+
+Therefore, we have that:
+
+$$\text{VC-DIMENSION} ∈ \Sigma_3^P$$
+
+QED.
+
+<br><br></div><br>
 
 
 
-    </div>
+<button class="collapsible"><strong>Lemma 3: Arguing that the VC-dimension is \(\Sigma_3^P\)-complete through a reduction from \(QSAT_3\).</strong></button>
+  <div class="content">
+<br>
+Given an instance of VC-DIMENSION:
+
+$$\text{VC−DIMENSION}=\{(𝐶,𝑚):∃X,|X|≥m\text{ s.t. }∀X' ⊆𝑋,∃𝑖\text{ s.t. }∀x∈X',C(i,x)=1\}$$
+
+We can show that it is \(Σ_3𝑃\)-complete by reducing from an instance of \(𝑄𝑆𝐴𝑇_3\) which is known to be \(Σ_3^P\)-complete. Therefore, let an arbitrary instance of \(𝑄𝑆𝐴𝑇_3\) be:
+$$∃𝑥_1 ∀𝑥_2 ∃𝑥_3 \text{ s.t. } \varphi(𝑥_1,𝑥_2,𝑥_3)=1$$
+
+We then define the universe \(U\) as the set \(\{0, 1\}^\ell \times \{1, 2, 3, ... \ell\}\) s.t. \(∀𝑥_1, |𝑥_1| = \ell\), we define the following subset:
+$$𝑈_{𝑥_1} = \{𝑥_1\} \times \{1,2,3,...\ell\}$$
+
+Using this, we define the collection of sets, \(S\), succinctly represented by circuit \(C\) (note that the circuit would have to maintain this invariant \(∀𝑥_1,𝑥_2,𝑥_3\), as:<br><br>
+
+1) If \(𝜑(𝑥_1,𝑥_2,𝑥_3)=1\), then \(𝑆(𝑥_1,𝑥_2,𝑥_3)=\{𝑥_1\}×\{1,2,3,...\ell\},|𝑥1|=l\)<br>
+2) If \(𝜑(𝑥_1, 𝑥_2, 𝑥_3) = 0\), then \(𝑆(𝑥_1, 𝑥_2, 𝑥_3) = 𝜙\), where \(𝜙\) is the empty set (note that we don’t need to
+address this case here since \(𝜑(𝑥_1,𝑥_2,𝑥_3) = 0\) should really just do nothing, hence the empty set will suffice), where the name of each set is \((𝑥_1, 𝑥_2, 𝑥_3)\).<br><br>
+
+We now define the reduction function \(f\):<br><br>
+
+<div class="single_indent"><strong>Inputs</strong>: A set named \((𝑥_1, 𝑥_2, 𝑥_3)\) and an element, \(a = (𝑥'_1,𝑥_2)\) of a potential subset \(𝑈_{x_1}\).</div><br>
+<div class="single_indent"><strong>Function</strong>: The isomorphism between the VC-DIMENSION instance \((𝐶,\ell)\) and \(𝑄𝑆𝐴𝑇_3\) instance \(𝜑(𝑥_1,𝑥_2,𝑥_3)\).</div><br>
+<div class="single_indent"><strong>Deciding Procedure</strong>: We return “ACCEPT” if \(𝑎 ∈ 𝑆(𝑥_1, 𝑥_2, 𝑥_3)\) and “NO” if \(𝑎 ∉ 𝑆(𝑥_1, 𝑥_2, 𝑥_3)\).</div><br>
+<div class="single_indent">Therefore, we do the following:</div><br>
+<div class="double_indent">If \((𝜑(𝑥_1, 𝑥_2, 𝑥_3) = 1) ∧ (a ∈ (x_1, \ell))\), return “ACCEPT”.</div><br>
+<div class="double_indent">Else, return “REJECT”.</div><br>
+
+Finally, the onus of the proof is to show that “yes” instances of \(𝑄𝑆𝐴𝑇_3\) maps to “yes” instances of the VC-
+DIMENSION decision problem and vice versa, and that “no” instances of \(𝑄𝑆𝐴𝑇_3\) maps to “no” instances of the
+VC-DIMENSION decision problem and vice versa:<br><br>
+
+To show that “yes” maps to “yes”:<br>
+<div class="single_indent">To show that “yes” \(𝑄𝑆𝐴𝑇_3\) instances map to “yes” VC-DIMENSION instances:</div>
+<div class="double_indent">Given a “yes” instance of \(𝑄𝑆𝐴𝑇_3\), \(∃𝑥_1 ∀𝑥_2 ∃𝑥_3 \text{ s.t. } 𝜑(𝑥_1, 𝑥_2 , 𝑥_3 ) = 1\), the set \(𝑆(𝑥_1 , 𝑥_2 , 𝑥_3 ) = \{x_1\}\times x_2\). <br>
+<div class="double_indent">Recall that the initial subset was:</div>
+$$𝑈_{𝑥_1} =\{𝑥_1\}\times\{1,2,3,...\ell\}$$
+<div class="double_indent">However, since \(𝑆(𝑥_1, 𝑥_2, 𝑥_3) = \{𝑥_1\} \times 𝑥_2\) and \(𝜑(𝑥_1, 𝑥_2, 𝑥_3) = 1\), the VC dimension of \(S\) would be \(≥ 𝑥_2 = \ell\).</div>
+<div class="double_indent">Hence, the VC dimension of \(S\) that is represented by circuit \(C\) would be \(≥ \ell\), which satisfies the decision problem.</div>
+<div class="double_indent">QED.</div><br>
+
+<div class="single_indent">To show that “yes” VC-DIMENSION instances map to “yes” \(𝑄𝑆𝐴𝑇_3\) instances:<br>
+<div class="double_indent">Given a “yes” instance of VC-DIMENSION \((𝐶, 𝑚)\), then the set \(S\) represented by the circuit \(C\) has a size atleast \(m\).</div>
+<div class="double_indent">Therefore, \(∃𝑋, |𝑋| ≥ 𝑚 \text{ s.t. } 𝑆 \text{ shatters } 𝑋\). It follows then by definition of shattering that \(∃ 𝑘 \text{ s.t. } 𝑋 ∈ 𝑈_𝑘\).</div>
+<div class="double_indent">However, this can only happen if \(∀𝑥_2, {𝑥_1} \times 𝑥_2 ∈ 𝑆\). This is the same thing as writing:</div>
+$$∃𝑥_1 ∀𝑥_2 ∃𝑥_3 s.t.𝜙(𝑥_1,𝑥_2,𝑥_3) = 1,$$
+<div class="double_indent">which is a “yes” instance of \(𝑄𝑆𝐴𝑇_3\).<br>
+<div class="double_indent">QED.<br><br>
+
+
+To show that “no” maps to “no”, the contrapositive argument holds since a “yes” instance of the VC-
+DIMENSION problem being reduced to a “yes” instance of \(𝑄𝑆𝐴𝑇_3\) implies that “no” instances of \(𝑄𝑆𝐴𝑇_3\) can be
+reduced to “no” instances of VC-DIMENSION, and a “yes” instance of \(𝑄𝑆𝐴𝑇_3\) being reduced to a “yes” instance of VC-DIMENSION implies that a “no” instance of VC-DIMENSION can be reduced to a “no” instance of \(QSAT_3\).<br><br>
+
+
+Since we have shown that “yes” maps to “yes” and “no” maps to “no”, we have that \(∃\) a reduction function from instances of \(𝑄𝑆𝐴𝑇_3\) to instances of the VC-DIMENSION problem and that \(∃\) a reduction function from
+instances of the VC-DIMENSION problem to instances of \(𝑄𝑆𝐴𝑇_3\). Additionally, since \(𝑄𝑆𝐴𝑇_3\) is known to be \(Σ_3^P\)-complete, it follows then that 𝑉𝐶-DIMENSION is also \(Σ_3^𝑃\)-complete.<br><br>
+QED.
+
+
+<br><br></div><br>
+
+</div></div></div></div><br></div>
   </div>
 </div>
 
