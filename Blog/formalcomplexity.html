@@ -165,6 +165,28 @@ if (devtools.isOpen) {
     html {
       scroll-behavior: smooth;
     }
+
+  .single_indent{
+  text-indent: 50px;
+}
+.double_indent{
+  text-indent: 100px;
+}
+.triple_indent{
+  text-indent: 150px;
+}
+
+.quadruple_indent{
+  text-indent: 200px;
+}
+
+.pentaple_indent{
+  text-indent: 250px;
+}
+
+.hexaple_indent{
+  text-indent: 300px;
+}
     </style>
 
 <div class="background_image">
@@ -211,14 +233,14 @@ if (devtools.isOpen) {
   font-weight: bold;
   margin: 0 auto; /* Center the text container */
   padding: 10px;
-  width: 60%;
+  width: 65%;
   text-align: center; /* Center text */
   position: absolute; /* Position text */
   top: 25%; /* Position text in the middle */
   left: 50%; /* Position text in the middle */
   transform: translate(-50%, -50%); /* Position text in the middle */
-  mix-blend-mode: screen; /* This makes the cutout text possible */
-  font-family: "Oswald", sans-serif;
+/*  mix-blend-mode: screen;  This makes the cutout text possible 
+*/  font-family: "Oswald", sans-serif;
   text-shadow: 3px 3px 3px #ababab;
 }
 
@@ -243,27 +265,240 @@ if (devtools.isOpen) {
 </style>
 
 <div class="image-container">
-  <div class="text">Formal Complexity: Showing that \(L_n(\theta) = n^2\)</div>
+  <div class="text">The Quadratic Space Complexity of the Parity Function:<br> Showing that \(L_n(\bigoplus_n) = n^2\)</div>
 </div>
 
 
 
 <div class="w3-row w3-padding">
-  <div class="w3-col l7 s12" style="float:none !important; margin:auto; position:relative; z-index:10; margin-top:-10%;">
+  <div class="w3-col l9 s12" style="float:none !important; margin:auto; position:relative; z-index:10; margin-top:-10%;">
     <div class="w3-container w3-white w3-margin w3-padding-large">
       <div class="w3">
 <p> 
+The parity function on \(n\) inputs is defined as \(\bigoplus\limits_n (x_1, ..., x_n) = x_1 \oplus ... \oplus x_n\). Here, \(\oplus\) is the XOR function which is just the bitwise addition of bits modulo \(2\). So, for instance:
+$$1 \oplus 1 = 0$$
+$$0 \oplus 1 = 1$$
+$$1 \oplus 0 = 1$$
+$$0 \oplus 0 = 0$$
+Back to topic, \(\bigoplus\limits_n (x_1, ..., x_n)\) is basically the \(\text{XOR}\) of the \(n\) variables \(x_1, ..., x_n\). Intuitively, it is \(1\) if there are an odd number of \(1\)s in the inputs, and \(0\) otherwise. Next, to introduce some notation, for any Boolean function \(f\), let \(L(f)\) denote the leaf-size of the smallest boolean formula consisting exclusively of its inputs \(x_1, ..., x_n\) and the operations \(\wedge, \vee, \neg\).<br><br>
 
-</p>
+The purpose of this blog post is to portray a pretty cool result that the leaf-size of the parity function on \(n\) inputs is \(n^2\). It's really neat that the leaf-size of the parity function is quadratic in the size of inputs, and it's also quite unexpected. The following proof goes in stages. We first prove an upper bound on this result and then use the notion of formal complexity (through the Krapchenko function) to prove a lower bound to show that this quadratic result is tight.
+<br><br>
       </div>
 
 
-<button class="collapsible"><strong>Coming Soon!</strong></button>
+<button class="collapsible"><strong>Lemma 1: \(L(\bigoplus_n)\leq n^2\) when \(n\) is a power of 2, where \(L\) is the leaf-size of the smallest formula that computes \(\bigoplus_n (x_1, ..., x_n)\)</strong></button>
   <div class="content">
-<br><h5 style="text-align:center;"><u>Coming Soon!</u></h5>
+<br>
+Given that \(\bigoplus\limits_n(x_1, x_2, ..., x_n) = x_1 \oplus ... \oplus x_n\) and \(n = 2^k\), we can show that \(L(\bigoplus_n) \leq n^2\) by mathematical induction on the power that \(n\) is raised to.<br><br>
+
+<u>Base Case</u>: \(k = 0 \Rightarrow n = 2^0 = 1\):<br>
+<div class="single_indent">To show that \(L(\bigoplus_1) \leq 1\), note that the leaf-size of the smallest formula that computes \(\bigoplus_1\) is just \(1\).</div>
+<div class="single_indent">This is because the formula would just be composed of a single literal. Hence shown.</div>
+
+<br>
+
+<u>Assumptive Case</u>: We now assume that this formula is true for \(k < p\):<br>
+<div class="single_indent">Therefore, \(L(\bigoplus_{2k}) \leq 2^k\), \(\forall k < p\) is now assumed to be true.</div><br>
+
+<u>Inductive Case</u>: To verify that the formula still holds true for \(k = p\):<br>
+<div class="single_indent">We need to show that \(L(\bigoplus_{2^p}) \leq 2^p\). To do this, we note that \(L(\bigoplus_{2^p}) = L(\bigoplus_{2^{p/2}} \oplus \bigoplus_{2^{p/2}})\). So, let</div>
+$$A = (x_1 \oplus ... \oplus x_p), \quad B = (x_{p+1} \oplus ... \oplus x_p)$$
+<div class="single_indent">Thus, \(L(\bigoplus_{2^p}) = L(A\oplus B)\).</div><br>
+
+<div class="single_indent">Since A and B are formulas of size \(p\), we have that the leaf sizes of \(A\) and \(B\) are \(\leq (\frac{p}{2})^2\) (by the assumptive case).</div>
+<div class="single_indent">So, we can compute \(A \oplus B\) through the following Boolean formula (which follows by definition):</div>
+$$A \oplus B = (A \wedge \neg B) \vee (\neg A \wedge B)$$
+<div class="single_indent">Then, since this computation involves four of these leaves, we have that \(L(\bigoplus_{2^p}) = 4L(\bigoplus_{2^{p/2}}) \leq 4(\frac{p}{2})^2 \leq p^2\).</div><br>
+
+<u>Conclusive Case</u>: We know that if the formula is true for \(n^k\), then it is true for \(n^{k+1}\), for \(k \in \{\mathbb{Z}_+ \cup 0\}\). From the base case, we know that it is true when \(k = 0\) or \(n = 1\). Hence, the inequality is true \(\forall k, k \in \{\mathbb{Z}_+ \cup 0\}\).<br><br>
+
+Therefore, we conclude that \(L(\bigoplus\limits_n)\leq n^2\), when \(n\) is a power of 2.<br><br>
+
+</div><br>
+
+<b>Definition 1:</b> Formal Complexity Measures:<br>
+A formal complexity measure (FC) is a function that maps Boolean functions on \(n\) variables to the natural numbers \(\mathbb{N}\), and satisfy the following properties:<br>
+<div class="single_indent">\(1)\) \(FC(x_i) = 1\) for \(1 \leq i \leq n\)</div>
+<div class="single_indent">\(2)\) \(FC(f) = FC(\neg f)\) for all \(f\)</div>
+<div class="single_indent">\(3)\) \(FC(f \wedge g) \leq FC(f) + FC(g)\) for all \(f, g\)</div>
+<br>
+<br>
+<button class="collapsible"><strong>Lemma 2: For every formal complexity measure \(FC\), we have that \(FC(f) \leq L(f)\).</strong></button>
+  <div class="content"><br>
+We can show that \(FC(f) \leq L(f)\) for optimal formulas in \(f\) by using mathematical induction on \(L(f)\). Note that<br><br>
+
+<u>Base Case</u>: \(L(f) = 1\)
+<div class="single_indent">𝐿(𝑓) = 1 implies that 𝑓 is a literal (a formula of size 0). By definition, we have that \(𝐿(𝑥_1) = 1\). </div>
+<div class="single_indent">Note then that from property 1, \(𝐹𝐶(𝑥_1) = 1\) and by extension from property 2, \(𝐹𝐶(¬𝑥_1) = 𝐹𝐶(𝑥_1) = 1\).</div>
+<div class="single_indent">Therefore, for literals \(𝐹𝐶(𝑓) = 𝐿(𝑓) = 1\), so \(𝐹𝐶(𝑓) ≤ 𝐿(𝑓)\) is satisfied. This satisfies the base case.</div><br>
+
+
+<u>Assumptive Case</u>: Assume that \(FC(f) \leq L(f)\) for optimal formulas for \(f\).<br><br>
+
+<u>Inductive Case</u>: For Boolean functions that act on optimal formulas to form more complex formulas:<br><br>
+
+<div class="single_indent">Given the previous assumption, we can now consider operations that act on optimal Boolean functions.</div>
+<div class="single_indent">Note that we only need to consider ∧,∨ operations, since negations can be transferred down to the leaves.</div>
+<div class="single_indent">In the leaves, the literal on the corresponding leaves is negated the appropriate number of times.</div><br>
+
+
+<div class="single_indent">Therefore, for \(\wedge\) operations that act on optimal formulas \(A\) and \(B\), let a Boolean function be \(f = A \wedge B\).</div>
+<div class="single_indent">Then, the leaf size of the full formula will be:</div>
+$$L(A \wedge B) = L(A) + L(B)$$
+<div class="single_indent">Since \(FC(A) \leq L(A)\) and \(FC(B) \leq L(B)\) from the assumptive case, we have:</div>
+$$L(A \wedge B) \geq FC(A) + FC(B)$$
+<div class="single_indent">From property 3, we have that \(FC(A) + FC(B) = FC(A \wedge B)\). Therefore, for \(\wedge\) operations,</div>
+$$L(A\wedge B) \geq FC(A\wedge B) \Rightarrow FC(f) \leq L(f)$$<br>
+<div class="single_indent">Then, for \(\vee\) operations that act on optimal formulas \(A\) and \(B\), let a Boolean function be \(f = A \vee B\).</div>
+<div class="single_indent">Then, using De Morgan’s law: \((A\vee B) = \neg(\neg A \wedge \neg B)\). So, </div>
+$$𝐹𝐶(𝐴 ∨ 𝐵) = 𝐹𝐶(¬(¬𝐴 ∧ ¬𝐵))$$
+
+$$\text{From property 2: } 𝐹𝐶(¬(¬𝐴 ∧ ¬𝐵)) = 𝐹𝐶(¬𝐴 ∧ ¬𝐵) \Rightarrow 𝐹𝐶(𝐴 ∨ 𝐵) = 𝐹𝐶(¬𝐴 ∧ ¬𝐵)$$
+
+$$\text{From property 3: } 𝐹𝐶(¬𝐴 ∧ ¬𝐵) = 𝐹𝐶(¬𝐴) + 𝐹𝐶(¬𝐵) \Rightarrow 𝐹𝐶(𝐴 ∨ 𝐵) = 𝐹𝐶(¬𝐴) + 𝐹𝐶(¬𝐵)$$
+
+$$\text{From property 2: } 𝐹𝐶(¬𝐴) = 𝐹𝐶(𝐴), 𝐹𝐶(¬𝐵) = 𝐹𝐶(𝐵) \Rightarrow 𝐹𝐶(𝐴 ∨ 𝐵) = 𝐹𝐶(𝐴) + 𝐹𝐶(𝐵)$$
+
+<div class="single_indent">Then, from the assumptive case we have that:</div>
+$$𝐹𝐶(𝐴) ≤ 𝐿(𝐴), 𝐹𝐶(𝐵) ≤ 𝐿(𝐵)$$
+<div class="single_indent">Therefore, we have that:</div>
+$$𝐹𝐶(𝐴 ∨ 𝐵) ≤ 𝐿(𝐴) + 𝐿(𝐵)$$
+<div class="single_indent">Additionally, note that \(L(A) + L(B) = L(A\vee B)\). Therefore,</div>
+$$𝐹𝐶(𝐴 ∨ 𝐵) ≤ 𝐿(𝐴 ∨ 𝐵) → 𝐹𝐶(𝑓) ≤ 𝐿(𝑓)$$
+<div class="single_indent">Thus, the inductive case is shown.</div><br><br>
+
+
+Therefore, we have now shown that \(FC(f) \leq L(f)\) is true for Boolean functions that act on optimal expressions, provided that \(FC(f) \leq L(f)\) is true for optimal expressions. Since we already know that the inequality is true for all literals (and their negations), it is then also true that for any optimal expression that builds on literals (every expression has some leaf-literals). Therefore, for every complexity measure \(FC\), we have that \(FC(f) \leq L(f)\).
+</div><br>
+
+<b>Definition 2:</b> Krapchenko Formal Complexity Measures: Let \(A, B \subseteq \{0, 1\}^n\). <br>
+Let \(H(A, B) = \{(a, b): a \in A, b \in B,\) and a and b differ in exactly 1 coordinate\(\}\). Define 
+$$ K(f) = \max\limits_{A \subseteq f^{-1}(1), B \subseteq f^{-1}(0)} \frac{|H(A, B)|^2}{|A||B|}$$
+
+<br>
+<button class="collapsible"><strong>Lemma 3: Proving that \(K\) is a formal complexity measure.</strong></button>
+  <div class="content">
+<br>
+To show that K is a formal complexity measure, we need to show that for some arbitrary Boolean formula \(f\), that each of the three properties defined in Definition 1 are valid.<br><br>
+
+<u>Property 1</u>: To show that \(K(x_i) = 1, \forall i, 1 \leq i \leq n\)
+
+<div class="single_indent">We show that when \(f\) is a literal such that \(f(x) = x_i\), then \(K(f(x)) = K(x_i) = 1\). Then, define the following:</div>
+
+$$A = \{0^n\}, \quad B = \{0^{n-1}10^{i-1}\}$$
+
+<div class="single_indent">Since \(A\) and \(B\) differ in exactly \(1\) coordinate by our construction of \(A\) and \(B\),</div>
+
+$$|𝐻(𝐴, 𝐵)| = |𝐴| = |𝐵| = 1$$
+
+$$|𝐻(𝐴, 𝐵)|^2 ≤ |𝐴||𝐵|$$
+
+$$K(x_i) = \max\limits_{A \subseteq x_i^{-1}(1), B\subseteq x_i^{-1}(0)} \frac{|H(A, B)|^2}{|A||B|} \leq 1 \quad \text{(an upper bound of 1)}$$
+
+<div class="single_indent">Additionally, for sets \(A \subseteq f^{-1}(0), B\subseteq f^{-1}(1)\),</div>
+
+$$\frac{|𝐻(𝐴,𝐵)|}{|A|} \leq 1 \text{ and } \frac{|𝐻(𝐴,𝐵)|}{|B|} \leq 1$$
+
+$$K(x_i) = \max\limits_{A \subseteq x_i^{-1}(1), B\subseteq x_i^{-1}(0)} \frac{|H(A, B)|^2}{|A||B|} \geq 1 \quad \text{(a lower bound of 1)}$$
+
+<div class="single_indent">Since we have that \(K(x_i) \geq 1\) and \(K(x_i) \leq 1\), we have that \(K(x_i) = 1\).</div>
+
+<br><br>
+<u>Property 2</u>: To show that \(𝐾(𝑓) = 𝐾(¬𝑓)\):<br>
+
+<div class="single_indent">Note that we can simply interchange A and B since the formula would not change:</div>
+
+$$K(f) = \max\limits_{A \subseteq f^{-1}(1), B \subseteq f^{-1}(0)} \frac{|H(A, B)|^2}{|A||B|} = \max\limits_{B \subseteq f^{-1}(1), A \subseteq f^{-1}(0)} \frac{|H(A, B)|^2}{|A||B|} = K(\neg f)$$
+
+<div class="single_indent">Therefore, negating the boolean formula would not change the output. Hence, \(𝐾(𝑓) = 𝐾(¬𝑓)\).</div>
+
+<br><br>
+
+<u>Property 3</u>: To show that \(𝐾(𝑓 ∧ 𝑔) ≤ 𝐾(𝑓) + 𝐾(𝑔)\):<br>
+
+<div class="single_indent">Let \(A\) and \(B\) be subsets maximizing the expression that defines \(𝐾(𝑓 ∧ 𝑔)\).</div>
+<div class="single_indent">Next, partition \(𝐴\) into \(𝐴_𝑓 ⊆ 𝑓^{−1}(1)\) and \(𝐴_𝑔 ⊆ 𝑔^{−1}(1)\). Then,</div>
+
+$$𝐻 ( 𝐴 , 𝐵 ) = 𝐻 ( 𝐴_𝑓 , 𝐵 ) \cup 𝐻 ( 𝐴_𝑔 , 𝐵 )$$
+
+<div class="single_indent">Note that</div>
+
+$$\frac{|H(A_f, B_f)|^2}{|A_f||B_f|} \leq K(f), \quad \text{where }B_f \subseteq f^{-1}(0)$$
+
+$$\frac{|H(A_g, B_g)|^2}{|A_g||B_g|} \leq K(g), \quad \text{where }B_g \subseteq g^{-1}(0)$$
+
+<div class="single_indent">Therefore, the onus of this proof is to show that:</div>
+
+$$K(f\wedge g) = \frac{|H(A_f, B_f) + H(A_g, B_g)|^2}{(|A_f| + |A_g|)|B|} \leq \frac{|H(A_f, B_f)|^2}{|A_f||B|} + \frac{|H(A_g, B_g)|^2}{|A_g||B|}$$
+
+<div class="single_indent">To show this, we try to reduce the above expression to a known statement:</div>
+
+$$\frac{|H(A_f, B_f) + H(A_g, B_g)|^2}{(|A_f| + |A_g|)|B|} \leq \frac{|H(A_f, B_f)|^2}{|A_f||B|} + \frac{|H(A_g, B_g)|^2}{|A_g||B|}$$
+
+<div class="single_indent">Multiplying both sides by \((|𝐴_𝑓| + |𝐴_𝑔|)|𝐴_𝑓||𝐴_𝑔||𝐵|\):</div>
+
+$$|𝐻(𝐴_f, 𝐵_f) + 𝐻(𝐴_g, 𝐵_g)|^2 |𝐴_f||𝐴_g| ≤ (|𝐴_f|+ |𝐴_g|)|𝐴_f|(|𝐻(𝐴_f,𝐵_f)|^2 +|𝐻(𝐴_g,𝐵_g)|^2|𝐴_f|)$$
+
+<div class="single_indent">Expanding the terms out:</div>
+
+$$(𝐻(𝐴_f,𝐵_f)^2|𝐴_f||𝐴_g|+𝐻(𝐴_g,𝐵_g)^2|𝐴_f||𝐴_g|+2𝐻(𝐴_f,𝐵_f)𝐻(𝐴_g,𝐵_g)|𝐴_f||𝐴_g|)$$
+$$\leq |𝐻(𝐴_f ,𝐵-f )|^2|𝐴_f ||𝐴_f |+|𝐻(𝐴_f ,𝐵_f )|^2|𝐴_f ||𝐴_g |+|𝐻(𝐴_g ,𝐵_g )|^2|𝐴_g||𝐴_f| + |𝐻(𝐴_g,𝐵_g)|^2|𝐴_g||𝐴_g|$$
+
+<div class="single_indent">Subtracting congruent terms and taking everything to the RHS, we have:</div>
+
+$$0 ≤ |𝐻(𝐴_f ,𝐵_f )|^2|𝐴_f|2 +|𝐻(𝐴_g ,𝐵_g )|^2|𝐴_g|2 −2𝐻(𝐴_f ,𝐵_f )𝐻(𝐴_g ,𝐵_g )|𝐴_f ||𝐴_g |$$
+
+<div class="single_indent">Factorizing:</div>
+
+$$0 ≤ (|𝐻(𝐴_f , 𝐵_f )| |𝐴_f | − |𝐻(𝐴_g , 𝐵_g )| |𝐴_g | )^2$$
+
+<div class="single_indent">However, note that this is just the factorized form of \((𝑎 − 𝑏)^2 ≥ 0\), which is known to be true. Hence,</div>
+
+$$K(f\wedge g) = \frac{|H(A_f, B_f) + H(A_g, B_g)|^2}{(|A_f| + |A_g|)|B|}$$
+
+$$\frac{|H(A_f, B_f)|^2}{|A_f||B|} + \frac{|H(A_g, B_g)|^2}{|A_g||B|}$$
+
+$$≤ 𝐾(𝑓) + 𝐾(𝑔)$$
+
+Since we have shown that \(𝐾(𝑓)\) satisfies all \(3\) properties of formal complexity measures, we have that \(𝐾(𝑓)\) is a \(FC\) measure.
+
 
 <p><br><br></p>
 </div><br>
+
+
+<button class="collapsible"><strong>Lemma 4: Proving that \(L(\theta) \geq n^2\).</strong></button>
+  <div class="content">
+<br>
+
+Let \(A \subseteq \bigoplus_n^{-1}(0), B \subseteq \bigoplus_n^{-1}(1) \).
+<br><br>
+
+It follows then that \(∀𝑥\) s.t. \(\bigoplus_n(𝑥) = 0\), all the \(n\) neighbors will have parity \(1\), and
+\(∀𝑥 s.t. \bigoplus\limits_n(x) = 1\), all the \(n\) neighbors will have parity \(0\) in the Boolean formula. Therefore,<br>
+
+$$|𝐻(𝐴, 𝐵)| = \frac{𝑛(2^𝑛)}{2} = 2^{𝑛−1}𝑛$$
+<div class="single_indent">Additionally, we have that:</div>
+$$|𝐴| = |𝐵| = 2^{𝑛−1}$$
+<div class="single_indent">Therefore, from the Krapchenko’s formal complexity measure defined in part c, we have that:</div>
+$$𝐹𝐶(\bigoplus_n) = \frac{|𝐻(𝐴,𝐵)|^2}{|𝐴||𝐵|}$$
+$$=\frac{(2^{𝑛−1}𝑛)^2}{(2^{n-1})^2} = \frac{2^{2n-2}n^2}{2^{2n-2}} $$
+$$𝐹𝐶(\bigoplus\limits_𝑛)=n^2$$
+
+However, from part b, we know that
+
+$$𝐹𝐶(\bigoplus_𝑛) ≤ 𝐿(\bigoplus_𝑛)$$
+
+<div class="single_indent">Then, substituting our result that \(𝐹𝐶(\bigoplus_n) = 𝑛^2\) into the above inequality, we have
+that</div>
+$$𝐿 (\bigoplus_n) ≥ 𝑛^2 $$
+<div class="single_indent">Hence shown.</div>
+
+
+
+</div><br>
+Combining Lemma 1 (\(L(\bigoplus_n) \leq n^2\)) and Lemma 4 (\(L(\bigoplus_n) \geq n^2\)) gives us the result that \(L(\bigoplus_n) = n^2\).
 
 
     </div>
