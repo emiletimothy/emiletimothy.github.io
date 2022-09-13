@@ -217,7 +217,7 @@ if (devtools.isOpen) {
   top: 25%; /* Position text in the middle */
   left: 50%; /* Position text in the middle */
   transform: translate(-50%, -50%); /* Position text in the middle */
-  mix-blend-mode: screen; /* This makes the cutout text possible */
+  /*mix-blend-mode: screen;  This makes the cutout text possible */
   font-family: "Oswald", sans-serif;
   text-shadow: 3px 3px 3px #ababab;
 }
@@ -235,36 +235,132 @@ if (devtools.isOpen) {
 }
 
 .image-container {
-  background-image: url("blog_pics/100prisonersproblem.jpg"); /* The image used - important! */
+  background-image: url("blog_pics/randomness3.webp"); /* The image used - important! */
   background-size: cover;
   position: relative; /* Needed to position the cutout text in the middle of the image */
-  height: 70%; /* Some height */
+  height: 80%; /* Some height */
 }
 </style>
 
 <div class="image-container">
-  <div class="text">Using Permutations to Understand the 100 Prisoners Problem and its Variants
+  <div class="text">Using Permutations to Understand the 100 Prisoners Problem and its Variant
 </div>
 </div>
 
 
 
 <div class="w3-row w3-padding">
-  <div class="w3-col l7 s12" style="float:none !important; margin:auto; position:relative; z-index:10; margin-top:-10%;">
+  <div class="w3-col l9 s12" style="float:none !important; margin:auto; position:relative; z-index:10; margin-top:-10%;">
     <div class="w3-container w3-white w3-margin w3-padding-large">
       <div class="w3">
 <p> 
+In this entry, I'm going to describe the 100 prisoners problem and one of its cool variants. It's a surprisingly neat insight that discrete mathematics provides into the fields of probability and combinatorics. I'm going to start by introducing the problem (as it was spoken originally):<br><br>
+
+The director of a prison offers 100 death row prisoners, who are numbered from 1 to 100, a last chance. A room contains a cupboard with 100 drawers. The director randomly puts one prisoner's number in each closed drawer. The prisoners enter the room, one after another. Each prisoner may open and look into 50 drawers in any order. The drawers are closed again afterwards. If, during this search, every prisoner finds their number in one of the drawers, all prisoners are pardoned. If just one prisoner does not find their number, all prisoners die. Before the first prisoner enters the room, the prisoners may discuss strategy — but may not communicate once the first prisoner enters to look in the drawers. What is the prisoners' best strategy?
 
 </p>
       </div>
 
 
-<button class="collapsible"><strong>Coming Soon!</strong></button>
+<button class="collapsible"><strong>The Solution for the Main Rendition of the 100 Prisoners Problem</strong></button>
   <div class="content">
-<br><h5 style="text-align:center;"><u>Coming Soon!</u></h5>
+<br>
+If every prisoner randomly chooses \(50\) drawers and hedges their chances, the probability that a single prisoner finds their number is \(50%\). Since each prisoner chooses these drawers independently, the probability that every prisoner finds their number is \(\frac{1}{2^{100}} = 0.0000000000000000000000000000008124\), which is too small. This begs the question, is it the optimal strategy?<br><br>
 
-<p><br><br></p>
+A more optimal strategy is to note that these prisoners can use a deterministic strategy to decide which drawer to open, where prisoner \(N\) opens box \(N\) to reveal a number \(X_N\). They then open box \(X_N\) to reveal a number \(X_{X_N}\). They continue this procedure until they either find their number or exceed 50 tries. This way, the success of each prisoner is no longer independently distributed, since prisoner \(N\) is essentially ensuring that their cycle (which is a unique permutation cycle of notes) is deterministic and contains a box with number \(N\).<br><br>
+
+Specifically, the permutation of numbers to boxes is a permutation of the numbers from \(1\) to \(100\). The mathematical idea behind this strategy is that every permutation can be decomposed into disjoint cycles (cycles wiwthout any common elements). The prisoners will all be successful if the longest cycle of the permutation has a length atmost \(50\), and their collective probability of survival is equal to the probability that a random permutation of the numbers from \(1\) to \(100\) contains no cycle of length greater than \(50\). <br><br>
+
+To calculate this probability, note that any permutation of the numbers from \(1\) to \(100\) can contain at most one cycle of length \(\ell\) greater than \(50\), and that there are \({100 \choose \ell}\) ways to select \(\ell\) numbers from the \(100\) possible numbers for the prisoners, where these \(\ell\) numbers form the elements of the permutation cycle. Additionally, these numbers can be arranged in \((\ell-1)!\) ways since there are \(\ell\) permutations to represent different cycles of length \(\ell\), since permutations are invariant under cyclic shifts. The remaining numbers can then be arranged in \((100-\ell)!\) ways. Therefore, the number of permutations of these numbers with a cycle of length \(\ell>50\) is \({\binom {100}{l}} \cdot (l-1)! \cdot (100-l)! = \frac {100!}{l}\).<br><br>
+
+The probability, that a random permutation does not contain a cycle of length \(\ell\) greater than \(50\) can then be found by first calculating the probability that each permutation does contain a cycle of length \(50\): 
+
+$$\Pr[\text{survival}] = 1-{\frac {1}{100!}}\left({\frac {100!}{51}}+\ldots +{\frac {100!}{100}}\right)$$
+
+$$=1-\left({\frac {1}{51}}+\ldots +{\frac {1}{100}}\right)$$
+
+$$\approx 0.311827821$$
+
+Therefore, using the cycle-following strategy, the prisoners survive with a probability that is approximately \(\frac{1}{3}\).
+
 </div><br>
+
+
+__<br>
+
+Let's now try out another (weaker and not-so-obvious) version of the 100 Prisoners Problem now that relies on a somewhat different solution!<br><br>
+
+Alice, Bob and Charlie play a game with Bob and Charlie on one team and Alice on the other. There are 100 boxes, labelled 1 to 100, and 100 notes, again labelled 1 to 100. The game proceeds as follows:<br><br>
+– With Bob watching, Alice places one note in each box as she pleases.<br>
+– Bob is then allowed to pick two boxes and switch their notes. He may only do this once.<br>
+– Alice sees Bob’s move and then picks a number N between 1 and 100.<br>
+– Bob now leaves and Charlie enters without speaking. Alice tells Charlie the number N.<br>
+– Finally, Charlie may open 50 boxes to try and find the box with number N. If Charlie picks 50 boxes at random, they win with a 50% chance.<br><br>
+Show that there is a strategy by which they can always win, no matter how Alice plays.<br><br>
+
+
+<button class="collapsible"><strong>The Solution for the Variant of the 100 Prisoners Problem</strong></button>
+  <div class="content">
+<br>
+
+Before we define a strategy, we define a methodology to approach this scenario. Let the manner in which Charlie opens 50 boxes be defined by a sequence (inspired from a linked list structure) in which Charlie opens the box numbered \(N\) to find a note numbered \(X_N\). Charlie would then open the box numbered \(X_N\) to find a note number \(X_{X_N}\), and continue this process to \(X_{X_{X_N}}\), and so forth. Therefore, we have defined a method of traversing through the notes and boxes.<br><br>
+
+The following figure is a diagrammatic representation for the case of 10 boxes. We use a program to randomize the numbers on the notes with unique numbers from 1 to 10.<br><br>
+
+<img src="blog_pics/prisoner_boxes.png" style="width:100%">
+
+Then, for any number we start with:<br>
+1) If we start with N = 10, then we are done.<br>
+2) If we start with any other arbitrary number, there is a longest theoretically possible cycle (of length 9)
+of boxes that can be traversed. (In this system, of course this theoretical limit is reduced to 4). This cycle can be found by traversing the system using our traversal mechanism to enumerate the cycle that starts with each number: <br><br>
+<b>
+<div class="single_indent">N = 1: (1 5 3 7) </div>
+<div class="single_indent">N = 2: (2 8 4) </div>
+<div class="single_indent">N = 3: (3 7 1 5) </div>
+<div class="single_indent">N = 4: (4 8 4) </div>
+<div class="single_indent">N = 5: (5 7 1)</div>
+<div class="single_indent">N = 6: (6 9) </div>
+<div class="single_indent">N = 7: (7 1 5 3) </div>
+<div class="single_indent">N = 8: (8 4 2) </div>
+<div class="single_indent">N = 9: (9 6) </div><br>
+</b>
+Therefore, we have shown that such a method of traversing through the notes and boxes reveals the existence of cycles. This can be proven by realizing that the only way in which Charlie can land on a box numbered \(N\) is if another box contains a note numbered \(N\). Therefore, the winning strategy would be to reduce the length of such a cycle to \(50\) or less such that the last note Charlie chooses would be \(N\), which guides Charlie back to the box numbered \(N\).<br><br>
+
+
+We claim that the strategy for which Bob and Charlie can always win if Bob splits the longest cycle into two smaller cycles (each of which should have a length that is lesser than or equal to \(50\)). We will first describe a procedure to implement this strategy, and then we will prove that this strategy guarantees a win. To define this procedure systematically, let the cycle be denoted by the variable \(V\).<br><br>
+
+1) When \(|V|<50\), no splitting is required, a win is guaranteed.<br><br>
+
+<div class="single_indent">To prove this, note that that there are no cycles of length greater than \(50\).</div>
+<div class="single_indent">So, when Charlie traverse the cycle (which exists), if the box \(N\) contains the note \(N\), then we are immediately done.</div><br>
+<div class="single_indent">If not, then the cycle that starts with box \(N\) and ends with the box containing the note numbered \(N\) will have length \(\leq 50\).</div>
+<div class="single_indent">Since only one cycle starts with box \(N\), the length of such a cycle is constrained to have a size that is atmost \(50\).</div><br>
+<div class="single_indent">Since Charlie chooses the last vertex of the cycle that is the box with number \(N\) (in atmost \(50\) moves), we get a win.</div>
+<br><br>
+
+2) If \(|V| \geq 50\), we define the following algorithm:<br><br>
+
+<div class="single_indent">Split V into 2 cycles: To do this, choose an arbitrary box contained in this cycle. Let this box be numbered P.</div>
+<div class="single_indent">Traverse this cycle (using our traversal mechanism) 50 times. Let the last box that is reached be numbered Q.</div><br>
+
+<div class="single_indent">Connect P to Q. To do this, we need the note in P to have the number Q.</div>
+<div class="single_indent">Then, find the box at the end of the cycle (which can be attained with traversals from P) and let it be numbered R.</div>
+<div class="single_indent">Then the swapping strategy would be to swap the notes in R and Q.</div>
+<div class="single_indent">This effectively splits the cycle into 2 smaller cycles of length 50.</div><br>
+
+<div class="single_indent">Return X, Y.</div><br>
+
+<div class="single_indent">Therefore, since the cycle V no longer exists, we know that there are no other cycles of length greater than 50.</div>
+<div class="single_indent">This is because only one cycle can have length greater than 50.</div><br><br>
+
+Therefore, when Charlie begins to traverse the notes and boxes in the cycle (which we know that exists), the cycle will have a length that is atmost \(50\), where the last ‘vertex’ of the cycle corresponds to the box with number \(N\) (so that it guides Charlie back to the initial block numbered \(N\)).<br><br>
+
+Hence, we have proven that this is a winning strategy for Charlie and Alice.
+
+
+</div><br>
+
+
 
 
     </div>
@@ -272,6 +368,31 @@ if (devtools.isOpen) {
 </div>
 
 <style>
+
+
+  .single_indent{
+  text-indent: 50px;
+}
+.double_indent{
+  text-indent: 100px;
+}
+.triple_indent{
+  text-indent: 150px;
+}
+
+.quadruple_indent{
+  text-indent: 200px;
+}
+
+.pentaple_indent{
+  text-indent: 250px;
+}
+
+.hexaple_indent{
+  text-indent: 300px;
+}
+
+
 .rectangle {
   height: 8%;
   width: 55%;
