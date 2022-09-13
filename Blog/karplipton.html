@@ -211,14 +211,14 @@ if (devtools.isOpen) {
   font-weight: bold;
   margin: 0 auto; /* Center the text container */
   padding: 10px;
-  width: 65%;
+  width: 55%;
   text-align: center; /* Center text */
   position: absolute; /* Position text */
   top: 25%; /* Position text in the middle */
   left: 50%; /* Position text in the middle */
   transform: translate(-50%, -50%); /* Position text in the middle */
-/*  mix-blend-mode: screen;  This makes the cutout text possible 
-*/  font-family: "Oswald", sans-serif;
+  /*mix-blend-mode: screen;  This makes the cutout text possible */
+  font-family: "Oswald", sans-serif;
   text-shadow: 3px 3px 3px #ababab;
 }
 
@@ -235,74 +235,295 @@ if (devtools.isOpen) {
 }
 
 .image-container {
-  background-image: url("blog_pics/equations1.jpeg"); /* The image used - important! */
+  background-image: url("blog_pics/matheq2.jpeg"); /* The image used - important! */
   background-size: cover;
   position: relative; /* Needed to position the cutout text in the middle of the image */
-  height: 70%; /* Some height */
+  height: 90%; /* Some height */
 }
 </style>
 
 <div class="image-container">
-  <div class="text">Two proofs of the Karp-Lipton theorem: \(\text{PH} = S_2^P\)</div>
+  <div class="text">Proving the Karp-Lipton theorem: \(\text{PH} = S_2^P\)</div>
 </div>
 
 
 <div class="w3-row w3-padding">
-  <div class="w3-col l7 s12" style="float:none !important; margin:auto; position:relative; z-index:10; margin-top:-10%;">
+  <div class="w3-col l9 s12" style="float:none !important; margin:auto; position:relative; z-index:10; margin-top:-10%;">
     <div class="w3-container w3-white w3-margin w3-padding-large">
       <div class="w3">
 <p> 
+Happy Monday! Today, I'm going to share something really cool about the polynomial hierarchy. I know that I've written prior entries about the polynomial hierarchy where I've praised some of its properties, but this result about the Polynomial Hierarchy is the WILDest thing ever! If you're new here, I'm going to start by giving my regular schpiel about what the polynomial hierarchy is.<br><br>
+
+Define \(\Delta_0^P := \Sigma_0^P := \prod_0^P:=P\), where \(P\) is the set of problems that can be solved in poly-time. Then, for all \(i \geq 0\), define:
+
+$$\Delta_{i+1}^P:=\text{P}^{\Sigma_i^P}$$
+$$\Sigma_{i+1}^P:=\text{NP}^{\Sigma_i^P}$$
+$$\prod_{i+1}^P:=\text{coNP}^{\Sigma_i^P}$$
+
+The polynomial-time hierarchy is defined as:
+
+$$PH = \bigcup\limits_{i} \{\Delta_i^P, \Sigma_i^P, \prod_i^P\}$$
+
+The result that I want to show here is that every language in the polynomial hierarchy is equivalent in computational power to the complexity class of symmetric functions \(S_2^P\), which resides between the first and second levelss of the polynomial hierarchy.<br><br>
+
+The formal definition of \(S_2^P\) is that any language \(L\) is said to be in \(S_2^P\) if there is a polynomial-time predicate \(P\) such that:<br>
+If \(x\in L\), then there exists a \(y\) such that for all \(z\), \(P(x,y,z)=1\)<br>
+If \(x\not\in L\), then there exists a \(z\) such that for all \(y\), \(P(x,y,z)=0\)<br><br>
+
+Another, more intuitive way to look at \(S_2^P\) is the following: Suppose that a polynomial-time computable judge has to decide whether a string \(x\) is in a language \(L\). Two lawyers submit written arguments to convince the judge, one arguing for the string in the language and the other arguing for the string to be out of the language. Neither lawyer can see the others arguments. For what languages can we have the judge always convinced? (The answer is \(S_2^P\)!)
+
+<br><br>
 
 </p>
       </div>
 
 
-<button class="collapsible"><strong>Lemma 1: \(S_2^p \subseteq (\Sigma_2^P \cup \prod_2^p)\)</strong></button>
+<button class="collapsible"><strong>Lemma 1: \(S_2^p \subseteq (\Sigma_2^P \cup \prod_2^p) \subseteq \text{ZPP}^\text{NP}\)</strong></button>
   <div class="content">
-<br><h5 style="text-align:center;"><u>Coming Soon!</u></h5>
+    <br>
+Let L be an arbitrary language in \(𝑆_𝑝\). It follows by definition then that:
 
-<p><br><br></p>
+$$ 𝑥 ∈ 𝐿 ⇒ ∃𝑦 ∀𝑧 (𝑥, 𝑦, 𝑧) ∈ 𝑅$$
+
+$$ 𝑥 ∉ 𝐿 ⇒ ∃𝑧 ∀𝑦 (𝑥, 𝑦, 𝑧) ∉ 𝑅 $$
+
+However, note that the order of the universal and existential quantifiers is commutative in this case only if the commutator is taken in both directions. So, from this we can write two alternate versions of the definition, where version 1 commutes the quantifiers in the case for \(𝑥 ∈ 𝐿\) while holding the case for \(𝑥 ∉ 𝐿\) to be constant, and version 2 commutes the quantifiers in the case for \(𝑥 ∉ 𝐿\) while holding the case for \(𝑥 ∈ 𝐿\) to be constant. This procedure yields:<br><br>
+
+Version 1:
+$$𝑥 ∈ 𝐿 ⇒ ∀𝑧 ∃𝑦 (𝑥, 𝑦, 𝑧) ∈ 𝑅$$
+$$𝑥 ∉ 𝐿 ⇒ ∃𝑧 ∀𝑦 (𝑥, 𝑦, 𝑧) ∉ 𝑅$$
+
+
+Version 2:
+$$𝑥 ∈ 𝐿 ⇒ ∃𝑦 ∀𝑧 (𝑥, 𝑦, 𝑧) ∈ 𝑅$$
+$$𝑥 ∉ 𝐿 ⇒ ∀𝑦 ∃𝑧 (𝑥, 𝑦, 𝑧) ∉ 𝑅$$
+
+However, by definition, the complexity class that version 1 decides is equal to \(Σ_2^𝑃\), and the complexity class
+that version 2 decides is equal to \(Π_2^𝑃\). Therefore, if \(𝑥 ∈ 𝑆_2^𝑃\) then \(𝑥 ∈ Σ_2^P\) and \(𝑥 ∈ Π_2^𝑃\).<br><br>
+Therefore, we have that:
+$$𝑆_2^𝑃 ⊆ (Σ_2^𝑃 ∩ Π_2^𝑃)$$
+
+QED.
+
+<br>
 </div><br>
 
 
 
 <button class="collapsible"><strong>Lemma 2: LEX-FIRST-ACCEPTANCE is \(P^{NP}\)-complete.</strong></button>
   <div class="content">
-<br><h5 style="text-align:center;"><u>Coming Soon!</u></h5>
+<br>
+The language LEX-FIRST-ACCEPTANCE consists of those pairs \((𝑪_𝟏, 𝑪_𝟐)\) for which \(𝑪_𝟏, 𝑪_𝟐\) are circuits, and the lexicographically first-string \(x\) for which \(𝑪_𝟏(𝒙) = 𝟏\) is also accepted by \(𝑪_𝟐\). (If there is no lexicographically first string, i.e., \(𝑪_𝟏\) is unsatisfiable, then \((𝑪_𝟏, 𝑪_𝟐)\) is not in the language). A bitstring \(x\) lexicographically precedes a bitstring \(y\) if the first position \(i\) in which they differ has \(𝒙_𝒊 = 𝟎\) and \(𝒚_𝒊 = 𝟏\).<br><br>
 
-<p><br><br></p>
+The purpose of this lemma is to show that LEX-FIRST-ACCEPTANCE is \(P^{NP}\)-complete - that not only is it solvable by \(P^{NP}\) Turing Machine, but also it is representative of every problem in the \(P^{NP}\) complexity class.<br><br>
+
+<u>Sub-Lemma 2.1</u>: \(𝐿𝐹𝐴 ∈ 𝑃^{𝑁𝑃}\):<br><br>
+Given an instance \((𝐶_1, 𝐶_2)\), call the \(\text{NP}\) oracle to determine the first lexicographically first string \(𝑥 ∈ \{0, 1\}^𝑛\) that is accepted by \(𝐶_1\). The \(\text{NP}\) oracle nondeterministically evaluates each string with \(𝐶_1\) but uses an arbitrary enumeration scheme to prioritize which string that is accepted by \(𝐶_1\) is lexicographically first. If there is no such string, the machine returns false. <br><br>
+
+If \(∃\) a lexicographically-first string \(x\), the \(P\) machine would check if \(𝐶_2(𝑥) = 1\):
+
+<div class="single_indent">If \(𝐶_2(𝑥) = 1\), the \(P\) machine returns ACCEPT.</div>
+<div class="single_indent">If \(𝐶_2(𝑥) = 0\), the \(P\) machine returns REJECT.</div><br>
+
+QED.
+
+<br><br>
 </div><br>
 
 
 <button class="collapsible"><strong>Lemma 3: \(P^{NP}\subseteq S_2^P\).</strong></button>
   <div class="content">
-<br><h5 style="text-align:center;"><u>Coming Soon!</u></h5>
+<br>
+In Lemma 2, I showed that LEX−FIRST−ACCEPTANCE (LFA) \(∈ 𝑃^\text{𝑁𝑃}\)-complete. Therefore, to show that \(P^{𝑁𝑃} ⊆ 𝑆_2^𝑃\), we can instead just show that \(\text{LFA} ∈ S_2^P\) since \(\text{LFA}\) can then be generalized to all other languages in \(𝑃^{\text{NP}}\). Therefore, our goal is to show that for some predicate \(T\):<br>
 
-<p><br><br></p>
+$$1) ∀𝑥∈\text{LFA}, ∃𝑦∀𝑧, 𝑇(𝑥,𝑦,𝑧)=1$$
+$$2) ∀𝑥∉\text{LFA}, ∃𝑧∀𝑦, 𝑇(𝑥,𝑦,𝑧)=0$$
+
+Given an instance \((𝐶_1, 𝐶_2)\) of \(\text{LFA}\), we let \(𝜙(𝑥, 𝑦)\) be the lexicographically-first string (to be accepted by circuit \(𝐶_1\)) between \(x\) and \(y\). Therefore, we define the following predicate \(T\):
+\(𝑇(𝑥, 𝑦, 𝑧) = 𝐶_2(𝜙(𝑥, 𝑦))\).<br><br>
+
+In the case that \(𝐶_1(𝑥)\) and \(𝐶_1(𝑦)\) are both \(0\), there is no lexicographically-first string. In this case, we simply set \(𝑇(𝑥, 𝑦, 𝑧) = 0\). However, we can rewrite this as:
+
+$$(𝐶_1,𝐶_2) ∈ \text{LFA} \Rightarrow ∃y∀z(∀x), T(x,y,z) = 1 \Rightarrow ∃y∀x, T(x,y)=1$$
+$$(𝐶_1,𝐶_2) ∉ \text{LFA} \Rightarrow ∃z∀y(∀x), T(x,y,z) = 0 \Rightarrow ∃x∀y, T(x,y)=0$$
+
+Since this is the definition of \(𝑆_2^𝑃\) (modified from above), this implies that \(\text{LFA} ∈ 𝑆_2^𝑃\). Hence, by the \(𝑃^{𝑁𝑃}\)-completeness of \(\text{LFA}\), we have that: 
+
+$$𝑃^{𝑁𝑃} ⊆ 𝑆_2^𝑃$$
+
+QED.
+
+<br><br>
 </div><br>
 
 
 <button class="collapsible"><strong>Lemma 4: \(MA \subseteq S_2^P\).</strong></button>
-  <div class="content">
-<br><h5 style="text-align:center;"><u>Coming Soon!</u></h5>
+  <div class="content"><br>
 
-<p><br><br></p>
+\(∀ 𝐿_1 ∈ \text{𝑀𝐴}\), we have by definition that:
+
+$$𝑥 ∈ 𝐿_1 ⇒ ∃𝑦 \Pr\limits_z [(𝑥,𝑦,𝑧)∈𝑅]≥\frac{2}{3}$$
+
+$$𝑥 ∉ 𝐿_1 ⇒ ∀𝑦 \Pr\limits_z [(𝑥,𝑦,𝑧)∈𝑅]≤\frac{1}{3}$$
+
+\(∀ 𝐿_2 ∈ 𝑆_2^P\), we have by definition that:
+
+$$𝑥 ∈ 𝐿_2 ⇒ ∃𝑦∀𝑧, (𝑥,𝑦,𝑧)∈𝑅$$
+
+$$𝑥 ∉ 𝐿_2 ⇒ ∃𝑧 ∀𝑦, (𝑥,𝑦,𝑧)∉𝑅$$
+
+We can increase the probability of successfully accepting a “yes” instance through error reduction, from which we know that \(∀ 𝐿_1 ∈ \text{𝑀𝐴}, ∃𝑅 ∈ 𝑃\) such that:
+
+$$𝑥 ∈ 𝐿_1 ⇒ ∃𝑦, \Pr\limits_z[(𝑥,𝑦,𝑧)∈𝑅]=1$$
+
+$$𝑥 ∉ 𝐿_1 ⇒ ∀𝑦, \Pr\limits_z[(𝑥,𝑦,𝑧)∈𝑅]≤\frac{1}{3}$$
+
+Similarly, we can successfully decrease the probability of incorrectly accepting a “no” instance through repeated error reduction which reduces the probability to:
+
+$$𝑥 ∈ 𝐿_1 ⇒ ∃𝑦, \Pr\limits_z[(𝑥,𝑦,𝑧)∈𝑅]=1$$
+
+$$𝑥 ∉ 𝐿_1 ⇒ ∀𝑦, \Pr\limits_z[(𝑥,𝑦,𝑧)∈𝑅]≤ \frac{1}{2^{|𝑦|}}$$
+
+We claim then through these definitions that \(∀𝐿 ∈ \text{MA}, 𝐿 ∈ 𝑆_2^P\). To show that \(𝑥 ∈ 𝐿 ⇒ ∃𝑦, \Pr\limits_z[(𝑥, 𝑦, 𝑧) ∈ 𝑅] = 1\) is contained in \(𝑥 ∈ 𝐿_2 ⇒ ∃𝑦 ∀𝑧, (𝑥, 𝑦, 𝑧) ∈ 𝑅\): Since the probability of \((𝑥, 𝑦, 𝑧) ∈ R\) is \(1\) for all \(z\):
+
+$$𝑥 ∈ 𝐿_1 ⇒ ∃𝑦, \Pr\limits_z [(𝑥,𝑦,𝑧)∈𝑅]=1$$
+
+$$ ⇒ 𝑥 ∈ 𝐿_2 ⇒ ∃𝑦 ∀𝑧, (𝑥,𝑦,𝑧)∈𝑅$$
+
+Using Boole’s inequality, we can take the union bound of the probability of incorrectly accepting a “no” instance of \(L\) across all possible values of \(y\) to get:
+
+$$𝑥 ∉ 𝐿_1 ⇒ ∀𝑦, \Pr\limits_z [(𝑥,𝑦,𝑧)∈𝑅]≤ \frac{1}{2^{|y|}}$$
+
+$$∈ ∃𝑦 \text{ such that }\Pr\limits_z [(x, y, z)∈𝑅] ≤ \frac{1}{2^{|y|}}\times 2^{|y|}$$
+
+$$= ∃𝑦 \text{ such that }\Pr\limits_z [(x, y, z)∈𝑅] =1$$
+
+$$∈ ∃ 𝑧 \text{ such that } ∀y(x, y, z)∉𝑅$$
+
+$$𝑥 ∉ L_2 ⇒ ∃𝑧 ∀y, (x, y, z) ∉ 𝑅$$
+
+These equations fits the necessary condition for all languages in \(𝑆_2^P\). Therefore, we have that:
+
+$$∀ 𝐿 ∈ \text{MA}, \text{MA} ∈ 𝑆_2^P$$
+
+$$𝑀𝐴 ⊆ 𝑆_2^P$$
+
+QED.
+
+<br><br>
 </div><br>
 
 
 <button class="collapsible"><strong>Lemma 5: \(BPP \subseteq S_2^P\).</strong></button>
   <div class="content">
-<br><h5 style="text-align:center;"><u>Coming Soon!</u></h5>
+<br>
 
-<p><br><br></p>
+Lemma \(1\): \(\text{BPP} ⊆ \text{MA}\)<br><br>
+<div class="single_indent">Given an arbitrary language \(\text{L} \in \text{BPP}\), we can show that there is an \(\text{MA}\) protocol that decides an instance \(x\):</div><br>
+
+<div class="double_indent">Merlin (the prover) sends a single TRUE (\(1\)) bit (This is just a filler so that Merlin is doing something)</div><br>
+
+<div class="double_indent">Arthur (the verifier) disregards Merlin’s bit and simulates the \(\text{BPP}\) machine for \(L\) on \(x\). </div>
+<div class="double_indent">Note here that this is only possible since Arthur has the ability to flip coins and make random decisions.</div>
+<div class="double_indent">If the \(\text{BPP}\) machine returns “TRUE”, Arthur returns “TRUE”.</div>
+<div class="double_indent">If the BPP machine returns “FALSE”, Arthur returns “FALSE”.</div><br>
+
+<div class="single_indent">Completeness and Soundness are intact here because Arthur simulates the \(\text{BPP}\) machine which has the same probabilities: </div>
+<div class="double_indent">In particular, \(∀𝑥 ∈ L\), \(\Pr[𝑥 \text{ accepted}] ≥ \frac{2}{3}\) and \(∀𝑥 ∉ L\), \(\Pr[𝑥 \text{ rejected}] ≥ \frac{2}{3}\).</div><br>
+
+<div class="single_indent">Therefore, any language in \(\text{BPP}\) has an \(\text{MA}\) protocol that decides it. Hence, \(\text{BPP} ⊆ \text{MA}\).</div><br>
+
+<div class="single_indent">QED.</div><br>
+
+
+Therefore, since we know that \(\text{BPP} ⊆ \text{MA}\), we can use the transitivity property and the result proven in Lemma 4 to obtain:<br>
+
+$$\text{BPP} ⊆ \text{MA} ⊆ S_2^P$$
+
+From this, we have that \(\text{BPP} ⊆ S_2^P\).<br><br>
+
+QED.
+
+
+<br><br><br>
 </div><br>
 
 
 <button class="collapsible"><strong>Lemma 6: If SAT has polynomial-sized circuits, then \(PH = S_2^P\).</strong></button>
   <div class="content">
-<br><h5 style="text-align:center;"><u>Coming Soon!</u></h5>
+<br>
 
-<p><br><br></p>
+It is known from the Cook-Levin theorem that \(\text{SAT} ∈ \text{NP}-complete\). Therefore, if \(\text{SAT}\) has polynomial-size circuits, then:
+
+$$ \text{NP} \subseteq \text{P}/\text{poly}$$
+
+To show that \(\text{PH} = S_2^P\), we need to show that:<br>
+1) \(\text{PH} = \Sigma_2^P\)<br>
+2) \(\text{PH} = \prod_2^P\)<br><br>
+
+In Lemma \(1\), we showed that \(\text{PH} \subseteq \Sigma_2^P \cap \prod_2^P\). Therefore, the onus of this proof is to show that:<br>
+1) \(Σ_2^P ⊆ \text{PH}\)<br>
+2) \(Π_2^P ⊆ \text{PH}\)<br><br>
+
+<u>Sub-Lemma 6.1</u>: \(Σ_2^𝑃 = \text{PH}\)<br>
+<div class="single_indent">This follows from the regular Karp-Lipton theorem shown in Lemma 4.</div>
+<div class="single_indent">Therefore, \(Σ_2^𝑃 ⊆ \text{PH}\) is trivially true.</div>
+<div class="single_indent">QED.</div><br>
+
+<u>Sub-Lemma 6.2</u>: \(Π_2^P ⊆ \text{PH}\):<br>
+<div class="single_indent">Let \(𝐶\) be a family of circuits which output \(1\) on satisfiable inputs and \(0\) on unsatisfiable inputs.</div>
+<div class="single_indent">Let \(C'\) be the family of circuits using self-reducibility of \(\text{SAT}\) instances to output satisfying assignments for \(\text{SAT}\) formulas.</div><br>
+
+<div class="single_indent">Let \(L\) be an arbitrary language in \(Π_2^P\) and let \(𝜙\) be a predicate in \(P\). It follows then that:</div>
+
+$$𝑥∈𝐿 ⇒ ∀𝑦∃𝑧, 𝜙(𝑥,𝑦,𝑧)=1$$
+
+$$𝑥∉𝐿 ⇒ ∃𝑦∀𝑧, 𝜙(𝑥,𝑦,𝑧)=0$$
+
+<div class="single_indent">However, note here that \(\{(𝑥, 𝑦) | ∃𝑧, φ(x, y, z) = 1\}\) is by definition in \(\text{NP}\) (where \(z\) is a witness).</div><br>
+
+<div class="single_indent">Therefore, \(C'\) must exist to find satisfying assignments \(z\) for satisfying formulas \(x\).</div><br>
+
+<div class="single_indent">We define the predicate \(𝜙'\) to be the polynomially verifiable instance \((𝐶, 𝑥, 𝑦)\).</div>
+<div class="single_indent">Note that \((C,x,y)\) is \(\text{TRUE}\) if \(𝐶'(𝑥) = 𝑧\), where \(𝜙(𝑥, 𝑦, 𝑧) = 1\), and \(\text{FALSE}\) otherwise. </div><br>
+
+<div class="single_indent">Therefore,</div>
+$$𝑥∈𝐿⇒ ∃𝐶 \text{ such that }∀𝑦, 𝐶'(𝑥)=𝑧 \text{ such that} 𝜙'(𝑥,𝑦,𝑧)=1$$
+$$𝑥∉𝐿⇒ ∀𝐶 \text{ such that }∃𝑦 ∀𝑧, 𝐶'(𝑥)=𝑧 \text{ such that } 𝜙'(𝑥,𝑦,𝑧)=0$$
+
+<div class="single_indent">However, this can just be rewritten as:</div>
+
+$$𝑥∈𝐿 ⇒ ∃𝐶∀𝑦, 𝜙'(𝐶,𝑥,𝑦)=1$$
+
+$$𝑥∉𝐿 ⇒ ∃𝑦∀𝐶, 𝜙'(𝐶,𝑥,𝑦)=0$$
+
+<div class="single_indent">Therefore, by definition \(𝐿 ∈ S_2^𝑃\). Since \(L ∈ Π_2^P\), we have that \(Π_2^P ⊆ S_2^P\).</div><br>
+
+<div class="single_indent">QED.</div><br>
+
+Therefore, since we have shown that
+
+$$Σ_2^P ⊆ \text{PH},\quad Π_2^P ⊆ \text{PH},$$
+
+and since we already know that
+
+$$\text{PH} ⊆ Σ_2^𝑃 ∩ Π_2^P,$$
+
+we now have that
+
+$$\text{PH} = Σ_2^P \text{ and } \text{PH} = Π_2^𝑃.$$
+
+Therefore,
+
+$$S_2^P = Π_2^P = Σ_2^P.$$
+
+This gives us:
+
+$$\text{PH} = S_2^P$$
+
+QED.
+
+<br><br><br>
 </div><br>
 
 
@@ -313,6 +534,30 @@ if (devtools.isOpen) {
 
 
 <style>
+
+  .single_indent{
+  text-indent: 50px;
+}
+.double_indent{
+  text-indent: 100px;
+}
+.triple_indent{
+  text-indent: 150px;
+}
+
+.quadruple_indent{
+  text-indent: 200px;
+}
+
+.pentaple_indent{
+  text-indent: 250px;
+}
+
+.hexaple_indent{
+  text-indent: 300px;
+}
+
+
 .rectangle {
   height: 8%;
   width: 55%;
