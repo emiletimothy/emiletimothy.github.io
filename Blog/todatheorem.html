@@ -257,20 +257,20 @@ table, th, td {
     <div class="w3-container w3-white w3-margin w3-padding-large">
       <div class="w3">
 <p> 
-The purpose of this post is to describe an odd complexity class, \(\bigoplus P\) (pronounced parity-P), which wasn't known to be powerful or even useful until the discovery of Toda's theorem (which I'm going to prove). Toda's theorem claims that the computational power of the polynomial hierarchy (the set of all problems that can be solved in polynomial time, irrespective of other resources) is completely equal to the ability to count polynomially long things.<br><br>
+The purpose of this post is to describe an odd complexity class, \(\oplus \text{P}\) (pronounced parity-P), which wasn't known to be powerful or even useful until the discovery of Toda's theorem (which I'm going to prove). Toda's theorem claims that the computational power of the polynomial hierarchy (the set of all problems that can be solved in polynomial time, irrespective of other resources) is completely equal to the ability to count polynomially long things. This is a cool result because it highlights the intricate value of being able to count things - the ability to count allows you to also solve any problem in the polynomial hierarchy.<br><br>
 
-I'm going to start by defining \(\text{NP}, \text{BPP}, \bigoplus P\) in terms of computational paths. Specifically, a language \(L\) is in:<br><br>
+I'm going to start by defining \(\text{NP}, \text{BPP}\), and \(\oplus \text{P}\) in terms of computational paths. Specifically, a language \(L\) is in:<br><br>
 
 1) \(\text{NP}\) iff there is such a polynomial-time nondeterministic Turing Machine \(M\) for which \(𝒙 ∈ 𝑳\) implies that at least one of the computation paths accepts, and \(𝒙 ∉ 𝑳\) implies that no computation paths accept.<br><br>
 
 2) \(\text{BPP}\) iff there is such a polynomial-time nondeterministic Turing Machine \(M\) for which \(x ∈ L\) implies that at least \(\frac{2}{3}\) of the computation paths accept, and \(𝒙 ∉ 𝑳\) implies that at most \(\frac{1}{3}\) of the computation paths accept.<br><br>
 
-3) \(\bigoplus P\) iff there is such a polynomial-time nondeterministic Turing Machine \(M\) for which \(x ∈ L\) implies that an odd number of the computation paths accept, and \(𝒙 ∉ 𝑳\) implies that an even number of the computation paths accept.<br><br>
+3) \(\oplus \text{P}\) iff there is such a polynomial-time nondeterministic Turing Machine \(M\) for which \(x ∈ L\) implies that an odd number of the computation paths accept, and \(𝒙 ∉ 𝑳\) implies that an even number of the computation paths accept.<br><br>
 
 
-Next, I'm going to describe the notion of Turing Machines with Oracles, and the specific classes of problems they solve. For instance, consider the classes \(\text{NP}^A\), \(\text{BPP}^A\), \((⨁P)^A\). These are the classes obtained by replacing the polynomial-time nondeterministic Turing Machine \(M\) in the definitions above with a polynomial-time nondeterministic oracle Turing Machine M that is equipped with language \(A\) as its oracle. As usual, if we write \(C\) instead of \(A\) in the exponent, for some complexity class \(C\), we mean that any language \(A ∈ C\) is permitted as the oracle. If \(C\) has a complete language (as \(\text{NP}^A\) and \((⨁P)^𝑨\) do, for any oracle \(A\)), then by using that language as the oracle we can solve any instance of a problem in \(C\) with a single call to this specific oracle.<br><br>
+Next, I'm going to describe the notion of Turing Machines with Oracles, and the specific classes of problems they solve. For instance, consider the classes \(\text{NP}^A\), \(\text{BPP}^A\), \((\oplus \text{P})^A\). These are the classes obtained by replacing the polynomial-time nondeterministic Turing Machine \(M\) in the definitions above with a polynomial-time nondeterministic oracle Turing Machine \(M\) that is equipped with language \(A\) as its oracle. As usual, if we write \(C\) instead of \(A\) in the exponent, for some complexity class \(C\), we mean that any language \(A ∈ C\) is permitted as the oracle. If \(C\) has a complete language (as \(\text{NP}^A\) and \((\oplus \text{P})^𝑨\) do, for any oracle \(A\)), then by using that language as the oracle we can solve any instance of a problem in \(C\) with a single call to this specific oracle.<br><br>
 
-Finally, I'm going to describe the polynomial-time hierarchy. Define \(\Delta_0^P := \Sigma_0^P := \prod_0^P:=P\), where \(P\) is the set of problems that can be solved in poly-time. Then, for all \(i \geq 0\), define:
+Finally, I'm going to describe the polynomial-time hierarchy. Define \(\Delta_0^P := \Sigma_0^P := \prod_0^P:= \text{P}\), where \(\text{P}\) is the set of problems that can be solved in polynomial time (with respect to the size of the instance of the problem). Then, for all \(i \geq 0\), define:
 
 $$\Delta_{i+1}^P:=\text{P}^{\Sigma_i^P}$$
 $$\Sigma_{i+1}^P:=\text{NP}^{\Sigma_i^P}$$
@@ -280,28 +280,32 @@ The polynomial-time hierarchy is defined as
 
 $$PH = \bigcup\limits_{i} \{\Delta_i^P, \Sigma_i^P, \prod_i^P\}$$
 
-The result that I want to show here is that every language in the polynomial hierarchy can be solved by Turing Machines of the counting complexity class \(P^{\#P}\) (pronounced P sharp-P), which really illuminates the significance of counting as a fundamental computational resource.
+The result that I want to show here is that every language in the polynomial hierarchy can be solved by Turing Machines of the counting complexity class \(\text{P}^{\#\text{P}}\) (pronounced P sharp-P), which really illuminates the significance of counting as a fundamental computational resource.
 
 </p>
 
       </div>
 
 
-<button class="collapsible"><strong>Lemma 1: Generalization of the Valiant-Vazirani Theorem to show that \(NP^A \subseteq BPP^{(\bigoplus P^A)}\) for any oracle \(A\).</strong></button>
+<button class="collapsible"><strong>Lemma 1: Generalization of the Valiant-Vazirani Theorem to show that \(\text{NP}^A \subseteq \text{BPP}^{(\bigoplus P^A)}\) for any oracle \(A\).</strong></button>
   <div class="content">
 <br>
-The generalized Valiant-Vazirani theorem states that for any \(n\), there is a randomized procedure that runs in \(poly(n)\) time and outputs a \(poly(n)\)-size circuit \(C\) such that for each subset \(T\subseteq\{0,1\}^n\) if \(|T|>0\), then $$\Pr[|\{x:x\in T \text{ and }C(x) = 1\}|=1] \geq \frac{1}{8n}$$This lemma seeks to show that the generalized Valiant-Vazirani theorem implies that for every oracle \(A\), that \(NP^A \subseteq BPP^{(\bigoplus P^A)}\).<br><br>
+The generalized Valiant-Vazirani theorem states that for any \(n\), there is a randomized procedure that runs in \(poly(n)\) time and outputs a \(poly(n)\)-size circuit \(C\) such that for each subset \(T\subseteq\{0,1\}^n\) if \(|T|>0\), then 
 
-Let \(𝐿\) be an arbitrary language in \(𝑁𝑃^𝐴\) that is decided by a nondeterministic oracle turing machine M that runs in polynomial time. Then, given an input \(x\) we can decide whether it is in \(L\) by using a probabilistic turing machine oracle equipped with the polynomial-time nondeterministic Turing Machine oracle \(⨁𝑃^𝐴\). Let \(P\) be the list of all the computation paths of \(M\) upon input \(x\) s.t. \(∀𝑝 ∈ 𝑇, p\) ends in an accept state and let the count of the number of accepting computation paths be \(m\). Using lemma 5.1, produce separate circuits \(𝐶_𝑖\) for each computation path \(𝑝_𝑖 ∈ 𝑃\), such that \(𝐶_𝑖(𝑝_𝑖) = 1\). Then, a nondeterministic turing machine oracle \(𝑀_𝑖\) would guess \(x\) such that \(\{𝑥: 𝑥 ∈ 𝑇 \text{ and } C_i(x) = 1\}_{𝑖=1,...,𝑘}\). Then, \(𝑀_𝑖\) would verify that the guess belongs in the set by using an oracle \(A\) in polynomial time and returns ACCEPT if the verification is successful. Therefore, \(𝑀_i^𝐴 ∈ ⨁𝑃^𝐴\).<br><br>
+$$\Pr[|\{x:x\in T \text{ and }C(x) = 1\}|=1] \geq \frac{1}{8n}$$ 
 
-Therefore, using \(𝑀_i^𝐴\) as an oracle, simulate the \(BPP\) behavior on a probabilistic turing machine by calling
-\(𝑀_i^𝐴, ∀𝑖, 1 ≤ 𝑖 ≤ 𝑘\) and counting the number of ACCEPTS returned from the oracle:<br>
+This lemma seeks to show that the generalized Valiant-Vazirani theorem implies that for every oracle \(A\), that \(\text{NP}^A \subseteq \text{BPP}^{(\bigoplus P^A)}\).<br><br>
+
+Let \(𝐿\) be an arbitrary language in \(\text{NP}^A\) that is decided by a nondeterministic oracle turing machine \(M\) that runs in polynomial time. Then, given an input \(x\) we can decide whether it is in \(L\) by using a probabilistic turing machine oracle equipped with the polynomial-time nondeterministic Turing Machine oracle \(\oplus P^A\). Let \(P\) be the list of all the computation paths of \(M\) upon input \(x\) such that for all\(𝑝 ∈ 𝑇, p\) ends in an accept state and let the count of the number of accepting computation paths be \(m\). Using lemma 5.1, produce separate circuits \(𝐶_𝑖\) for each computation path \(𝑝_𝑖 ∈ 𝑃\), such that \(𝐶_𝑖(𝑝_𝑖) = 1\). Then, a nondeterministic turing machine oracle \(𝑀_𝑖\) would guess \(x\) such that \(\{𝑥: 𝑥 ∈ 𝑇 \text{ and } C_i(x) = 1\}_{𝑖=1,...,𝑘}\). Then, \(𝑀_𝑖\) would verify that the guess belongs in the set by using an oracle \(A\) in polynomial time and returns ACCEPT if the verification is successful. Therefore, \(𝑀_i^𝐴 ∈ \oplus \text{P}^𝐴\).<br><br>
+
+Therefore, using \(𝑀_i^𝐴\) as an oracle, simulate the \(\text{BPP}\) behavior on a probabilistic turing machine by calling
+\(\text{M}_i^𝐴, ∀𝑖, 1 ≤ 𝑖 ≤ 𝑘\) and counting the number of ACCEPTS returned from the oracle:<br>
 <div class="single_indent">If the number of ACCEPTS is odd, then the probabilistic TM returns ACCEPT.</div>
 <div class="single_indent">If number of ACCEPTS is even, then the probabilistic TM returns REJECT.</div><br>
 
 
 To show that this procedure maps “yes” to “yes”:<br>
-<div class="single_indent">  If \(𝑥 ∈ 𝐿 ∈ 𝑁𝑃^𝐴\), then</div>
+<div class="single_indent">  If \(𝑥 ∈ 𝐿 ∈ \text{NP}^𝐴\), then</div>
     $$𝑃(|\{𝑥:𝑥∈𝑇 \text{ and }C_i(x)=1\}_𝑖|=1) ≥ \frac{1}{8𝑚}$$
   
 <div class="single_indent">from lemma 5.1. Therefore, for \(k\) circuits, the probability of all of them deciding incorrectly becomes:</div>
@@ -309,8 +313,8 @@ To show that this procedure maps “yes” to “yes”:<br>
         $$\leq \bigg(1-\frac{1}{8m}\bigg)^k \approx 1 - \frac{k}{8m} \quad \text{(by taylor expansion)}$$
 
 
-  <div class="single_indent">For this to be in BPP, the probability of incorrectly deciding a string in \(L\) should be atmost \(\frac{1}{3}\).</div>
-  <div class="single_indent">Therefore, we can choose the number of circuits, \(k\), that the \(BPP\) would have to make to satisfy this property.</div>
+  <div class="single_indent">For this to be in \(\text{BPP}\), the probability of incorrectly deciding a string in \(L\) should be atmost \(\frac{1}{3}\).</div>
+  <div class="single_indent">Therefore, we can choose the number of circuits, \(k\), that the \(\text{BPP}\) would have to make to satisfy this property.</div>
 
 $$1−\frac{𝑘}{8m} ≤ \frac{1}{3} \Rightarrow \frac{2}{3} \leq \frac{k}{8m} \Rightarrow k ≥ \frac{16}{3} m$$
 
@@ -320,12 +324,12 @@ $$1−\frac{𝑘}{8m} ≤ \frac{1}{3} \Rightarrow \frac{2}{3} \leq \frac{k}{8m} 
 
 To show that this procedure maps “no” to “no”:<br>
 
-  <div class="single_indent">If \(𝑥 ∉ 𝐿\), then the number of accepting configurations in \(⨁𝑃^𝐴\) will be \(0\) which is even.</div>
+  <div class="single_indent">If \(𝑥 ∉ 𝐿\), then the number of accepting configurations in \(\oplus \text{P}^A\) will be \(0\) which is even.</div>
   <div class="single_indent">Therefore, the probabilistic turing machine will return a REJECT.</div>
   <div class="single_indent">So, “no” maps to “no”.</div><br><br>
 
-Therefore, we now have that \(∀𝐴\):
-$$𝑁𝑃^𝐴 ⊆ 𝐵𝑃𝑃^{(⨁𝑃^𝐴)}$$
+Therefore, we now have that for all \(A\):
+$$\text{NP}^A ⊆ \text{BPP}^{(⨁ \text{P}^𝐴)}$$
 
  QED.
 
@@ -335,40 +339,40 @@ $$𝑁𝑃^𝐴 ⊆ 𝐵𝑃𝑃^{(⨁𝑃^𝐴)}$$
 </div><br>
 
 
-<button class="collapsible"><strong>Lemma 2: For any oracle A, \(NP^A \subseteq BPP^A \Rightarrow NP^{NP^{NP^{(...^{NP^A})}}} \subseteq BPP^A\)</strong></button>
+<button class="collapsible"><strong>Lemma 2: For any oracle A, \(\text{NP}^A \subseteq \text{BPP}^A \Rightarrow \text{NP}^{\text{NP}^{\text{NP}^{(...^{\text{NP}^A})}}} \subseteq \text{BPP}^A\)</strong></button>
   <div class="content">
 <br>
-<strong><u>Sub-Lemma 2.1: \(NP^{BPP} \subseteq BPP^{NP}\)</u></strong><br><br>
+<strong><u>Sub-Lemma 2.1: \(\text{NP}^{\text{BPP}} \subseteq \text{BPP}^{\text{NP}}\)</u></strong><br><br>
 
-Given an arbitrary language \(𝐿 ∈ 𝑁𝑃^{𝐵𝑃𝑃}\) that is decided by a polynomial-time nondeterministic turing machine \(M\) and queries oracle \(𝐴 ∈ 𝐵𝑃𝑃\), we can decide a string of the language using a \(BPP\) probabilistic turing machine \(M’\) that queries oracle \(𝐵 ∈ 𝑁𝑃\).<br><br>
+Given an arbitrary language \(𝐿 ∈ \text{NP}^{\text{BPP}}\) that is decided by a polynomial-time nondeterministic turing machine \(M\) and queries oracle \(\text{A} ∈ \text{BPP}\), we can decide a string of the language using a \(\text{BPP}\) probabilistic turing machine \(M’\) that queries oracle \(\text{B} ∈ \text{NP}\).<br><br>
 
 Given an input \(x\), there are \(2^{|𝑥|^{𝑂(1)}} = 2^{|𝑥|^𝑘}\) possible computation paths that are generated by \(M\).
-Therefore, let the \(BPP\) machine \(M’\) query its \(NP\) turing machine oracle \(2^{|𝑥|^𝑘}\) times (one time for each computation path). On each query let \(M’\) build up an array of size \(|x|\) of “true” or “false” for each path such that if the oracle returns “true” for every bit, then \(M\) returns “true”.<br><br>
+Therefore, let the \(\text{BPP}\) machine \(M’\) query its \(\text{NP}\) turing machine oracle \(2^{|𝑥|^𝑘}\) times (one time for each computation path). On each query let \(M’\) build up an array of size \(|x|\) of “true” or “false” for each path such that if the oracle returns “true” for every bit, then \(M\) returns “true”.<br><br>
 
-Then, through repeated error reduction, reduce the error of the \(BPP\) to atmost \(\frac{1}{3|x|^k} \times \frac{1}{2^{|x|^k}}\)<br><br>
+Then, through repeated error reduction, we can reduce the error of the \(\text{BPP}\) machine to atmost \(\frac{1}{3|x|^k} \times \frac{1}{2^{|x|^k}}\)<br><br>
 
 Therefore, upon the \(2^{|𝑥|^𝑘}\) computational paths that a nondeterministic turing machine would take, where the number of queries to the oracle are atmost \(|𝑥|^𝑘\), we have that the probability of incorrectly deciding the string becomes:
 $$≤ \frac{1}{3|x|^k \times 2^{|x|^k}} \times (2^{|𝑥|^𝑘} \times |𝑥|^𝑘) = \frac{1}{3}$$
 
-It follows then that the probability of correctly deciding the string is atleast \(\frac{2}{3}\). Since this is simulated on a \(BPP\) machine with a turing machine oracle in \(NP\), we have that
+It follows then that the probability of correctly deciding the string is atleast \(\frac{2}{3}\). Since this is simulated on a \(\text{BPP}\) machine with a turing machine oracle in \(\text{NP}\), we have that
 
-$$𝐿 ∈ 𝐵𝑃𝑃^{𝑁𝑃}$$
+$$\text{L} ∈ \text{BPP}^{\text{NP}}$$
 
 Therefore, we conclude that:
 
-$$𝑁𝑃^{𝐵𝑃𝑃} ⊆ 𝐵𝑃𝑃^{𝑁𝑃}$$
+$$\text{NP}^{\text{BPP}} ⊆ \text{BPP}^{\text{NP}}$$
 
 QED.
 
 <br><br>
-<strong><u>Sub-Lemma 2.2: \(BPP^{BPP} \subseteq BPP\)</u></strong>
+<strong><u>Sub-Lemma 2.2: \(\text{BPP}^{\text{BPP}} \subseteq \text{BPP}\)</u></strong>
 <br><br>
-Given a language \(𝐿 ∈ 𝐵𝑃𝑃^{𝐵𝑃𝑃}\) that is decided by a \(BPP\) probabilistic turing machine \(M\) and queries oracle \(𝐴 ∈ 𝐵𝑃𝑃\), we can decide a string of the language by using a \(BPP\) probabilistic turing machine \(M'\), and we can use error reduction to show that \(𝐿 ∈ 𝐵𝑃𝑃\) by simulating the oracle, where the probability of errors for \(M'\) is \(𝑒_2\) and the probability of errors for \(M\) is \(𝑒_1\).<br><br>
+Given a language \(𝐿 ∈ \text{BPP}^{\text{BPP}}\) that is decided by a \(\text{BPP}\) probabilistic turing machine \(M\) and queries oracle \(𝐴 ∈ \text{BPP}\), we can decide a string of the language by using a \(\text{BPP}\) probabilistic turing machine \(M'\), and we can use error reduction to show that \(𝐿 ∈ \text{BPP}\) by simulating the oracle, where the probability of errors for \(M'\) is \(𝑒_2\) and the probability of errors for \(M\) is \(𝑒_1\).<br><br>
 
 Given an input \(x\), query the oracle atleast once on each bit of \(x\). Therefore, the total number of queries would be \(|𝑥|^𝑘\). Hence, the probability of getting an error on a single query is \(𝑒_1\) whereas the probability
 of getting an error in the entire simulation would be \(|𝑥|^𝑘 𝑒_1\). Then, adding in the probability of getting an error in \(M\), we have that the probability of error is: \(|𝑥|^𝑘 𝑒_1 + 𝑒_2\).<br><br>
 
-Through repeated error reduction, we can reduce the values of \(𝑒_1\) and \(𝑒_2\) from \(\frac{1}{3}\). However, to show that \(𝑥 ∈ 𝐵𝑃𝑃\), we would need:
+Through repeated error reduction, we can reduce the values of \(𝑒_1\) and \(𝑒_2\) from \(\frac{1}{3}\). However, to show that \(𝑥 ∈ \text{BPP}\), we would need:
 
 $$|𝑥|^𝑘 𝑒_1 + 𝑒_2 ≤ \frac{1}{3}$$
 
@@ -380,55 +384,55 @@ since
 
 $$|𝑥|^𝑘 𝑒_1 + 𝑒_2 = \frac{1}{6} + \frac{1}{6} = \frac{1}{3}.$$
 
-If the probability of an error is \(\frac{1}{3}\), then the probability of success will be \(\frac{2}{3}\). Therefore, through simulating the BPP oracle on a BPP machine M, we have that:
+If the probability of an error is \(\frac{1}{3}\), then the probability of success will be \(\frac{2}{3}\). Therefore, through simulating the \(\text{BPP}\) oracle on a \(\text{BPP}\) machine \(M\), we have that:
 
-$$𝐵𝑃𝑃^{𝐵𝑃𝑃} ⊆ 𝐵𝑃𝑃$$
+$$\text{BPP}^{\text{BPP}} \subseteq \text{BPP}$$
 
 QED.<br><br>
 
-Given lemma 1, \((𝑁𝑃^{𝐵𝑃𝑃} ⊆ 𝐵𝑃𝑃^{𝑁𝑃})\) and lemma 2 \((𝐵𝑃𝑃^{𝐵𝑃𝑃} ⊆ 𝐵𝑃𝑃)\), we can finally use induction to show that:
+Given lemma 1, \((\text{NP}^{\text{BPP}} ⊆ \text{BPP}^{\text{NP}})\) and lemma 2 \((\text{BPP}^{\text{BPP}} ⊆ \text{BPP})\), we can finally use induction to show that:
 
-$$𝑁𝑃^𝐴 ⊆ 𝐵𝑃𝑃^𝐴 ⇒ 𝑁𝑃^{(𝑁𝑃^{(𝑁𝑃^{(...^{(𝑁𝑃^𝐴)}... )))}}} ⊆ 𝐵𝑃𝑃^𝐴,$$
+$$\text{NP}^𝐴 ⊆ \text{BPP}^𝐴 ⇒ \text{NP}^{(\text{NP}^{(\text{NP}^{(...^{(\text{NP}^𝐴)}... )))}}} ⊆ \text{BPP}^𝐴,$$
 
 where we induct on the height, \(i\), of the \(NP\) tower.<br><br>
 
 
 <u>Base Case</u>: \(i = 1\):
-<div class="single_indent">When \(i = 1\), the formulation becomes \(𝑁𝑃^𝐴 ⊆ 𝐵𝑃𝑃^𝐴\), which is known to be true.</div><br>
+<div class="single_indent">When \(i = 1\), the formulation becomes \(\text{NP}^𝐴 ⊆ \text{BPP}^𝐴\), which is known to be true.</div><br>
 
 <u>Assumptive Case</u>: \(i = k\)
 <div class="single_indent">Assume that for height \(k\), </div>
-$$𝑁𝑃^{(𝑁𝑃^{(...^{(𝑁𝑃^𝐴)))}}} ⊆ 𝐵𝑃𝑃^𝐴$$<br>
+$$\text{NP}^{(\text{NP}^{(...^{(\text{NP}^𝐴)))}}} ⊆ \text{BPP}^A$$<br>
 
 <u>Inductive Case</u>: \(i = k + 1\)
 <div class="single_indent">Expanding to the next level, we get:</div>
 
-$$𝑁𝑃^{𝑁𝑃^{(𝑁𝑃(...^{(𝑁𝑃^𝐴)))}}} ⊆ NP^{𝐵𝑃𝑃^𝐴}$$
+$$\text{NP}^{\text{NP}^{(\text{NP}(...^{(\text{NP}^𝐴)))}}} ⊆ \text{NP}^{\text{BPP}^𝐴}$$
 
-<div class="single_indent">Applying lemma 1 \((𝑁𝑃^{𝐵𝑃𝑃} ⊆ 𝐵𝑃𝑃^{𝑁𝑃})\) to the RHS yields:</div>
+<div class="single_indent">Applying lemma 1 \((\text{NP}^{\text{BPP}} ⊆ \text{BPP}^{\text{NP}})\) to the RHS yields:</div>
 
-$$𝑁𝑃^{𝑁𝑃^{(𝑁𝑃(...^{(𝑁𝑃^𝐴)))}}} ⊆ 𝐵𝑃𝑃^{NP^𝐴}$$
+$$\text{NP}^{\text{NP}^{(\text{NP}(...^{(\text{NP}^𝐴)))}}} ⊆ \text{BPP}^{\text{NP}^A}$$
 
-<div class="single_indent">We know that \(𝑁𝑃^𝐴 ⊆ 𝐵𝑃𝑃^𝐴\). Therefore, the expression becomes:</div>
+<div class="single_indent">We know that \(\text{NP}^𝐴 ⊆ \text{BPP}^𝐴\). Therefore, the expression becomes:</div>
 
-$$𝑁𝑃^{𝑁𝑃^{(𝑁𝑃(...^{(𝑁𝑃^𝐴)))}}} \subseteq BPP^{BPP^A}$$
+$$\text{NP}^{\text{NP}^{(\text{NP}(...^{(\text{NP}^𝐴)))}}} \subseteq \text{BPP}^{\text{BPP}^A}$$
 
-<div class="single_indent">Applying lemma 2 \((𝐵𝑃𝑃^{𝐵𝑃𝑃} ⊆ 𝐵𝑃𝑃)\) to the RHS yields:</div>
+<div class="single_indent">Applying lemma 2 \((\text{BPP}^{\text{BPP}} ⊆ \text{BPP})\) to the RHS yields:</div>
 
-$$𝑁𝑃^{𝑁𝑃^{(𝑁𝑃(...^{(𝑁𝑃^𝐴)))}}} \subseteq BPP^A$$
+$$\text{NP}^{\text{NP}^{(\text{NP}(...^{(\text{NP}^𝐴)))}}} \subseteq \text{BPP}^A$$
 
 <div class="single_indent">Therefore, the inductive stage holds for \(i = k + 1\).</div><br>
 
 
 <u>Conclusive Step:</u><br>
 
-<div class="single_indent"> The theorem holds for an \(NP\) tower of height \(k + 1\) provided that it holds for an \(NP\) tower of height \(k\).</div>
-<div class="single_indent">However, from our basis step, we showed that the theorem holds for an \(NP\) tower of height \(1\).</div>
-<div class="single_indent">Therefore, from the inductive hypothesis, the theorem therefore holds true for any \(NP\) tower of height \(𝑛 ∈ \mathbb{N}\).</div> <br>
+<div class="single_indent"> The theorem holds for an \(\text{NP}\) tower of height \(k + 1\) provided that it holds for an \(\text{NP}\) tower of height \(k\).</div>
+<div class="single_indent">However, from our basis step, we showed that the theorem holds for an \(\text{NP}\) tower of height \(1\).</div>
+<div class="single_indent">Therefore, from the inductive hypothesis, the theorem therefore holds true for any \(\text{NP}\) tower of height \(𝑛 ∈ \mathbb{N}\).</div> <br>
 
 <div class="single_indent">Hence, we have that:</div>
 
-$$𝑁𝑃^𝐴 ⊆ 𝐵𝑃𝑃^𝐴 \Rightarrow 𝑁𝑃^{𝑁𝑃^{(𝑁𝑃(...^{(𝑁𝑃^𝐴)))}}} ⊆ 𝐵𝑃𝑃^𝐴$$
+$$\text{NP}^𝐴 ⊆ \text{BPP}^𝐴 \Rightarrow \text{NP}^{\text{NP}^{(\text{NP}(...^{(\text{NP}^𝐴)))}}} ⊆ \text{BPP}^𝐴$$
 
 QED.
 
@@ -436,16 +440,16 @@ QED.
 </div><br>
 
 
-<button class="collapsible"><strong>Lemma 3: \(co\)-\((\bigoplus P) \subseteq \bigoplus P\)</strong></button>
+<button class="collapsible"><strong>Lemma 3: \(\text{co}\)-\((\oplus P) \subseteq \oplus P\)</strong></button>
   <div class="content">
     <br>
 
-Given an arbitrary language \(𝐿 ∈ co\)-\((⨁𝑃)\) that is decided by a nondeterministic polynomial-time turing machine \(M(x, y)\) s.t. \(𝑥 ∈ 𝐿\) implies that an even number of computation paths (\(y\) is even) end up on an ACCEPT state and \(𝑥 ∉ 𝐿\) implies that an odd number of computation paths (\(y\) is odd) end up on a REJECT state, we can also decide \(L\) on a \(⨁P\) machine \(M'\).<br><br>
+Given an arbitrary language \(𝐿 ∈ \text{co}\)-\((\oplus \text{P})\) that is decided by a nondeterministic polynomial-time turing machine \(M(x, y)\) s.t. \(𝑥 ∈ 𝐿\) implies that an even number of computation paths (\(y\) is even) end up on an ACCEPT state and \(𝑥 ∉ 𝐿\) implies that an odd number of computation paths (\(y\) is odd) end up on a REJECT state, we can also decide \(L\) on a \(\oplus \text{P}\) machine \(M'\).<br><br>
 
 Therefore, we use the following procedure:<br><br>
 
 \(M’(x)\):<br>
-<div class="single_indent">If \(𝐿 = \{𝑥 | \text{ number of }y's \text{ s. t. }𝑀(𝑥, 𝑦) = 1 \text{ is even}\}\), then construct \((⨁ P)\) machine \(M'\) that runs on \(𝑀'(𝑥, 𝑦)\).</div><br>
+<div class="single_indent">If \(𝐿 = \{𝑥 | \text{ number of }y's \text{ s. t. }𝑀(𝑥, 𝑦) = 1 \text{ is even}\}\), then construct \((\oplus \text{P})\) machine \(M'\) that runs on \(𝑀'(𝑥, 𝑦)\).</div><br>
 
 <div class="single_indent">Then, we allow \(M’(𝑥, ty)\) to have an additional computational path than \(M\) by letting it do the following:</div><br>
 
@@ -457,11 +461,11 @@ Therefore, we use the following procedure:<br><br>
 
 
 We see here that \(M'\) has exactly 1 more accepting computation path than \(M\). Since \(M\) had an even number of paths, we have that \(M’\) has an odd number of paths. Therefore, \(𝐿 = \{ 𝑥 | \text{ number of y's s.t. } 𝑀'(𝑥, 𝑦) =
-1 \text{ is odd}\}\). Hence, \(𝐿 ∈ ⨁𝑃\).<br><br>
+1 \text{ is odd}\}\). Hence, \(𝐿 ∈ \oplus \text{P}\).<br><br>
 
-Since \(𝐿 ∈ ⨁𝑃, 𝐿 ∈ 𝑐𝑜\)-\(⨁𝑃\), we use the transitivity property to conclude that:
+Since \(𝐿 ∈ \oplus \text{P}, 𝐿 ∈ \text{co}\)-\(\oplus \text{P}\), we use the transitivity property to conclude that:
 
-$$𝑐𝑜\text{ -}⨁𝑃 ⊆ ⨁𝑃$$
+$$\text{co -}\oplus \text{P} ⊆ \oplus \text{P}$$
 
 QED.
 
@@ -470,12 +474,13 @@ QED.
 </div><br>
 
 
-<button class="collapsible"><strong>Lemma 4: \((\bigoplus P)^{\bigoplus P} \subseteq \bigoplus P\)</strong></button>
+<button class="collapsible"><strong>Lemma 4: \((\oplus \text{P})^{\oplus \text{P}} \subseteq \oplus \text{P}\)</strong></button>
   <div class="content"><br>
 
-Given an arbitrary language \(𝐿 ∈ (⨁𝑃)^{⨁𝑃}\) that is decided by a nondeterministic turing machine \(M\) which queries an oracle \(𝐴 ∈ ⨁𝑃\), we can show that it is also decided by a nondeterministic turing machine \(M'\) s.t. \(𝐿 = \{x | \text{ number of 𝑦's s.t. }𝑀'(𝑥,𝑦) = 1 \text{ is odd }\}\).<br><br>
+Given an arbitrary language \(𝐿 ∈ (\oplus \text{P})^{\oplus \text{P}}\) that is decided by a nondeterministic turing machine \(M\) which queries an oracle \(𝐴 ∈ \oplus\text{P}\), we can show that it is also decided by a nondeterministic turing machine \(M'\) s.t. \(𝐿 = \{x: |\{y: M'(x,y)=1\}| \text{ is odd}\}\).
+<br><br>
 
-First use the method suggested in the hint, knowing that \(∃\) some nondeterministic guess that produces a correct transcript that concurs with M on the specified computation path.<br><br>
+First use the method suggested in the hint, knowing that there exists some nondeterministic guess that produces a correct transcript that concurs with \(M\) on the specified computation path.<br><br>
 
 Then, we use the following strategy to decide on an input \(x\).<br><br>
 
@@ -517,11 +522,11 @@ The procedure outlined above, however, ensures that \(M'\) REJECTs on all of the
 
 Since we have shown that “yes” maps to “yes” and “no” maps to “no”, we conclude the proof of correctness for this procedure, and therefore we have that:
 
-$$L \in \bigoplus P$$
+$$L \in \oplus \text{P}$$
 
 Then, by the property of transitivity, we have that:
 
-$$\bigg(\bigoplus P\bigg)^{\bigoplus P} \subseteq \bigoplus P$$
+$$(\oplus \text{P})^{\oplus \text{P}} \subseteq \oplus \text{P}$$
 
 QED.
 
@@ -529,48 +534,48 @@ QED.
 </div><br>
 
 
-<button class="collapsible"><strong>Lemma 5: \(PH \subseteq BPP^{\bigoplus P}\)</strong></button>
+<button class="collapsible"><strong>Lemma 5: \(\text{PH} \subseteq \text{BPP}^{\oplus \text{P}}\)</strong></button>
   <div class="content">
 <br>
-Let \(L\) be an arbitrary language s.t. \(𝐿 ∈ PH\), where
+Let \(L\) be an arbitrary language such that \(𝐿 ∈ \text{PH}\), where
 
-$$ PH = \bigcup\limits_{k \in \mathbb{N}} \Sigma_k^P$$
+$$ \text{PH} = \bigcup\limits_{k \in \mathbb{N}} \Sigma_k^P$$
 
-It follows then that we need to show that \(∀𝑘, Σ_k^𝑃 ⊆ BPP^{\bigoplus P}\). Therefore,
+It follows then that we need to show that \(∀𝑘, Σ_k^𝑃 ⊆ BPP^{\bigoplus \text{P}}\). Therefore,
 
-$$NP^A ⊆ BPP^{(⨁P^A)} \quad \text{(from Lemma 1)}$$
+$$\text{NP}^A ⊆ \text{BPP}^{(\oplus \text{P}^A)} \quad \text{(from Lemma 1)}$$
 
-Let \(A ∈ ⨁𝑃\). It follows then that since \((⨁P)^{⨁P} ⊆ ⨁P\) (proven in Lemma 2), we can simply replace \(⨁P^A\)
-with some language \(A' ∈ ⨁P\). Therefore, we have that:
+Let \(A ∈ \oplus \text{P}\). It follows then that since \((\oplus \text{P})^{\oplus \text{P}} ⊆ \oplus \text{P}\) (proven in Lemma 2), we can simply replace \(\oplus \text{P}^A\)
+with some language \(A' ∈ \oplus \text{P}\). Therefore, we have that:
 
-$$NP^A ⊆ BPP^{A'}$$
+$$\text{NP}^A ⊆ \text{BPP}^{A'}$$
 
-Then, let \(B ∈ ⨁P\)-complete. It follows then that since \(B\) can be reduced to \(𝐴\), \(A'\) , we can rewrite the above set inclusion as:
+Then, let \(B ∈ \oplus \text{P}\)-complete. It follows then that since \(B\) can be reduced to \(𝐴\), \(A'\) , we can rewrite the above set inclusion as:
 
-$$NP^B ⊆ BPP^B$$
+$$\text{NP}^B ⊆ \text{BPP}^B$$
 
 Given the above set-inclusion to be true, we also know that:
 
-$$NP^{NP^B} \subseteq BPP^B$$
-$$NP^{NP^{NP^B}} \subseteq BPP^B$$
-$$NP^{NP^{NP^{NP^{NP^{...^{NP^B}}}}}} \subseteq BPP^B$$
+$$\text{NP}^{\text{NP}^B} \subseteq \text{BPP}^B$$
+$$\text{NP}^{\text{NP}^{\text{NP}^B}} \subseteq \text{BPP}^B$$
+$$\text{NP}^{\text{NP}^{\text{NP}^{\text{NP}^{\text{NP}^{...^{\text{NP}^B}}}}}} \subseteq \text{BPP}^B$$
 
 
-Therefore, we have that \(∀𝑘\) levels in the NP-tower:
+Therefore, we have that for all \(k\) levels in the \(\text{NP}\)-tower:
 
-$$\{𝑁𝑃^{𝑁𝑃^{...^{𝑁𝑃^𝐵}}}\} ⊆ BPP^B$$
+$$\{\text{NP}^{\text{NP}^{...^{\text{NP}^𝐵}}}\} ⊆ \text{BPP}^B$$
 
 
-However, by definition the LHS (with a height of \(k\)) is equal to \(Σ_k^P\). Therefore, we now have that \(∀𝑘\) we can just construct the NP-tower of height \(k\) and it would still be contained in \(𝐵𝑃𝑃^𝐵\).
+However, by definition the LHS (with a height of \(k\)) is equal to \(Σ_k^P\). Therefore, we now have that for all \(k\), we can just construct the \(\text{NP}\)-tower of height \(k\) and it would still be contained in \(\text{BPP}^𝐵\).
 
-$$∀𝑘, Σ_k^𝑃 ∈ 𝐵𝑃𝑃^𝐵$$
+$$∀𝑘, Σ_k^𝑃 ∈ \text{BPP}^𝐵$$
 
-$$ PH = \bigcup\limits_{k \in \mathbb{N}} \Sigma_k^P \in BPP^B$$
+$$ \text{PH} = \bigcup\limits_{k \in \mathbb{N}} \Sigma_k^P \in \text{BPP}^B$$
 
-$$PH \subseteq BPP^B, \quad B \in \bigoplus P\text{-complete}$$
+$$\text{PH} \subseteq \text{BPP}^B, \quad B \in \oplus \text{P-complete}$$
 
 This then yields:
-$$𝑃𝐻 ⊆ 𝐵𝑃𝑃^{⨁P}$$
+$$\text{PH} ⊆ \text{BPP}^{\oplus \text{P}}$$
 
 QED.
 
@@ -867,25 +872,25 @@ QED.
 </div><br>
 
 
-<button class="collapsible"><strong>Lemma 8: Concluding that \(PH \subseteq P^{\# P}\)</strong></button>
+<button class="collapsible"><strong>Lemma 8: Concluding that \(\text{PH} \subseteq \text{P}^{\# \text{P}}\)</strong></button>
   <div class="content">
 <br>
 Recall Lemmas \(1\) and \(2\) which state that
-$$𝑃𝐻 ⊆ 𝐵𝑃𝑃^{⨁𝑃} $$
-$$(⨁𝑃)^{⨁𝑃} ⊆ ⨁𝑃 $$
+$$\text{PH} ⊆ \text{BPP}^{\oplus \text{P}} $$
+$$(\oplus \text{P})^{\oplus \text{P}} ⊆ \oplus \text{P} $$
 
-<u>Lemma 8.1</u>: any language in \(BPP^{⨁ 𝑃}\) can be decided in \(BPP^{⨁ 𝑃}\) with the oracle machine making a single query and then immediately entering \(q_\text{accept}\) or \(q_\text{reject}\).<br><br>
+<u>Lemma 8.1</u>: any language in \(\text{BPP}^{\oplus \text{P}}\) can be decided in \(BPP^{\oplus \text{P}}\) with the oracle machine making a single query and then immediately entering \(q_\text{accept}\) or \(q_\text{reject}\).<br><br>
 
-Let \(𝐿 ∈ 𝐵𝑃𝑃^{⨁𝑃}\). Let \(M\) be a probabilistic \(TM\) with oracle \(𝑃^{⨁𝑃}\) that decides a string \(x\) through the following procedure (and only tossing the coins redundantly):<br><br>
+Let \(𝐿 ∈ \text{BPP}^{\oplus \text{P}}\). Let \(M\) be a probabilistic \(TM\) with oracle \(\text{P}^{\oplus \text{P}}\) that decides a string \(x\) through the following procedure (and only tossing the coins redundantly):<br><br>
 
 \(M(x)\):<br>
-<div class="single_indent">Toss the \(𝑐 = |𝑥|\) coins and write down the results (what is actually done with the results is not relevant right now).</div><br>
+<div class="single_indent">Toss the \(c = |𝑥|\) coins and write down the results (what is actually done with the results is not relevant right now).</div><br>
 
-<div class="single_indent">Query the oracle \(𝑃^{⨁𝑃}\) on \(x\).</div><br>
+<div class="single_indent">Query the oracle \(\text{P}^{\oplus \text{P}}\) on \(x\).</div><br>
 
 <div class="single_indent">If the oracle returns ACCEPT, then enter \(𝑞_\text{𝑎𝑐𝑐𝑒𝑝𝑡}\). If the oracle returns REJECT, then enter \(𝑞_\text{𝑟𝑒𝑗𝑒𝑐𝑡}\).</div><br>
 
-Therefore, we have that \(M\) decides \(L\) in \(𝐵𝑃𝑃^{𝑃^{⨁𝑃}}\). Recall Lemma 2 which states that \((⨁𝑃)^{⨁𝑃} ⊆ ⨁𝑃\). Since \(𝑃 ∈ ⨁𝑃\), we have that \(𝑃^{⨁𝑃} ⊆ ⨁𝑃\). Therefore, \(M\) decides \(L\) in \(𝐵𝑃𝑃^{⨁𝑃}\).<br><br>
+Therefore, we have that \(M\) decides \(L\) in \(\text{BPP}^{\text{P}^{\oplus \text{P}}}\). Recall Lemma 2 which states that \((\oplus \text{P})^{\oplus \text{P}} ⊆ \oplus \text{P}\). Since \(\text{P} ∈ \oplus \text{P}\), we have that \(\text{P}^{\oplus \text{P}} ⊆ \oplus \text{P}\). Therefore, \(M\) decides \(L\) in \(\text{BPP}^{\oplus \text{P}}\).<br><br>
 
 QED.
 
@@ -893,9 +898,9 @@ QED.
 <br><br><br>
 <u>Lemma 8.2</u>: The outcome of the query is determined by the number of satisfying assignments of some circuit \(C\).<br><br>
 
-For the query made by \(M\) to \(⨁𝑃\), we let the turing machine that decides \(⨁𝑃\) be denoted as \(M'\). It follows then that \(M'\) has an equivalent circuit \(C\). It follows immediately that the outcome of the query (of form \(q: \{0, 1\}^c \rightarrow \{0, 1\}\) (where \(c\) is the number of coins)) depends on \(C\).<br><br>
+For the query made by \(M\) to \(\oplus \text{P}\), we let the turing machine that decides \(\oplus \text{P}\) be denoted as \(M'\). It follows then that \(M'\) has an equivalent circuit \(C\). It follows immediately that the outcome of the query (of form \(q: \{0, 1\}^c \rightarrow \{0, 1\}\) (where \(c\) is the number of coins)) depends on \(C\).<br><br>
 
-To determine the relationship further, we recall that \(⨁𝑃\) returns ACCEPT if the number of computation paths is odd and REJECT if it is even. Therefore, for an oracle query \(q\) to return ACCEPT, the number of satisfying assignments for \(C\) would have to be odd (\(\equiv 1 \mod 2)\), and for it to return REJECT, the number of satisfying assignments for \(C\) would have to be even \((\equiv 0 \mod 2)\).<br><br>
+To determine the relationship further, we recall that \(\oplus \text{P}\) returns ACCEPT if the number of computation paths is odd and REJECT if it is even. Therefore, for an oracle query \(q\) to return ACCEPT, the number of satisfying assignments for \(C\) would have to be odd (\(\equiv 1 \mod 2)\), and for it to return REJECT, the number of satisfying assignments for \(C\) would have to be even \((\equiv 0 \mod 2)\).<br><br>
 
 Hence, we conclude that the outcome of the query is determined by the number of satisfying assignments of some circuit \(C\).<br><br>
 
@@ -913,7 +918,7 @@ $$1 \mod 2^c \text{ satisfying assignments if } 𝐶 \text{ had } 1 \mod 2 \text
 The onus of the proof is to now show that the language can be decided by a deterministic polynomial-time
 turing machine \(Q\) that uses nondeterministic polynomial-time turing machine oracle \(Q'\) that runs in \(\#𝑃\).<br><br>
 
-From lemma \(8.1\), we have that since the language \(L\) is decided by \(BPP\), atleast \(\frac{2}{3}\) of the computation paths correctly produce circuit \(C'\) when \(𝑥 ∈ 𝐿\) such that \(C'\) has \(1 \mod 2^c\) satisfying assignments. Similarly, atmost \(\frac{1}{3}\) of the computation paths correctly produce circuit \(C'\) when \(𝑥 ∉ 𝐿\) such that \(C'\) has \(0 \mod 2^c\) satisfying assignments. Therefore, the total number of paths that produce \(C'\) with \(1 \mod 2^c\) satisfying assignments when \(𝑥 ∈ 𝐿\) is \(≥ \frac{2}{3}\cdot 2^c\), whereas the total number of paths that produce \(C'\) with \(0 \mod 2^c\) satisfying assignments when \(𝑥 ∉ 𝐿\) is \(≤ \frac{1}{3} \cdot 2^c\).<br><br>
+From lemma \(8.1\), we have that since the language \(L\) is decided by \(\text{BPP}\), atleast \(\frac{2}{3}\) of the computation paths correctly produce circuit \(C'\) when \(𝑥 ∈ 𝐿\) such that \(C'\) has \(1 \mod 2^c\) satisfying assignments. Similarly, atmost \(\frac{1}{3}\) of the computation paths correctly produce circuit \(C'\) when \(𝑥 ∉ 𝐿\) such that \(C'\) has \(0 \mod 2^c\) satisfying assignments. Therefore, the total number of paths that produce \(C'\) with \(1 \mod 2^c\) satisfying assignments when \(𝑥 ∈ 𝐿\) is \(≥ \frac{2}{3}\cdot 2^c\), whereas the total number of paths that produce \(C'\) with \(0 \mod 2^c\) satisfying assignments when \(𝑥 ∉ 𝐿\) is \(≤ \frac{1}{3} \cdot 2^c\).<br><br>
 
 Note then that we can use a \(\#𝑃\) oracle to find the total length of the set \(𝑆 = (𝑥 = \{0,1\}^𝑐) × 𝑖\) such that
 \(𝐶'(𝑞(𝑥), i) = 1\) where \(𝑥\) is every possible input of length \(c\) in the set, \(𝑞(𝑥)\) is a result of querying \(x\), and \(i\) is the \(d\)-dimensional input to \(C'\).<br><br>
@@ -927,17 +932,17 @@ Then, a polynomial procedure \(H\) does the following:<br><br>
 
 <div class="single_indent">If \(𝑘 ≤ \frac{2}{3} \cdot 2^c\), then return REJECT.</div><br>
 
-There are atleast \(\frac{2}{3}\) accepting paths that we explicitly search for and atmost \(\frac{1}{3}\) rejecting paths that we explicitly search for by using \(\#P\) which is then verified through the modulo operation by procedure \(H\). Hence, we now have that any for an arbitrary language \(𝐿 ∈ 𝐵𝑃𝑃^{⨁𝑃}\), \(𝐿 ∈ 𝑃^{\#𝑃}\). Therefore, we now have that:<br><br>
+There are atleast \(\frac{2}{3}\) accepting paths that we explicitly search for and atmost \(\frac{1}{3}\) rejecting paths that we explicitly search for by using \(\#\text{P}\) which is then verified through the modulo operation by procedure \(H\). Hence, we now have that any for an arbitrary language \(𝐿 ∈ \text{BPP}^{\oplus \text{P}}\), \(𝐿 ∈ \text{P}^{\#\text{P}}\). Therefore, we now have that:<br>
 
-$$𝐵𝑃𝑃^{⨁𝑃} ⊆ 𝑃^{\#𝑃}$$
+$$\text{BPP}^{\oplus \text{P}} ⊆ \text{P}^{\#\text{P}}$$
 
 However, recall result 1 from the previous set that:
 
-$$𝑃𝐻 ⊆ 𝐵𝑃𝑃^{⨁𝑃}$$
+$$\text{PH} ⊆ \text{BPP}^{\oplus \text{P}}$$
 
 Therefore, by the property of transitivity we now have that
 
-$$𝑃𝐻 ⊆ 𝑃^{\#𝑃}$$
+$$\text{PH} ⊆ \text{P}^{\#\text{P}}$$
 
 QED.
 
