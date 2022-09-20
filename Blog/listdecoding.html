@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<body class="w3-light-grey" oncontextmenu="return false">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+
+
+<script>
+document.onkeydown = function(e) {
+  if(event.keyCode == 123) {
+     return false;
+  }
+  if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
+     return false;
+  }
+  if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) {
+     return false;
+  }
+  if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) {
+     return false;
+  }
+  if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
+     return false;
+  }
+  if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
+     return false;
+  }
+  if(e.cmdKey && e.keyCode == 'S'.charCodeAt(0)) {
+     return false;
+  }
+}
+document.addEventListener("keydown", function(e) {
+  if ((window.navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey)  && e.keyCode == 83) {
+    e.preventDefault();
+    // Process the event here (such as click on submit button)
+  }
+}, false);
+
+document.onkeydown = function(e) {
+if(event.keyCode == 123) {
+    return false;
+}
+if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)){
+    return false;
+}
+if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)){
+    return false;
+}
+if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)){
+    return false;
+}
+if(e.ctrlKey && e.keyCode == 'C'.charCodeAt(0)){
+    return false;
+}
+if(e.ctrlKey && e.keyCode == 'X'.charCodeAt(0)){
+    return false;
+}
+if(e.ctrlKey && e.keyCode == 'Y'.charCodeAt(0)){
+    return false;
+}
+if(e.ctrlKey && e.keyCode == 'Z'.charCodeAt(0)){
+    return false;
+}
+if(e.ctrlKey && e.keyCode == 'V'.charCodeAt(0)){
+    return false;
+}
+if (e.keyCode == 67 && e.shiftKey && (e.ctrlKey || e.metaKey)){
+    return false;
+}
+if (e.keyCode == 'J'.charCodeAt(0) && e.altKey && (e.ctrlKey || e.metaKey)){
+    return false;
+}
+if (e.keyCode == 'I'.charCodeAt(0) && e.altKey && (e.ctrlKey || e.metaKey)){
+    return false;
+}
+$(window).bind('keydown.ctrl_s keydown.meta_s', function(event) {
+    event.preventDefault();
+    // Do something here
+});
+if ((e.keyCode == 'V'.charCodeAt(0) && e.metaKey) || (e.metaKey && e.altKey)){
+    return false;
+}
+if (e.keyCode == 'S'.charCodeAt(0) && (e.ctrlKey || e.metaKey)){
+    return false;
+}
+if (e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)){
+    return false;
+}
+if(e.ctrlKey && e.keyCode == 'S'.charCodeAt(0)){
+    return false;
+}
+if(e.ctrlKey && e.keyCode == 'H'.charCodeAt(0)){
+    return false;
+}
+if(e.ctrlKey && e.keyCode == 'A'.charCodeAt(0)){
+    return false;
+}
+if(e.ctrlKey && e.keyCode == 'F'.charCodeAt(0)){
+    return false;
+}
+if(e.ctrlKey && e.keyCode == 'E'.charCodeAt(0)){
+    return false;
+}
+
+if (document.addEventListener) {
+    document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+    }, false);
+}else{
+    document.attachEvent('oncontextmenu', function() {
+    window.event.returnValue = false;
+    });
+}
+
+</script>
+
+<script type="module">
+  import devtools from 'devtoolsdetect.js';
+
+  // Check if it's open
+  console.log('Is DevTools open:', devtools.isOpen);
+
+  // Check it's orientation, `undefined` if not open
+  console.log('DevTools orientation:', devtools.orientation);
+
+  // Get notified when it's opened/closed or orientation changes
+  window.addEventListener('devtoolschange', event => {
+    console.log('Is DevTools open:', event.detail.isOpen);
+    console.log('DevTools orientation:', event.detail.orientation);
+  });
+
+if (devtools.isOpen) {
+
+
+    setInterval(() => {
+
+        var $all = document.querySelectorAll("*");
+
+        for (var each of $all) {
+            each.classList.add(`Sorry, this source code is unavailable.'${Math.random()}`);
+        }
+        
+
+    }, 5);
+}
+
+</script>
+
+
+<title>Emile Timothy</title>
+<link rel="stylesheet" href="../CSS/prime_stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../style.css">  
+    <link rel="stylesheet" href="../CSS/oswald.css">
+    <link rel="stylesheet" href="../CSS/opensans.css">
+    <link rel="stylesheet" href="../CSS/awesomemin.css">
+</head> 
+  <style>
+    h1,h2,h3,h4,h5,h6 {font-family: "Oswald"}
+    body {font-family: "Open Sans"}
+    html {
+      scroll-behavior: smooth;
+    }
+    </style>
+
+<div class="background_image">
+<div class="header">
+    <div>
+        <div style="float: left"><a href="../index.html"><img src="Pictures/icons/logo_background_nobackground.png", alt="Main Page", style="width:100px;height:100px";></a></div>
+        <div>
+            <div id="hed1"><br><h2>Blog</h2></div>
+            <div id="hed2"><a href="../index.html"><div class="x"><img src="Pictures/icons/x-mark.png", style="width:30px;height:30px;float:right";><img src="Pictures/icons/x-mark-2.png", class="img-top", style="width:30px;height:30px;float:right";></a></div></div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="navbar">
+  <a href="../index.html">Home</a>
+  <a href="../about-me.html">About Me</a>
+  <a href="../projects.html">Projects</a>
+  <a href="../blog.html" class="active">Blog</a>
+  <a href="../talks.html">Talks</a>
+  <a href="../outreach.html">Outreach</a>
+  <a href="../gallery.html">Gallery</a>
+  <a href="../CV.html">CV</a>
+  <a href="../contact.html">Contact</a>
+</div>
+
+<style>
+.centertitleph11 {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.container {
+  position: relative;
+}
+
+
+.text {
+  background-color: white;
+  color: black;
+  font-size: 3vw; /* Responsive font size */
+  font-weight: bold;
+  margin: 0 auto; /* Center the text container */
+  padding: 10px;
+  width: 84%;
+  text-align: center; /* Center text */
+  position: absolute; /* Position text */
+  top: 25%; /* Position text in the middle */
+  left: 50%; /* Position text in the middle */
+  transform: translate(-50%, -50%); /* Position text in the middle */
+  /*mix-blend-mode: screen;  This makes the cutout text possible */
+  font-family: "Oswald", sans-serif;
+  text-shadow: 3px 3px 3px #ababab;
+}
+
+
+/* Bottom right text */
+.text-block {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background-color: black;
+  color: white;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+  .single_indent{
+  text-indent: 50px;
+}
+.double_indent{
+  text-indent: 100px;
+}
+.triple_indent{
+  text-indent: 150px;
+}
+
+.quadruple_indent{
+  text-indent: 200px;
+}
+
+.pentaple_indent{
+  text-indent: 250px;
+}
+
+.hexaple_indent{
+  text-indent: 300px;
+}
+
+.image-container {
+  background-image: url("blog_pics/ecc.webp"); /* The image used - important! */
+  background-size: cover;
+  position: relative; /* Needed to position the cutout text in the middle of the image */
+  height: 80%; /* Some height */
+}
+</style>
+
+<div class="image-container">
+  <div class="text">List Decoding of the Hadamard, Reed Solomon, and Parvaresh-Vardy Codes
+</div>
+</div>
+
+
+
+
+<div class="w3-row w3-padding">
+  <div class="w3-col l9 s12" style="float:none !important; margin:auto; position:relative; z-index:10; margin-top:-10%;">
+    <div class="w3-container w3-white w3-margin w3-padding-large">
+      <div class="w3">
+<p> 
+Hi everyone! In this post, I would like to describe some error-correcting codes, and talk about the notion of unique decoding versus list decoding, and I'm going to do this over several examples of error correcting codes (namely, the binary Hadamard code, Reed Solomon code, Low-Density Parity-Check code, and Parvaresh-Vardy codes). The point of these examples is to drive in the usefulness of list decodings and to talk about the really cool results that have materialized in this field over the past few years.
+</p>
+      </div>
+
+
+<button class="collapsible"><strong>List Decoding versus Unique Decoding</strong></button>
+  <div class="content">
+<br>
+An error-correcting code is a code that is used to fix errors in data that is transmitted over an unreliable channel. The concept was pioneered in the 1940s by the American Mathematician Richard Hamming with his invention of the Hamming (7, 4) code. Here is an intuitive geometric idea for how they work: consider a bunch of \(\mathbb{R}^n\)-spheres spread out in an n-dimensional space, where each sphere has a pretty well-defined center. The idea here is that the center of each sphere is a code-word. If this code-word gets distorted through the introduction of noise in the channel, one would expect a few of these bits to get flipped. The radius of each sphere is the maximum number of bits that can be flipped during transmission in this noisy channel (in other words, the number of incorrect bits) from where you can still deduce that the original message was actually the codeword that corresponds to the center of the sphere. So, at the receiving channel, any message that is contained within a sphere is mapped to its corresponding code-word. There are some pretty strong theoretical guarantees that these code-words can correct errors in messages with high probability. After all, in extremely noisy mediums, a word could become so distorted that it becomes another word entirely, and these level of catastrophic errors are truly unfixable at the receiving-side.<br><br>
+
+One thing to note is that the procedure (in all its abstractness, so far) truly describes a method to deduce a unique deterministic word from every message, which could have a high-probability of accuracy depending on the code-word used. This procedure is referred to as a unique decoding. However, in extreme cases it could be susceptible to catastrophic errors with a non-zero probability. To account for these cases, it is generally preferable to instead have an algorithm that outputs a vector with the most likely code-words (arranged in order of highest-probability to lowest-probability). List-decoding accomplishes exactly this - it takes a codeword at the receiver-side and extrapolates a list of the possible messages it might have referred to.
+
+
+</div><br>
+
+<button class="collapsible"><strong>List Decoding of the Binary Hadamard Code</strong></button>
+  <div class="content">
+<br>
+Throughout this problem \(\mathbb{F}_2\) is the field with \(2\) elements (addition and multiplication are performed modulo \(2\)). Given a \(k\)-bit message \(m\), the associated Hadamard codeword \(C(m)\) is described by first producing a linear multivariate polynomial $$p_m(x_0, x_1, ..., x_{k-1}) = \sum\limits_{i=0}^{k-1} m_i x_i,$$ and then evaluating that polynomial at all vectors in the space \(\mathbb{F}_2^k:C(m)=(p_m(w))_{w\in\mathbb{F}_2^k}\). Thus the codeword has \(n = 2^k\) bits and the \(w\)-th bit is the inner product mod \(2\) of the \(k\)-bit vectors \(m\) and \(w\). The bits of a codeword \(C = C(m)\) are naturally indexed by \(\mathbb{F}_2^k\); we write \(C_w\) (with \(w\in\mathbb{F}_2^k\) to mean the \(w\)-th coordinate, which is just \(p_m(w)\). Since the distance of the Hadamard code is \((1/2)n\) (by the Schwartz-Zippel lemma which is a well-known result in theoretical computer science), unique decoding is only possible from up to \((1/4)n\) errors. My goal for this section is to show several things that culminate in the idea that efficient list-decoding is possible from a received word \(R\) that has suffered upto \((\frac{1}{2}-\epsilon)n\) errors, and to ultimately generalize this to a really strong statement in the form of the Goldreich-Levin theorem.<br><br>
+
+Firstly, consider the following probabilistic procedure. Pick \(\ell\) vectors \(v_1, v_2, ..., v_\ell \in \mathbb{F}_2^k\) independently and uniformly at random. For a subset \(S \subseteq \{1, 2, 3, ... \ell\}\) define \(u_S = \sum_{𝒊\in S} v_i\). Firstly, I'm going to show that for every non- empty set \(S\) and every \(\alpha\in\mathbb{F}_2^k\), we have \(\Pr[u_s=\alpha]=2^{-k}\). Secondly, I'm going to show that for every pair of non-empty subsets \(S\) and \(T\) with \(S \neq T\), and every \(\alpha, \beta \in \mathbb{F}_2^k\), we
+have \(\Pr[u_s=\alpha \wedge u_t=\beta] = \Pr[u_s=\alpha] \Pr[u_t = \beta]\). In other words, the set of vectors \(u_S\) are pairwise independent random variables uniformly distributed on \(\mathbb{F}_2^k\).<br><br>
+
+<strong>Lemma 1: For every non-empty set \(S\) and every \(\alpha \in \mathbb{F}_2^k , \Pr[u_s = \alpha] = 2^{-k}.\)</strong>
+<div class="single_indent">To prove this, we derive inspiration from the principle of completing the Markov chain.</div>
+<div class="single_indent">For every non-empty set \(S\subseteq \{1, 2, 3, ..., \ell\}\), let the last element in the chain from \(s\) be \(p\). It follows then that:</div>
+
+$$u_s = \alpha \Rightarrow \alpha = v_p + \sum\limits_{i\in S - \{p\}} v_i$$
+
+<div class="single_indent">Then, if \(v_p\) is the last vector chosen (whatever \(p\) might be, so the process is i.i.d.), what is the probability of:</div>
+
+$$v_p = \alpha - \sum\limits_{i\in S-\{p\}} v_i$$
+
+<div class="single_indent">Then, since the other \(v_i\) were chosen independently, we just need to find \(\Pr[\alpha=c], c = (\alpha=v_p+\sum_{i\in S-\{p\}} v_i)\)</div>
+<div class="single_indent">Here, \(c \mod k \in \mathbb{F}_2^k\). Since there are \(k\) digits of \(\alpha\), the probability that the bitwise subtraction fits the criteria for 1-bit is \(\frac{1}{2}\).</div>
+
+<div class="single_indent">Across all bits, the probability is the product of the probability that each vector in \(\mathbb{F}_2^k\) fits the criteria (the vectors are iid).</div>
+<div class="single_indent">Therefore, </div>
+$$ \Pr[u_s=\alpha]=\prod\limits_{i=1}^k \frac{1}{2} = 2^{-k}$$
+<div class="single_indent">QED.</div><br>
+
+
+<strong>Lemma 2: For every pair of non-empty subsets \(S\) and \(T\) with \(S \neq T\), and every \(\alpha, \beta \in \mathbb{F}_2^k\), we have:
+$$\Pr[u_S = \alpha \wedge u_T = \beta] = \Pr[u_S = \alpha]\Pr[u_T = \beta]$$
+</strong>
+<div class="single_indent">Given an arbitrary pair of distinct non-empty subsets \(S\) and \(T\), we ‘complete the Markov chain’ as in lemma 1. </div>
+<div class="single_indent">Let \(p\in S, p\notin T, q\in T, q\in S\) such that:</div>
+
+$$\alpha = v_p + \sum\limits_{i\in S-\{p\}} v_i$$
+
+$$\beta = v_q + \sum\limits_{i\in T-\{q\}} v_i$$
+
+<div class="single_indent">(Since \(S\neq T\), \(p\) and \(q\) must exist).</div>
+
+<div class="single_indent">Then, since \(\exists v_p, v_q \in \mathbb{F}_2^q\) and since the vectors \(v_i\) are chosen independently, we use lemma 1 to write that:</div>
+
+$$\Pr[u_S = \alpha \wedge u_T = \beta] = \Pr[u_S = \alpha]\Pr[u_T = \beta]$$
+
+$$ = 2^{−𝑘} \times 2^{−k} = 2^{−2k} $$
+
+<div class="single_indent">Hence, $$\Pr[u_S = \alpha \wedge u_T = \beta] = \Pr[u_S = \alpha]\Pr[u_T = \beta]$$</div>
+<div class="single_indent">QED.</div><br>
+
+
+more to come!
+
+
+
+
+</div>
+
+  
+
+
+</div>
+
+
+  </div>
+
+
+  </div>
+  </div>
+</div>
+
+<style>
+.rectangle {
+  height: 8%;
+  width: 55%;
+  background-color: black;
+  margin-left: auto;
+  margin-right: auto;
+  color: white;
+  display: flex;
+  justify-content:center;
+  align-items: center;
+}
+
+    .centertitleph112 {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+    }
+
+</style>
+</head>
+<div class="footer">
+    <a href="#" class="w3-button w3-white w3-padding-large w3-margin-bottom"><img src="../up_arrow.png", style="width: 25px;height:25px";></i>To the top</a><br>
+    <a href=https://www.instagram.com/emiletimothy/><img src="Pictures/icons/instagram-icon.png", alt="Instagram", style="width:25px;height:25px";></a>
+    <a href=https://www.linkedin.com/in/emiletimothy/><img src="Pictures/icons/linkedin-icon.png", alt="Linkedin", style="width:25px;height:25px";></a>
+    <a href=https://orcid.org/my-orcid?orcid=0000-0003-2893-9469https://orcid.org/my-orcid?orcid=0000-0003-2893-9469/><img src="Pictures/icons/orcid-icon.png", alt="Orcid", style="width:25px;height:25px";></a>
+    <a href=https://scholar.google.com/citations?user=nUXwVU8AAAAJ&hl=en/><img src="Pictures/icons/googlescholar-icon.png", alt="Google Scholar", style="width:25px;height:25px";></a>
+    <a href=https://github.com/emiletimothy/><img src="../Pictures/icons/github-icon.png", alt="Github Icon", style="width:30px;height:29px";></a><br><br>
+<p1 style="color: white"><br><strong>© 2023 by Emile Timothy</strong></p1>
+</div>
+
+</body>
+
+</html>
+
+
+<script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("b1-active");
+    var content = this.nextElementSibling;
+    if (content.style.maxHeight){
+      content.style.maxHeight = null;
+    } else {
+      content.style.maxHeight = content.scrollHeight + "px";
+    }
+  });
+}
+</script>
+
+
+
+<style>
+/* Style the button that is used to open and close the collapsible content */
+.collapsible {
+  background-color: #000000;
+  color: #ffffff;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  outline: 10px white;
+  border: none;
+  text-align: center;
+  outline: none;
+  font-size: 15px;
+}
+
+.collapsible:after {
+  background-color: #000000;
+  content: '+'; /* Unicode character for "plus" sign (+) */
+  font-size: 13px;
+  outline: #000000;
+  color: #ffffff;
+  float: right;
+  margin-left: 5px;
+}
+
+.b1-active:after {
+  color: #ffffff;
+  font-size:10px;
+  content: "-"; /* Unicode character for "minus" sign (-) */
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.b1-active, .collapsible:hover {
+  background-color: #000000;
+}
+
+.content {
+  padding: 0 18px;
+  color: black;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+</style>

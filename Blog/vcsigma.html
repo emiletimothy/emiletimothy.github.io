@@ -287,11 +287,11 @@ To explain this better, I'm going to introduce some notation: <br>
 <div class="single_indent">Let \(\text{NP}^A\) be the set of problems solvable in nondeterministic poly-time with a TM that uses an oracle for a problem in \(A\).</div>
 <div class="single_indent">Let \(\text{coNP}^A\) be the set of problems solvable in co-nondeterministic poly-time with a TM that uses an oracle for a problem in \(A\).</div><br>
 
-Then, define \(\Delta_0^P := \Sigma_0^P := \prod_0^P:=P\), where \(P\) is the set of problems that can be solved in poly-time. Then, for all \(i \geq 0\), define:
+Then, define \(\Delta_0^P := \Sigma_0^P := \Pi_0^P:=P\), where \(P\) is the set of problems that can be solved in poly-time. Then, for all \(i \geq 0\), define:
 
 $$\Delta_{i+1}^P:=\text{P}^{\Sigma_i^P}$$
 $$\Sigma_{i+1}^P:=\text{NP}^{\Sigma_i^P}$$
-$$\prod_{i+1}^P:=\text{coNP}^{\Sigma_i^P}$$
+$$\Pi_{i+1}^P:=\text{coNP}^{\Sigma_i^P}$$
 
 The result that I want to show here is that the VC-dimension is in \(\Sigma_3^P\), and that is the strongest form of problem in \(\Sigma_3^P\). So, any solution that can compute the VC-dimension can be used to compute any other problem in \(\Sigma_3^P\). The complexity-theoretic word for this phenomenon is <i>completenesss</i>. That is to say, the V-dimension is \(\Sigma_3^P\)-complete.
 
@@ -359,7 +359,7 @@ $$𝑈_{𝑥_1} = \{𝑥_1\} \times \{1,2,3,...\ell\}$$
 
 Using this, we define the collection of sets, \(S\), succinctly represented by circuit \(C\) (note that the circuit would have to maintain this invariant \(∀𝑥_1,𝑥_2,𝑥_3\), as:<br><br>
 
-1) If \(𝜑(𝑥_1,𝑥_2,𝑥_3)=1\), then \(𝑆(𝑥_1,𝑥_2,𝑥_3)=\{𝑥_1\}×\{1,2,3,...\ell\},|𝑥1|=l\)<br>
+1) If \(𝜑(𝑥_1,𝑥_2,𝑥_3)=1\), then \(𝑆(𝑥_1,𝑥_2,𝑥_3)=\{𝑥_1\}×\{1,2,3,...\ell\},|𝑥_1|=l\)<br>
 2) If \(𝜑(𝑥_1, 𝑥_2, 𝑥_3) = 0\), then \(𝑆(𝑥_1, 𝑥_2, 𝑥_3) = 𝜙\), where \(𝜙\) is the empty set (note that we don’t need to
 address this case here since \(𝜑(𝑥_1,𝑥_2,𝑥_3) = 0\) should really just do nothing, hence the empty set will suffice), where the name of each set is \((𝑥_1, 𝑥_2, 𝑥_3)\).<br><br>
 
@@ -400,7 +400,7 @@ reduced to “no” instances of VC-DIMENSION, and a “yes” instance of \(�
 
 
 Since we have shown that “yes” maps to “yes” and “no” maps to “no”, we have that \(∃\) a reduction function from instances of \(𝑄𝑆𝐴𝑇_3\) to instances of the VC-DIMENSION problem and that \(∃\) a reduction function from
-instances of the VC-DIMENSION problem to instances of \(𝑄𝑆𝐴𝑇_3\). Additionally, since \(𝑄𝑆𝐴𝑇_3\) is known to be \(Σ_3^P\)-complete, it follows then that 𝑉𝐶-DIMENSION is also \(Σ_3^𝑃\)-complete.<br><br>
+instances of the VC-DIMENSION problem to instances of \(𝑄𝑆𝐴𝑇_3\). Additionally, since \(𝑄𝑆𝐴𝑇_3\) is known to be \(\Sigma_3^P\)-complete, it follows then that 𝑉𝐶-DIMENSION is also \(\Sigma_3^𝑃\)-complete.<br><br>
 QED.
 
 
