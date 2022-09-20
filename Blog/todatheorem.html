@@ -270,15 +270,15 @@ I'm going to start by defining \(\text{NP}, \text{BPP}\), and \(\oplus \text{P}\
 
 Next, I'm going to describe the notion of Turing Machines with Oracles, and the specific classes of problems they solve. For instance, consider the classes \(\text{NP}^A\), \(\text{BPP}^A\), \((\oplus \text{P})^A\). These are the classes obtained by replacing the polynomial-time nondeterministic Turing Machine \(M\) in the definitions above with a polynomial-time nondeterministic oracle Turing Machine \(M\) that is equipped with language \(A\) as its oracle. As usual, if we write \(C\) instead of \(A\) in the exponent, for some complexity class \(C\), we mean that any language \(A ∈ C\) is permitted as the oracle. If \(C\) has a complete language (as \(\text{NP}^A\) and \((\oplus \text{P})^𝑨\) do, for any oracle \(A\)), then by using that language as the oracle we can solve any instance of a problem in \(C\) with a single call to this specific oracle.<br><br>
 
-Finally, I'm going to describe the polynomial-time hierarchy. Define \(\Delta_0^P := \Sigma_0^P := \prod_0^P:= \text{P}\), where \(\text{P}\) is the set of problems that can be solved in polynomial time (with respect to the size of the instance of the problem). Then, for all \(i \geq 0\), define:
+Finally, I'm going to describe the polynomial-time hierarchy. Define \(\Delta_0^P := \Sigma_0^P := \Pi_0^P:= \text{P}\), where \(\text{P}\) is the set of problems that can be solved in polynomial time (with respect to the size of the instance of the problem). Then, for all \(i \geq 0\), define:
 
 $$\Delta_{i+1}^P:=\text{P}^{\Sigma_i^P}$$
 $$\Sigma_{i+1}^P:=\text{NP}^{\Sigma_i^P}$$
-$$\prod_{i+1}^P:=\text{coNP}^{\Sigma_i^P}$$
+$$\Pi_{i+1}^P:=\text{coNP}^{\Sigma_i^P}$$
 
 The polynomial-time hierarchy is defined as
 
-$$PH = \bigcup\limits_{i} \{\Delta_i^P, \Sigma_i^P, \prod_i^P\}$$
+$$PH = \bigcup\limits_{i} \{\Delta_i^P, \Sigma_i^P, \Pi_i^P\}$$
 
 The result that I want to show here is that every language in the polynomial hierarchy can be solved by Turing Machines of the counting complexity class \(\text{P}^{\#\text{P}}\) (pronounced P sharp-P), which really illuminates the significance of counting as a fundamental computational resource.
 
