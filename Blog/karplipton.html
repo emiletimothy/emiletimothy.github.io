@@ -254,15 +254,15 @@ if (devtools.isOpen) {
 <p> 
 Happy Monday! Today, I'm going to share something really cool about the polynomial hierarchy. I know that I've written prior entries about the polynomial hierarchy where I've praised some of its properties, but this result about the Polynomial Hierarchy is the WILDest thing ever! If you're new here, I'm going to start by giving my regular schpiel about what the polynomial hierarchy is.<br><br>
 
-Define \(\Delta_0^P := \Sigma_0^P := \prod_0^P:=P\), where \(P\) is the set of problems that can be solved in poly-time. Then, for all \(i \geq 0\), define:
+Define \(\Delta_0^P := \Sigma_0^P := \Pi_0^P:=P\), where \(P\) is the set of problems that can be solved in poly-time. Then, for all \(i \geq 0\), define:
 
 $$\Delta_{i+1}^P:=\text{P}^{\Sigma_i^P}$$
 $$\Sigma_{i+1}^P:=\text{NP}^{\Sigma_i^P}$$
-$$\prod_{i+1}^P:=\text{coNP}^{\Sigma_i^P}$$
+$$\Pi_{i+1}^P:=\text{coNP}^{\Sigma_i^P}$$
 
 The polynomial-time hierarchy is defined as:
 
-$$PH = \bigcup\limits_{i} \{\Delta_i^P, \Sigma_i^P, \prod_i^P\}$$
+$$\text{PH} = \bigcup\limits_{i} \{\Delta_i^P, \Sigma_i^P, \Pi_i^P\}$$
 
 The result that I want to show here is that every language in the polynomial hierarchy is equivalent in computational power to the complexity class of symmetric functions \(S_2^P\), which resides between the first and second levelss of the polynomial hierarchy.<br><br>
 
@@ -283,25 +283,25 @@ Another, more intuitive way to look at \(S_2^P\) is the following: Suppose that 
     <br>
 Let L be an arbitrary language in \(𝑆_𝑝\). It follows by definition then that:
 
-$$ 𝑥 ∈ 𝐿 ⇒ ∃𝑦 ∀𝑧 (𝑥, 𝑦, 𝑧) ∈ 𝑅$$
+$$ 𝑥 ∈ 𝐿 ⇒ ∃𝑦 ∀𝑧, (𝑥, 𝑦, 𝑧) ∈ 𝑅$$
 
-$$ 𝑥 ∉ 𝐿 ⇒ ∃𝑧 ∀𝑦 (𝑥, 𝑦, 𝑧) ∉ 𝑅 $$
+$$ 𝑥 ∉ 𝐿 ⇒ ∃𝑧 ∀𝑦, (𝑥, 𝑦, 𝑧) ∉ 𝑅 $$
 
 However, note that the order of the universal and existential quantifiers is commutative in this case only if the commutator is taken in both directions. So, from this we can write two alternate versions of the definition, where version 1 commutes the quantifiers in the case for \(𝑥 ∈ 𝐿\) while holding the case for \(𝑥 ∉ 𝐿\) to be constant, and version 2 commutes the quantifiers in the case for \(𝑥 ∉ 𝐿\) while holding the case for \(𝑥 ∈ 𝐿\) to be constant. This procedure yields:<br><br>
 
 Version 1:
-$$𝑥 ∈ 𝐿 ⇒ ∀𝑧 ∃𝑦 (𝑥, 𝑦, 𝑧) ∈ 𝑅$$
-$$𝑥 ∉ 𝐿 ⇒ ∃𝑧 ∀𝑦 (𝑥, 𝑦, 𝑧) ∉ 𝑅$$
+$$𝑥 ∈ 𝐿 ⇒ ∀𝑧 ∃𝑦, (𝑥, 𝑦, 𝑧) ∈ 𝑅$$
+$$𝑥 ∉ 𝐿 ⇒ ∃𝑧 ∀𝑦, (𝑥, 𝑦, 𝑧) ∉ 𝑅$$
 
 
 Version 2:
-$$𝑥 ∈ 𝐿 ⇒ ∃𝑦 ∀𝑧 (𝑥, 𝑦, 𝑧) ∈ 𝑅$$
-$$𝑥 ∉ 𝐿 ⇒ ∀𝑦 ∃𝑧 (𝑥, 𝑦, 𝑧) ∉ 𝑅$$
+$$𝑥 ∈ 𝐿 ⇒ ∃𝑦 ∀𝑧, (𝑥, 𝑦, 𝑧) ∈ 𝑅$$
+$$𝑥 ∉ 𝐿 ⇒ ∀𝑦 ∃𝑧, (𝑥, 𝑦, 𝑧) ∉ 𝑅$$
 
-However, by definition, the complexity class that version 1 decides is equal to \(Σ_2^𝑃\), and the complexity class
-that version 2 decides is equal to \(Π_2^𝑃\). Therefore, if \(𝑥 ∈ 𝑆_2^𝑃\) then \(𝑥 ∈ Σ_2^P\) and \(𝑥 ∈ Π_2^𝑃\).<br><br>
+However, by definition, the complexity class that version 1 decides is equal to \(\Sigma_2^P\), and the complexity class
+that version 2 decides is equal to \(\Pi_2^P\). Therefore, if \(𝑥 ∈ S_2^P\) then \(𝑥 ∈ \Sigma_2^P\) and \(𝑥 ∈ \Pi_2^P\).<br><br>
 Therefore, we have that:
-$$𝑆_2^𝑃 ⊆ (Σ_2^𝑃 ∩ Π_2^𝑃)$$
+$$S_2^𝑃 ⊆ (\sigma_2^P ∩ \Pi_2^P)$$
 
 QED.
 
@@ -310,14 +310,14 @@ QED.
 
 
 
-<button class="collapsible"><strong>Lemma 2: LEX-FIRST-ACCEPTANCE is \(P^{NP}\)-complete.</strong></button>
+<button class="collapsible"><strong>Lemma 2: LEX-FIRST-ACCEPTANCE is \(\text{P}^{\text{NP}}\)-complete.</strong></button>
   <div class="content">
 <br>
 The language LEX-FIRST-ACCEPTANCE consists of those pairs \((𝑪_𝟏, 𝑪_𝟐)\) for which \(𝑪_𝟏, 𝑪_𝟐\) are circuits, and the lexicographically first-string \(x\) for which \(𝑪_𝟏(𝒙) = 𝟏\) is also accepted by \(𝑪_𝟐\). (If there is no lexicographically first string, i.e., \(𝑪_𝟏\) is unsatisfiable, then \((𝑪_𝟏, 𝑪_𝟐)\) is not in the language). A bitstring \(x\) lexicographically precedes a bitstring \(y\) if the first position \(i\) in which they differ has \(𝒙_𝒊 = 𝟎\) and \(𝒚_𝒊 = 𝟏\).<br><br>
 
-The purpose of this lemma is to show that LEX-FIRST-ACCEPTANCE is \(P^{NP}\)-complete - that not only is it solvable by \(P^{NP}\) Turing Machine, but also it is representative of every problem in the \(P^{NP}\) complexity class.<br><br>
+The purpose of this lemma is to show that LEX-FIRST-ACCEPTANCE is \(P^{\text{NP}}\)-complete - that not only is it solvable by \(P^{\text{NP}}\) Turing Machine, but also it is representative of every problem in the \(P^{\text{NP}}\) complexity class.<br><br>
 
-<u>Sub-Lemma 2.1</u>: \(𝐿𝐹𝐴 ∈ 𝑃^{𝑁𝑃}\):<br><br>
+<u>Sub-Lemma 2.1</u>: \(𝐿𝐹𝐴 ∈ P^{\text{NP}}\):<br><br>
 Given an instance \((𝐶_1, 𝐶_2)\), call the \(\text{NP}\) oracle to determine the first lexicographically first string \(𝑥 ∈ \{0, 1\}^𝑛\) that is accepted by \(𝐶_1\). The \(\text{NP}\) oracle nondeterministically evaluates each string with \(𝐶_1\) but uses an arbitrary enumeration scheme to prioritize which string that is accepted by \(𝐶_1\) is lexicographically first. If there is no such string, the machine returns false. <br><br>
 
 If \(∃\) a lexicographically-first string \(x\), the \(P\) machine would check if \(𝐶_2(𝑥) = 1\):
@@ -331,10 +331,10 @@ QED.
 </div><br>
 
 
-<button class="collapsible"><strong>Lemma 3: \(P^{NP}\subseteq S_2^P\).</strong></button>
+<button class="collapsible"><strong>Lemma 3: \(\text{P}^{\text{NP}}\subseteq S_2^P\).</strong></button>
   <div class="content">
 <br>
-In Lemma 2, I showed that LEX−FIRST−ACCEPTANCE (LFA) \(∈ 𝑃^\text{𝑁𝑃}\)-complete. Therefore, to show that \(P^{𝑁𝑃} ⊆ 𝑆_2^𝑃\), we can instead just show that \(\text{LFA} ∈ S_2^P\) since \(\text{LFA}\) can then be generalized to all other languages in \(𝑃^{\text{NP}}\). Therefore, our goal is to show that for some predicate \(T\):<br>
+In Lemma 2, I showed that LEX−FIRST−ACCEPTANCE (LFA) \(∈ \text{P}^\text{NP}\)-complete. Therefore, to show that \(P^\text{NP} ⊆ 𝑆_2^P\), we can instead just show that \(\text{LFA} ∈ S_2^P\) since \(\text{LFA}\) can then be generalized to all other languages in \(𝑃^{\text{NP}}\). Therefore, our goal is to show that for some predicate \(T\):<br>
 
 $$1) ∀𝑥∈\text{LFA}, ∃𝑦∀𝑧, 𝑇(𝑥,𝑦,𝑧)=1$$
 $$2) ∀𝑥∉\text{LFA}, ∃𝑧∀𝑦, 𝑇(𝑥,𝑦,𝑧)=0$$
@@ -347,9 +347,9 @@ In the case that \(𝐶_1(𝑥)\) and \(𝐶_1(𝑦)\) are both \(0\), there is 
 $$(𝐶_1,𝐶_2) ∈ \text{LFA} \Rightarrow ∃y∀z(∀x), T(x,y,z) = 1 \Rightarrow ∃y∀x, T(x,y)=1$$
 $$(𝐶_1,𝐶_2) ∉ \text{LFA} \Rightarrow ∃z∀y(∀x), T(x,y,z) = 0 \Rightarrow ∃x∀y, T(x,y)=0$$
 
-Since this is the definition of \(𝑆_2^𝑃\) (modified from above), this implies that \(\text{LFA} ∈ 𝑆_2^𝑃\). Hence, by the \(𝑃^{𝑁𝑃}\)-completeness of \(\text{LFA}\), we have that: 
+Since this is the definition of \(𝑆_2^𝑃\) (modified from above), this implies that \(\text{LFA} ∈ 𝑆_2^𝑃\). Hence, by the \(\text{P}^{\text{NP}}\)-completeness of \(\text{LFA}\), we have that: 
 
-$$𝑃^{𝑁𝑃} ⊆ 𝑆_2^𝑃$$
+$$\text{P}^{\text{NP}} ⊆ 𝑆_2^P$$
 
 QED.
 
@@ -357,14 +357,14 @@ QED.
 </div><br>
 
 
-<button class="collapsible"><strong>Lemma 4: \(MA \subseteq S_2^P\).</strong></button>
+<button class="collapsible"><strong>Lemma 4: \(\text{MA} \subseteq S_2^P\).</strong></button>
   <div class="content"><br>
 
-\(∀ 𝐿_1 ∈ \text{𝑀𝐴}\), we have by definition that:
+\(∀ 𝐿_1 ∈ \text{MA}\), we have by definition that:
 
-$$𝑥 ∈ 𝐿_1 ⇒ ∃𝑦 \Pr\limits_z [(𝑥,𝑦,𝑧)∈𝑅]≥\frac{2}{3}$$
+$$𝑥 ∈ 𝐿_1 ⇒ ∃𝑦, \Pr\limits_z [(𝑥,𝑦,𝑧)∈𝑅]≥\frac{2}{3}$$
 
-$$𝑥 ∉ 𝐿_1 ⇒ ∀𝑦 \Pr\limits_z [(𝑥,𝑦,𝑧)∈𝑅]≤\frac{1}{3}$$
+$$𝑥 ∉ 𝐿_1 ⇒ ∀𝑦, \Pr\limits_z [(𝑥,𝑦,𝑧)∈𝑅]≤\frac{1}{3}$$
 
 \(∀ 𝐿_2 ∈ 𝑆_2^P\), we have by definition that:
 
@@ -372,7 +372,7 @@ $$𝑥 ∈ 𝐿_2 ⇒ ∃𝑦∀𝑧, (𝑥,𝑦,𝑧)∈𝑅$$
 
 $$𝑥 ∉ 𝐿_2 ⇒ ∃𝑧 ∀𝑦, (𝑥,𝑦,𝑧)∉𝑅$$
 
-We can increase the probability of successfully accepting a “yes” instance through error reduction, from which we know that \(∀ 𝐿_1 ∈ \text{𝑀𝐴}, ∃𝑅 ∈ 𝑃\) such that:
+We can increase the probability of successfully accepting a “yes” instance through error reduction, from which we know that \(∀ 𝐿_1 ∈ \text{MA}, ∃𝑅 ∈ P\) such that:
 
 $$𝑥 ∈ 𝐿_1 ⇒ ∃𝑦, \Pr\limits_z[(𝑥,𝑦,𝑧)∈𝑅]=1$$
 
@@ -406,7 +406,7 @@ These equations fits the necessary condition for all languages in \(𝑆_2^P\). 
 
 $$∀ 𝐿 ∈ \text{MA}, \text{MA} ∈ 𝑆_2^P$$
 
-$$𝑀𝐴 ⊆ 𝑆_2^P$$
+$$\text{MA} ⊆ 𝑆_2^P$$
 
 QED.
 
@@ -414,7 +414,7 @@ QED.
 </div><br>
 
 
-<button class="collapsible"><strong>Lemma 5: \(BPP \subseteq S_2^P\).</strong></button>
+<button class="collapsible"><strong>Lemma 5: \(\text{BPP} \subseteq S_2^P\).</strong></button>
   <div class="content">
 <br>
 
@@ -449,32 +449,32 @@ QED.
 </div><br>
 
 
-<button class="collapsible"><strong>Lemma 6: If SAT has polynomial-sized circuits, then \(PH = S_2^P\).</strong></button>
+<button class="collapsible"><strong>Lemma 6: If SAT has polynomial-sized circuits, then \(\text{PH} = S_2^P\).</strong></button>
   <div class="content">
 <br>
 
-It is known from the Cook-Levin theorem that \(\text{SAT} ∈ \text{NP}-complete\). Therefore, if \(\text{SAT}\) has polynomial-size circuits, then:
+It is known from the Cook-Levin theorem that \(\text{SAT} ∈ \text{NP-complete}\). Therefore, if \(\text{SAT}\) has polynomial-size circuits, then:
 
 $$ \text{NP} \subseteq \text{P}/\text{poly}$$
 
 To show that \(\text{PH} = S_2^P\), we need to show that:<br>
 1) \(\text{PH} = \Sigma_2^P\)<br>
-2) \(\text{PH} = \prod_2^P\)<br><br>
+2) \(\text{PH} = \Pi_2^P\)<br><br>
 
-In Lemma \(1\), we showed that \(\text{PH} \subseteq \Sigma_2^P \cap \prod_2^P\). Therefore, the onus of this proof is to show that:<br>
-1) \(Σ_2^P ⊆ \text{PH}\)<br>
-2) \(Π_2^P ⊆ \text{PH}\)<br><br>
+In Lemma \(1\), we showed that \(\text{PH} \subseteq \Sigma_2^P \cap \Pi_2^P\). Therefore, the onus of this proof is to show that:<br>
+1) \(\Sigma_2^P ⊆ \text{PH}\)<br>
+2) \(\Pi_2^P ⊆ \text{PH}\)<br><br>
 
-<u>Sub-Lemma 6.1</u>: \(Σ_2^𝑃 = \text{PH}\)<br>
+<u>Sub-Lemma 6.1</u>: \(\Sigma_2^𝑃 = \text{PH}\)<br>
 <div class="single_indent">This follows from the regular Karp-Lipton theorem shown in Lemma 4.</div>
-<div class="single_indent">Therefore, \(Σ_2^𝑃 ⊆ \text{PH}\) is trivially true.</div>
+<div class="single_indent">Therefore, \(\Sigma_2^𝑃 ⊆ \text{PH}\) is trivially true.</div>
 <div class="single_indent">QED.</div><br>
 
-<u>Sub-Lemma 6.2</u>: \(Π_2^P ⊆ \text{PH}\):<br>
+<u>Sub-Lemma 6.2</u>: \(\Pi_2^P ⊆ \text{PH}\):<br>
 <div class="single_indent">Let \(𝐶\) be a family of circuits which output \(1\) on satisfiable inputs and \(0\) on unsatisfiable inputs.</div>
 <div class="single_indent">Let \(C'\) be the family of circuits using self-reducibility of \(\text{SAT}\) instances to output satisfying assignments for \(\text{SAT}\) formulas.</div><br>
 
-<div class="single_indent">Let \(L\) be an arbitrary language in \(Π_2^P\) and let \(𝜙\) be a predicate in \(P\). It follows then that:</div>
+<div class="single_indent">Let \(L\) be an arbitrary language in \(\Pi_2^P\) and let \(𝜙\) be a predicate in \(P\). It follows then that:</div>
 
 $$𝑥∈𝐿 ⇒ ∀𝑦∃𝑧, 𝜙(𝑥,𝑦,𝑧)=1$$
 
@@ -488,7 +488,7 @@ $$𝑥∉𝐿 ⇒ ∃𝑦∀𝑧, 𝜙(𝑥,𝑦,𝑧)=0$$
 <div class="single_indent">Note that \((C,x,y)\) is \(\text{TRUE}\) if \(𝐶'(𝑥) = 𝑧\), where \(𝜙(𝑥, 𝑦, 𝑧) = 1\), and \(\text{FALSE}\) otherwise. </div><br>
 
 <div class="single_indent">Therefore,</div>
-$$𝑥∈𝐿⇒ ∃𝐶 \text{ such that }∀𝑦, 𝐶'(𝑥)=𝑧 \text{ such that} 𝜙'(𝑥,𝑦,𝑧)=1$$
+$$𝑥∈𝐿⇒ ∃𝐶 \text{ such that }∀𝑦, 𝐶'(𝑥)=𝑧 \text{ such that } 𝜙'(𝑥,𝑦,𝑧)=1$$
 $$𝑥∉𝐿⇒ ∀𝐶 \text{ such that }∃𝑦 ∀𝑧, 𝐶'(𝑥)=𝑧 \text{ such that } 𝜙'(𝑥,𝑦,𝑧)=0$$
 
 <div class="single_indent">However, this can just be rewritten as:</div>
@@ -497,25 +497,25 @@ $$𝑥∈𝐿 ⇒ ∃𝐶∀𝑦, 𝜙'(𝐶,𝑥,𝑦)=1$$
 
 $$𝑥∉𝐿 ⇒ ∃𝑦∀𝐶, 𝜙'(𝐶,𝑥,𝑦)=0$$
 
-<div class="single_indent">Therefore, by definition \(𝐿 ∈ S_2^𝑃\). Since \(L ∈ Π_2^P\), we have that \(Π_2^P ⊆ S_2^P\).</div><br>
+<div class="single_indent">Therefore, by definition \(𝐿 ∈ S_2^𝑃\). Since \(L ∈ \Pi_2^P\), we have that \(\Pi_2^P ⊆ S_2^P\).</div><br>
 
 <div class="single_indent">QED.</div><br>
 
 Therefore, since we have shown that
 
-$$Σ_2^P ⊆ \text{PH},\quad Π_2^P ⊆ \text{PH},$$
+$$\Sigma_2^P ⊆ \text{PH},\quad \Pi_2^P ⊆ \text{PH},$$
 
 and since we already know that
 
-$$\text{PH} ⊆ Σ_2^𝑃 ∩ Π_2^P,$$
+$$\text{PH} ⊆ \Sigma_2^𝑃 ∩ \Pi_2^P,$$
 
 we now have that
 
-$$\text{PH} = Σ_2^P \text{ and } \text{PH} = Π_2^𝑃.$$
+$$\text{PH} = \Sigma_2^P \text{ and } \text{PH} = \Pi_2^𝑃.$$
 
 Therefore,
 
-$$S_2^P = Π_2^P = Σ_2^P.$$
+$$S_2^P = \Pi_2^P = \Sigma_2^P.$$
 
 This gives us:
 
