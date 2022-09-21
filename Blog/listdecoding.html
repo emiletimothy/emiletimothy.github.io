@@ -338,14 +338,159 @@ $$\Pr[u_S = \alpha \wedge u_T = \beta] = \Pr[u_S = \alpha]\Pr[u_T = \beta]$$
 $$ = 2^{−𝑘} \times 2^{−k} = 2^{−2k} $$
 
 <div class="single_indent">Hence, $$\Pr[u_S = \alpha \wedge u_T = \beta] = \Pr[u_S = \alpha]\Pr[u_T = \beta]$$</div>
-<div class="single_indent">QED.</div><br>
+<div class="single_indent">QED.</div><br><br>
 
 
-more to come!
+Suppose then that the received word \(R\) agrees with \(C = C(m)\) in at least a \(\frac{1}{2}+\epsilon\) fraction of its \(n\) bits. We can then observe that \(C_w + C_{w+e_i} = m_i\) (here, \(i\) is the \(i\)-th elementary vector in \(\mathbb{F}_2^k\) – the vector with \(1\) in the \(i\)-th position and zeros elsewhere). Of course, in our decoding algorithm, we do not have access to \(C\) to find \(C_w\) and \(C_{w+e_i}\). So, we will replace \(C_w\) with a “guess” (for now imagine it is always correct), and \(C_{w+e_i}\) with \(R_{w+e_i}\) (which may or may not be correct). We can then show that for all i, that:
+
+$$ \Pr[|\{S\neq\Phi: C_{u_s}+R_{u_s+e_i}=m_i\}|\leq \frac{2^\ell-1}{2}] \leq \frac{1}{4\epsilon^2 (2^\ell-1)}$$
+
+Let a family of indicator random variables for the event that \(R_{u_s+e_i} = C_{u_s+e_i}\) be \(L_s\) such that \(L_s\) be the number of bits for which the equality is met for the expression (on that particular value of \(S\)). Then, (rewriting the LHS of the probability statement using the indicator class) let \(L = \Sigma L_s\) such that \(S = \phi\). It follows then that:
+
+$$ |\{S\neq\phi: C_{u_S}+R_{u_S+e_i} = m_i\}|=L$$
+
+implies that
+
+$$\Pr[|\{S\neq\phi: C_{u_S} + R_{u_s+e_i} = m_i\}| \leq \frac{2^\ell - 1}{2} = \Pr[𝐿 \leq \frac{2^\ell-1}{2}]$$
+
+To use Chebyshev’s inequality, we now have to determine \(\mathbb{E}[L]\), \(\mathbb{V}ar[L]\) which we will do from 
+\(\mathbb{E}[L_S], \mathbb{V}ar[L_S]\):
+
+Since the received word \(R\) agrees with \(C = C(m)\) in at least a \(\frac{1}{2} + \epsilon\) fraction of its \(n\) bits (by assumption), we have that:
+
+$$\mathbb{R}[L_S] ≥ \frac{1}{2} + \epsilon$$
+
+Therefore, by the linearity of the expectation formula:
+
+$$\mathbb{E}[L]=(2\ell −1)\mathbb{E}[L_S] \geq (\frac{1}{2}+\epsilon)(2^\ell −1)$$
+
+Using the variance formula:
+
+$$\mathbb{V}ar[L_S] = \mathbb{E}[L_S^2] − \mathbb{E}[L_S]^2$$
+
+$$ = \sum\limits_S L_s^2 \Pr[R_{u_s+e_i}=C_{u_s+e_i}] - (\frac{1}{4}-\epsilon^2-\epsilon)_>$$
+
+$$ = \frac{1}{2} - (\frac{1}{4} - \epsilon^2 - \epsilon)_> \leq \frac{1}{4}$$
+
+$$ \mathbb{V}ar[L_S] \leq \frac{1}{4}$$
+
+Then, using that the variance of the sum is equal to the sum of the variance (since \(L_S\) is pairwise independent) and since the length of the message composed from set \(S\subseteq \{1,2,3,...,\ell\}\) is \(2^\ell-1\), we have that  (by the linearity of the variance for covariant distributions from separate random independent variables):
+
+$$ \mathbb{V}ar[L] \leq \frac{2^\ell-1}{4}$$
+
+(A brief sanity check: Note that in all cases equality is reached when \(\epsilon = 0\)). Now, recall Chebyshev’s inequality which states that:
+
+$$ \Pr[L-\mathbb{E}[L]\leq k] ≤ \frac{\mathbb{V}ar[L]}{k^2}$$
+
+Therefore,
+
+$$ \Pr[L \leq \frac{2^\ell-1}{2}]=\Pr[L-\mathbb{E}[X]\leq \frac{2^\ell-1}{2} - \mathbb{E}[X]] $$
+
+Using the Chebyshev inequality and our value of the variance as derived above (note that it is valid to use Chebyshev’s inequality since \(\epsilon(2^\ell − 1) \geq 0\) since \(\epsilon > 0\)), we have that:
+
+$$ = \Pr[L-\mathbb{E}[X]\leq \epsilon(2^\ell-1)] \leq \frac{2^\ell-1}{4\epsilon^2(2^\ell-1)^2}$$
+
+$$= \frac{1}{4\epsilon^2(2^\ell-1)}$$
+
+Therefore, we conclude that:
+
+$$\Pr[|\{S\neq\phi: C_{u_S} + R_{u_s+e_i} = m_i\}| \leq \frac{2^\ell - 1}{2} = \Pr[𝐿 \leq \frac{2^\ell-1}{2}]$$
+
+$$= \boxed{\frac{1}{4\epsilon^2(2^\ell-1)}}$$
 
 
+QED.<br><br><br>
 
 
+I'm now going to describe a probabilistic procedure \(A\) that has the following behavior:<br>
+1) it has random access to a word \(R\) that agrees with \(C = C(m)\) in at least a \(\frac{1}{2}+\epsilon\) fraction of its \(n\) bits, and<br>
+2) it runs in time \(poly(k, \epsilon^{-1})\), and<br>
+3) with probability at least \(\frac{3}{4}\) it outputs a list of \(L=O(k\epsilon^{-2})\) “candidate messages” \(m_1, m_2, ..., m_L\) that includes the original message \(m\).<br><br>
+
+We can show that it takes surprisingly few bits to describe \((C_{u_S})_{S\neq\phi})\) by noting that the number of bits that would be chosen would be \(2^\ell\) so an appropriate (logarithmic) choice of \(\ell\) would make the number of bits drastically small. Therefore, let \(\ell= \log(k\epsilon^{-2} + 2)\). From this, we define the following probabilistic procedure \(A\):<br><br>
+
+A(input \(R\) = a word that agrees with \(C = C(m)\) in atleast a \(\frac{1}{2}+\epsilon\) fraction of its \(n\) bits (so the first property is satisfied)):<br><br>
+
+Pick \(\ell\) vectors \(v_1, v_2, ..., v_k \in \mathbb{F}_2^k\) independently and uniformly at random. Then, 
+$$u_S = \sum_{i\in S}v_i \Rightarrow C_{u_S} = \sum_{i\in S} C_{v_i}$$
+
+(since \(C_w + C_{e_i} = C_{w+e_i}\) as mentioned earlier).<br><br>
+
+The total number of candidate choices for \(C_{v_i}\) is \(L = 2^\ell = 2^{\log k \epsilon^{-2} + 2} = k \epsilon^{-2} + 2 \in O(k\epsilon^{-2})\). Therefore, if we output a candidate message \(m_1\) for every candidate choice \(c_i\) and find a way to get the procedure to output the original message \(m\) (\(\frac{3}{4}\)ths of the time) in a procedure that runs in \(\text{poly}(k, \epsilon^{−1})\), then we are done.
+
+Note here that the probability that \(\sum\limits_{i\in S} c_i + R_{u_S+e_j} = m_j\) is: 
+
+$$ \Pr[L\geq \frac{2^\ell-1}{2}] = 1 - \frac{1}{4\epsilon^2 k\epsilon^{-2}} = 1 - \frac{1}{4k}$$
+
+Taking the union-bound of this probability for all \(k\) yields a union bound of \(\frac{3}{4}\). Therefore, if we append the majority bit (from all the \(S'\)) \(\sum_{i\in S} c_i + R_{u_s+e_j}\) to a
+list \(B\) every time we guess the \(i\)’th candidate choice \(c_i\), and just return \(B\) at the very end, there is a probability of \(\frac{3}{4}\) that the original message would have been returned (since the majority of all
+the \(S'\) in \(\sum_{i\in S} c_i + R_{u_s+e_j}=m_j\) is true \(\frac{3}{4}\) of the time). Therefore, the second property is satisfied.<br><br>
+
+Therefore, we now need to ensure that this procedure has a run-time of \(\text{poly}(k, \epsilon^{−1})\). To do this, note that the number of candidate choices for \(C_{v_i}\) is \(O(k\epsilon^{-2})\). Since this needs to be done for all \(v_i\) and since there are \(k\) many \(v_i\)‘s (and the comparison procedure only runs in \(O(1)\) with respect to \(k\)), we have that the total run-time is 
+
+$$O(k^2 \epsilon^{-2}) = \text{poly}(k^2, \epsilon^{−2}) = \text{poly}(k,\epsilon^{-1})$$
+
+Therefore, the third property is satisfied.
+
+Therefore, we have constructed a probabilistic procedure \(A\) that satisfies all the above properties. As desired.<br><br>
+
+QED.<br><br><br>
+
+
+Finally, I'm going to use all of this to prove something called the Goldreich-Levin theorem, which states that for every function family \(f_n: \{0,1\}^n \rightarrow \{0, 1\}^n\):
+
+$$\text{GL}(x,y) = \sum\limits_{i=1}^n x_i y_i$$
+
+is a hard bit for the function family \(f'_n:\{0, 1\}^n \times \{0, 1\}^n \rightarrow \{0, 1\}^{2n}\) defined by \(\mathcal{f}'(x, y) = (f(x), y)\). That is, if there is a circuit family \(\{C_n\}\) of size \(s(n) ≥ n\) that achieves:
+
+$$\Pr\limits_{x,y}[C_n(x,y) = \text{GL}(\mathcal{f}_n'(x,y))] ≥ \frac{1}{2} + \epsilon(n)$$
+
+then there is a circuit family \(\{C'_n\}\) of size \(s'(n)\) that achieves:
+
+$$\Pr\limits_y[C'_n(x, y) = \mathcal{f}'_n(x, y)] \geq \epsilon'(n)$$
+
+with \(s'(n) = (\frac{s(n)}{\epsilon(n)})^\text{O(1)}\) and \(\epsilon'(n) = (\frac{\epsilon(n)}{n})^\text{O(1)}\). <br><br>
+
+Let \(X\) be the class in which for all \(x \in X\), (where \(|X| \geq \frac{\epsilon(n)}{2}|X|\)):
+
+$$\Pr\limits_y[C(x,y)=\text{GL}(f'_n(x,y))]\geq\frac{1}{2}+\frac{\epsilon(n)}{2}$$
+
+We see then that \(\text{GL}(f'_n(x, y))\) is the \(y\)th bit of the codeword \(C(f_n(x))\), and that for all \(x \in X\):
+
+$$C(f_n(x)) = C_n(x, y) \text{ agree on atleast } \frac{1}{2} + \frac{\epsilon(n)}{2} \text{ of its bits.}$$
+
+Then, using the probabilistic procedure \(A\) that we defined earlier, we can assign the random word to be \(C_n\) such that on input \((x, y)\) we would get \((f_n(x), y)\) for all \(x\in X\), and that this would happen \(\frac{3}{4} \times \frac{1}{L}\) of the time, given that \(x\in X\). However, the probability that \(x\in X\) is \(\frac{\epsilon(n)+1}{2}\) (as described above).<br><br>
+
+Therefore, the total probability that \(A\) outputs \((f_n(x), y)\) is (using the fact that the probability of \(2\)
+independent events happening is equal to the products of the probabilities of each event):
+
+$$\epsilon'(n) = L\times \frac{3}{4} \times \frac{1}{\frac{\epsilon(n)+1}{2}}$$
+
+$$\epsilon'(n) = O(\frac{\epsilon(n)^2}{n} \times \frac{1}{\frac{\epsilon(n)+1}{2}}$$
+
+$$\epsilon'(n) = (\frac{\epsilon(n)}{n})^\text{O(1)}$$
+
+Therefore, the probability that \(A\) outputs \((f_n(x),y) \geq (\frac{\epsilon(n)}{n})^\text{O(1)}. Hence, we have that for the probabilistic procedure:
+
+$$\epsilon'(n) = (\frac{\epsilon(n)}{n})^\text{O(1)}$$
+
+To find the size of the circuit family, we can simply construct a circuit for each step in the run-time.
+
+We already know that the run-time of the algorithm would be: \(\frac{1}{\epsilon'(n)} = (\frac{n}{\epsilon(n)})^\text{O(1)}\) since \(\Pr[C'(x, y) = f'_n(x, y)] \geq \epsilon'(n)\). Therefore, since \(s(n)>n\), we could use a circuit of size \(s(n)\) for each query (while \(n\) expecting atmost a quadratic increase in size by using Razborov's method for circuit-value finding). Hence, the associated size of the circuit would be:
+
+$$s'(n) = (n\frac{s(n)}{\epsilon(n)})^\text{O(1)}$$
+
+$$=(\frac{s(n)}{\epsilon(n)}^\text{O(1)}$$
+
+Therefore, if there is a circuit family \(\{C_n\}\) of size \(s(n) \geq n\) that achieves: \(\Pr\limits{x,y}[C_n(x, y) = \text{GL}(f'_n(x, y))] ≥ \frac{1}{2} + \epsilon(n)\), then there is a circuit family \(\{C'_n\}\) of size \(s'(n)\) that achieves: 
+
+$$\Pr\limits_{x,y}[C'_n(x,y)=f_n'(x,y)]\geq \epsilon'(n)$$
+
+with \(s'(n) = (\frac{s(n)}{\epsilon(n)})^\text{O(1)}\) and \(\epsilon'(n) = (\frac{\epsilon(n)}{n})^\text{O(1)}\).<br><br>
+
+This proves the Goldreich-Levin theorem.<br><br>
+
+QED.
 </div>
 
   
