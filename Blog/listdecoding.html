@@ -295,7 +295,7 @@ One thing to note is that the procedure (in all its abstractness, so far) truly 
 <button class="collapsible"><strong>List Decoding of the Binary Hadamard Code</strong></button>
   <div class="content">
 <br>
-Throughout this problem \(\mathbb{F}_2\) is the field with \(2\) elements (addition and multiplication are performed modulo \(2\)). Given a \(k\)-bit message \(m\), the associated Hadamard codeword \(C(m)\) is described by first producing a linear multivariate polynomial $$p_m(x_0, x_1, ..., x_{k-1}) = \sum\limits_{i=0}^{k-1} m_i x_i,$$ and then evaluating that polynomial at all vectors in the space \(\mathbb{F}_2^k:C(m)=(p_m(w))_{w\in\mathbb{F}_2^k}\). Thus the codeword has \(n = 2^k\) bits and the \(w\)-th bit is the inner product mod \(2\) of the \(k\)-bit vectors \(m\) and \(w\). The bits of a codeword \(C = C(m)\) are naturally indexed by \(\mathbb{F}_2^k\); we write \(C_w\) (with \(w\in\mathbb{F}_2^k\) to mean the \(w\)-th coordinate, which is just \(p_m(w)\). Since the distance of the Hadamard code is \((1/2)n\) (by the Schwartz-Zippel lemma which is a well-known result in theoretical computer science), unique decoding is only possible from up to \((1/4)n\) errors. My goal for this section is to show several things that culminate in the idea that efficient list-decoding is possible from a received word \(R\) that has suffered upto \((\frac{1}{2}-\epsilon)n\) errors, and to ultimately generalize this to a really strong statement in the form of the Goldreich-Levin theorem.<br><br>
+Throughout this section \(\mathbb{F}_2\) is the field with \(2\) elements (addition and multiplication are performed modulo \(2\)). Given a \(k\)-bit message \(m\), the associated Hadamard codeword \(C(m)\) is described by first producing a linear multivariate polynomial $$p_m(x_0, x_1, ..., x_{k-1}) = \sum\limits_{i=0}^{k-1} m_i x_i,$$ and then evaluating that polynomial at all vectors in the space \(\mathbb{F}_2^k:C(m)=(p_m(w))_{w\in\mathbb{F}_2^k}\). Thus the codeword has \(n = 2^k\) bits and the \(w\)-th bit is the inner product mod \(2\) of the \(k\)-bit vectors \(m\) and \(w\). The bits of a codeword \(C = C(m)\) are naturally indexed by \(\mathbb{F}_2^k\); we write \(C_w\) (with \(w\in\mathbb{F}_2^k\) to mean the \(w\)-th coordinate, which is just \(p_m(w)\). Since the distance of the Hadamard code is \((1/2)n\) (by the Schwartz-Zippel lemma which is a well-known result in theoretical computer science), unique decoding is only possible from up to \((1/4)n\) errors. My goal for this section is to show several things that culminate in the idea that efficient list-decoding is possible from a received word \(R\) that has suffered upto \((\frac{1}{2}-\epsilon)n\) errors, and to ultimately generalize this to a really strong statement in the form of the Goldreich-Levin theorem.<br><br>
 
 Firstly, consider the following probabilistic procedure. Pick \(\ell\) vectors \(v_1, v_2, ..., v_\ell \in \mathbb{F}_2^k\) independently and uniformly at random. For a subset \(S \subseteq \{1, 2, 3, ... \ell\}\) define \(u_S = \sum_{𝒊\in S} v_i\). Firstly, I'm going to show that for every non- empty set \(S\) and every \(\alpha\in\mathbb{F}_2^k\), we have \(\Pr[u_s=\alpha]=2^{-k}\). Secondly, I'm going to show that for every pair of non-empty subsets \(S\) and \(T\) with \(S \neq T\), and every \(\alpha, \beta \in \mathbb{F}_2^k\), we
 have \(\Pr[u_s=\alpha \wedge u_t=\beta] = \Pr[u_s=\alpha] \Pr[u_t = \beta]\). In other words, the set of vectors \(u_S\) are pairwise independent random variables uniformly distributed on \(\mathbb{F}_2^k\).<br><br>
@@ -492,19 +492,247 @@ This proves the Goldreich-Levin theorem.<br><br>
 
 QED.
 </div>
-<br>
+
+\(\DeclareMathOperator*{\FF}{\mathbb{F}}\)
+\(\DeclareMathOperator*{\ra}{\rightarrow}\)
+\(\DeclareMathOperator*{\Ra}{\Rightarrow}\)
+
+
 <button class="collapsible"><strong>List Decoding of the Reed-Solomon Code</strong></button>
   <div class="content">
-  
-Coming soon!
+  <br>
+Throughout this section \(\FF_q\) is the field with \(q\) elements. Given a \(k\)-bit message \(m\), the associated Reed-Solomon codeword \(C(m)\) is described by first producing a degree \(k−1\) polynomial \(p(x) = \sum_{i=0}^{k-1}m_i x^i\) and then evaluating that polynomial at all of the elements in the field \(\FF_q: C(m) = (p_m(w))_{w\in\FF_q}\). You should think of \(q\) as being polynomial in \(k\).<br><br>
+
+Now, we are given a received word \(R\) that has suffered \(e\) errors. We know that if \(e>\frac{q}{2}\), unique
+decoding is impossible, since the distance of this code is a priori at most \(q\). However, we can still show that efficient list-decoding is possible as long as \(e\) is as large as \(q-\sqrt{2kq}\). If we choose, say,
+\(q = k^2\), then this implies that we can recover from up to a \(1-o(1)\) fraction of errors.<br><br>
+
+
+So, firstly, let's view the received word \(R\) as a function \(R: \FF_q\rightarrow\FF_q\). We can then show that one can efficiently find a polynomial \(Q(x,y)\neq 0\) with \(x\)-degree at most \(\sqrt{q}\) and y-degree at most \(\sqrt{q}\) for which \(Q(w, R(w))=0\) for all \(w\in \FF_q\).<br><br>
+
+We can reduce the problem of finding a polynomial to just solving for the coefficients in the linear combination of all the elements in the monomial space of x and y. Therefore, a polynomial 𝑄(𝑥, 𝑦) ≠ 0 with x-
+degree at most √𝑞 and y-degree at most √𝑞 can be written as:<br>
+
+$$ Q(x,y) = \sum\limits_{\beta\in M} a_\beta \beta(x,y)$$
+
+Where \(M\) is the set of all the possible monomials in \(x\) and \(y\) such that \(\max\limits_x(M) = \max\limits_y(M) = \sqrt{q}\). Therefore, including the \(0\)-degree monomials, we have that \(|M| = (\sqrt{q} + 1)^2 = q + 1 + \sqrt{2q}\). So, for all \(\omega \in \FF_q\), there are only \(|M|\) values (all the \(\alpha_\beta\)'s that need to be found in order to solve
+
+$$Q(w,R(w)) = \sum\limits_{\alpha\in M} a_\alpha \alpha(w,R(w)) = 0$$
+
+To find these \(|M|\) values, note that we can set up \(q\) equations for all the \(w\)’s. However, a system of linear equations with \(|M|\) variables and \(q\) equations can be solved by writing the system as a matrix equation in the basis of the monomial set \(M\) (since \(|M| > 𝑞\)):
+
+$$\begin{pmatrix}
+\chi_1 & \chi_4 & \chi_6 & ...\\
+\chi_2 & ... & \chi_7 & ... \\
+\chi_3 & \chi_5 & \chi_8 & ...\\
+... & ... & ... & ...\\
+\end{pmatrix} * 
+
+\begin{pmatrix}
+M[1] \\ 
+M[2] \\
+M[3] \\
+...
+\end{pmatrix}
+=
+\begin{pmatrix}
+0 \\
+0 \\
+0 \\
+...
+\end{pmatrix}
+$$ 
+
+
+Then, by converting the matrix to row-echelon form, the Gauss-Jordan elimination method can be used to efficiently solve this matrix. Since this is an efficient matrix solution method (it runs in strongly polynomial time (from Jack Edmonds, 1967), it would efficiently find the coefficients to the polynomial that satisfies the linear equations. Therefore, we can efficiently find a polynomial \(Q(x,y)\neq 0\) with \(x\)-degree at most \(\sqrt{q}\) and \(y\)-
+degree at most \(\sqrt{q}\) for which \(Q(w,R(w))=0\) for all \(\omega\in\FF_q\). Hence shown.<br><br>
+
+
+Next, let \(p:\FF_q\ra\FF_q\) be a polynomial of degree atmost \(k−1\) for which \(|\{w\in\FF_q: p(w)\neq R(w)\}|\leq q-t\). That is, \(p\) is a \(RS\) codeword that agrees with the received word \(R\) in at least \(t\) locations. I'm now going to show that if \(t>k\sqrt{q}\), then \((y−p(x))\) divides \(Q(x, y)\) to conclude that through using an efficient algorithm for factoring multivariate polynomials (which is known), we can find all codewords which have agreement \(t>k\sqrt{q}\) with \(R\).<br><br>
+
+We first show that the polynomial is identically \(0\) if \(t>k\sqrt{q}\). Note that \(Q(w,p(w))=0\) for all \(\omega\in\FF_q\) for which \(p(w)=R(w)\). The degree of the polynomial is \(\sqrt{q}+\sqrt{q} \text{(degree of p)}\) (since the degree of \(x\) and \(y\) are \(\sqrt{q}\). The degree of \(p\) is \(k-1\). Therefore, the degree of the polynomial is \(sqrt{q}+\sqrt{q}(k-1)=k\sqrt{q}\). Then, given that there are \(t>k\sqrt{q}\) possible values of \(w\) such that \(Q(w,p(w)) = 0\), we have from lecture that this polynomial (since it has more zeros than degrees) is a zero polynomial.<br><br>
+
+Now that we have established that \(Q(w,p(w))\) is a zero polynomial, we can view \(Q\) as a univariate polynomial in \(y\) with coefficients in \(\FF_q[x]\). We already know that \(p(w)\) is a root of \(Q\), so we can divide the polynomial by \(y-p(w)\) without any remainders from the divisor theorem. Therefore, given an efficient algorithm for factoring polynomials, every \(\text{RS}\) codeword \(p(w)\) such that \(p(w) = R(w)\) will be found as factors in the efficient factorization procedure.<br><br>
+
+Therefore, by simply reading the factors off from the factorization of the polynomial (to be precise, the factors are the codewords), we can find all the codewords which have an agreement \(t>k\sqrt{q}\) with \(R\).<br><br>
+
+QED.<br><br><br>
+
+
+Now, I'm going to do something slightly different. Define the \((1, k−1)\)-weighted degree of a polynomial \(Q(x, y) = \sum\limits_{i,j} q_{i,j}x^i y^i\) is defined to be \(\max\{i + (k − 1)j ∶ q_{i,j}\neq 0\}\). Using a similar analysis as earlier, we can show that one can find \(Q(x, y)\) with the required properties and with \((1, k−1)\)-weighted degree at most \(\sqrt{2kq}\), and therefore can tolerate agreement only \(t>\sqrt{2kq}\). To show that we can find \(Q(x, y)\) with a \((1, k − 1)\)-weighted degree of \(\sqrt{2kq}\), we must check that there are greater than \(q\) possible pairs \((i, j)\) such that \(i + (k − 1)j \leq \sqrt{2kq}\), and then use some of the analyses from earlier to find \(Q(x,y)\) with the required properties.
+<br><br>
+
+Then, we can construct a triangle by noting that all the pairs \((i,j)\) such that \(0 \leq i \leq \sqrt{2kq}\) and \(0 \leq j \leq \sqrt{2kq}\). Then, we have that:<br><br>
+
+
+<style>
+  .pic_center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+
+<img src="blog_pics/reedsolmontriangle.png" style="width:50% " class="pic_center">
+<br><br>
+
+Therefore, (if you take only integer points) there are \(\frac{2kq}{k-1}\) satisfying points in the \(x\)-axis in total from which atleast half (\(\geq \frac{kq}{k-1})\) of these pairs satisfy the \(y\)-axis inequality. Therefore, there are \(\frac{kq}{k-1}\) points that solve the inequality \(i+(k-1)j\leq \sqrt{2kq}\). When you include non-integers, the number of points increases but the number of solution points for the inequality is still
+
+$$
+\geq \frac{1}{2} \frac{2kq}{k-1} = \frac{kq}{q-1} = \frac{q}{1-\frac{1}{k}} > q$$
+
+Hence, we now have \(q\) points that satisfy the weighted polynomial. The degree of the polynomial is \(\max\{i + (k − 1)j\} = \sqrt{2kq}\) and since \(t>\sqrt{2kq}\), we now have that \(Q\) is a \(0\)-polynomial.<br><br>
+
+We already know that \(p(w)\) is a root of \(Q\), so we can divide the polynomial by \(y-p(w)\) without any remainders from the divisor theorem. Therefore, given an efficient algorithm for factoring polynomials, every Reed-Solomon codeword \(p(w)\) such that \(p(w) = R(w)\) will be found as factors in the efficient factorization procedure.<br><br>
+
+Therefore, by simply reading the factors off from the factorization of the polynomial, we can find all the codewords which have an agreement \(t>\sqrt{2kq}\) with \(R\).<br><br>
+
+QED.
 
   </div>
 
 <br>
 <button class="collapsible"><strong>List Decoding of the Parvaresh-Vardy Code</strong></button>
   <div class="content">
-  
-Coming soon!
+  <br>
+
+Throughout this section \(\FF_q\) is the field with \(q\) elements. We have an integer parameter \(c \geq 1\), and we fix a polynomial \(E(x)\) of degree \(k\), that is irreducible over \(\FF_q\). Set \(h = ⌈(q + 1)^\frac{1}{c+1}⌉\). Then, given a \(k\)-bit message \(m\), the associated Parvaresh-Vardy codeword \(C(m)\) is described as follows:<br><br>
+1) Produce the degree \(k−1\) polynomial \(p_m(x) = \sum_{i=0}^{k-1} m_ix^i\) <br><br>
+
+2) define \(p_m^{(i)}(x)\) to be the polynomial \((p_m(x))^{h_i} \mod E(x)\), for \(i = 0, 1, 2, ..., c−1\). Note that \(p_m^{(0)}(x)\) is just \(p_m(x)\)<br><br>
+
+3) the codeword \(C(m)\) is the following sequence of symbols in
+
+$$\mathbb{F}^c_q: ([p_m^{(0)}(w), p_m^{(1)}(w), ..., p_m^{(c-1)}(w)])_{w\in \FF_q}$$
+
+
+Now, we are given a received word \(R\) that has suffered \(e\) errors. You will show that list-decoding is possible for Parvaresh-Vardy codes when \(e\) is as large as \(q−(c+ 1)kh\). Note, for example, that when taking \(c = \log q\),
+we require agreement only \(\approx k \log q\), in contrast to the \(\approx \sqrt{kq}\) achievable with Reed-Solomon codes (typically, \(q\) is a large polynomial in \(k\)).<br><br>
+
+
+Fistly, we view the received word \(R\) as a function \(R: \FF_q \ra \FF_q^c\). Show that one can efficiently find a
+polynomial \(Q(x, y_0, y_1, ..., y_{c-1} \neq 0\) with individual variable degrees at most \(h−1\) for which \(Q(w,R(w)_0, ..., R(w)_{c-1}) = 0\) for all \(w \in \FF_q\).<br><br>
+
+
+We can reduce the problem of finding a polynomial to just solving for the coefficients in the linear combination of all the elements in the monomial space of \(x, y_0, y_1, ..., y_{c-1}\). A polynomial \(Q(x, y_0, y_1, ..., y_{c-1})\) with individual variable degrees atmost \(h - 1\) can be written as:
+
+$$ Q(x, y_0, y_1, ..., y_{c-1}) = \sum_{\beta\in M} \alpha_\beta \beta(x, y_0, y_1, ..., y_{c-1}), \beta\in M$$
+
+Here, \(M\) is the set of all the possible monomials in \(x, y_0, y_1, ..., y_{c-1}\) such that
+
+
+$$ \max\limits_x(M) = \max\limits_{y_0}(M) = \max\limits_{y_1}(M) = ... = \max\limits_{y_{c-1}}(M) = h − 1.$$
+
+Therefore, including the 0-degree monomials, we have that \(|M| = h^{c+1}\). So, for all \(\omega \in \FF_q\), there are only \(|M|\) values (all the \(\alpha_\beta\)'s) that need to be found in order to solve \(Q(w, R(w)_0, ..., R(w)_{c-1})=0\).<br><br>
+
+To find these \(|M|\) values, note that we can set up \(q\) equations for all the \(w\)’s. However, a system of linear equations with \(|M|\) variables and \(q\) equations can then be solved by writing the system as a matrix equation in the basis of the monomial set \(M\) (since \(|M| > q)\):
+
+$$\begin{pmatrix}
+\chi_1 & \chi_4 & \chi_6 & ...\\
+\chi_2 & ... & \chi_7 & ... \\
+\chi_3 & \chi_5 & \chi_8 & ...\\
+... & ... & ... & ...\\
+\end{pmatrix} * 
+
+\begin{pmatrix}
+M[1] \\ 
+M[2] \\
+M[3] \\
+...
+\end{pmatrix}
+=
+\begin{pmatrix}
+0 \\
+0 \\
+0 \\
+...
+\end{pmatrix}
+$$ 
+
+Then, by converting the matrix to row-echelon form, the Gauss-Jordan elimination method can be used to efficiently solve this matrix. Since this is an efficient matrix solution method (from Jack Edmonds, 1967), it would efficiently find the coefficients to the polynomial that satisfies the linear equations. Therefore, we can efficiently find a polynomial \(Q(x, y_0, y_1, ..., y_{c-1})\neq 0\) with individual variable degrees at most \(h−1\) for which \(Q(w,R(w)_0, ..., R(w)_{c-1})=0\) for all \(w\in\FF_q\).<br><br>
+
+Hence shown.<br><br><br>
+
+
+Next, let \(p:\FF_q\ra\FF_q\) be a polynomial of degree at most \(k−1\) for which
+
+$$|\{\omega \in \FF_q: [p^{(0)}(w), p^{(1)}(\omega), ..., p^{(c−1)}(\omega)] \neq R(\omega)\}| ≤ q-t$$
+
+That is, \(p\) is a Parvaresh-Vardy codeword that agrees with the received word \(R\) in atleast \(t\) locations. I'm now going to show a pretty neat result: that, if \(t > (c+ 1)kh\) then the polynomial
+
+$$Q(x, p^{(0)}(x), p^{(1)}(x), ..., p^{(c−1)}(x))$$
+
+is the zero polynomial.<br><br><br>
+
+
+We first show that the polynomial is identically \(0\) if \(t > (c + 1)kh\). Note that 
+
+$$Q(x, p^{(0)}(\omega), p^{(1)}(\omega), ..., p^{(c−1)}(\omega)) = 0$$
+
+for all \(\omega \in \FF_q\) for which
+
+$$ p^{(0)}(\omega) = p^{(1)}(\omega) = ⋯ =p^{(c-1)}(\omega) = R(\omega)$$
+
+The degree of the polynomial \(Q\) is \(≤ (h − 1) + c(h − 1)(k − 1)\) (since the degree of \(x\) and each \(y\) are atmost \(h − 1\), the degree of \(p\) is \(k − 1\), and there are \(c\) many \(y\)’s. Therefore,<br>
+
+$$\begin{align*}
+\text{degree}_Q &\leq (h-1) + c(h-1)(k-1) \\
+&= chk  + h + c - (ck + ch + 1) \\
+&< chk + kh \\
+&= kh(c+1)
+\end{align*}
+$$
+
+
+Then, given that there are \(t > (c + 1)kh\) possible values of \(w\) such that \(Q\) evaluated on \(w=0\), we have from lecture that this polynomial (since it has more zeros than degrees) is a zero polynomial.<br><br>
+
+QED.<br><br><br><br>
+
+
+Finally, recall that \(\frac{\FF_q[x]}{E(x)}\) – the set of univariate polynomials with coefficients in \(\FF_q\) and with multiplication and addition performed modulo \(E(x)\) – is a field. Define the following polynomial with coefficients in this field:
+
+$$ Q^*(z) = Q(x,z,z^h,z^{h^2}, ..., z^{h^{c-1}}) \mod E(x)$$
+
+Assuming the existence of an efficient algorithm that outputs all of the roots of a given univariate polynomial with coefficients in \(\frac{\FF_q[x]}{E(x)}\), and making reference to \(Q^*\), we can argue that one can efficiently find all \(E(x)\) Parvaresh-Vardy codewords which have agreement \(t > (c+ 1)kh\) with \(R\).<br><br>
+
+We first prove the following lemma:<br><br>
+
+
+<strong>Lemma 1 : For all \(p: \FF_q \ra \FF_q\) such that \(p^{(0)}(\omega) = p^{(1)}(\omega) = ... = p^{(c-1)}(\omega) = R(\omega)\) is true for \(t>(c+1)kh\) bits, \(p(w)\) is a root of the polynomial \(Q^*(z) = Q(x,z,z^h,z^{h^2}, ...,z^{h^{c-1}}) \mod E(x)\)</strong>
+
+
+To show that:
+
+$$Q(w,p(w))^{h^0}, (p(w))^{h^1}, ..., (p(w))^{h^{c-1}}) \mod E(w) \equiv 0$$
+
+We consider the LHS,
+
+$$Q(w,p(w))^{h^0}, (p(w))^{h^1}, ..., (p(w))^{h^{c-1}}) \mod E(w)$$
+
+However, from the composite modulo principle, this is equivalent to:
+
+$$ Q(w,p(w))^{h^0} \mod E(w), (p(w))^{h^1} \mod E(w), ..., (p(w))^{h^{c-1}} \mod E(w))$$ 
+
+$$= Q(w, p(w)^{(0)}, (p(w))^{(1)}, ..., (p(w))^{(c−1)})$$
+
+However, since we already know that \(Q(w, p^{(0)}(w), p^{(1)}(w), ..., p^{(c−1)}(w))\) is identically \(0\). Therefore, it follows then that \(p(\omega\)) is a root of the polynomial \(Q^*\). Hence shown.<br><br><br>
+
+
+We now have that \(p(w)\) is a root of the polynomial \(Q^*\). The degree of the polynomial \(Q^*\) is: <br><br>
+
+$$\text{degree} \leq (\text{degree}_p)(1 + h + h^2 + ... + h^{c-1})$$
+
+$$\text{degree} \leq (h − 1)(1 + h + h^2 + ... + h^{c-1})$$
+
+$$ = h + h^2 + h^3 + ... + h^{c} -1 − h − h^2 − h^3 − ... − h^{c−1}$$
+
+$$ h^c - 1 = q$$
+
+
+Therefore, given an efficient algorithm that outputs all the roots of a given univariate polynomial with coefficients \(\frac{\FF_q[x]}{E(x)}\), we can find all the roots of \(Q^*\) (which would still be polynomials) (through the way in which we have just found one of the roots). These polynomial solutions would contain every bit of the Parvaresh-Vardy coded message that satisfies the criteria of having an agreement \(t>(c+1)kh\) with \(R\). Therefore, by simply reading the roots, we can find all the codewords which have an agreement \(t>(c+1)kh\) with \(R\).<br><br>
+
+QED.
+
 
   </div>
 
