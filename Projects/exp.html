@@ -18,6 +18,11 @@
     }
     </style>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+
 <div class="background_image">
 <div class="header">
     <div>
@@ -42,6 +47,7 @@
   <a href="../contact.html">Contact</a>
 </div>
 
+
 <style>
 .centertitleph11 {
   display: block;
@@ -62,7 +68,7 @@
   font-weight: bold;
   margin: 0 auto; /* Center the text container */
   padding: 10px;
-  width: 83.5%;
+  width: 70%;
   text-align: center; /* Center text */
   position: absolute; /* Position text */
   top: 25%; /* Position text in the middle */
@@ -90,12 +96,35 @@
   position: relative; /* Needed to position the cutout text in the middle of the image */
   height: 80%; /* Some height */
 }
+
+  .auxiliary:link {
+    color: tomato;
+    background-color: transparent;
+    text-decoration: underline;
+  }
+
+  .auxiliary:visited {
+    color: black;
+    background-color: transparent;
+    text-decoration: none;
+  }
+
+  .auxiliary:hover {
+    background-color: transparent;
+    text-decoration: underline;
+    font-weight:bold;
+  }
+
+  .auxiliary:active {
+    color: tomato;
+    background-color: transparent;
+    text-decoration: underline;
+  }
 </style>
 
 <div class="image-container">
-  <div class="text">Deriving Random Walks on Expander Graphs from the Sticky Random Walk</div>
+  <div class="text">Enlarging the Pseudorandomness of Expander Random Walks</div>
 </div>
-
 
 
 <div class="w3-row w3-padding">
@@ -103,8 +132,23 @@
     <div class="w3-container w3-white w3-margin w3-padding-large">
       <div class="w3">
 
+<p> For my senior thesis under the mentorship with <a class="auxiliary" href="http://users.cms.caltech.edu/~umans/">Professor Christopher Umans</a>, I am working to enlarge the pseudorandomnesss of expander random walks by finding classes of functions that cannot distinguish between the vertices sampled from an expander walk on vertices labeled \(\{1,\dots,n\}\) and the vertices sampled from the uniform distribution on \([n]\). Building off of previous research (see below), we are working to show that expander random walks are fooled by functions computed by \(\mathrm{ACC}^0\) circuits. See my fall write-up for the project below!</p>
 
-<p> During my Junior year, I had the privilege to work with <a href="http://users.cms.caltech.edu/~umans/">Professor Christopher Umans</a> on a research project focused towards understanding expander graphs. Over the year, we constructed a framework to study the model of <a href="https://en.wikipedia.org/wiki/Expander_walk_sampling">random walks on expander graphs</a>. A prior result shows that the sticky random walk can be a useful model to understand the full-scale expander graph. My research generalized the <a href="https://drops.dagstuhl.de/opus/volltexte/2021/13587/">sticky random walk</a> from 2 symbols to m symbols, using a generalized Krawtchouk function and combinatorial arguments. I'll be taking the project forward to an undergraduate thesis. See my write-up for the project below!</p>
+<p align="center">
+<iframe src="https://drive.google.com/file/d/1EN6dCjJIc8kDvk3TqfZP_-7PzBoi2xaM/preview" width="90%" height="720" allow="autoplay"></iframe>
+</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="w3-row w3-padding">
+  <div class="w3-col l9 s12" style="float:none !important; margin:auto; position:relative; z-index:10; margin-top:-10%;">
+    <div class="w3-container w3-white w3-margin w3-padding-large">
+      <div class="w3">
+
+
+<p> During my Junior year, I focused on understanding expander graphs. Over the year, we constructed a framework to study the model of <a class="auxiliary" href="https://en.wikipedia.org/wiki/Expander_walk_sampling">random walks on expander graphs</a>. A prior result shows that the sticky random walk can be a useful model to understand the full-scale expander graph. My research generalized the <a class="auxiliary" href="https://drops.dagstuhl.de/opus/volltexte/2021/13587/">sticky random walk</a> from \(2\) to \(\mathrm m\) characters. See my write-up for the project below!</p>
 
 <p align="center"><iframe src="https://drive.google.com/file/d/1LReIqT5rFgB8UqtdJKAoxpKkeSUEEdn3/preview" width="90%" height="720" allow="autoplay"></iframe></iframe></p>
 

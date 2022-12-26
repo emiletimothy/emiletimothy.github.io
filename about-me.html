@@ -64,6 +64,37 @@
 </div>
 </div>
 
+<style>
+  .auxiliary:link {
+    color: tomato;
+    background-color: transparent;
+    text-decoration: underline;
+  }
+
+  .auxiliary:visited {
+    color: tomato;
+    background-color: transparent;
+    text-decoration: none;
+  }
+
+  .auxiliary:hover {
+      background-color: transparent;
+    text-decoration: underline;
+    font-weight:bold;
+  }
+
+  .auxiliary:active {
+    color: tomato;
+    background-color: transparent;
+    text-decoration: underline;
+  }
+</style>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+
 <div class="navbar">
   <a href="index.html">Home</a>
   <a href="about-me.html" class="active">About Me</a>
@@ -94,11 +125,10 @@
             <img src="Pictures/headshots/sk4.jpeg" alt="Picture of me at Annenberg" style="width:100%" class="w3-padding-16">
             <div>"Looking outside Annenberg" by Kim Fox Photography</div>
           </div>
-           <p><strong>
-    Hello! My name is Emile Timothy, and I'm a senior at Caltech majoring in Computer Science. On campus, I do research at the Theory of Computation (ToC) Group and the Rigorous Systems Research Group (RSRG), and am a member of the Caltech Data Science team. My other interests include working on research or coding projects, playing the Piano, thinking about wild hypothetical scenarios, and exploring boba stores and running trails around Pasadena and Los Angeles. I occasionally post pictures and share my thoughts on 
-    <a href=https://www.instagram.com/emiletimothy/>Instagram</a> and <a href="https://twitter.com/emile217">Twitter</a>.<br>
+           <p>
+    Hello! My name is <b>Emile Timothy</b>, and I'm a senior at <a class="auxiliary" href="https://caltech.edu/"> Caltech</a> majoring in Computer Science. I do research at the <a class="auxiliary" href="https://www.cms.caltech.edu/research/theoretical-computer-science">Theory of Computation Group</a> and the <a class="auxiliary" href="http://rsrg.cms.caltech.edu/">Rigorous Systems Research Group</a> (RSRG), and am a member of the <a class="auxiliary" href="http://datascience.caltech.edu/">Caltech Data Science team</a>. My interests include working on research or coding projects, playing the Piano, thinking about wild hypothetical scenarios, and exploring boba stores and running trails around Pasadena and Los Angeles as a member of the <a class="auxiliary"><a class="auxiliary" href="https://caltech.prestosports.com/sports/xc/2019-20/releases/20190716slczml">Caltech XC/TF team</a>. I occasionally post pictures and share my thoughts on <a class="auxiliary" href=https://www.instagram.com/emiletimothy/>Instagram</a> and <a class="auxiliary" href="https://twitter.com/emile217">Twitter</a>.<br>
 
-    <p>My research with Professor Chris Umans focuses on constructing a framework to study the model of <a href="https://en.wikipedia.org/wiki/Expander_walk_sampling">random walks on expander graphs</a>. A prior result shows that the sticky random walk can be a useful model to understand the full-scale expander graph. My research is devoted to generalizing the <a href="https://drops.dagstuhl.de/opus/volltexte/2021/13587/">sticky random walk</a> from 2 symbols to m symbols, using a generalized Krawtchouk function and combinatorial arguments. My research with Prof. Wierman focuses on using <a href="https://arxiv.org/abs/2106.10497">perturbation analysis</a> to prove stability bounds on using model-predictive control on linear time-varying (LTV) systems in which the predictions of the disturbances are noisy, and extending this to linear feedback policies on the <a href="https://arxiv.org/abs/1905.12776">regularized online balanced descent (R-OBD)</a> algorithm. I am also creating simulations to show that perturbing the target parameters of noisy LTV systems leads to large deviations from the optimal cost. My research with Prof. Abu-Mostafa focuses on explaining why <a href="https://en.wikipedia.org/wiki/Multiclass_classification">multi-classifiers</a> sometimes outperform <a href="https://en.wikipedia.org/wiki/Binary_classification">binary classifiers</a>. To explain this, we are developing a theory of mutual cross-<a href="https://towardsdatascience.com/regularization-in-machine-learning-76441ddcf99a">regularization</a> between classes to prove a higher learning bound for multi-classifiers and training neural networks on large datasets (MNIST) to find the scope of this theory.</p>
+    <p>My research with <a class="auxiliary" href="http://users.cms.caltech.edu/~umans/">Chris Umans</a> focuses on constructing a framework to study the model of <a class="auxiliary" href="https://dl.acm.org/doi/10.1145/3406325.3451049">expander random walks</a>, which is a useful tool in <a class="auxiliary" href="https://simons.berkeley.edu/derandomization">derandomization</a>. My research is devoted to enlarging the pseudorandomness of expander random walks by finding test-functions that are unable to distinguish between expander random walks and truly random walks. We are currently trying to show that all functions computed by \(\mathrm{ACC}^0\) circuits are fooled by expander random walks. My research with <a class="auxiliary" href="https://adamwierman.com/">Adam Wierman</a> focuses on using <a class="auxiliary" href="https://arxiv.org/abs/2106.10497">perturbation analysis</a> to prove stability bounds for model-predictive control in noisy systems, and deriving linear feedback policies for the <a class="auxiliary" href="https://arxiv.org/abs/1905.12776">regularized online balanced descent (R-OBD)</a> algorithm. <a class="auxiliary" href="https://arxiv.org/abs/2210.12320">Our work</a> is currently awaiting review at \(\mathrm{SIGMETRICS}\) \(2023\). My research with <a class="auxiliary" href="https://work.caltech.edu/">Yaser Abu-Mostafa</a> focuses on explaining why neural-network <a class="auxiliary" href="https://www.sciencedirect.com/topics/computer-science/multi-classifiers">multi-classifiers</a> outperform <a class="auxiliary" href="https://www.learndatasci.com/glossary/binary-classification/">binary classifiers</a>. To explain this, we are developing a theory of mutual cross-<a class="auxiliary" href="https://towardsdatascience.com/regularization-in-machine-learning-76441ddcf99a">regularization</a> between classes to prove a higher learning bound for multi-classifiers and training neural networks on large datasets (MNIST) to find the scope of this theory.</p>
         </div>
       </div>
       <hr>
@@ -117,11 +147,11 @@
 <!--  <img src="Pictures/headshots/mepic1.png" alt="Picture of me at Moore Walk" style="width:100%" class="w3-padding-16">
  -->  <div>"Coding on Moore Walk" by Kim Fox Photography</div>
 </div>
- <p>In <a href="https://www.gemscis-dubai.com/en">High School</a>, I represented the UAE in the <a href="https://ipho-unofficial.org/">International Physics Olympiad</a> where I specialized in the thermal and statistical physics section - it was a defining moment for me: the study of stochasticity and noise in the context of physics seemed like something I would enjoy working on. <br><br>
+ <p>In <a class="auxiliary" href="https://www.gemscis-dubai.com/en">High School</a>, I represented the UAE in the <a class="auxiliary" href="https://ipho-unofficial.org/">International Physics Olympiad</a> where I specialized in the thermal and statistical physics section - it was a defining moment for me: the study of stochasticity and noise in the context of physics seemed like something I would enjoy working on. <br><br>
 
-However, at <a href="https://www.cms.caltech.edu/">Caltech</a>, the study of randomness as studied in Computer Science allured me. There are several open-problems in computational complexity, a field that studies classes of problems and how they relate to each other in terms of computational resources, one of which is whether BPP = P. BPP is the class of "bounded-error probabilistic time", which means that a probabilistic algorithm can solve any problem in BPP with arbitrarily high precision in a polynomial amount of time. Conversely, P is the class of "polynomial time", which means that any algorithm can solve a problem in P in a polynomial amount of time. As of today, the question of whether BPP = P is an open problem, but the implications of this equality would be <a href="https://www.wisdom.weizmann.ac.il/~oded/COL/bpp-p.pdf">enormous and far-reaching</a>. Most notably, it would imply that randomness can be simulated. True randomness is an expensive resource, and we get truly random bits by measuring fluctuations in background radiation and air temperature. Therefore, in cryptography and computational physics, computer today instead use <a href="https://en.wikipedia.org/wiki/Pseudorandomness#:~:text=A%20pseudorandom%20sequence%20of%20numbers,completely%20deterministic%20and%20repeatable%20process.">pseudorandom bits</a> which are seeded from a fewer number of truly random bits but can be distinguished by large ad-hoc statistical tests and large circuits. It would be revolutionary if algorithms could instead generate truly random bits without any seed, since it would imply 1) that BPP = P, and 2) that randomness is not a special resource since we can create randomness in polynomial time. My research on expander graphs stems from <a href="https://dl.acm.org/doi/10.1145/28395.28410">Szemerèdi's (1987) theorem</a> that a short random walk on an expander graph can efficiently simulate a uniformly random sampling of its vertices with an exponentially high probability, since it decreases the number of random bits k needed to generate n random bits from O(k log n) to log(n) + O(k): it's an absurdly useful theorem for the derandomization of probabilistic algorithms. The problem is that we don't really have a consistent way to analyze expander graphs, given their ubiquitiousness (error-correcting codes, probabilistically-checkable proofs, derandomization) and complexity at the asymptotic limit (when it has a large number of vertices). Therefore, I'm studying the <a href="https://drops.dagstuhl.de/opus/volltexte/2021/13587/">sticky random walk</a> to see if it tells us anything about random walks on expander graphs as the bias goes to 0. I'm hopeful that it might reveal something special about the underlying nature of randomness.<br><br>
+However, at <a class="auxiliary"  href="https://www.cms.caltech.edu/">Caltech</a>, the study of randomness as studied in Computer Science allured me. There are several open-problems in computational complexity, a field that studies classes of problems and how they relate to each other in terms of computational resources, one of which is whether \(\mathrm{BPP} = \mathrm{P}\). \(\mathrm{BPP}\) is the class of "bounded-error probabilistic time", which means that a probabilistic algorithm can solve any problem in \(\mathrm{BPP}\) with arbitrarily high precision in a polynomial amount of time. Conversely, \(\mathrm P\) is the class of "polynomial time", which means that any algorithm can solve a problem in \(\mathrm P\) in a polynomial amount of time. As of today, the question of whether \(\mathrm{BPP} = \mathrm{P}\) is an open problem, but the implications of this equality would be <a class="auxiliary" href="https://www.wisdom.weizmann.ac.il/~oded/COL/bpp-p.pdf">enormous and far-reaching</a>. Most notably, it would imply that randomness can be simulated. True randomness is an expensive resource, and we can barely get truly random bits by measuring fluctuations in background radiation and air temperature, though samples from these distribution can be (catastrophically) correlated. Therefore, in cryptography and computational physics, computers today instead use <a class="auxiliary" href="https://en.wikipedia.org/wiki/Pseudorandomness#:~:text=A%20pseudorandom%20sequence%20of%20numbers,completely%20deterministic%20and%20repeatable%20process.">pseudorandom bits</a> which are seeded from a fewer number of truly random bits but can be distinguished by large ad-hoc statistical tests and large circuits. It would be revolutionary if algorithms could instead generate truly random bits without any seed, since it would imply 1) that \(\mathrm{BPP} = \mathrm{P}\), and 2) that randomness is not a special resource since we can create randomness in polynomial time. My research on expander graphs stems from <a class="auxiliary" href="https://dl.acm.org/doi/10.1145/28395.28410">Szemerèdi's (1987) theorem</a> that a short random walk on an expander graph can efficiently simulate a uniformly random sampling of its vertices with an exponentially high probability, since it decreases the number of random bits, \(\mathrm k\), needed to generate \(n\) random bits from \(O(k \log n)\) to \(\log(n) + O(k)\): it's an absurdly useful theorem for the derandomization of probabilistic algorithms. The problem is that we don't really have a consistent way to analyze expander graphs, given their ubiquitiousness (error-correcting codes, probabilistically-checkable proofs, derandomization) and complexity at the asymptotic limit (when it has a large number of vertices). Therefore, I'm studying the <a class="auxiliary" href="https://drops.dagstuhl.de/opus/volltexte/2021/13587/">expander random walk</a> to see if it tells us anything about random walks on expander graphs as the bias goes to \(0\). I'm hopeful that it might reveal something special about the underlying nature of randomness.<br><br>
 
-Randomness, in the form of stochasticity, also rears itself quite unpredictably in machine learning. In the study of dimensionality reduction embeddings, we can reduce a p-dimensional dataset to a 2-dimensional dataset to actually visualize the data to understand how clusters form by comparing the similarity of points. The most common techniques for this are t-SNE (t-stochastic neighbor embedding) and UMAP (uniform manifold approximate projection), which uses the <a href="https://en.wikipedia.org/wiki/Kullback%E2%80%93Leibler_divergence">Kullback-Leibler divergence</a> and <a href="https://en.wikipedia.org/wiki/Cross_entropy">cross entropy</a> loss functions, respectively. When performing dimensionality reduction on noisy real-world data, my research group observed that the noise is not uniformly propagated down to lower dimensions, suggesting that noise (even truly random noise) contains some information, which has interesting implications in information theory. My affinity for understanding noise better has also made me curious about how noise affects machine-learning models. My work in reinforcement learning seeks to understand how <a href="https://en.wikipedia.org/wiki/Model_predictive_control">model predictive control</a> with predictive errors can learn information in the presence of noise, and whether it is possible to bound a stable trajectory during the learning process. I'm hopeful that my work in understanding how noise shapes the trajectories of dynamical systems can lead to creating more stable processes and systems, and will contribute meaningful change in the efforts to create a sustainable world.<br><br>
+Randomness, in the form of stochasticity, also rears itself quite unpredictably in machine learning. In the study of dimensionality reduction embeddings, we can reduce transform any \(\mathrm p\)-dimensional dataset to a \(\mathrm q\)-dimensional dataset to actually visualize the data to understand how clusters form by comparing the similarity of points. The most common techniques for this are \(\mathrm t\)-\(\mathrm{SNE}\) (t-stochastic neighbor embedding) and \(\mathrm{UMAP}\) (uniform manifold approximate projection), which uses the <a class="auxiliary" href="https://en.wikipedia.org/wiki/Kullback%E2%80%93Leibler_divergence">Kullback-Leibler divergence</a> and <a class="auxiliary" href="https://en.wikipedia.org/wiki/Cross_entropy">cross entropy</a> loss functions, respectively. When performing dimensionality reduction on noisy real-world data, my research group observed that the noise is not uniformly propagated down to lower dimensions, suggesting that noise (even truly random noise) contains some information, which has interesting implications in information theory. My affinity for understanding noise better has also made me curious about how noise affects machine-learning models. My work in reinforcement learning seeks to understand how <a class="auxiliary" href="https://en.wikipedia.org/wiki/Model_predictive_control">model predictive control</a> with predictive errors can learn information in the presence of noise, and whether it is possible to bound a stable trajectory during the learning process. I'm hopeful that my work in understanding how noise shapes the trajectories of dynamical systems can lead to creating more stable processes and systems, and will contribute meaningful change in the efforts to create a sustainable world.<br><br>
 
 
         </div>
@@ -138,8 +168,8 @@ Randomness, in the form of stochasticity, also rears itself quite unpredictably 
             <div>Caltech Class of '23 Commencement Picture</div>
           </div>
 
-<p>I grew up in <a href="https://www.visitdubai.com/en/articles/new-attractions-in-dubai">Dubai</a> as the child of immigrant parents from India who left their families and social-circles and worked hard to make a living. Given the different culture of the Middle-East, it wasn’t easy for them to adapt. My
-Mom worked as a Chemistry Teacher, managing extraordinary shifts while carrying me, and my Dad balanced job instability. After she gave birth, he traveled 100 kilometers every day just to see me. Today, my Dad teaches next-generation technology to a wide base of change-makers as a <a href="https://firstmiletc.com/">Telecom Instructor</a>, and my Mom inspires the lives of thousands of students as a <a href="https://www.gemsnewmillenniumschool-alkhail.com/About-Us/Welcome-Message">Principal</a>. I have an indelible impression from my parents, my superheros, of what it takes to strive towards success: the collective power of drive and resolve. I take the road less traveled, the wicket gate, to make an impact, knowing that it takes commitment to push the frontiers of Computer Science: create ideas, prove theories, break barriers, and serve humanity. From all of this, I've learnt the importance of humility. <a href="https://calvinrosser.com/notes/surely-joking-mr-feynman-richard-feynman/">Richard Feynman</a> once said that "the more you know, the more you know what you don't know". I'm truly reminded every day of just how little I really know and how many global problems there are out there that are just waiting to be solved. Yet, my thirst for problem solving and my hunger to understand the unknown is letting me rise to this challenge.
+<p>I grew up in <a class="auxiliary" href="https://www.visitdubai.com/en/articles/new-attractions-in-dubai">Dubai</a> as the child of immigrant parents from India who left their families and social-circles and worked hard to make a living. Given the different culture of the Middle-East, it wasn’t easy for them to adapt. My
+Mom worked as a Chemistry Teacher, managing extraordinary shifts while carrying me, and my Dad balanced job instability. After she gave birth, he traveled 100 kilometers every day just to see me. Today, my Dad teaches next-generation technology to a wide base of change-makers as a <a class="auxiliary" href="https://firstmiletc.com/">Telecom Instructor</a>, and my Mom inspires the lives of thousands of students as a <a class="auxiliary" href="https://www.gemsnewmillenniumschool-alkhail.com/About-Us/Welcome-Message">Principal</a>. I have an indelible impression from my parents, my superheros, of what it takes to strive towards success: the collective power of drive and resolve. I take the road less traveled, the wicket gate, to make an impact, knowing that it takes commitment to push the frontiers of Computer Science: create ideas, prove theories, break barriers, and serve humanity. From all of this, I've learnt the importance of humility. <a class="auxiliary" href="https://calvinrosser.com/notes/surely-joking-mr-feynman-richard-feynman/">Richard Feynman</a> once said that "the more you know, the more you know what you don't know". I'm truly reminded every day of just how little I really know and how many global problems there are out there that are just waiting to be solved. Yet, my thirst for problem solving and my hunger to understand the unknown is letting me rise to this challenge.
 </p>
         </div>
       </div>
@@ -152,8 +182,10 @@ Mom worked as a Chemistry Teacher, managing extraordinary shifts while carrying 
     <div class="w3-col l4">
       <div class="w3-white w3-margin">
         <div class="content_img_1">
-          <img src="Pictures/headshots/sk1.jpeg" alt="Poster Picture" style="width:100%">
-          <div>"Facing North" by Kim Fox Photography</div>
+<!--           <img src="Pictures/headshots/sk1.jpeg" alt="Poster Picture" style="width:100%">
+ -->          <img src="Pictures/me_and_canella.jpg" alt="Poster Picture" style="width:100%">
+<!--           <div>"Facing North" by Kim Fox Photography</div>
+ -->          <div>"Facing West" by Christopher Zhou</div>
         </div>
         <div class="w3-container w3-black">
           <h4>Emile Timothy Anand</h4>
@@ -241,7 +273,7 @@ Mom worked as a Chemistry Teacher, managing extraordinary shifts while carrying 
             <span class="w3-display-middle">
               <a href="Projects/dimensionalityreduction.html">
               <div class="zoom content_img_1">
-                <img src="Pictures/blog/tSNE.png" alt="Toda's theorem" style="width:100%;">
+                <img src="Pictures/blog/tSNE.png" alt="tSNE manifolds" style="width:100%;">
                 <div>Manifolds</div>
               </div>
             </span>
@@ -262,6 +294,11 @@ Mom worked as a Chemistry Teacher, managing extraordinary shifts while carrying 
       </div>
       <hr>
 
+<style>
+  .tag_transition:hover {
+    font-weight:bold;
+  }
+</style>
       <!-- Tags -->
       <div class="w3-white w3-margin">
         <div class="w3-container w3-padding w3-black">
@@ -269,13 +306,13 @@ Mom worked as a Chemistry Teacher, managing extraordinary shifts while carrying 
         </div>
         <div class="w3-container w3-white">
           <p> 
-            <span class="w3-tag w3-orange w3-small w3-margin-bottom">Complexity Theory</span>
-            <span class="w3-tag w3-deep-purple w3-small w3-margin-bottom">Machine Learning</span>
-            <span class="w3-tag w3-teal w3-small w3-margin-bottom">Derandomization</span>
-            <span class="w3-tag w3-lime w3-small w3-margin-bottom">Convex Optimization</span>
-            <span class="w3-tag w3-indigo w3-small w3-margin-bottom">Control Theory</span>
-            <span class="w3-tag w3-khaki w3-small w3-margin-bottom">Expanders</span>
-            <span class="w3-tag w3-light-blue w3-small w3-margin-bottom">PRGs</span>
+            <span class="w3-tag w3-orange w3-small w3-margin-bottom tag_transition">Complexity Theory</span>
+            <span class="w3-tag w3-deep-purple w3-small w3-margin-bottom tag_transition">Machine Learning</span>
+            <span class="w3-tag w3-teal w3-small w3-margin-bottom tag_transition">Derandomization</span>
+            <span class="w3-tag w3-lime w3-small w3-margin-bottom tag_transition">Convex Optimization</span>
+            <span class="w3-tag w3-indigo w3-small w3-margin-bottom tag_transition">Control Theory</span>
+            <span class="w3-tag w3-khaki w3-small w3-margin-bottom tag_transition">Expanders</span>
+            <span class="w3-tag w3-light-blue w3-small w3-margin-bottom tag_transition">PRGs</span>
           </p>
         </div>
       </div>

@@ -165,6 +165,28 @@ if (devtools.isOpen) {
     html {
       scroll-behavior: smooth;
     }
+
+  .single_indent{
+  text-indent: 50px;
+}
+.double_indent{
+  text-indent: 100px;
+}
+.triple_indent{
+  text-indent: 150px;
+}
+
+.quadruple_indent{
+  text-indent: 200px;
+}
+
+.pentaple_indent{
+  text-indent: 250px;
+}
+
+.hexaple_indent{
+  text-indent: 300px;
+}
     </style>
 
 <div class="background_image">
@@ -211,14 +233,14 @@ if (devtools.isOpen) {
   font-weight: bold;
   margin: 0 auto; /* Center the text container */
   padding: 10px;
-  width: 65%;
+  width: 50%;
   text-align: center; /* Center text */
   position: absolute; /* Position text */
   top: 25%; /* Position text in the middle */
   left: 50%; /* Position text in the middle */
   transform: translate(-50%, -50%); /* Position text in the middle */
-  /*mix-blend-mode: screen;  This makes the cutout text possible */
-  font-family: "Oswald", sans-serif;
+/*  mix-blend-mode: screen;  This makes the cutout text possible 
+*/  font-family: "Oswald", sans-serif;
   text-shadow: 3px 3px 3px #ababab;
 }
 
@@ -235,40 +257,18 @@ if (devtools.isOpen) {
 }
 
 .image-container {
-  background-image: url("blog_pics/is2.jpeg"); /* The image used - important! */
+  background-image: url("blog_pics/sipser_lautemann.webp"); /* The image used - important! */
   background-size: cover;
   position: relative; /* Needed to position the cutout text in the middle of the image */
-  height: 90%; /* Some height */
+  height: 70%; /* Some height */
 }
-
-  .auxiliary:link {
-    color: tomato;
-    background-color: transparent;
-    text-decoration: underline;
-  }
-
-  .auxiliary:visited {
-    color: black;
-    background-color: transparent;
-    text-decoration: none;
-  }
-
-  .auxiliary:hover {
-    background-color: transparent;
-    text-decoration: underline;
-    font-weight:bold;
-  }
-
-  .auxiliary:active {
-    color: tomato;
-    background-color: transparent;
-    text-decoration: underline;
-  }
 </style>
 
 <div class="image-container">
-  <div class="text">Simulating the Ising Model Using Monte-Carlo Methods</div>
+  <div class="text">Proving the Sipser-Lautemann theorem: \(\mathrm{BPP} \subseteq \Sigma_2^\mathrm P \cap \Pi_2^\mathrm P\)</div>
 </div>
+
+$$\DeclareMathOperator*{\EE}{\mathbb{E}}$$
 
 
 <div class="w3-row w3-padding">
@@ -277,19 +277,112 @@ if (devtools.isOpen) {
       <div class="w3">
 <p> 
 
-</p>
+
+Happy Sunday! Today, I'm going to share another really cool result involving some substructures of the polynomial hierarchy. As usual, I'm going to start by giving my regular schpiel about what the polynomial hierarchy is.<br><br>
+
+The classes NP and co-NP are near the bottom of the “polynomial time hierarachy,” which consists of the complexity classes \(\Sigma_k^p, \Delta_k^p, \Pi_k^p\) for \(k\geq 0\) defined as follows: We say that \(L \in \Sigma_k^p\) if there is a polynomial time deterministic Turing machine \(A\) and a constant \(c<\infty\) such that the following holds, where all \(|y_i| \leq |x|^c\) (here \(|\cdot|\) indicates the length of a binary string):
+
+$$x \in L \iff \exists y_1 \forall y_2 \exists y_3 \forall y_4 \cdots \exists y_{k-1} \forall y_k: A(x, y_1, \cdots, y_k) = 1 \text{ (k even)}$$
+
+$$x \in L \iff \exists y_1 \forall y_2 \exists y_3 \forall y_4 \cdots \forall y_{k-1} \exists y_k: A(x, y_1, \cdots, y_k) = 1 \text{(k odd)}$$
+
+
+And we define \(\Pi_p^k = \mathrm{co}\text{-}\Sigma_p^k\) (which by de Morgan just means that you start the above lines
+with a \(\forall\). Thus, from the definitions:<br><br>
+
+1) \(\Delta_0^P := \Sigma_0^P := \Pi_0^P:=\mathrm P\), where \(\mathrm P\) is the set of problems that can be solved in poly-time. <br>
+2) \(\Delta_{i+1}^P:=\text{P}^{\Sigma_i^P}, \forall i\geq 0\)<br>
+3) \(\Sigma_{i+1}^P:=\text{NP}^{\Sigma_i^P}, \forall i\geq 0\)<br>
+4) \(\Pi_{i+1}^P:=\text{coNP}^{\Sigma_i^P}, \forall i\geq 0\)<br><br>
+
+Furthermore, we have the relation that:
+
+$$ \Sigma_i^P \cup \Pi_i^P \subseteq \Sigma_{i+1}^P \cap \Pi_{i+1}^P$$
+
+The polynomial-time hierarchy is defined as:
+
+$$\text{PH} = \bigcup_{i\in\mathbb{N}} \{\Delta_i^P, \Sigma_i^P, \Pi_i^P\}$$
+
+The result that I want to show here is that despite we have <i>absolutely</i> no idea of how \(\mathrm{BPP}\) and \(P\) are related to each other and even though we <i>don't</i> know where \(\mathrm{BPP}\) fits into the polynomial hierarchy, that \(\mathrm{BPP}\) is contained <i>somewhere</i> in the intersections of the polynomial hierarchy. Specifically, I'm going to show that \(\mathrm{BPP} \subseteq \Sigma_2^P \cap \Pi_2^P\). <br><br>
       </div>
 
 
-<button class="collapsible"><strong>Coming Soon!</strong></button>
+<button class="collapsible"><strong>Lemma 1: Exponential Amplifications of the Success Probability of BPP Machines via Chernoff Bounds</strong></button>
   <div class="content">
-<br><h5 style="text-align:center;"><u>Coming Soon!</u></h5>
+<br>
 
-<p><br><br></p>
+Given a problem \(L\in\mathrm{BPP}\), let \(A\) be a Turing Machine that decides \(L\). Then, 
+
+$$\forall x\in L, \Pr(A(x) \text{ accepts})\geq \frac{2}{3}$$
+$$\forall x\notin L, \Pr(A(x) \text{ rejects})< \frac{1}{3}$$
+
+
+Since \(A\) has success probability greater than \(\frac{1}{2}\), we run \(A(x)\) for \(T\) times and return the majority output. <br><br>
+
+So, we need to find \(T\in \mathrm{poly}(n)\) for which the probability that the majority is wrong is atmost \(2^{-n}\). For all \(x\in L\), let \(A(x) = 1\) if \(A \text{ accepts } x\) and \(0\) otherwise. Then, define \(\{Y_i\}_{i=1}^T\) where \(Y_i = 1\{A_i(x)=1\}\) is the indicator function that returns \(1\) if \(A(x)=1\) on the \(i\)'th iteration, and \(0\) otherwise. So, \(\Pr(\text{majority is wrong})=\Pr(\sum_{i=1}^T Y_i< T/2)=\Pr(\bar{Y}< 1/2)\), where \(\bar{Y} = \frac{1}{T}\sum_{i=1}^T Y_i\). <br><br>
+
+
+Then, by the linearity of expectations:
+$$\mathbb{E}[\bar{Y}] = \mathbb{E}\bigg[\frac{1}{T}\sum_{i=1}^T Y_i\bigg] = \frac{1}{T}\sum_{i=1}^T \mathbb{E}[Y_i] = \frac{1}{T}\sum_{i=1}^T \mathbb{E}[1\{A_i(x) = 1\}] = \frac{1}{T}\sum_{i=1}^T \Pr(A_i(x)=1) \geq \frac{2}{3}$$
+
+
+Thus, \(\mathbb{E}[\bar{Y}] \geq \frac{2}{3}\). We then recall the lower Chernoff bound which states that for random variables \(\{X_{i}\}_{i\in\mathbb{N}}\) with mean \(\bar{X}\) and expectation \(\theta\) that: $$\Pr[\bar{X}<(1-\epsilon)\theta] < \exp(-\theta n\epsilon^2/2)$$
+
+Then, using this bound in this setting tells us that:
+
+$$\Pr(\bar{Y}<(1-\epsilon)\EE[\bar{Y}])<\exp(-\EE[\bar{Y}] T\epsilon^2/2)$$
+
+Setting \(\epsilon=\frac{1}{4}\), yields that \(\Pr(\bar{Y}<(1-\epsilon)\EE[\bar{Y}])=\Pr(\bar{Y}<\frac{1}{2})\), which we are trying to bound. So, by the Chernoff bound:
+
+\[\Pr(\bar{Y}<(1-\epsilon)\EE[\bar{Y}]) = \Pr(\bar{Y}<1/2) \stackrel{\text{Chernoff}}{<}  \exp(-2T/(3\cdot 4^2 \cdot 2)) = \exp(-T/48)\]
+
+Then, for a good choice of \(T\) we can reduce the probability of the majority output being wrong to less than \(2^{-n}\). Taking natural logs on both sides gives: 
+
+$$-T/48 < \log_e 2^{-n} = \log_2 2^{-n} / \log_2 e \implies -T/48 < -n/\log_2 e \implies T>\frac{48n}{\log_2 e}$$
+
+Thus, if we set \(T>\frac{48n}{\log_2 e}\), the probability of error is less than \(2^{-n}\). Since \(T > \frac{48n}{\log_2 e} \in O(n)\), we know that any Turing Machine \(A'\) that queries \(A\) a linear number of times will still run in polynomial time and use polynomially many random bits (with respect to \(n\). Therefore, we get that any language \(L\in \mathrm{BPP}\) has a Turing Machine \(A'\) for which the probability that it is correct is strictly less than \(2^{-n}\) for inputs \(x\in\{0,1\}^n\).
 </div><br>
+
+Thus, we have shown that we can amplify any \(\mathrm{BPP}\) algorithm \(A\) into \(A'\) that errs on inputs of length \(n\) with probability \(<2^{-n}\). Then, suppose \(A'\) uses \(r\) random bits. Let \(Z_x \subseteq \{0,1\}^r\) denote the subset on which \(A'\) accepts an input \(x\). For \(s\in\{0,1\}^r\), let \(Z_x \oplus s = \{z\oplus s :  z \in Z_x\}\) and \(a  =  2\lceil {r/n}\rceil\). I'm going to show that for \(r  >  1\) (the \(0\) case is really easy to see):
+
+$$x  \in  L  \iff  \exists s_1 , \cdots, s_a \in \{0,1\}^r \text{ such that } \bigcup_{i=1}^a (Z_x \oplus s_i) = \{0,1\}^r$$
+
+
+In the forward direction, let \(s_1, ..., s_a  \in  \{0,1\}^r\), independently and identically distributed. If \(\Pr[\{0,1\}^r  = \bigcup_{i=1}^n (Z_x \oplus s_i)]  >  0\), then \(\exists s_1, ..., s_a  \in  \{0,1\}^r\) such that \(\{0,1\}^r  =  \bigcup_{i=1}^n (Z_x \oplus s_i)\). Since \(s_i\) is independent, \(\forall y  \in  \{0,1\}^r\) and since \(\Pr(y\in Z_x\oplus s_i)\)\(=1-2^{-n}\) we can write that:
+
+$$\Pr\bigg(y\notin \bigcup_{i=1}^a Z_x \oplus s_i\bigg) = \prod_{i=1}^a \Pr(y\notin Z_x \oplus s_i) < 2^{-na}$$
+
+We then union bound the probability that \(\exists y\in \{0,1\}^r\) such that \(y\notin \bigcup_{i=1}^a Z_x \oplus s_i\) and use \(a = \lceil{2r/n}\rceil\):
+
+\begin{align*}
+    \Pr\bigg[\bigcup_{y\in\{0,1\}^r} \bigg(y\notin \bigcup_{i=1}^a Z_x\oplus s_i \bigg)\bigg] &\stackrel{\text{union bound}}{\leq} \sum_{y\in\{0,1\}^r} \Pr\bigg[y\notin \bigcup_{i=1}^a Z_x \oplus s_i\bigg] < \sum_{\{0,1\}^r} 2^{-na} = \frac{2^r}{2^{na}} = 2^{-r}>0
+\end{align*}
+
+The last inequality is true since \(r=\mathrm{poly}(n)\), and so, we have that \(\Pr(\{0,1\}^r = \bigcup_{i=1}^a Z_x \oplus s_i) = 1 - 2^{-r}>0\). The strict \(>\) implies that there is some \(s_1, ..., s_a\) for which \(\{0,1\}^r = \bigcup_{i=1}^a Z_x \oplus s_i\), which proves this direction.
+
+For the backward direction, we show that if \(x\notin L\), then \(\forall s_1, ..., s_a\in\{0,1\}^r, \bigcup_{i=1}^a (Z_x\oplus s_i)\neq \{0,1\}^r\). We start by noting that there are strictly fewer than \(\frac{2^{r}}{2^{n}}=2^{r-n}\) bit-strings which must be in \(Z_x\) for \(x\notin L\). Then, since \(r=\mathrm{poly}(n)<2^n\) for large \(n\)), we have that:
+
+\begin{align*}
+    \frac{|\bigcup_{i=1}^n Z_x\oplus s_i|}{|\{0,1\}^r|} \leq \frac{a|Z_x|}{2^r} \leq a\frac{2^{r-n}}{2^r} &= 2^{-n}\lceil{2r/n}\rceil = 2^{1-n}\frac{r}{n}< 1
+\end{align*}
+
+Thus, we can write that \(|\bigcup_{i=1}^n Z_x\oplus s_i|  <  |\{0,1\}^r|\). So, we get that \(\forall s_1, ..., s_a\in \{0,1\}^r, \bigcup_{i=1}^a (Z_x\oplus s_i)\neq \{0,1\}^r\), which shows the backward direction. So, \(x  \in  L\) if and only if \(\exists s_1,...,s_a\) such that \(\bigcup_{i=1}^a(Z_x\oplus s_i)=\{0,1\}^r\). Thus, we can write that for a Turing Machine \(B(x, s_1, ..., s_a) = \mathrm{OR}(A'(x, y\oplus s_i)  \text{accepts})\) for \(y\in\{0,1\}^r\):
+
+$$ x\in L\iff \exists(s_1, ..., s_a), \forall y\in\{0,1\}^r, B(x, s_1, ..., s_a) = 1$$
+
+Thus, \(L \in \mathrm{BPP}  \implies  L  \in  \Sigma_2^P\) by the above pattern of quantifiers. So, \(\mathrm{BPP}   \subseteq  \Sigma_2^P\). <br><br>
+
+Also, since \(\mathrm{Co-}\Sigma_2^P=\Pi_2^P\) and \(\overline{\mathrm{BPP}}=\mathrm{BPP}\) (a \(\overline{\mathrm{BPP}}\) machine can decide containment of \(\bar{L}\) by inverting the output of a \(\mathrm{BPP}\) machine), we get \(\mathrm{BPP} \subseteq \Pi_2^P\). Therefore, \(L \in \mathrm{BPP} \implies  L \in \Sigma_2^P \cap \Pi_2^P\). Hence, we have that
+
+$$\boxed{\mathrm{BPP} \subseteq \Sigma_2^P \cap \Pi_2^P}$$
+
+This proves the claim.
+
+
     </div>
   </div>
 </div>
+
 
 <style>
 .rectangle {

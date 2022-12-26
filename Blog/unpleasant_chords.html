@@ -211,7 +211,7 @@ if (devtools.isOpen) {
   font-weight: bold;
   margin: 0 auto; /* Center the text container */
   padding: 10px;
-  width: 65%;
+  width: 58%;
   text-align: center; /* Center text */
   position: absolute; /* Position text */
   top: 25%; /* Position text in the middle */
@@ -235,39 +235,15 @@ if (devtools.isOpen) {
 }
 
 .image-container {
-  background-image: url("blog_pics/is2.jpeg"); /* The image used - important! */
+  background-image: url("blog_pics/matheq2.jpeg"); /* The image used - important! */
   background-size: cover;
   position: relative; /* Needed to position the cutout text in the middle of the image */
-  height: 90%; /* Some height */
+  height: 70%; /* Some height */
 }
-
-  .auxiliary:link {
-    color: tomato;
-    background-color: transparent;
-    text-decoration: underline;
-  }
-
-  .auxiliary:visited {
-    color: black;
-    background-color: transparent;
-    text-decoration: none;
-  }
-
-  .auxiliary:hover {
-    background-color: transparent;
-    text-decoration: underline;
-    font-weight:bold;
-  }
-
-  .auxiliary:active {
-    color: tomato;
-    background-color: transparent;
-    text-decoration: underline;
-  }
 </style>
 
 <div class="image-container">
-  <div class="text">Simulating the Ising Model Using Monte-Carlo Methods</div>
+  <div class="text">Why do most chords sound unpleasant to the ear?</div>
 </div>
 
 
@@ -277,21 +253,92 @@ if (devtools.isOpen) {
       <div class="w3">
 <p> 
 
-</p>
-      </div>
+ Think of a number \(r \in (0, 1)\) as the ratio between the frequencies of the two notes. Empirically, rationals \(r\) with “large denominators” are pleasing chords. For instance \(r = 2/3\) is what is called a “fifth,” \(r = 3/4\) is what is called a “fourth,” and \(5/8\) is a “major sixth". <br><br>
+
+ In the actual tuning of stringed instruments, the frequency ratios will be slightly different, but close to these values. This is (at least in part) because one cannot make finitely many notes display all the desired low-denominator ratios. For instance, if you want to be able to go up both by octaves (an octave is a factor of \(2\) in frequency) and by fifths, then you would require that for some positive integers \(k, \ell, 2^k = (3/2)^\ell\); which is not going to happen. The “chromatic scale,” which uses \(12\) notes per octave, rising in frequency by \(2^{1/12}\), has the fortuitous property that some small-denominator fractions are approximated quite well, e.g., \(2^{7/12} = 1.4983 \cdots \sim 3/2\). As you know, the rationals are dense in the interval \((0, 1)\). You might then ask, why aren’t all frequency ratios pleasing—since we can get arbitrarily close using rationals. Of course, if the only chords you find pleasing have denominators less than say \(8\), then it’s not hard to answer the question—there are \(17\) such fractions, and if you want to approximate any fraction multiplicatively within say \(e^{\pm 0.01}\), then most of the interval \((0, 1)\) is left out. <br><br>
+
+Suppose, however, you are musically very sophisticated—you can find pleasure in all chords with rational frequency ratios \(m/n\) (reduced fraction) with huge denominators. We can also assume that there is some imprecision in the ability to hear such frequencies, and that this imprecision is quantified by the (somewhat large) multiplicative factor of \(e^{\pm n^{−5}}\). The point of this post is to show that that despite one's willingness to enjoy any rational chord, even approximate with a large range of imprecision, and despite the fact that the rationals are dense in \(0, 1\), most chords remain unpleasant to your ear. For this, we utilize a probabilistic approach.
+
+<br><br>
 
 
-<button class="collapsible"><strong>Coming Soon!</strong></button>
-  <div class="content">
-<br><h5 style="text-align:center;"><u>Coming Soon!</u></h5>
+For every rational number \(\frac{m}{n}\), the range of "nice" chords \(r\) is given by the multiplicative factor
+\[\frac{m}{n}e^{-n^{-5}}\leq r\leq \frac{m}{n}e^{n^{-5}}\]
+Therefore, the probability that a randomly chosen \(r\) in \([0,1]\) is "nice" is the probability that \(r\) is in the union of the ranges. Therefore,
 
-<p><br><br></p>
+    \begin{align*}\Pr[\text{r is "nice"}] &= \Pr\bigg[\bigcup_{m< n| m,n\in\mathbb{Z}_+} \frac{m}{n}e^{-n^{-5}}\leq r\leq e^{n^{-5}}\bigg]
+    \end{align*}
+
+To evaluate this probability, we use Boole's inequality (also called the union bound) which states that \(\Pr[\cup_i A_i] \leq \sum_i \Pr[A_i]\). Therefore, we take the summation of these probabilities for all \(n\in\mathbb{N}\). For each \(n\), we also sum over all possible \(m \in \{1,\cdots,n-1\}\). Therefore,
+
+    \begin{align*}
+    \Pr\bigg[\bigcup_{m< n| m,n\in\mathbb{Z}_+} \frac{m}{n}e^{-n^{-5}}\leq r\leq e^{n^{-5}}\bigg] &\leq \sum_{n=1}^\infty \bigg(\sum_{m=1}^{n-1} \left(\frac{m}{n}e^{n^{-5}}-\frac{m}{n}e^{-n^{-5}}\right)\bigg) \\
+        &= \sum_{n=1}^\infty \bigg(\frac{1}{n}\bigg(e^{n^{-5}}-e^{-n^{-5}}\bigg)\bigg(\sum_{m=1}^{n-1}m\bigg)\bigg) 
+    \end{align*}
+
+The last equality emerges from factorizing the terms dependent on \(m\). Then, since \(\sum_{m=1}^{n-1} m\) is just the sum of the first \(n-1\) natural numbers, we can use the fact that the sum of the first \(n\) natural numbers is \(n(n+1)/2\), and therefore the sum of the first \(n-1\) natural numbers must be \(n(n-1)/2\). Substituting this result above and simplifying yields that:
+
+    \begin{align*}
+    \sum_{n=1}^\infty \bigg(\frac{1}{n}\bigg(e^{n^{-5}}-e^{-n^{-5}}\bigg)\bigg(\sum_{m=1}^{n-1}m\bigg)\bigg) &= \sum_{n=1}^\infty \bigg(\frac{n(n-1)}{2n}(e^{n^{-5}}-e^{-n^{-5}})\bigg)\\
+    &= \frac{1}{2}\sum_{n=1}^\infty \bigg((n-1)(e^{n^{-5}}-e^{-n^{-5}})\bigg)
+    \end{align*}
+
+
+Note additionally that the Taylor series of \(e^x - e^{-x}\) for \(x\in[0,1]\) only preserves the odd-powered terms while canceling out the even-powered terms. Specifically, we have that:
+\begin{align*}
+    \sum_{k=0}^\infty \frac{x^k}{k!} - \sum_{k=0}^\infty \frac{(-x)^k}{k!} &= 2\sum_{k=0}^\infty(-1)^{k}\frac{x^{2k+1}}{(2k+1)!} \\
+    &\leq 4x
+\end{align*}
+
+The last inequality follows by noting that each successive term in the series shrinks by a factor of more than \(\frac{1}{2}\), so we can bound the sum by twice the largest term (by the geometric sum).
+Then, letting \(x = n^{-5}\), we get:
+\begin{align*}
+    \Pr[\text{r is "nice"}] &\leq \frac{1}{2}\sum_{n=1}^\infty \bigg((n-1)(e^{n^{-5}}-e^{-n^{-5}})\bigg) \leq \frac{1}{2}\sum_{n=1}^\infty 4n^{-5}(n-1) \\
+    &= 2\sum_{n=1}^\infty (n^{-4}-n^{-5})
+\end{align*}
+The final component of information that we need to analyze this expression is to note that the Harmonic sum of degree $k$ which is \(\sum_{n=1}^\infty n^{-k} = \zeta(k)\) is the Riemann zeta function, which has known calculated values. Therefore, we can write that:
+\begin{align*}
+    2\sum_{n=1}^\infty (n^{-4}-n^{-5}) &= 2(\zeta(4)-\zeta(5)) \\
+    &\approx 0.09079\ldots
+\end{align*}
+Therefore, the probability that a randomly chosen \(r\) is "nice" is approximately \(0.09079\), which is incredibly small. Therefore, most chords chosen randomly will sound unpleasant to the ear, even if the metric of audial pleasure extends to all rational chords with an additional measure of imprecision of detecting various frequencies.
+
+
+<br>
 </div><br>
+
+
     </div>
   </div>
 </div>
 
+
+
 <style>
+
+  .single_indent{
+  text-indent: 50px;
+}
+.double_indent{
+  text-indent: 100px;
+}
+.triple_indent{
+  text-indent: 150px;
+}
+
+.quadruple_indent{
+  text-indent: 200px;
+}
+
+.pentaple_indent{
+  text-indent: 250px;
+}
+
+.hexaple_indent{
+  text-indent: 300px;
+}
+
+
 .rectangle {
   height: 8%;
   width: 55%;

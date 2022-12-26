@@ -141,14 +141,38 @@
   <div class="text">Correlating COVID-19 outbreaks to COVID-19 Vaccine Efficacy</div>
 </div>
 
+<style>
+  .auxiliary:link {
+    color: tomato;
+    background-color: transparent;
+    text-decoration: underline;
+  }
 
+  .auxiliary:visited {
+    color: black;
+    background-color: transparent;
+    text-decoration: none;
+  }
+
+  .auxiliary:hover {
+    background-color: transparent;
+    text-decoration: underline;
+    font-weight:bold;
+  }
+
+  .auxiliary:active {
+    color: tomato;
+    background-color: transparent;
+    text-decoration: underline;
+  }
+</style>
 
 <div class="w3-row w3-padding">
   <div class="w3-col l8 s12" style="float:none !important; margin:auto; position:relative; z-index:10; margin-top:-10%;">
     <div class="w3-container w3-white w3-margin w3-padding-large">
       <div class="w3">
 
-<p>During the spring quarter of my sophomore year at Caltech, I took CS 156b (Learning from Data), which is a graduate-level project-based class on Machine Learning taught by Professor <a href="https://work.caltech.edu/">Yaser Abu-Mostafa</a>. Since this was during the peak of the COVID-19 pandemic, Prof. Abu-Mostafa asked us to pursue a ML project of our choice using any available data to produce novel and meaningful insights about COVID-19. So, my friends (Julen, Andrew, and Basel, who are really smart guys) and I, decided to use existing data to determine how effective the COVID-19 vaccine was against the dominant variants at the time (B.1.1.7, P.1, B.1.351, B.1.427, B.1.429).<br><br>
+<p>During the spring quarter of my sophomore year at Caltech, I took CS 156b (Learning from Data), which is a graduate-level project-based class on Machine Learning taught by Professor <a class="auxiliary" href="https://work.caltech.edu/">Yaser Abu-Mostafa</a>. Since this was during the peak of the COVID-19 pandemic, Prof. Abu-Mostafa asked us to pursue a ML project of our choice using any available data to produce novel and meaningful insights about COVID-19. So, my friends (Julen, Andrew, and Basel, who are really smart guys) and I, decided to use existing data to determine how effective the COVID-19 vaccine was against the dominant variants at the time (B.1.1.7, P.1, B.1.351, B.1.427, B.1.429).<br><br>
 
 We used GISAID-scraped data and data from Outbreak.info, OWID, CDC, which represented regularly-updating COVID-19 variant outbreaks in different states in the United States. We used this data to train a couple of models: LSTM (Long Short-term Memory), VAR (Vector Auto-Regression), SIR (Susceptible, Infectious, Recovered) model, ARIMA (Autoregressive Integrated Moving Average), and GPR (gaussian process regression). Specifically, we looked at vaccine-delivery data and variant-outbreaks to see if we could find a negative correlation. My contribution to this project was the development of the ARIMA and GPR models, which are tools used primarily in modeling highly volatile data, like stocks. I also looked at XGBoost, but decided against using it due its lack of scalability since the data changed so sporadically. Our final machine-learning model ensembled the ARIMA, LSTM, and VAR models, to yield a pretty accurate estimate of the COVID-19 vaccine efficacy.<br><br>
 

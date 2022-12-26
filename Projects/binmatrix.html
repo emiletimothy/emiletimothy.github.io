@@ -240,6 +240,30 @@ if (devtools.isOpen) {
   position: relative; /* Needed to position the cutout text in the middle of the image */
   height: 80%; /* Some height */
 }
+
+  .auxiliary:link {
+    color: tomato;
+    background-color: transparent;
+    text-decoration: underline;
+  }
+
+  .auxiliary:visited {
+    color: black;
+    background-color: transparent;
+    text-decoration: none;
+  }
+
+  .auxiliary:hover {
+    background-color: transparent;
+    text-decoration: underline;
+    font-weight:bold;
+  }
+
+  .auxiliary:active {
+    color: tomato;
+    background-color: transparent;
+    text-decoration: underline;
+  }
 </style>
 
 <div class="image-container">
@@ -252,7 +276,7 @@ if (devtools.isOpen) {
   <div class="w3-col l8 s12" style="float:none !important; margin:auto; position:relative; z-index:10; margin-top:-13%;">
     <div class="w3-container w3-white w3-margin w3-padding-large">
       <div class="w3">
-<p>In the winter quarter of my sophomore year at Caltech, I took CS 4 (Functional Programming) with Professor <a href="http://users.cms.caltech.edu/~mvanier/">Mike Vanier</a>. For our final exam, we were asked to model a well-known puzzle (Kanoodle) using a sparse binary matrix, and then use the solutions to the binary matrix to solve the puzzle. The math behind the problem is really interesting, and the OCaml algorithms that solve this puzzle are extremely elegant and neat. In this page, I'm going to describe the underlying algorithm in some technical details and explore the math (with plenty of digressions) that makes it possible.</p><br></div>
+<p>In the winter quarter of my sophomore year at Caltech, I took CS 4 (Functional Programming) with Professor <a class="auxiliary" href="http://users.cms.caltech.edu/~mvanier/">Mike Vanier</a>. For our final exam, we were asked to model a well-known puzzle (Kanoodle) using a sparse binary matrix, and then use the solutions to the binary matrix to solve the puzzle. The math behind the problem is really interesting, and the OCaml algorithms that solve this puzzle are extremely elegant and neat. In this page, I'm going to describe the underlying algorithm in some technical details and explore the math (with plenty of digressions) that makes it possible.</p><br></div>
 
 <button class="collapsible"><strong>Module: Binary Matrix</strong></button>
   <div class="content">

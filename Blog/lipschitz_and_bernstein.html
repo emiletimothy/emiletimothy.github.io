@@ -165,6 +165,28 @@ if (devtools.isOpen) {
     html {
       scroll-behavior: smooth;
     }
+
+  .single_indent{
+  text-indent: 50px;
+}
+.double_indent{
+  text-indent: 100px;
+}
+.triple_indent{
+  text-indent: 150px;
+}
+
+.quadruple_indent{
+  text-indent: 200px;
+}
+
+.pentaple_indent{
+  text-indent: 250px;
+}
+
+.hexaple_indent{
+  text-indent: 300px;
+}
     </style>
 
 <div class="background_image">
@@ -211,14 +233,14 @@ if (devtools.isOpen) {
   font-weight: bold;
   margin: 0 auto; /* Center the text container */
   padding: 10px;
-  width: 65%;
+  width: 66%;
   text-align: center; /* Center text */
   position: absolute; /* Position text */
   top: 25%; /* Position text in the middle */
   left: 50%; /* Position text in the middle */
   transform: translate(-50%, -50%); /* Position text in the middle */
-  /*mix-blend-mode: screen;  This makes the cutout text possible */
-  font-family: "Oswald", sans-serif;
+/*  mix-blend-mode: screen;  This makes the cutout text possible 
+*/  font-family: "Oswald", sans-serif;
   text-shadow: 3px 3px 3px #ababab;
 }
 
@@ -235,40 +257,17 @@ if (devtools.isOpen) {
 }
 
 .image-container {
-  background-image: url("blog_pics/is2.jpeg"); /* The image used - important! */
+  background-image: url("blog_pics/eq3.jpeg"); /* The image used - important! */
   background-size: cover;
   position: relative; /* Needed to position the cutout text in the middle of the image */
-  height: 90%; /* Some height */
+  height: 70%; /* Some height */
 }
-
-  .auxiliary:link {
-    color: tomato;
-    background-color: transparent;
-    text-decoration: underline;
-  }
-
-  .auxiliary:visited {
-    color: black;
-    background-color: transparent;
-    text-decoration: none;
-  }
-
-  .auxiliary:hover {
-    background-color: transparent;
-    text-decoration: underline;
-    font-weight:bold;
-  }
-
-  .auxiliary:active {
-    color: tomato;
-    background-color: transparent;
-    text-decoration: underline;
-  }
 </style>
 
 <div class="image-container">
-  <div class="text">Simulating the Ising Model Using Monte-Carlo Methods</div>
+  <div class="text">Arbitrary-Precision Approximations of Lipschitz Functions by Linear Combinations of Bernstein Polynomials</div>
 </div>
+
 
 
 <div class="w3-row w3-padding">
@@ -276,20 +275,111 @@ if (devtools.isOpen) {
     <div class="w3-container w3-white w3-margin w3-padding-large">
       <div class="w3">
 <p> 
+Let \(P_n\) denote the set of all real polynomials of degree \(\leq n\). For any function \(f : [0, 1] \to \mathbb{R}\), we define the \(\ell_\infty\)-norm as 
 
-</p>
-      </div>
+$$\|f\|_\infty = \max\{|f(x)|: x \in [0, 1]\}$$
+
+The Weierstrass approximation theorem says: for any continuous real function \(f\) on \([0, 1]\), that
 
 
-<button class="collapsible"><strong>Coming Soon!</strong></button>
-  <div class="content">
-<br><h5 style="text-align:center;"><u>Coming Soon!</u></h5>
+$$\lim_{n\to\infty} \min_{p \in P_n} \|p − f\|_\infty = 0$$
 
-<p><br><br></p>
-</div><br>
-    </div>
-  </div>
+This means that any function can be approximated arbitrarily well by an infinite-degree polynomial. In 1912 Bernstein gave an elegant probabilistic proof of this theorem. In this post, I'm going to prove a variant of the approximation theorem in which we have a Lipschitz condition on \(f\): that there is a \(C < \infty\) such that
+
+
+$$\sup_{x\neq y \in [0,1]} \frac{|f(x) - f(y)|}{|x − y|} \leq C$$
+
+The goal of this post is to show that \(\|f - b_f\|_\infty \leq O(C/\sqrt{n})\). This means that I'm going to bound the distance of the <i>furthest</i> deviation from the approximation by a term that tends to \(0\) (by the inverse square root of \(n\)) as \(n\to\infty\). I'm also going to define an explicit polynomial with which we can create such an approximation: the Bernstein polynomial.<br><br>
+
+The Bernstein polynomials of degree \(n\) are defined for \(0 \leq k \leq n\) as:
+
+$$b_{n,k}(x) = {n\choose k}x^k(1−x)^{n−k}$$
+
+Also, the Bernstein approximation of a function \(f\) is given by 
+
+$$b_f(x)=\sum_{k=1}^n f(k/n) b_{n,k}(x)$$
+
+
+We then show that \(\|f-b_f\|_\infty \leq O(C/\sqrt{n})\), where \(f\) is a \(C\)-Lipschitz function such that \(\sup_{x\neq y \in [0,1]} |f(x) − f(y)|/|x − y| \leq C\), where \(C < \infty\). For \(x\in[0,1]\), let \(\{K_i\}_{i=1}^n\) be independently and identically distributed Bernoulli random variables with expectation \(x\), and let \(K = \sum_{i=1}^n K_i\). Then, \(\Pr(K_i = 1) = x\) and \(\Pr(K_i = 0) = 1−x\). <br><br>
+
+We observe that \(b_{n,i}(x) = {n\choose i}x^i (n-x)^{n-i} = \Pr[K = i]\) as \(K \sim \mathrm{Bin}(n,x)\) since \(K = \sum_{i=1}^n K_i\), where \(K_i \sim \mathrm{Bernoulli}(x)\). Then, \(b_f(x) = \mathbb{E}[f(K/n)]\) since \(b_f(x) = \sum_{i=1}^n f(i/n) b_{n,i}(x) = \sum_{i=1}^n f(i/n) \Pr[K = i] = \mathbb{E}[f(K/n)]\).<br><br>
+
+\(\DeclareMathOperator*{\EE}{\mathbb{E}}\)
+
+Note that for all \(x\in[0,1]\), if \(|f(x) -b_f(x)| \leq \beta\), then \(\|f-b_f\|_\infty \leq \beta\) as well. So, it suffices to show that for all \(x\in[0,1]\), we have that \(|f(x) - b_f(x)|\leq O(C/\sqrt{n})\). That is what we aim to first show. First, since \(b_f(x) = \EE[f(K/n)]\) from earlier, we must have that:
+
+\begin{align*}
+    |f(x)-b_f(x)| &= |f(x) - \EE[f(K/n)]| = |\EE[f(x) - f(K/n)]|
+\end{align*}
+
+The last equality follows by linearity of expectations: \(\EE[\alpha X + \beta Y] = \alpha \EE[X] + \beta\EE[Y]\) for constants \(\alpha,\beta\) and random variables \(X,Y\). Then, to simplify this further, we note that the absolute value operator is a convex function since \(|\alpha X + \beta Y| \leq \alpha |X| + \beta|Y|\) for positive \(\alpha,\beta\). Therefore, Jensen's inequality must hold for it. Jensen's inequality states that for a convex function \(\zeta\), we must have that \(\zeta(\EE[X]) \leq \EE[\zeta(X)]\). Therefore, setting \(\zeta = |\cdot|\), we get that:
+
+\begin{align*}
+    |\EE[f(x) - f(K/n)]|&\leq \EE[|f(x) - f(K/n)|]
+\end{align*}
+
+Since \(f\) is \(C\)-Lipschitz continuous, we have that \(|f(x) - f(K/n)|/|x-K/n| \leq C \implies |f(x) - f(K/n)|\leq C|x-K/n|\). So,
+
+\begin{align*}
+    |f(x)-b_f(x)| &\leq \EE[|f(x)-f(K/n)|] \leq \EE[C|x-K/n|] \\
+    &= C\EE[|x-K/n|]
+\end{align*}
+
+In the last line, we used the linearity of expectations. To compute the resulting expectation, we then define a family of events \(\{D_i\}_{i=1}^n\): 
+
+$$D_i = \bigg[\frac{i}{\sqrt{n}}<\bigg|\frac{K}{n}-x\bigg|\leq \frac{i+1}{\sqrt{n}}\bigg]$$
+
+So, we then  use the law of total expectation, where we condition on \(D_i\), which gives us:
+\begin{align*}
+    |f(x) - b_f(x)| \leq C\EE[|x-K/n|] = C\cdot \sum_{i=0}^n \EE[|x-K/n| \text{ $|$ }D_i]\Pr(D_i)
+\end{align*}
+
+Note that since \(D_i = [\frac{i}{\sqrt{n}}<|\frac{K}{n}-x|\leq \frac{i+1}{\sqrt{n}}]\), we can write that \(\EE[|x-K/n|\text{ | }D_i]\geq \frac{i}{\sqrt{n}}\). Additionally, we upper bound the two-tailed probability scenario by only considering the limit of the lower-tail:
+
+\begin{align*}
+\Pr(D_i) &= \Pr\bigg(\frac{i}{\sqrt{n}}<\bigg|\frac{K}{n}-x\bigg|\leq\frac{i+1}{\sqrt{n}}\bigg) \leq \Pr\bigg(\frac{i}{\sqrt{n}}<\bigg|\frac{K}{n}-x\bigg|\bigg) \\
+\end{align*}
+
+Simplifying this term by considering each case of the absolute value yields that:
+
+\begin{align*}
+\Pr\bigg(\frac{i}{\sqrt{n}}<\bigg|\frac{K}{n}-x\bigg|\bigg) &= \Pr\bigg(\frac{i}{\sqrt{n}}<\frac{K}{n}-x\bigg) + \Pr\bigg(\frac{i}{\sqrt{n}} < x - \frac{K}{n}\bigg) \\
+&= \Pr(i\sqrt{n}< K-x n) + \Pr(i\sqrt{n}< x n - K)
+\end{align*}
+
+Note that \(\EE[xn - K] = nx - \EE[K] = nx - nx = 0\), and \(\EE[K-xn]=\EE[K]-xn = xn - xn = 0\). <br><br>
+
+
+Before I continue, I'm quickly going to state the Chernoff bound: Let \(X_i\) for \(1\leq i\leq n\) be Bernoulli with \(\EE[X_i]=p_i\). Set \(Y_i = X_i - p_i\) so \(\EE[Y_i]=0\). Set \(Y = \sum Y_i\). Then, for \(\lambda>0\), we must have that \(\Pr[Y>\lambda\sqrt{n}]< e^{-2\lambda^2}\). <br><br>
+
+
+Therefore, the Chernoff bound tells us that \(\Pr(i\sqrt{n}< K-xn) < e^{-2i^2}\) and \(\Pr(i\sqrt{n}< xn-K) < e^{-2i^2}\). So, \(\Pr(D_i)< 2e^{-2i^2}\). Hence, we get that:
+
+\begin{align*}
+    |f(x) - b_f(x)| &\leq C\cdot \sum_{i=0}^n \EE[|x-K/n| \text{ $|$ }D_i]\Pr(D_i) \leq C\sum_{i=0}^n \frac{2ie^{-2i^2}}{\sqrt{n}} = \frac{2C}{\sqrt{n}} \sum_{i=0}^n i e^{-2i^2}
+\end{align*}
+
+
+We now bound the resulting finite sum with its infinite sum: \(\sum_{i=0}^n ie^{-2i^2} \leq \sum_{i=0}^\infty ie^{-2i^2}\). Then, \(e^{2i^2}>i^3\) for large enough \(i\) since taking natural logs on both sides tells us that \(2i^2 > 3\ln i\). Thus, we have that \(\sum_{i=0}^n ie^{-2i^2}\leq \sum_{i=0}^\infty i/i^3 = \sum_{i=0}^\infty \frac{1}{i^2} = \frac{\pi^2}{6}\). Therefore:
+\begin{align*}
+    |f(x) - b_f(x)| &\leq \frac{2C}{\sqrt{n}} \sum_{i=0}^n i e^{-2i^2} \\
+    &\leq \frac{2C}{\sqrt{n}} \cdot \frac{\pi^2}{6} = \frac{\pi^2}{3} \cdot \frac{C}{\sqrt{n}} \\
+    &= O(C/\sqrt{n})
+\end{align*}
+Hence, \(|f(x) - b_f(x)| \leq O(C/\sqrt{n})\). But, from our earlier assertion, this then implies that
+\begin{align*}
+    \boxed{\|f - b_f\|_\infty \leq O(C/\sqrt{n})}
+\end{align*}
+This proves the claim. So, all \(C\)-Lipschitz functions can be approximated arbitrarily well by a linear combination of Bernstein polynomials, where the furthest deviation errs by atmost \(O(C/\sqrt{n})\), where \(n\) is the degree of the Bernstein polynomial.
+
+
+
 </div>
+
+
+</p></div></div></div>
+
+
 
 <style>
 .rectangle {
