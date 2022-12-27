@@ -343,7 +343,7 @@ $$ = 2^{−𝑘} \times 2^{−k} = 2^{−2k} $$
 
 Suppose then that the received word \(R\) agrees with \(C = C(m)\) in at least a \(\frac{1}{2}+\epsilon\) fraction of its \(n\) bits. We can then observe that \(C_w + C_{w+e_i} = m_i\) (here, \(i\) is the \(i\)-th elementary vector in \(\mathbb{F}_2^k\) – the vector with \(1\) in the \(i\)-th position and zeros elsewhere). Of course, in our decoding algorithm, we do not have access to \(C\) to find \(C_w\) and \(C_{w+e_i}\). So, we will replace \(C_w\) with a “guess” (for now imagine it is always correct), and \(C_{w+e_i}\) with \(R_{w+e_i}\) (which may or may not be correct). We can then show that for all i, that:
 
-$$ \Pr[|\{S\neq\Phi: C_{u_s}+R_{u_s+e_i}=m_i\}|\leq \frac{2^\ell-1}{2}] \leq \frac{1}{4\epsilon^2 (2^\ell-1)}$$
+$$ \Pr\left[|\{S\neq\Phi: C_{u_s}+R_{u_s+e_i}=m_i\}|\leq \frac{2^\ell-1}{2}\right] \leq \frac{1}{4\epsilon^2 (2^\ell-1)}$$
 
 Let a family of indicator random variables for the event that \(R_{u_s+e_i} = C_{u_s+e_i}\) be \(L_s\) such that \(L_s\) be the number of bits for which the equality is met for the expression (on that particular value of \(S\)). Then, (rewriting the LHS of the probability statement using the indicator class) let \(L = \Sigma L_s\) such that \(S = \phi\). It follows then that:
 
@@ -351,7 +351,7 @@ $$ |\{S\neq\phi: C_{u_S}+R_{u_S+e_i} = m_i\}|=L$$
 
 implies that
 
-$$\Pr[|\{S\neq\phi: C_{u_S} + R_{u_s+e_i} = m_i\}| \leq \frac{2^\ell - 1}{2} = \Pr[𝐿 \leq \frac{2^\ell-1}{2}]$$
+$$\Pr[|\{S\neq\phi: C_{u_S} + R_{u_s+e_i} = m_i\}| \leq \frac{2^\ell - 1}{2} = \Pr\left[L \leq \frac{2^\ell-1}{2}\right]$$
 
 To use Chebyshev’s inequality, we now have to determine \(\mathbb{E}[L]\), \(\mathbb{V}ar[L]\) which we will do from 
 \(\mathbb{E}[L_S], \mathbb{V}ar[L_S]\):
@@ -362,13 +362,13 @@ $$\mathbb{R}[L_S] ≥ \frac{1}{2} + \epsilon$$
 
 Therefore, by the linearity of the expectation formula:
 
-$$\mathbb{E}[L]=(2\ell −1)\mathbb{E}[L_S] \geq (\frac{1}{2}+\epsilon)(2^\ell −1)$$
+$$\mathbb{E}[L]=(2\ell −1)\mathbb{E}[L_S] \geq \left(\frac{1}{2}+\epsilon\right)(2^\ell −1)$$
 
 Using the variance formula:
 
 $$\mathbb{V}ar[L_S] = \mathbb{E}[L_S^2] − \mathbb{E}[L_S]^2$$
 
-$$ = \sum\limits_S L_s^2 \Pr[R_{u_s+e_i}=C_{u_s+e_i}] - (\frac{1}{4}-\epsilon^2-\epsilon)_>$$
+$$ = \sum\limits_S L_s^2 \Pr[R_{u_s+e_i}=C_{u_s+e_i}] - \left(\frac{1}{4}-\epsilon^2-\epsilon\right)_>$$
 
 $$ = \frac{1}{2} - (\frac{1}{4} - \epsilon^2 - \epsilon)_> \leq \frac{1}{4}$$
 
@@ -394,7 +394,7 @@ $$= \frac{1}{4\epsilon^2(2^\ell-1)}$$
 
 Therefore, we conclude that:
 
-$$\Pr[|\{S\neq\phi: C_{u_S} + R_{u_s+e_i} = m_i\}| \leq \frac{2^\ell - 1}{2} = \Pr[𝐿 \leq \frac{2^\ell-1}{2}]$$
+$$\Pr[|\{S\neq\phi: C_{u_S} + R_{u_s+e_i} = m_i\}| \leq \frac{2^\ell - 1}{2} = \Pr\left[𝐿 \leq \frac{2^\ell-1}{2}\right]$$
 
 $$= \boxed{\frac{1}{4\epsilon^2(2^\ell-1)}}$$
 
@@ -412,7 +412,7 @@ We can show that it takes surprisingly few bits to describe \((C_{u_S})_{S\neq\p
 A(input \(R\) = a word that agrees with \(C = C(m)\) in atleast a \(\frac{1}{2}+\epsilon\) fraction of its \(n\) bits (so the first property is satisfied)):<br><br>
 
 Pick \(\ell\) vectors \(v_1, v_2, ..., v_k \in \mathbb{F}_2^k\) independently and uniformly at random. Then, 
-$$u_S = \sum_{i\in S}v_i \Rightarrow C_{u_S} = \sum_{i\in S} C_{v_i}$$
+$$u_S = \sum_{i\in S}v_i \implies C_{u_S} = \sum_{i\in S} C_{v_i}$$
 
 (since \(C_w + C_{e_i} = C_{w+e_i}\) as mentioned earlier).<br><br>
 
@@ -466,21 +466,24 @@ independent events happening is equal to the products of the probabilities of ea
 
 $$\epsilon'(n) = L\times \frac{3}{4} \times \frac{1}{\frac{\epsilon(n)+1}{2}}$$
 
-$$\epsilon'(n) = O(\frac{\epsilon(n)^2}{n} \times \frac{1}{\frac{\epsilon(n)+1}{2}}$$
+$$\epsilon'(n) = O\left(\frac{\epsilon(n)^2}{n} \times \frac{1}{\frac{\epsilon(n)+1}{2}}\right)$$
 
-$$\epsilon'(n) = (\frac{\epsilon(n)}{n})^\text{O(1)}$$
+$$\epsilon'(n) = \left(\frac{\epsilon(n)}{n}\right)^\text{O(1)}$$
 
 Therefore, the probability that \(A\) outputs \((f_n(x),y) \geq (\frac{\epsilon(n)}{n})^\text{O(1)}\). Hence, we have that for the probabilistic procedure:
 
-$$\epsilon'(n) = (\frac{\epsilon(n)}{n})^\text{O(1)}$$
+$$\epsilon'(n) = \left(\frac{\epsilon(n)}{n}\right)^\text{O(1)}$$
 
 To find the size of the circuit family, we can simply construct a circuit for each step in the run-time.
 
 We already know that the run-time of the algorithm would be: \(\frac{1}{\epsilon'(n)} = (\frac{n}{\epsilon(n)})^\text{O(1)}\) since \(\Pr[C'(x, y) = f'_n(x, y)] \geq \epsilon'(n)\). Therefore, since \(s(n)>n\), we could use a circuit of size \(s(n)\) for each query (while \(n\) expecting atmost a quadratic increase in size by using Razborov's method for circuit-value finding). Hence, the associated size of the circuit would be:
 
-$$s'(n) = (n\frac{s(n)}{\epsilon(n)})^\text{O(1)}$$
-
-$$=(\frac{s(n)}{\epsilon(n)}^\text{O(1)}$$
+$$
+\begin{align*}
+s'(n) &= \left(n\frac{s(n)}{\epsilon(n)}\right)^\text{O(1)} \\
+&=\left(\frac{s(n)}{\epsilon(n)}\right)^\text{O(1)}
+\end{align*}
+$$
 
 Therefore, if there is a circuit family \(\{C_n\}\) of size \(s(n) \geq n\) that achieves: \(\Pr\limits{x,y}[C_n(x, y) = \text{GL}(f'_n(x, y))] ≥ \frac{1}{2} + \epsilon(n)\), then there is a circuit family \(\{C'_n\}\) of size \(s'(n)\) that achieves: 
 
