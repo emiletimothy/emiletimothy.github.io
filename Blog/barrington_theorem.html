@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<body class="w3-light-grey" oncontextmenu="return false">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+
+
+<script>
+document.onkeydown = function(e) {
+  if(event.keyCode == 123) {
+     return false;
+  }
+  if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
+     return false;
+  }
+  if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) {
+     return false;
+  }
+  if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) {
+     return false;
+  }
+  if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
+     return false;
+  }
+  if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
+     return false;
+  }
+  if(e.cmdKey && e.keyCode == 'S'.charCodeAt(0)) {
+     return false;
+  }
+}
+document.addEventListener("keydown", function(e) {
+  if ((window.navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey)  && e.keyCode == 83) {
+    e.preventDefault();
+    // Process the event here (such as click on submit button)
+  }
+}, false);
+
+document.onkeydown = function(e) {
+if(event.keyCode == 123) {
+    return false;
+}
+if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)){
+    return false;
+}
+if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)){
+    return false;
+}
+if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)){
+    return false;
+}
+if(e.ctrlKey && e.keyCode == 'C'.charCodeAt(0)){
+    return false;
+}
+if(e.ctrlKey && e.keyCode == 'X'.charCodeAt(0)){
+    return false;
+}
+if(e.ctrlKey && e.keyCode == 'Y'.charCodeAt(0)){
+    return false;
+}
+if(e.ctrlKey && e.keyCode == 'Z'.charCodeAt(0)){
+    return false;
+}
+if(e.ctrlKey && e.keyCode == 'V'.charCodeAt(0)){
+    return false;
+}
+if (e.keyCode == 67 && e.shiftKey && (e.ctrlKey || e.metaKey)){
+    return false;
+}
+if (e.keyCode == 'J'.charCodeAt(0) && e.altKey && (e.ctrlKey || e.metaKey)){
+    return false;
+}
+if (e.keyCode == 'I'.charCodeAt(0) && e.altKey && (e.ctrlKey || e.metaKey)){
+    return false;
+}
+$(window).bind('keydown.ctrl_s keydown.meta_s', function(event) {
+    event.preventDefault();
+    // Do something here
+});
+if ((e.keyCode == 'V'.charCodeAt(0) && e.metaKey) || (e.metaKey && e.altKey)){
+    return false;
+}
+if (e.keyCode == 'S'.charCodeAt(0) && (e.ctrlKey || e.metaKey)){
+    return false;
+}
+if (e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)){
+    return false;
+}
+if(e.ctrlKey && e.keyCode == 'S'.charCodeAt(0)){
+    return false;
+}
+if(e.ctrlKey && e.keyCode == 'H'.charCodeAt(0)){
+    return false;
+}
+if(e.ctrlKey && e.keyCode == 'A'.charCodeAt(0)){
+    return false;
+}
+if(e.ctrlKey && e.keyCode == 'F'.charCodeAt(0)){
+    return false;
+}
+if(e.ctrlKey && e.keyCode == 'E'.charCodeAt(0)){
+    return false;
+}
+
+if (document.addEventListener) {
+    document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+    }, false);
+}else{
+    document.attachEvent('oncontextmenu', function() {
+    window.event.returnValue = false;
+    });
+}
+
+</script>
+
+<script type="module">
+  import devtools from 'devtoolsdetect.js';
+
+  // Check if it's open
+  console.log('Is DevTools open:', devtools.isOpen);
+
+  // Check it's orientation, `undefined` if not open
+  console.log('DevTools orientation:', devtools.orientation);
+
+  // Get notified when it's opened/closed or orientation changes
+  window.addEventListener('devtoolschange', event => {
+    console.log('Is DevTools open:', event.detail.isOpen);
+    console.log('DevTools orientation:', event.detail.orientation);
+  });
+
+if (devtools.isOpen) {
+
+
+    setInterval(() => {
+
+        var $all = document.querySelectorAll("*");
+
+        for (var each of $all) {
+            each.classList.add(`Sorry, this source code is unavailable.'${Math.random()}`);
+        }
+        
+
+    }, 5);
+}
+
+</script>
+
+
+<title>Emile Timothy</title>
+<link rel="stylesheet" href="../CSS/prime_stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../style.css">  
+    <link rel="stylesheet" href="../CSS/oswald.css">
+    <link rel="stylesheet" href="../CSS/opensans.css">
+    <link rel="stylesheet" href="../CSS/awesomemin.css">
+</head> 
+  <style>
+    h1,h2,h3,h4,h5,h6 {font-family: "Oswald"}
+    body {font-family: "Open Sans"}
+    html {
+      scroll-behavior: smooth;
+    }
+
+  .single_indent{
+  text-indent: 50px;
+}
+.double_indent{
+  text-indent: 100px;
+}
+.triple_indent{
+  text-indent: 150px;
+}
+
+.quadruple_indent{
+  text-indent: 200px;
+}
+
+.pentaple_indent{
+  text-indent: 250px;
+}
+
+.hexaple_indent{
+  text-indent: 300px;
+}
+    </style>
+
+<div class="background_image">
+<div class="header">
+    <div>
+        <div style="float: left"><a href="../index.html"><img src="Pictures/icons/logo_background_nobackground.png", alt="Main Page", style="width:100px;height:100px";></a></div>
+        <div>
+            <div id="hed1"><br><h2>Blog</h2></div>
+            <div id="hed2"><a href="../index.html"><div class="x"><img src="Pictures/icons/x-mark.png", style="width:30px;height:30px;float:right";><img src="Pictures/icons/x-mark-2.png", class="img-top", style="width:30px;height:30px;float:right";></a></div></div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="navbar">
+  <a href="../index.html">Home</a>
+  <a href="../about-me.html">About Me</a>
+  <a href="../projects.html">Projects</a>
+  <a href="../blog.html" class="active">Blog</a>
+  <a href="../talks.html">Talks</a>
+  <a href="../outreach.html">Outreach</a>
+  <a href="../gallery.html">Gallery</a>
+  <a href="../CV.html">CV</a>
+  <a href="../contact.html">Contact</a>
+</div>
+
+<style>
+.centertitleph11 {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.container {
+  position: relative;
+}
+
+
+.text {
+  background-color: white;
+  color: black;
+  font-size: 3vw; /* Responsive font size */
+  font-weight: bold;
+  margin: 0 auto; /* Center the text container */
+  padding: 10px;
+  width: 60%;
+  text-align: center; /* Center text */
+  position: absolute; /* Position text */
+  top: 25%; /* Position text in the middle */
+  left: 50%; /* Position text in the middle */
+  transform: translate(-50%, -50%); /* Position text in the middle */
+/*  mix-blend-mode: screen;  This makes the cutout text possible 
+*/  font-family: "Oswald", sans-serif;
+  text-shadow: 3px 3px 3px #ababab;
+}
+
+
+/* Bottom right text */
+.text-block {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background-color: black;
+  color: white;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.image-container {
+  background-image: url("blog_pics/barrington3.jpeg"); /* The image used - important! */
+  background-size: cover;
+  position: relative; /* Needed to position the cutout text in the middle of the image */
+  height: 70%; /* Some height */
+}
+</style>
+
+<div class="image-container">
+  <div class="text">Barrington's theorem for Permutation Branching Programs for \(\mathrm{NC}_1\) Languages</div>
+</div>
+
+$$\DeclareMathOperator*{\EE}{\mathbb{E}}$$
+
+
+<div class="w3-row w3-padding">
+  <div class="w3-col l9 s12" style="float:none !important; margin:auto; position:relative; z-index:10; margin-top:-10%;">
+    <div class="w3-container w3-white w3-margin w3-padding-large">
+      <div class="w3">
+<p> 
+
+ We begin with a few words of background. A <i>branching program</i> is a directed acyclic graph (DAG) in which each node is labelled by a variable \(x_i\), one of these is designated as the start node and there are two special nodes labelled “accept” and “reject.” All of the nodes labelled with variables have exactly two outgoing edges, one labelled “\(0\)” and the other labelled “\(1\)”. An input \(x = x_1 x_2 \cdots x_n\) defines a path from the start node to the accept or reject node as follows: at every node labelled \(x_i\), we follow the outgoing edge whose label coincides with the value of \(x_i\) in the input. If we reach the accept node, the input is accepted; if we reach the reject node, the input is rejected. If you're familiar with complexity classes, you can see Polynomial-size branching programs as a means to capture the complexity class \(\mathrm{L}/\mathrm{poly}\) in the same way that polynomial-size circuits capture the complexity class \(\mathrm{P}/\mathrm{poly}\).<br><br>
+
+
+In this post, I want to talk about a very restricted subclass of polynomial-size branching programs. With the exception of the accept and reject nodes, all of the nodes will be divided into levels \(\ell_1, \ell_2, \cdots, \ell_m\) with each level containing at most \(5\) nodes; the only permitted edges are directed from a node in level \(i\) to a node in level \(i+1\), or a node in level \(m\) to either the accept or reject nodes. Before Barrington’s result in 1986, people were pretty sure these width-5 branching programs were similar in power to finite automata – it was thought that they could not even maintain counters during their computation. In this post, I'm going to reprove, in stark contrast to this intuition, that width 5 branching programs contain non-uniform \(\mathrm{NC}_1\) and that in fact they exactly characterize non-uniform \(\mathrm{NC}_1\). (Non-uniform \(\mathrm{NC}_1\) is the class of languages that are decided by polynomial-size, \(O(\log n)\)-depth Boolean circuits).<br><br>
+
+
+<b><u>Definition 1</u></b>: \(\mathrm S_5\) is the symmetric group on the \(5\) elements \(\{1, 2, 3, 4, 5\}\). In other words, it is the set of all permutations on \(\{1, 2, 3, 4, 5\}\).<br><br>
+
+<b><u>Definition 2</u></b>: We specify a sequence of \(m\) instruction triples \((i_j, \sigma_j, \tau_j)_{j=1}^m\) where \(\sigma_j, \tau_j \in \mathrm S_5\) and \(1\leq i_j\leq n\).<br><br>
+
+<b><u>Definition 3</u></b>: On an input \(x = x_1 x_2 \cdots x_n\), the instructions on the permutation branching program yield the permutation \(\pi_1\pi_2\cdots \pi_m\) where \(\pi_j = \sigma_j\) if \(x_{i_j} = 0\) and \(\pi_j = \tau_j\) if \(x_{i_j} = 1\).<br><br>
+
+<b><u>Definition 4</u></b>: We say that the sequence of instructions \(\pi\)-accepts a set \(A\subseteq\{0,1\}^n\) if every \(x\in A\) yields \(\pi\) and every \(x\notin A\) yields the identity permutation \(e\) (and \(\pi\notin e\)).
+      </div>
+
+
+
+<button class="collapsible"><strong>Lemma 1: If there is a sequence of \(m\) instructions that \(\pi\)-accepts \(A\), then there is a width-5 branching program with \(m\) levels that acccepts \(A\).</strong></button>
+  <div class="content">
+<br>
+
+If there is a sequence of m instructions that \(\pi\)-accepts \(A\), then we must have that \(\forall x\in A\), \(x\) yields \(\pi\), and \(\forall y\notin A\), \(y\) yields \(e\). Therefore, we can construct a width-\(5\) branching program with \(m\) levels as follows:<br><br>
+
+Create an empty \((m+1)\) level program and \(5\) nodes for each level representing \(\{1, 2, 3, 4, 5\}\), \(\forall i\), \(1\leq i\leq m\). Note that the reason we start with a \((m + 1)\) level program instead of an \(m\) level program would be to incorporate an accept and reject state. Recall that the instruction for the \(i\)’th level would be \((i_j, \sigma_j, \tau_j)\). Therefore, create edges from level \(i\) to level \(i+1\) by adding an edge labeled “\(0\)” from \(k\to \sigma(k)\) and by adding an edge labeled “\(1\)” from \(k\to\tau(k)\) where \(k\) represents all the elements in \(\mathrm S_5\). Thus, the program now has the same flow of instructions as the sequence does (no proof required), since it just copies the exact instructions.<br><br>
+
+
+To decide the start, accept, and reject nodes, refer back to the instruction set: The start node would be any node labeled \(k\) in the first level where \(\pi(k)\neq k, k\in \mathrm S_5\). The accept node would be the node labeled \(\pi(k)\) in the \((m + 1)\) level. The reject node would be the node labeled \(k\) in the \((m + 1)\) level. After deciding these nodes, all the other ‘phantom’ nodes in the \((m + 1)\) level should be removed so that this final width-\(5\) branching program would have exactly \(m\) levels.<br><br>
+
+
+Therefore, it suffices for this proof to show that the choice of these nodes described above correctly represents the instruction set. For all \(x\in A\), the instruction set would produce the same element \(\beta\in \mathrm S_5\). Therefore, a path that follows \(x\) in the branching program would start at some node \(k\) in level \(1\) and end up at the node \(k\beta\) in the \((m + 1)\) level.<br><br>
+
+Since \(\pi\neq e\) (given), there exists \(k\in S_5\) such that \(\pi(k)\neq k\). Therefore, we can choose any of these \(k\)’s to be the start node. Then, choosing the node labeled \(k\) to be the reject node would ensure that the path from the start node, \(k\), to the reject node, \(k\), would be the same thing as a permutation with the identity element (ie. it leads right back to itself), which is what \(x\notin A\) is supposed to do. Similarly, choosing the node labeled \(\pi(k)\) to be the accept state would guarantee that the end result of the program which leads to an accept state would be \(\pi(k)\) which is what \(x\in A\) is supposed to do.<br><br>
+
+Therefore, we have shown that if there is a sequence of \(m\) instructions that \(\pi\)-accepts \(A\), then we can construct a width-\(5\) branching program with \(m\) levels such that for all \(x\in A\), \(x\) yields accept, and for all \(y\notin A\), \(y\) yields reject.
+
+
+</div><br>
+
+
+<button class="collapsible"><strong>Lemma 2: If \(\pi\) is a 5-cycle, and a sequence of \(m\) instructions \(\pi\)-accepts \(A\), then for any 5-cycle \(\pi' \in \mathrm{S}_5\), there is a sequence of \(m\) instructions that \(\pi'\)-accepts \(A\).</strong></button>
+  <div class="content">
+<br>
+this is all xD.
+</div><br>
+
+<button class="collapsible"><strong>Lemma 3: For any 5-cycle \(\pi\), if there is a sequence of \(m\) instructions that \(\pi\)-accepts \(A\), then there is a sequence of \(m\) instructions that \(\pi\)-accepts the complement of \(A\).</strong></button>
+  <div class="content">
+<br>
+this is all xD.
+</div><br>
+
+
+<button class="collapsible"><strong>Lemma 4: If \(\pi,\pi'\) are 5-cycles and there is a sequence of \(m\) instructions that \(\pi\)-accepts \(A\), and a sequence of \(m'\) instructions that \(\pi'\)-accepts \(B\), then there is a sequence of \(2(m+m')\) instructions that \(\pi''\)-accepts \(A\cap B\) for some 5-cycle \(\pi''\).</strong></button>
+  <div class="content">
+<br>
+this is all xD.
+</div><br>
+
+
+<button class="collapsible"><strong>Lemma 5: If \(\pi,\pi'\) are 5-cycles and there is a sequence of \(m\) instructions that \(\pi\)-accepts \(A\), and a sequence of \(m'\) instructions that \(\pi'\)-accepts \(B\), then there is a sequence of \(2(m+m')\) instructions that \(\pi''\)-accepts \(A\cup B\) for some 5-cycle \(\pi''\).</strong></button>
+  <div class="content">
+<br>
+this is all xD.
+</div><br>
+
+
+<button class="collapsible"><strong>Lemma 6: If \(A\) is decided by a fan-in \(2\), depth \(d\) Boolean circuit with \(\wedge, \vee, \neg\) gates, then there is a sequence of at most \(4d\) instructions that \(\pi\)-accepts \(A\), for some \(5\)-cycle \(\pi\).</strong></button>
+  <div class="content">
+<br>
+this is all xD.
+</div><br>
+
+
+<button class="collapsible"><strong>Lemma 7: Every language decided by polynomial-size width-\(5\) branching programs is in non-uniform \(\mathrm{NC}_1\), and therefore the languages decided by polynomial-size width-\(5\) branching programs are exactly non-uniform \(\mathrm{NC}_1\).</strong></button>
+  <div class="content">
+<br>
+this is all xD.
+</div><br>
+
+
+
+here some more.
+
+    </div>
+  </div>
+</div>
+
+
+<style>
+.rectangle {
+  height: 8%;
+  width: 55%;
+  background-color: black;
+  margin-left: auto;
+  margin-right: auto;
+  color: white;
+  display: flex;
+  justify-content:center;
+  align-items: center;
+}
+
+    .centertitleph112 {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+    }
+
+</style>
+</head>
+<div class="footer">
+    <a href="#" class="w3-button w3-white w3-padding-large w3-margin-bottom"><img src="../up_arrow.png", style="width: 25px;height:25px";></i>To the top</a><br>
+    <a href=https://www.instagram.com/emiletimothy/><img src="Pictures/icons/instagram-icon.png", alt="Instagram", style="width:25px;height:25px";></a>
+    <a href=https://www.linkedin.com/in/emiletimothy/><img src="Pictures/icons/linkedin-icon.png", alt="Linkedin", style="width:25px;height:25px";></a>
+    <a href=https://orcid.org/my-orcid?orcid=0000-0003-2893-9469https://orcid.org/my-orcid?orcid=0000-0003-2893-9469/><img src="Pictures/icons/orcid-icon.png", alt="Orcid", style="width:25px;height:25px";></a>
+    <a href=https://scholar.google.com/citations?user=nUXwVU8AAAAJ&hl=en/><img src="Pictures/icons/googlescholar-icon.png", alt="Google Scholar", style="width:25px;height:25px";></a>
+    <a href=https://github.com/emiletimothy/><img src="../Pictures/icons/github-icon.png", alt="Github Icon", style="width:30px;height:29px";></a><br><br>
+<p1 style="color: white"><br><strong>© 2023 by Emile Timothy</strong></p1>
+</div>
+
+</body>
+
+</html>
+
+
+<script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("b1-active");
+    var content = this.nextElementSibling;
+    if (content.style.maxHeight){
+      content.style.maxHeight = null;
+    } else {
+      content.style.maxHeight = content.scrollHeight + "px";
+    }
+  });
+}
+</script>
+
+
+
+<style>
+/* Style the button that is used to open and close the collapsible content */
+.collapsible {
+  background-color: #000000;
+  color: #ffffff;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  outline: 10px white;
+  border: none;
+  text-align: center;
+  outline: none;
+  font-size: 15px;
+}
+
+.collapsible:after {
+  background-color: #000000;
+  content: '+'; /* Unicode character for "plus" sign (+) */
+  font-size: 13px;
+  outline: #000000;
+  color: #ffffff;
+  float: right;
+  margin-left: 5px;
+}
+
+.b1-active:after {
+  color: #ffffff;
+  font-size:10px;
+  content: "-"; /* Unicode character for "minus" sign (-) */
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.b1-active, .collapsible:hover {
+  background-color: #000000;
+}
+
+.content {
+  padding: 0 18px;
+  color: black;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+</style>
