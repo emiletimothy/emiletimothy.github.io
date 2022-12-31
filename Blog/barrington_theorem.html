@@ -280,7 +280,7 @@ $$\DeclareMathOperator*{\EE}{\mathbb{E}}$$
  We begin with a few words of background. A <i>branching program</i> is a directed acyclic graph (DAG) in which each node is labelled by a variable \(x_i\), one of these is designated as the start node and there are two special nodes labelled “accept” and “reject.” All of the nodes labelled with variables have exactly two outgoing edges, one labelled “\(0\)” and the other labelled “\(1\)”. An input \(x = x_1 x_2 \cdots x_n\) defines a path from the start node to the accept or reject node as follows: at every node labelled \(x_i\), we follow the outgoing edge whose label coincides with the value of \(x_i\) in the input. If we reach the accept node, the input is accepted; if we reach the reject node, the input is rejected. If you're familiar with complexity classes, you can see Polynomial-size branching programs as a means to capture the complexity class \(\mathrm{L}/\mathrm{poly}\) in the same way that polynomial-size circuits capture the complexity class \(\mathrm{P}/\mathrm{poly}\).<br><br>
 
 
-In this post, I want to talk about a very restricted subclass of polynomial-size branching programs. With the exception of the accept and reject nodes, all of the nodes will be divided into levels \(\ell_1, \ell_2, \cdots, \ell_m\) with each level containing at most \(5\) nodes; the only permitted edges are directed from a node in level \(i\) to a node in level \(i+1\), or a node in level \(m\) to either the accept or reject nodes. Before Barrington’s result in 1986, people were pretty sure these width-5 branching programs were similar in power to finite automata – it was thought that they could not even maintain counters during their computation. In this post, I'm going to reprove, in stark contrast to this intuition, that width 5 branching programs contain non-uniform \(\mathrm{NC}_1\) and that in fact they exactly characterize non-uniform \(\mathrm{NC}_1\). (Non-uniform \(\mathrm{NC}_1\) is the class of languages that are decided by polynomial-size, \(O(\log n)\)-depth Boolean circuits).<br><br>
+In this post, I want to talk about a very restricted subclass of polynomial-size branching programs. With the exception of the accept and reject nodes, all of the nodes will be divided into levels \(\ell_1, \ell_2, \cdots, \ell_m\) with each level containing at most \(5\) nodes; the only permitted edges are directed from a node in level \(i\) to a node in level \(i+1\), or a node in level \(m\) to either the accept or reject nodes. Before Barrington’s result in 1986, people were pretty sure these width-5 branching programs were similar in power to finite automata – it was thought that they could not even maintain counters during their computation. In this post, I'm going to reprove, in stark contrast to this intuition, that width-5 branching programs contain non-uniform \(\mathrm{NC}_1\) and that in fact they exactly characterize non-uniform \(\mathrm{NC}_1\). (Non-uniform \(\mathrm{NC}_1\) is the class of languages that are decided by polynomial-size, \(O(\log n)\)-depth Boolean circuits).<br><br>
 
 
 <b><u>Definition 1</u></b>: \(\mathrm S_5\) is the symmetric group on the \(5\) elements \(\{1, 2, 3, 4, 5\}\). In other words, it is the set of all permutations on \(\{1, 2, 3, 4, 5\}\).<br><br>
@@ -298,9 +298,9 @@ In this post, I want to talk about a very restricted subclass of polynomial-size
   <div class="content">
 <br>
 
-If there is a sequence of m instructions that \(\pi\)-accepts \(A\), then we must have that \(\forall x\in A\), \(x\) yields \(\pi\), and \(\forall y\notin A\), \(y\) yields \(e\). Therefore, we can construct a width-\(5\) branching program with \(m\) levels as follows:<br><br>
+If there is a sequence of m instructions that \(\pi\)-accepts \(A\), then we must have that for all \(x\in A\), \(x\) yields \(\pi\), and for all \(y\notin A\), \(y\) yields \(e\). Therefore, we can construct a width-\(5\) branching program with \(m\) levels as follows:<br><br>
 
-Create an empty \((m+1)\) level program and \(5\) nodes for each level representing \(\{1, 2, 3, 4, 5\}\), \(\forall i\), \(1\leq i\leq m\). Note that the reason we start with a \((m + 1)\) level program instead of an \(m\) level program would be to incorporate an accept and reject state. Recall that the instruction for the \(i\)’th level would be \((i_j, \sigma_j, \tau_j)\). Therefore, create edges from level \(i\) to level \(i+1\) by adding an edge labeled “\(0\)” from \(k\to \sigma(k)\) and by adding an edge labeled “\(1\)” from \(k\to\tau(k)\) where \(k\) represents all the elements in \(\mathrm S_5\). Thus, the program now has the same flow of instructions as the sequence does (no proof required), since it just copies the exact instructions.<br><br>
+Create an empty \((m+1)\) level program and \(5\) nodes for each level representing \(\{1, 2, 3, 4, 5\}\), for all \(i\), \(1\leq i\leq m\). Note that the reason we start with a \((m + 1)\) level program instead of an \(m\) level program would be to incorporate an accept and reject state. Recall that the instruction for the \(i\)’th level would be \((i_j, \sigma_j, \tau_j)\). Therefore, create edges from level \(i\) to level \(i+1\) by adding an edge labeled “\(0\)” from \(k\to \sigma(k)\) and by adding an edge labeled “\(1\)” from \(k\to\tau(k)\) where \(k\) represents all the elements in \(\mathrm S_5\). Thus, the program now has the same flow of instructions as the sequence does (no proof required), since it just copies the exact instructions.<br><br>
 
 
 To decide the start, accept, and reject nodes, refer back to the instruction set: The start node would be any node labeled \(k\) in the first level where \(\pi(k)\neq k, k\in \mathrm S_5\). The accept node would be the node labeled \(\pi(k)\) in the \((m + 1)\) level. The reject node would be the node labeled \(k\) in the \((m + 1)\) level. After deciding these nodes, all the other ‘phantom’ nodes in the \((m + 1)\) level should be removed so that this final width-\(5\) branching program would have exactly \(m\) levels.<br><br>
@@ -312,53 +312,155 @@ Since \(\pi\neq e\) (given), there exists \(k\in S_5\) such that \(\pi(k)\neq k\
 
 Therefore, we have shown that if there is a sequence of \(m\) instructions that \(\pi\)-accepts \(A\), then we can construct a width-\(5\) branching program with \(m\) levels such that for all \(x\in A\), \(x\) yields accept, and for all \(y\notin A\), \(y\) yields reject.
 
-
 </div><br>
 
 
 <button class="collapsible"><strong>Lemma 2: If \(\pi\) is a 5-cycle, and a sequence of \(m\) instructions \(\pi\)-accepts \(A\), then for any 5-cycle \(\pi' \in \mathrm{S}_5\), there is a sequence of \(m\) instructions that \(\pi'\)-accepts \(A\).</strong></button>
   <div class="content">
 <br>
-this is all xD.
+
+If \(\pi\) is a \(5\)-cycle and there exists a sequence of \(m\)-instructions that \(\pi\)-accepts \(A\), denote this sequence of \(m\)-instructions as \((i_j,\sigma_j,\tau_j)\) for all \(j\), such that \(1\leq j\leq m\). Then, from the principle of conjugation, we have that since \(\pi\) and \(\pi'\) are \(5\)-cycles in \(\mathrm S_5\), then there exists a permutation \(\beta\in\mathrm S_5\) such that:
+
+$$\beta \pi \beta^{-1} = \pi'$$
+
+Therefore, we can now modify the sequence of \(m\)-instructions that \(\pi\)-accepts \(A\) to produce a sequence of \(m\)-instructions that \(\pi'\)-accepts \(A\) by simply taking the conjugal of \(\sigma_j,\tau_j\). This forms:
+
+$$(i_j, \beta\sigma_j \beta^{-1}, \beta\tau_j \beta^{-1}), \forall j, 1 \leq j \leq m$$
+
+We can justify this since the conjugal that takes \(\pi\) to \(\pi'\), then for all \(x\in A\), \(x\) yields \(\pi'\) instead of \(\pi\) and for all \(y\notin A\), \(y\) yields the identity element. Therefore, for any \(5\)-cycle \(\pi'\in \mathrm S_5\), there is a sequence of \(m\) instructions that \(\pi'\)-accepts \(A\).
+
 </div><br>
 
 <button class="collapsible"><strong>Lemma 3: For any 5-cycle \(\pi\), if there is a sequence of \(m\) instructions that \(\pi\)-accepts \(A\), then there is a sequence of \(m\) instructions that \(\pi\)-accepts the complement of \(A\).</strong></button>
   <div class="content">
 <br>
-this is all xD.
+
+If \(\pi\) is a \(5\)-cycle and there exists a sequence of \(m\)-instructions that \(\pi\)-accepts \(A\), denote this sequence of \(m\)-instructions as \((i_j, \sigma_j, \tau_j)\) for all \(j\) such that \(1 \leq j \leq m\).<br><br>
+
+Then, we can simply modify the last instruction so that it takes the complement of \(A\) by taking the appropriate inverse. The last instruction here would be \((i_m, \sigma_m, \tau_m)\). Therefore, to modify the last instruction, we would just take the part of the instruction that led to \(\pi\) and make it now produce \(e\) and the parts of the instruction which did not lead to \(\pi\) (it led to \(e\)) now produce \(\pi^{-1}\). To do this, we make the following modification:
+
+$$(i_m, \sigma_m \pi^{-1}, \tau_m \pi^{-1})$$
+
+Note that the sequence of instructions is still the same, with the exception that anything that leads to \(\pi\) instead leads to \(e\), whereas anything that leads to \(e\) leads to \(\pi^{−1}\). This forms a sequence that \(\pi^{-1}\)-accepts the complement of \(A\) (for instance, for all \(x\in A\), \(x\) leads to \(e\), whereas for all \(y\notin A\), \(y\) leads to \(\pi^{-1}\)).<br><br>
+
+Then, note that if \(\pi^{-1}\in \mathrm S_5\), then \(\pi\in \mathrm S_5\). It follows then from Lemma 2, that if there is a sequence of \(m\) instructions that \(\pi^{-1}\)-accepts the complement of \(A\), then there is a sequence of \(m\) instructions that \(\pi\)-accepts the complement of \(A\).
+
 </div><br>
 
 
 <button class="collapsible"><strong>Lemma 4: If \(\pi,\pi'\) are 5-cycles and there is a sequence of \(m\) instructions that \(\pi\)-accepts \(A\), and a sequence of \(m'\) instructions that \(\pi'\)-accepts \(B\), then there is a sequence of \(2(m+m')\) instructions that \(\pi''\)-accepts \(A\cap B\) for some 5-cycle \(\pi''\).</strong></button>
   <div class="content">
 <br>
-this is all xD.
+
+If \(\pi\) and \(\pi'\) are \(5\)-cycles and there is a sequence of \(m\) instructions that \(\pi\)-accepts \(A\) and a sequence of \(m’\) instructions that \(\pi'\) accepts \(B\), then we can construct a set of instructions that \(\pi''\) accepts \(A\cap B\) by noting that the commutator \(\sigma \tau \sigma^{-1} \tau^{-1}\) is a \(5\)-cycle.<br><br>
+
+Therefore, the instruction sequence would be (using Lemma 2):<br><br>
+
+The sequence of \(m\) instructions that \(\sigma\)-accepts \(A\), followed by <br>
+The sequence of \(m'\) instructions that \(\tau\)-accepts \(B\), followed by <br>
+The sequence of \(m\) instructions that \(\sigma^{-1}\)-accepts \(A\), followed by <br>
+The sequence of \(m'\) instructions that \(\tau\)-accepts \(B\).<br><br>
+
+This sequence has a length of \(m+m'+m+m' = 2(m+m')\).<br><br>
+
+
+To verify that this instruction sequence \(\sigma \tau \sigma^{-1} \tau^{-1}\) accepts \(A\cap B\), we need to show that if \(x\in A\cap B\), then the instruction sequence leads to \(\sigma\tau\sigma^{-1}\tau^{-1}\) and if \(x\notin A\cap B\), then the instruction sequences would lead to \(e\).<br><br>
+
+1) If \(x\in A\cap B\), then the instruction sequence leads to \(\sigma\tau\sigma^{-1}\tau^{-1}\): To show this, note that only valid instances of \(x\) would be able to follow each of the \(4\) instruction sequences to the very end to produce exactly \(\sigma\tau\sigma^{-1}\tau^{-1}\).<br><br>
+
+
+2) If \(x\notin A\cap B\), then the instruction sequence leads to \(e\): If \(x\in A\cap \bar{B}\), then the instruction sequences would lead to \(\sigma e \sigma^{-1} e = e\), since the sequences would not \(\tau\) or \(\tau^{-1}\)-accept \(B\), and it would \(\sigma\) and \(\sigma^{-1}\)-accept \(A\). If \(x\in\bar{A}\cap B\), then the instruction sequences would lead to \(e\tau e \tau^{-1} = e\), since the sequences would not \(\sigma\) or \(\sigma^{-1}\) accept \(A\), and it would \(\tau\) and \(\tau^{-1}\) accept \(B\). If \(x\notin A\cap B\), then every segment in the instruction would lead to the identity element, so the full sequence would be \(eeee = e\).<br><br>
+
+
+Therefore, we conclude that if \(\pi\) and \(\pi'\) are \(5\)-cycles, and there is a sequence of \(m\) instructions that \(\pi\)-accepts \(A\), and a sequence of \(m'\) instructions that \(\pi'\)-accepts \(B\), then there is a sequence of \(2(m + m')\) instructions that \(\sigma\tau\sigma^{-1}\tau^{-1}\)-accepts \(A\cap B\) (ie. \(\sigma\tau\sigma^{-1}\tau^{-1} = \pi''\)).
+
 </div><br>
 
 
 <button class="collapsible"><strong>Lemma 5: If \(\pi,\pi'\) are 5-cycles and there is a sequence of \(m\) instructions that \(\pi\)-accepts \(A\), and a sequence of \(m'\) instructions that \(\pi'\)-accepts \(B\), then there is a sequence of \(2(m+m')\) instructions that \(\pi''\)-accepts \(A\cup B\) for some 5-cycle \(\pi''\).</strong></button>
   <div class="content">
 <br>
-this is all xD.
+
+
+If \(\pi\) and \(\pi'\) are \(5\)-cycles and there is a sequence of \(m\) instructions that \(\pi\)-accepts \(A\) and a sequence of \(m'\) instructions that \(\pi'\) accepts \(B\), then we can construct a set of instructions that \(\pi''\) accepts \(A \cup B\) by constructing an expression for the formula using De Morgan’s law:<br><br>
+
+$$\neg (A \cup B) = \neg A \cap \neg B$$
+
+$$A\cup B = \neg(\neg A \cap \neg B)$$
+
+Then, from part c, we have that if there is a sequence of \(m\) instructions that \(\pi\)-accepts \(A\) and a sequence of \(m'\) instructions that \(\pi'\) accepts \(B\), then there is also a sequence of \(m\) instructions that \(\pi\)-accepts the complement of \(A\) and a sequence of \(m'\) instructions that \(\pi'\) accepts the complement of \(B\).<br><br>
+
+
+Then, from Lemma \(4\), we can create a sequence of \(2(m + m')\) instructions that a sequence of \(m\) instructions that \(\pi\)-accepts \(A\) and a sequence of \(m'\) instructions for which \(\pi'\) can  \(\sigma\tau\sigma^{-1}\tau^{-1}\)-accept \(\neg A \cap \neg B\).<br><br>
+
+
+Finally, we use part Lemma \(3\) to find a sequence of \(2(m + m')\) instructions that \(\sigma\tau\sigma^{-1}\tau^{-1}\)-accepts \(\neg(\neg A \cap \neg B)\), which is the same thing as a sequence of \(2(m + m')\) instructions that \(\sigma\tau\sigma^{-1}\tau^{-1}\)-accepts \(A \cup B\).<br><br>
+
+
+Since these intermediary steps are self-justified in Lemma \(3\) and \(4\), we can therefore conclude that if \(\pi\) and \(\pi'\) are \(5\)-cycles, and there is a sequence of \(m\) instructions that \(\pi\)-accepts \(A\), and a sequence of \(m'\) instructions that \(\pi'\) accepts \(B\), then there is a sequence of \(2(m + m')\) instructions that \(\sigma\tau\sigma^{-1}\tau^{-1}\)-accepts \(A\cup B\) (ie. \(\sigma\tau\sigma^{-1}\tau^{-1} = \pi'')\).
+
+
 </div><br>
 
 
 <button class="collapsible"><strong>Lemma 6: If \(A\) is decided by a fan-in \(2\), depth \(d\) Boolean circuit with \(\wedge, \vee, \neg\) gates, then there is a sequence of at most \(4d\) instructions that \(\pi\)-accepts \(A\), for some \(5\)-cycle \(\pi\).</strong></button>
   <div class="content">
 <br>
-this is all xD.
+
+If \(A\) is decided by a fan-in \(2\), depth \(d\) Boolean circuit with \(\wedge,\vee,\neg\) gates, then we can prove that there is a sequence of atmost \(4^d\) instructions that \(\pi\)-accepts \(A\) for some \(5\)-cycle \(\pi\) using induction on \(d\).<br><br>
+
+
+Base Case: \(d = 0\): A fan-in-\(2\), depth \(0\) Boolean circuit is just a single literal \(x_i\) or \(\neg x_i\). For this, we can construct the following instruction set that would \(\pi\)-accept \(A\): \((i,e,\pi)\) if the literal is \(x_i\) and \((i,\pi,e)\) if the literal is \(\neg x_i\). Since this is just one instruction set, we have that there are \(1 \leq 4^0\) instructions that \(\pi\)-accepts \(A\) when \(d = 0\). Hence, the base case is satisfied.<br><br>
+
+Assumptive Case: \(d \leq k-1, k\in \mathbb{Z}_+\).  Assume that a fan-in \(2\) depth-\(d\) Boolean circuit has a sequence of at most \(4^d\) instructions that would \(\pi\)-accept \(A\) for a \(5\)-cycle \(\pi\). <br><br>
+
+Inductive Case: \(d=k, k\in\mathbb{Z}_+\). In this case, we need to consider each Boolean operation separately.<br><br>
+
+If the Boolean operation is negation: If the negation gate is at the highest depth, then the Boolean tree has a depth of \(d – 1\). Then, from the assumptive case we already know that there is a sequence of at most \(4^{d-1}\) instructions that \(\pi\)-accepts \(\bar{A}\), and (from Lemma 3) that there would therefore also be a sequence of atmost \(4^d\) instructions that \(\pi\)-accepts \(A\) since \(4^{d-1} \leq 4^d\). Hence, a Boolean tree where the last operation is \(\neg\) can have an instruction set of atmost \(4^d\) instructions that \(\pi\)-accepts \(A\).<br><br>
+
+
+If the Boolean operation is \(\wedge\): The sequence of instructions would depend on the two (Boolean subtree of depth \(d – 1\) formulas being passed as an argument to \(\wedge\). Then, from the assumptive case, we know that the total length of the instruction sets would be \(\leq 2(4^{d-1} + 4^{d-1}) = 4^{d-1}(2)(2) = 4(4^{d-1}) = 4^d\). Hence, a Boolean tree where the last operation is \(\wedge\) can have an instruction set of atmost \(4^d\) instructions that \(\pi\)-accepts \(A\).<br><br>
+
+If the Boolean operation is \(\vee\): The sequence of instructions would (again) depend on the two (Boolean subtree of depth \(d – 1\)-formulas being passed as an argument to \(\vee\). Note here that \((f\vee g) = \neg(\neg f\wedge \neg g)\). Therefore, from the assumptive case we know that there is a sequence of \(4^{d-1}\) instructions for the subtree \(f\) and another sequence of \(4^{d−1}\) instructions for the subtree \(g\). Then, through negating these gates and using the method described above for \(\wedge\) and then negating the final output again, we produce a sequence of \(4^d\) instructions that \(\pi\)-accepts \(A\) when the last Boolean operator is \(\vee\).<br><br>
+
+Hence shown that the inductive case holds true.
+
+
+Conclusive Case: Then, from the induction hypothesis we know that for any fan-in \(2\) depth \(d\) Boolean circuit, that there is an instruction set of length \(\leq 4^d\).<br><br>
+
+
+At this point, we also need to address the following lemma: Every language in non-uniform \(\mathrm {NC}_1\) has a polynomial-size width-\(5\) branching program:<br><br>
+
+To show this, note that by definition \(\mathrm {NC}_1\) is decidable by circuits with a depth of \(O(\log n)\). However, we have just shown that any language decided by such a circuit has a sequence of atmost \(4^d\) instructions that \(\pi\)-accepts \(A\). Therefore, the length of instructions that \(\pi\)-accepts \(A\) for a circuit of depth \(O(\log n)\) is atmost
+
+$$4^{O(\log n)} = 4^{\log n^k} = 2^{\log n^{2k}} = n^{2k} \in O(n^k), k \in \mathbb{Z}_+$$
+
+From Lemma 1, we have that if there is a sequence of \(m\) instructions that \(\pi\)-accepts an arbitrary language \(A\), then there is a width-\(5\) branching program that for the language. Additionally, from the calculation above, we would also have that the circuit would be of polynomial size: \(O(n^k)\).
+
+
 </div><br>
 
 
 <button class="collapsible"><strong>Lemma 7: Every language decided by polynomial-size width-\(5\) branching programs is in non-uniform \(\mathrm{NC}_1\), and therefore the languages decided by polynomial-size width-\(5\) branching programs are exactly non-uniform \(\mathrm{NC}_1\).</strong></button>
   <div class="content">
 <br>
-this is all xD.
+
+For all \(i\) such that \(1 \leq i\leq m\), there exists a permutation function \(\pi_i\) between layer \(i\) and layer \(i+1\) such that \(\pi_i(k)\) is the result of traversing the directed edge from node \(k\). Then, by finding the composition of all these permutation functions from the start node to the very end, we check if:
+
+$$\pi_1\pi_2\pi_3\cdot \pi_{O(2^d)} = \text{accept or reject?}$$
+
+Then, note that the number of possible functions \(\tau\{1, 2, 3, 4, 5\} \mapsto \{1, 2, 3, 4, 5\}\) is finite, so the corresponding circuit would have a fixed depth. Therefore, by writing the corresponding circuits for the composed permutation function in a binary tree, we would have a binary tree that forms the composed permutation circuit, and it would have \(2^d\) inputs and a (fixed) depth of \(O(\log n)\). Therefore, if the inputs to this circuit would be descriptions of the smaller permutation functions, it would then match the polynomial-size width-\(5\) branching programs if we pad the number of levels to \(2^d\) where \(d = O(\log n)\). After this, the procedure could then just return whatever the composed function produced.<br><br>
+
+
+Since the depth of the circuit is \(O(\log n)\) and since the size of the circuit is \(2^{O(\log n)} = n^k\) which is polynomially large, we have that any language that this polynomial-size width-\(5\) branching program accepts would be non-uniform in \(\mathrm{NC}_1\) (by definition).<br><br>
+
+
+From Lemma 6, we showed that every language in non-uniform \(\mathrm{NC}_1\) is decided by a polynomial-size width-\(5\) branching program. Since we have just shown that every language decided by a polynomial size width-\(5\) branching program is in non-uniform \(\mathrm{NC}_1\), we have that the languages decided by polynomial-size width-\(5\) branching programs are exactly non-uniform \(\mathrm{NC}_1\).
+
 </div><br>
 
+Therefore, and quite unintuitively, we see that width-\(5\) branching programs contain non-uniform \(\mathrm{NC}_1\) - in fact they exactly characterize non-uniform \(\mathrm{NC}_1\).
 
-
-here some more.
 
     </div>
   </div>
