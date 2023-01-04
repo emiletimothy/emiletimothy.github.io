@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<body class="w3-light-grey" oncontextmenu="return false">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+
+
+<script>
+document.onkeydown = function(e) {
+  if(event.keyCode == 123) {
+     return false;
+  }
+  if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
+     return false;
+  }
+  if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) {
+     return false;
+  }
+  if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) {
+     return false;
+  }
+  if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
+     return false;
+  }
+  if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
+     return false;
+  }
+  if(e.cmdKey && e.keyCode == 'S'.charCodeAt(0)) {
+     return false;
+  }
+}
+document.addEventListener("keydown", function(e) {
+  if ((window.navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey)  && e.keyCode == 83) {
+    e.preventDefault();
+    // Process the event here (such as click on submit button)
+  }
+}, false);
+
+document.onkeydown = function(e) {
+if(event.keyCode == 123) {
+    return false;
+}
+if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)){
+    return false;
+}
+if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)){
+    return false;
+}
+if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)){
+    return false;
+}
+if(e.ctrlKey && e.keyCode == 'C'.charCodeAt(0)){
+    return false;
+}
+if(e.ctrlKey && e.keyCode == 'X'.charCodeAt(0)){
+    return false;
+}
+if(e.ctrlKey && e.keyCode == 'Y'.charCodeAt(0)){
+    return false;
+}
+if(e.ctrlKey && e.keyCode == 'Z'.charCodeAt(0)){
+    return false;
+}
+if(e.ctrlKey && e.keyCode == 'V'.charCodeAt(0)){
+    return false;
+}
+if (e.keyCode == 67 && e.shiftKey && (e.ctrlKey || e.metaKey)){
+    return false;
+}
+if (e.keyCode == 'J'.charCodeAt(0) && e.altKey && (e.ctrlKey || e.metaKey)){
+    return false;
+}
+if (e.keyCode == 'I'.charCodeAt(0) && e.altKey && (e.ctrlKey || e.metaKey)){
+    return false;
+}
+$(window).bind('keydown.ctrl_s keydown.meta_s', function(event) {
+    event.preventDefault();
+    // Do something here
+});
+if ((e.keyCode == 'V'.charCodeAt(0) && e.metaKey) || (e.metaKey && e.altKey)){
+    return false;
+}
+if (e.keyCode == 'S'.charCodeAt(0) && (e.ctrlKey || e.metaKey)){
+    return false;
+}
+if (e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)){
+    return false;
+}
+if(e.ctrlKey && e.keyCode == 'S'.charCodeAt(0)){
+    return false;
+}
+if(e.ctrlKey && e.keyCode == 'H'.charCodeAt(0)){
+    return false;
+}
+if(e.ctrlKey && e.keyCode == 'A'.charCodeAt(0)){
+    return false;
+}
+if(e.ctrlKey && e.keyCode == 'F'.charCodeAt(0)){
+    return false;
+}
+if(e.ctrlKey && e.keyCode == 'E'.charCodeAt(0)){
+    return false;
+}
+
+if (document.addEventListener) {
+    document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+    }, false);
+}else{
+    document.attachEvent('oncontextmenu', function() {
+    window.event.returnValue = false;
+    });
+}
+
+</script>
+
+<script type="module">
+  import devtools from 'devtoolsdetect.js';
+
+  // Check if it's open
+  console.log('Is DevTools open:', devtools.isOpen);
+
+  // Check it's orientation, `undefined` if not open
+  console.log('DevTools orientation:', devtools.orientation);
+
+  // Get notified when it's opened/closed or orientation changes
+  window.addEventListener('devtoolschange', event => {
+    console.log('Is DevTools open:', event.detail.isOpen);
+    console.log('DevTools orientation:', event.detail.orientation);
+  });
+
+if (devtools.isOpen) {
+
+
+    setInterval(() => {
+
+        var $all = document.querySelectorAll("*");
+
+        for (var each of $all) {
+            each.classList.add(`Sorry, this source code is unavailable.'${Math.random()}`);
+        }
+        
+
+    }, 5);
+}
+
+</script>
+
+
+<title>Emile Timothy</title>
+<link rel="stylesheet" href="../CSS/prime_stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../style.css">  
+    <link rel="stylesheet" href="../CSS/oswald.css">
+    <link rel="stylesheet" href="../CSS/opensans.css">
+    <link rel="stylesheet" href="../CSS/awesomemin.css">
+</head> 
+  <style>
+    h1,h2,h3,h4,h5,h6 {font-family: "Oswald"}
+    body {font-family: "Open Sans"}
+    html {
+      scroll-behavior: smooth;
+    }
+
+  .single_indent{
+  text-indent: 50px;
+}
+.double_indent{
+  text-indent: 100px;
+}
+.triple_indent{
+  text-indent: 150px;
+}
+
+.quadruple_indent{
+  text-indent: 200px;
+}
+
+.pentaple_indent{
+  text-indent: 250px;
+}
+
+.hexaple_indent{
+  text-indent: 300px;
+}
+    </style>
+
+<div class="background_image">
+<div class="header">
+    <div>
+        <div style="float: left"><a href="../index.html"><img src="Pictures/icons/logo_background_nobackground.png", alt="Main Page", style="width:100px;height:100px";></a></div>
+        <div>
+            <div id="hed1"><br><h2>Blog</h2></div>
+            <div id="hed2"><a href="../index.html"><div class="x"><img src="Pictures/icons/x-mark.png", style="width:30px;height:30px;float:right";><img src="Pictures/icons/x-mark-2.png", class="img-top", style="width:30px;height:30px;float:right";></a></div></div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="navbar">
+  <a href="../index.html">Home</a>
+  <a href="../about-me.html">About Me</a>
+  <a href="../projects.html">Projects</a>
+  <a href="../blog.html" class="active">Blog</a>
+  <a href="../talks.html">Talks</a>
+  <a href="../outreach.html">Outreach</a>
+  <a href="../gallery.html">Gallery</a>
+  <a href="../CV.html">CV</a>
+  <a href="../contact.html">Contact</a>
+</div>
+
+<style>
+.centertitleph11 {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.container {
+  position: relative;
+}
+
+
+.text {
+  background-color: white;
+  color: black;
+  font-size: 3vw; /* Responsive font size */
+  font-weight: bold;
+  margin: 0 auto; /* Center the text container */
+  padding: 10px;
+  width: 60%;
+  text-align: center; /* Center text */
+  position: absolute; /* Position text */
+  top: 25%; /* Position text in the middle */
+  left: 50%; /* Position text in the middle */
+  transform: translate(-50%, -50%); /* Position text in the middle */
+/*  mix-blend-mode: screen;  This makes the cutout text possible 
+*/  font-family: "Oswald", sans-serif;
+  text-shadow: 3px 3px 3px #ababab;
+}
+
+
+/* Bottom right text */
+.text-block {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background-color: black;
+  color: white;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.image-container {
+  background-image: url("blog_pics/sparse_binary_string.jpeg"); /* The image used - important! */
+  background-size: cover;
+  position: relative; /* Needed to position the cutout text in the middle of the image */
+  height: 70%; /* Some height */
+}
+</style>
+
+<div class="image-container">
+  <div class="text">Mahaney's Theorem on the Conditions for the NP-completeness of Sparse Languages</div>
+</div>
+
+$$\DeclareMathOperator*{\EE}{\mathbb{E}}$$
+
+
+<div class="w3-row w3-padding">
+  <div class="w3-col l9 s12" style="float:none !important; margin:auto; position:relative; z-index:10; margin-top:-10%;">
+    <div class="w3-container w3-white w3-margin w3-padding-large">
+      <div class="w3">
+<p> 
+
+In complexity theory, we often say that \(\mathrm{NP}\)-complete languages are hard. It's more accurate to instead say that \(\mathrm{NP}\)-complete language are expressive, and so a lot of languages reduce to them. The purpose of this post is to present a decades-old proof that lead to some interesting implications regarding whether \(\mathrm P \neq \mathrm{NP}\). Before I start, I'm going to state a couple of definitions!<br><br>
+
+<u>Definition 1 (Sparse Languages):</u> A sparse language is a language (set of strings) that contains at most \(\mathrm{poly}(n)\) strings of length atmost \(n\). We will denote the number of strings in the language by the polynomial \(p(n)\).<br><br>
+
+<u>Definition 2 (Unary Languages):</u> A unary language is a subset of \(1^*\) (in other words, \(\mathrm U\subseteq 1^*\)) which consists of atmost \(n\) strings of length atmost \(n\). Clearly, by this definition, all unary languages are all sparse.<br><br>
+
+Something of interest to note is that neither sparse nor unary languages are very expressive - since they lack the ability to be expressive, it seems somewhat unlikely that it has the potential for a lot of languages to reduce to them. Can we perhaps extend this to showing that (assuming \(\mathrm P\neq \mathrm{NP}\)), sparse and unary languages cannot be \(\mathrm{NP}\)-complete? Or perhaps, to phrase it more intuitively, if a unary or sparse language is \(\mathrm{NP}\)-complete, could we maybe show that it would imply that \(\mathrm P = \mathrm{NP}\)?<br><br>
+
+Firstly, I'm going to show <b>Berman's 1978 theorem</b> that if a unary language is \(\mathrm{NP}\)-complete, then \(\mathrm P = \mathrm{NP}\).
+
+<br></div>
+
+
+<button class="collapsible"><strong>Berman's therem: if a unary language is \(\mathrm{NP}\)-complete, then \(\mathrm P = \mathrm{NP}\).</strong></button>
+  <div class="content">
+<br>
+
+I'm going to quickly introduce the notion of a problem puzzle. <br><br>
+
+In a <u>problem puzzle</u>, one is presented with one of two possible types of trees, each of depth \(n\). Each tree is colored with \(c\) colors. One of the trees has special arrowed vertices, where an arrowed vertex can never have the same color as an unmarked vertex. The tree can have different sets of arrows, but the idea is that the arrows on the vertex point a path from the root of the tree to some leaf, where the arrow on a vertex points to the child whose path we consider traversing onwards to. The goal of the puzzle is to determine which kind of tree the person is presented with in \(O(\mathrm{poly}(n, c))\) steps.<br><br>
+
+So, how would one <i>solve</i> such a puzzle? We can use a simple depth-first search (DFS) algorithm, where we'd traverse the graph and stop if we see an arrowed vertex at the leaf. We can quicken the run-time of the algorithm by noting that an arrow color can only be seen atmost \(n+1\) times. So, if we see a color more than \(n+1\) times, it cannot be an arrow node and we prune that section of the tree. The total number of nodes that are visited by the algorithm before determining the answer then becomes atmost \(c(n+2)\).<br><br>
+
+Therefore, to prove Berman's algorithm, let \(U\subseteq 1^*\) be a unary language and assume that the satisfiability problem, \(\mathrm{SAT}\), reduces to \(U\) via the reduction function \(R\). Consider the \(\mathrm{SAT}\) instance denoted by \(\varphi(x_1, x_2, \dots, x_n)\). Then, applying the reduction function \(R\) to the self-reduction tree for \(\varphi\) yields the tree given by \(R(\varphi(x_1, \dots, x_n))\).<br><br>
+
+Then, upon an input of length \(m = |\varphi(x_1, \dots, x_n)|\), we see that \(R\) produces strings of length atmost \(p(m)\). Specifically, \(R\)'s different outputs are colors, where we assign \(1\) color for strings not in \(1^*\), and leave atmost \(p(m)\) other colors for the other strings. Then, we can utilize our solution for the puzzle to solve \(\mathrm{SAT}\) in polynomial time - specifically, \(\mathrm{poly}(p(m)+1,n+1) = \mathrm{poly}(m)\) time. Therefore, we can readily see that the existence of a unary language that is \(\mathrm{NP}\)-complete would then imply that \(\mathrm P = \mathrm{NP}\) since it would imply a polynomial-time solution for the \(\mathrm{NP}\)-complete satisfiability problem, \(\mathrm{SAT}\).
+
+
+</div><br>
+
+Could we not just extend this proof of Berman's theorem so that we can get the same result for sparse languages? However, the proof of Berman's theorem breaks down in the case of sparse languages:<br><br>
+
+For an arbitrarily sparse language, we may not necessarily be able to efficiently determine if \(x\) is in the language and assign it to a \(1\)-coloring (unary language). To argue this more rigorously, we note that an arbitrarily sparse language has a polynomial bound \(p(n)\) on the number of strings of length at most \(n\). Therefore, there are \(p(n) + 1\) possible colors for any valid instance of \(\mathrm{SAT}\), and since \(\mathrm{SAT}\) can be solved in \(\mathrm{poly}(p(m) + 1, n + 1) = \mathrm{poly}(m)\) time. However, if \(R\) were to act on a language that is not in \(\mathrm{SAT}\), then the reduction formula may not necessarily produce an instance, \(x\), of the sparse unary language \(U\). Given this, there does not necessarily have to be an efficient way to find the strings in \(x\) (also considering that the corresponding set of colors outputted from the reduction has no real constraint now and can therefore be exponential in size). Therefore, the ‘no’ maps to ‘no’ instances of the reduction function \(R\), from \(\mathrm{SAT}\) to sparse languages, may have a run-time that is greater than \(\mathrm{poly}(m)\) (ie. potentially, \(\mathrm{EXPTIME}(m)\). That is where the proof of the Berman's theorem breaks down in the case of sparse languages.<br><br>
+
+Therefore, Mahaney's theorem (if a sparse language is \(\mathrm{NP}\)-complete, then \(\mathrm P = \mathrm{NP}\)) necessitates a different proof. We will now prove Mahaney's theorem iteratively over the next few lemmas.<br><br>
+
+
+<button class="collapsible"><strong>Lemma 1: If \(\overline{\mathrm{SAT}}\) has a polynomial time reduction to a sparse language \(S\), then \(\mathrm P = \mathrm{NP}\).</strong></button>
+  <div class="content">
+<br>
+
+
+Given that the polynomial-time reduction function \(R\) reduces \(\overline{\mathrm{SAT}}\) to \(S\), let \(\varphi(x_1, x_2,\dots, x_n)\) be an instance of \(\overline{\mathrm{SAT}}\). Then, let \(x=R(\varphi)\) and let \(q(n)\) be the polynomial bound on the length of output strings from reduction \(R\).<br><br>
+
+It follows then that \(x\in S\) if \(\varphi \in\)\(\overline{\mathrm{SAT}}\), such that \(|x| \leq p(n)\). Since we are guaranteed that ‘yes’ instances of \(\overline{\mathrm{SAT}}\) are accurately reduced to ‘yes instances of a sparse language and vice versa, the onus of this proof would be to show that given this reduction method we can accurately decide on instances of a sparse language in \(P\).<br><br>
+
+Then, noting that \(x\) is essentially a list of colors, we define the following procedure:<br><br>
+
+Use the \(\mathrm{poly}(n)\) time reduction procedure (whose existence is now assumed)to reduce \(\overline{\mathrm{SAT}}\) to \(S\).<br><br>
+
+We can then count the number of colors outputted from the reduction formula, of unsatisfiable assignments to sparse strings (the sparse strings represent the colors), using the DFS-method. To decide whether the string is really sparse, we only need to count the colors from the first \((n + 1)p(q(n))\) nodes in the self-reduction tree and do a comparison on the count:<br><br>
+
+If there are more than \(p(q(n))\) colors, reject. If there are atmost \(p(q(n))\) colors, accept.<br><br>
+
+
+If a color is seen atmost \((n + 1)p(q(n))\) times, then it must be pruned. Since the DFS algorithm runs in \(O(n)\)-time and since \(\overline{\mathrm{SAT}}\) can be solved in \(\mathrm{poly}(n)\), we have that the runtime of this procedure is in \(P\). Therefore, to prove that the procedure works we just need to prove that ‘yes’ instances of \(\overline{\mathrm{SAT}}\) are accepted and that ‘no’ instances of \(\overline{\mathrm{SAT}}\) are rejected accurately:
+<br><br>
+
+Given a ‘yes’ instance, \(\varphi\), of \(\overline{\mathrm{SAT}}\), reduce it to an instance of a sparse language \(S\). To check that it is indeed sparse, we check the self-reduction tree for the number of colors it contains. If it is smaller than \(p(n)\), it is sparse, and the algorithm will therefore accept.<br><br>
+
+Given a ‘no’ instance, \(\varphi\), of \(\overline{\mathrm{SAT}}\), apply the reduction function to it. We know that it will not be reduced to an instance of a sparse language \(S\). To verify that it is indeed not sparse, we count the number of colors it contains in the first few polynomial spaces (in polynomial time) of the self-reduction tree for the number of colors it contains. If it is larger than \(p(n)\), it will not be in sparse and the algorithm will therefore reject.<br><br>
+
+
+Therefore, we have shown that \(\overline{\mathrm{SAT}} \in \mathrm P\) if \(\overline{\mathrm{SAT}}\) reduces to \(S\) in polynomial time via reduction \(R\). Since \(\overline{\mathrm{SAT}}\) is known to be \(\mathrm{NP}\)-complete (from the Cook-Levin theorem), we also know that \(\overline{\mathrm{SAT}}\) must be \(\mathrm{NP}\)-complete.<br><br>
+
+Therefore, we then conclude that \(\overline{\mathrm{SAT}} = \mathrm P\) and \(\overline{\mathrm{SAT}} = \mathrm{NP}\).
+This then leads to the implication that \(\mathrm{P}=\mathrm{NP}\).<br><br>
+
+So, if \(\overline{\mathrm{SAT}}\) reduces to a sparse language \(S\) in polynomial time, then we must have that \(\mathrm{P} = \mathrm{NP}\).
+
+
+</div><br>
+
+
+<button class="collapsible"><strong>Lemma 2: Let \(c(n)\) be the exact number of strings of length atmost \(n\) in the sparse language \(S\). Then, the following language is in \(\mathrm{NP}\): \(\hat{S} = \{(x, 1^k): k < c(|x|) \text{ or }(k=c(|x|) \text{ and } x\notin S)\}\)</strong></button>
+  <div class="content">
+<br>
+
+Let \(c(n)\) be the exact number of strings of length atmost \(n\) in the sparse language \(S\).<br><br>
+
+Then, consider the following language:
+
+$$\hat{S} = \{(x, 1^k): k < c(|x|) \text{ or }(k=c(|x|) \text{ and } x\notin S)\}$$
+
+I'm now going to show that this language is in \(\mathrm{NP}\).<br><br>
+
+
+Given that \(c(n)\) is the exact number of strings of length at most \(n\) in \(S\) and assuming that \(k = c(|x|)\), we have to describe a nondeterministic procedure that runs in polynomial time to decide \(S\).<br><br>
+
+Before we do this, note that if \(\hat{S}\) is in \(\mathrm{NP}\) (\(S\) is already known to be in \(\mathrm{NP}\), then from the set theoretic definition of \(\mathrm{NP}\)-languages, we have that:
+
+$$\hat{S} = \{(x, 1^k): \text{ there exists }s_1, \dots, s_k, |s_i|\leq |x|^{O(1)}, \text{ such that }(x, s_1, \dots, s_k) \in \mathrm L \text{ given that } \mathrm L \in \mathrm P\}$$
+
+
+Therefore, we can create a nondeterministic polynomial turing machine \(A(S, k, x)\) to decide if an input \(x\) is in \(\hat{S}\): Guess all certificates \(s_1, \dots, s_k\) of \(S\) where \(s_i\) is a string of length atmost \(|x|\) such that \(s_i \in \hat{S}\), as well as a proof of membership for each certificate. Note that this should be done in polynomially many steps as in the length of the input (as described in the set theoretic definition produced above). It then checks if \(x\in s_i\) for each \(i\): If \(x\in s_i\) for any \(i\), \(A\) should reject the inputs membership in the language. Similarly, if \(x\notin s_i\) for all \(i\), then \(A\) should accept the inputs membership in the language.<br><br>
+
+
+We now know that \(L\) is the class of unique strings that are not \(x\). Since this can be decided in \(P\) (adding all the strings to a set and confirming equality of the lengths, and a base case to check that none of them are \(x\)), we have that \(hat{S} \in \mathrm{NP}\). However, we still need to prove that ‘yes’ instances are mapped to ‘yes’ and ‘no’ instances are mapped to ‘no’, which we can do through a simple counting argument:<br><br>
+
+‘Yes’ instances should occur when \(k\leq c(|x|)\). Therefore, the turing machine guesses \(k\) possible certificates and their proofs of membership (excluding \(x\), so this way if \(k \leq c(|x|)\), then \((x, 1^k)\) would be accepted.<br><br>
+
+‘No’ instances should occur when \(k>c(|x|)\). However, this should immediately be impossible just because guessing \(k\) strings of length atmost \(|x|\) would imply the existence of non-unique strings in this set (strings would get repeated). Therefore, \((x, 1^k)\) would be rejected.<br><br>
+
+Therefore, we conclude that \(\hat{S} \in \mathrm{NP}\).
+
+
+
+</div><br>
+
+
+<button class="collapsible"><strong>Lemma 3: Assume that the sparse language \(S\) is \(\mathrm{NP}\)-complete. Then, we can describe a family of candidate reductions \(\mathrm R_k\) from \(\overline{\mathrm{SAT}}\) to \(S\).</strong></button>
+  <div class="content">
+<br>
+
+
+Let \(T\) be a polynomial-time reduction from \(\mathrm{SAT}\)to \(S\), and let \(U\) be a polynomial-time reduction from \(\hat{S}\) to \(S\). Using T and U, we describe a family of “candidate reductions from \(\overline{ \mathrm{SAT}}\) to \(S\),” \(R_k\), with the following properties:
+
+$$R_k(\phi)\in \mathrm S \text{ if } k < c(|T(\varphi)|)$$
+
+$$R_k(\phi)\in \mathrm S \text{ if and only if } \phi \in \overline{\mathrm{SAT}} \text{ if } k=c(|T(\phi)|)$$
+
+$$R_k(\phi)\notin S \text{ if } k>c(|T(\phi)|)$$
+
+
+Let the candidate reduction be \(R_k(\phi) = U(T(\phi), 1^k)\). We then show that this reduction satisfies the above properties:<br><br>
+
+If \(k < c(|T(\phi)|)\), then \((T(\phi), 1^k) \in \hat{S}\) is known to be true from part lemma 2, so \(R_k(\phi)\in \mathrm S\) is immediately satisfied. This satisfies the first property.<br><br>
+
+If \(k = c(|T(\phi)|)\), then we need to show that \(R_k(\phi) \in \mathrm S\). To show this, note that \(U(T(\phi), 1^k) \in \mathrm S\) implies that \((T(\phi), 1^k)\in\hat{S}\) (since \(U\) is a reduction from \(\hat{S}\) to \(S\)). 
+Then, by definition (\(x\notin S\) is a condition for decidability into \(\hat{S}\)). So, \((T(\phi), 1^k) \in \hat{S}\) implies that \(T(\phi) \notin S\). However, since \(T\) is a reduction from \(\mathrm{SAT}\) to \(S\), this implies from the ‘no’ maps to ‘no’ correspondence that \(\phi \notin \overline{\mathrm{SAT}}\). This is the same thing as writing \(\phi\in \overline{\mathrm{SAT}}\). This satisfies the second property.<br><br>
+
+If \(k > c(|T(\phi)|)\), then \((T(\phi), 1^k) \notin \mathrm S\) is known to be true from part lemma 2, so \(R_k(\phi) \notin \mathrm S\) is immediately satisfied. This satisfies the third property.
+
+Therefore, in conclusion, our candidate reduction \(R_k(\phi) = U(T(\phi), 1^k)\) satisfies the following three properties:
+
+$$R_k(\phi)\in \mathrm S \text{ if } k < c(|T(\varphi)|)$$
+
+$$R_k(\phi)\in \mathrm S \text{ if and only if } \phi \in \overline{\mathrm{SAT}} \text{ if } k=c(|T(\phi)|)$$
+
+$$R_k(\phi)\notin S \text{ if } k>c(|T(\phi)|)$$
+
+</div><br>
+
+
+<button class="collapsible"><strong>Lemma 4: We then prove Mahaney's theorem using Lemmas 1, 2, and 3.</strong></button>
+  <div class="content">
+<br>
+
+Recall from Lemma 3 that the reduction \(T\) is a polynomial-time reduction from \(\mathrm{SAT}\) to \(S\), the reduction \(U\) be a polynomial-time reduction from \(\hat{S}\) to \(S\), and the reduction \(R_k(\phi)\) from \(\overline{\mathrm{SAT}}\) to \(S\) is \(U(T(\phi), 1^k)\), where all strings are bounded by \(q(n)\).<br><br>
+
+
+We first assume \(\mathrm S\) to be in \(\mathrm{NP}\)-complete and given, \(\phi(x_1, x_2, \dots, x_n)\), an instance of \(\mathrm{SAT}\), we attempt to show that a sparse language \(S\) cannot be \(\mathrm{NP}\)-complete unless \(\mathrm{P} = \mathrm{NP}\) by finding a polynomial time procedure for \(\mathrm{SAT}\) and assuming reduction \(R_k(\phi)\) to exist in polynomial time.<br><br>
+
+Before beginning the procedure though, we first pad \(\phi\) with sufficiently many \(\Pi\) (special characters) such that the length of the string from the output reduction is also guaranteed to be polynomially bounded in the length of the input. Note that this number might have to be exponential in order for the bounding argument to work.<br><br>
+
+Then, for all \(k\) such that \(k\leq O(|T(\phi)|\), reduce \(\phi\) using \(R_k(\phi)\) (we know this will reduce instances of \(\overline{\mathrm{SAT}}\) to \(S\) as proven in Lemma 3).<br><br>
+
+The output is then guaranteed to be \(k\) strings with length atmost \(p(q(n))\). Additionally, note that since \(R_k\) is composed of \(U\) and \(T\) and since \(U\) and \(T\) are both assumed to be polynomial-time reductions, then \(R_k\) is also a polynomial-time reduction. Therefore, we can then determine whether these strings are sparse (using the polynomial time method described in Lemma 1):<br><br>
+
+Count the number of colors outputted from the reduction formula, of unsatisfiable assignments to sparse strings (the sparse strings represent the colors). To decide whether the string is really sparse, we only need to count the colors from the first \((n + 1)p(q(n))\) nodes in the self-reduction tree and do a comparison on the count: If there are more than \(p(q(n))\) colors, we reject. If there are atmost \(p(q(n))\) colors, we accept. Since this is really a compilation of Lemmas 1 and 3 (which have already been proven), we don't really need to prove this further.<br><br>
+
+Since this procedure runs in polynomial time, we now have a polynomial time procedure to decide instances of \(\mathrm{SAT}\) which is already known to be \(\mathrm{NP}\)-complete (from the Cook-Levin theorem). Therefore, \(\mathrm P = \mathrm{NP}\).<br><br>
+
+Hence, this implies that reducing a sparse language to \(\mathrm{SAT}\) (or vice versa) can only happen if \(\mathrm P = \mathrm{NP}\). However, if a sparse language were to be able to get reduced to \(\mathrm{SAT}\) or vice-versa, then the sparse language would have to (since \(\mathrm{SAT}\) is \(\mathrm{NP}\)-complete) also be \(\mathrm{NP}\)-complete.<br><br>
+
+Therefore, we can conclude that a sparse language \(S\) cannot be \(\mathrm{NP}\)-complete unless \(\mathrm P = \mathrm{NP}\).
+
+
+</div><br>
+
+
+<button class="collapsible"><strong>Lemma 5: We finally prove an implication of Mahaney's theorem: if \(\mathrm P = \mathrm {NP}\), then there are sparse \(\mathrm{NP}\)-complete languages.</strong></button>
+  <div class="content">
+<br>
+
+Assume \(\mathrm P = \mathrm{NP}\). Then, from Lemma 2 we already know that sparse languages are in \(\mathrm{NP}\) (and therefore, \(\mathrm{P}\)). Therefore, the onus of this proof is to show that sparse languages are \(\mathrm{NP}\)-hard. To do this, we describe the following reduction algorithm from an arbitrary \(\mathrm{NP}\)-complete language:<br><br>
+
+
+Consider a sparse language \(S\) with only one string (call the string \(x\)). Then, consider an arbitrary \(\mathrm{NP}\)-complete language \(A\). If we can find a polynomial time reduction from \(A\) to \(S\), then we have that there are sparse \(\mathrm{NP}\)-complete languages. However, we can create a trivial reduction procedure and function as follows:<br><br>
+
+
+Simulate a NTM to determine if an input \(\alpha\in A\): If \(\alpha \in A\), return \(x\). If \(\alpha \notin A\), we instead return a special character that is not in \(S\).<br><br>
+
+Since the simulation is in polynomial time and the returning process runs in linear time, we have that this reduction procedure from an \(\mathrm{NP}\)-complete language to \(S\) is also polytime (by the time hierarchy principle).<br><br>
+
+Therefore, since we have shown that sparse languages are both \(\mathrm{NP}\) and \(\mathrm{NP}\)-hard given these conditions, we can conclude that if \(\mathrm P = \mathrm{NP}\), then there exists sparse \(\mathrm{NP}\)-complete languages.
+
+</div><br>
+
+
+So, you can see that Mahaney's theorem is quite reasonable: sparse languages contain very few strings. These strings are hardly capable of expressing \(\mathrm{NP}\)-complete languages. So, the existence of a \(\mathrm{NP}\)-complete sparse language would, in turn, imply that \(\mathrm P = \mathrm{NP}\).
+
+
+    </div>
+  </div>
+</div>
+
+
+<style>
+.rectangle {
+  height: 8%;
+  width: 55%;
+  background-color: black;
+  margin-left: auto;
+  margin-right: auto;
+  color: white;
+  display: flex;
+  justify-content:center;
+  align-items: center;
+}
+
+    .centertitleph112 {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+    }
+
+</style>
+</head>
+<div class="footer">
+    <a href="#" class="w3-button w3-white w3-padding-large w3-margin-bottom"><img src="../up_arrow.png", style="width: 25px;height:25px";></i>To the top</a><br>
+    <a href=https://www.instagram.com/emiletimothy/><img src="Pictures/icons/instagram-icon.png", alt="Instagram", style="width:25px;height:25px";></a>
+    <a href=https://www.linkedin.com/in/emiletimothy/><img src="Pictures/icons/linkedin-icon.png", alt="Linkedin", style="width:25px;height:25px";></a>
+    <a href=https://orcid.org/my-orcid?orcid=0000-0003-2893-9469https://orcid.org/my-orcid?orcid=0000-0003-2893-9469/><img src="Pictures/icons/orcid-icon.png", alt="Orcid", style="width:25px;height:25px";></a>
+    <a href=https://scholar.google.com/citations?user=nUXwVU8AAAAJ&hl=en/><img src="Pictures/icons/googlescholar-icon.png", alt="Google Scholar", style="width:25px;height:25px";></a>
+    <a href=https://github.com/emiletimothy/><img src="../Pictures/icons/github-icon.png", alt="Github Icon", style="width:30px;height:29px";></a><br><br>
+<p1 style="color: white"><br><strong>© 2023 by Emile Timothy</strong></p1>
+</div>
+
+</body>
+
+</html>
+
+
+<script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("b1-active");
+    var content = this.nextElementSibling;
+    if (content.style.maxHeight){
+      content.style.maxHeight = null;
+    } else {
+      content.style.maxHeight = content.scrollHeight + "px";
+    }
+  });
+}
+</script>
+
+
+
+<style>
+/* Style the button that is used to open and close the collapsible content */
+.collapsible {
+  background-color: #000000;
+  color: #ffffff;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  outline: 10px white;
+  border: none;
+  text-align: center;
+  outline: none;
+  font-size: 15px;
+}
+
+.collapsible:after {
+  background-color: #000000;
+  content: '+'; /* Unicode character for "plus" sign (+) */
+  font-size: 13px;
+  outline: #000000;
+  color: #ffffff;
+  float: right;
+  margin-left: 5px;
+}
+
+.b1-active:after {
+  color: #ffffff;
+  font-size:10px;
+  content: "-"; /* Unicode character for "minus" sign (-) */
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.b1-active, .collapsible:hover {
+  background-color: #000000;
+}
+
+.content {
+  padding: 0 18px;
+  color: black;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+</style>
