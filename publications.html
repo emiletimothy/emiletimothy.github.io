@@ -45,12 +45,12 @@
 </div>
 
 <div class="navbar">
-  <a href="index.html" class="active">Home</a>
+  <a href="index.html">Home</a>
   <a href="about-me.html">About Me</a>
   <a href="projects.html">Projects</a>
   <a href="blog.html">Blog</a>
   <a href="talks.html">Talks</a>
-  <a href="publications.html">Publications</a> <!-- look at how Omer Reingold phrases this -->
+  <a href="publications.html" class="active">Publications</a> <!-- look at how Omer Reingold phrases this -->
   <a href="outreach.html">Extracurricular</a> <!-- look at how Omer Reingold phrases this -->
   <a href="CV.html">CV</a>
   <a href="contact.html">Contact</a>
@@ -88,13 +88,13 @@
 
 <style>
   .auxiliary:link {
-    color: tomato;
+    color: black;
     background-color: transparent;
     text-decoration: underline;
   }
 
   .auxiliary:visited {
-    color: tomato;
+    color: black;
     background-color: transparent;
     text-decoration: none;
   }
@@ -106,23 +106,115 @@
   }
 
   .auxiliary:active {
-    color: tomato;
+    color: black;
     background-color: transparent;
     text-decoration: underline;
   }
+
+  .p3 {
+    font-weight: bold;
+  }
+
+ .tab { margin-left: 10%; }
+
+  ul {
+  margin-left: 10%;
+  list-style-type: decimal;
+  counter-reset: css-counters 0; /* intializes counter, set -1 for zero-based counters */
+  }
+
+/*  ul li:before {
+  counter-increment: css-counters;
+  content: counters(css-counters, ".") " ";  generates inherited counters from parents 
+  }*/
 </style>
 
 
 
-<!-- <img src="Pictures/headshots/mepic1.png" width="30%" height="45%" class="center rounded-corners"/>
- -->
- <img src="Pictures/headshots/sk3.jpeg" alt="Picture of me at Moore Walk" style="width:34%" class="center rounded-corners">
+<br>
+<h2 class="tab"><u>Publications and Technical Reports:</u></h2>
 
- <p class="p1">Hello there! My name is <b>Emile Timothy</b>. I'm a senior Computer Science major at <a class="auxiliary" href="https://www.caltech.edu/">Caltech</a> doing research at the <a class="auxiliary" href="http://theory.cms.caltech.edu">Theory of Computing Group</a> and the <a class="auxiliary" href="http://rsrg.cms.caltech.edu/">Rigorous Systems Research Group</a>, where I work on problems in computational complexity, discrete math, machine learning, and control theory. I am fortunate to be mentored by Professors <a class="auxiliary" href="http://users.cms.caltech.edu/~umans/">Chris Umans</a>, <a class="auxiliary" href="https://adamwierman.com/">Adam Wierman</a>, and <a class="auxiliary" href="https://work.caltech.edu/">Yaser Abu-Mostafa</a>, and advised by Professor <a class="auxiliary" href="http://users.cms.caltech.edu/~klbouman/">Katie Bouman</a>. A big part of my research is devoted to showing the pseudorandomness of random walks on expander graphs under test functions computed by \(\mathrm{ACC}^\mathrm{0}\) circuits through Fourier-analytic methods. I'm also currently using perturbation analysis to show that a class of algorithms that receive predictions of its time-varying costs and dynamics (model predictive control, stochastic bandits, and regularized online balanced descent) can be used to stabilize the control of dynamical systems with noisy predictions. In my spare time, I enjoy playing the piano, cross-country running, training for duathlons, and giving back to the communities that have nurtured me.</p>
 
-<br><br><br><br><br><br>
+<ul>
+  <li>
+    <strong>Online Adaptive Controller Selection in Time-Varying Systems: No-Regret via Contractive Perturbations</strong><br>
+    Yiheng Lin, James Preiss, <u>Emile Anand</u>, Yingying Li, Yisong Yue, Adam Wierman (Nov 2022)<br>
+    [<a href="https://arxiv.org/abs/2210.12320" class="auxiliary">ArXiV</a>]<br>
+    In review at ICML (International Conference on Machine Learning) 2023<br><br>
+  </li>
 
-<!-- infographic about what is where would be a good idea for here? some things about networks, particularly. -->
+
+  <li>
+    <strong>Identifying Chemicals Through Dimensionality Reduction</strong><br>
+    <u>Emile Anand</u>, Charles Steinhardt, Martin Hansen (Dec 2021)<br>
+    [<a href="https://arxiv.org/abs/2211.14708" class="auxiliary">ArXiV</a>]<br>
+    RSC-CICAG AI in Chemistry 2021<br><br>
+  </li>
+
+
+  <li>
+  <strong><u>Upcoming</u>: Uncertainty Propagation in Dimensionality Reduction Embeddings</strong><br>
+  <u>Emile Anand</u>, Sai Advaith Maddipatla (Feb 2023)<br>
+  [<a href="https://emiletimothy.github.io/Projects/dimensionalityreduction.html" class="auxiliary">progress</a>]<br>
+  ArXiV preprint 2023<br><br>
+  </li>
+
+
+  <li>
+    <strong><u>Upcoming</u>: Pseudorandomness of the Sticky Random Walk</strong><br>
+    <u>Emile Anand</u>, Chris Umans (Jan 2023)<br>
+    [<a href="https://emiletimothy.github.io/Projects/exp.html" class="auxiliary">progress</a>]<br>
+    ArXiV preprint 2023<br><br>
+
+  </li>
+</ul>
+
+
+
+
+<h2 class="tab"><u>Presentations:</u></h2>
+
+
+<ul>
+  <li>
+    <strong>Data-Adaptive Model Predictive Control of Linear Time Varying Systems With Imperfect Predictions</strong><br>
+    <u>Emile Anand</u> (Sep 2022)<br>
+    [<a href="https://emiletimothy.github.io/Projects/exp.html" class="auxiliary">link</a>]<br>
+    Caltech SFP Fall Seminar Day Presentations 2022<br><br>
+  </li>
+
+
+  <li>
+    <strong>Presenting Cohn’s construction of USP’s for \(O(n^{2.37})\) matrix multiplication in the Coppersmith-Winograd Hashing</strong><br>
+    <u>Emile Anand</u> (May 2022)<br>
+    [<a href="https://www.youtube.com/watch?v=078Pg1VUZgc" class="auxiliary">link</a>]<br>
+    Caltech CS 153 (theoretical ideas in computer science) Final Presentation<br><br>
+  </li>
+
+
+  <li>
+    <strong>Solving a Water Crisis: Identifying Chemicals Using Dimensionality Reduction</strong><br>
+    <u>Emile Anand</u> (Sep 2021)<br>
+    [<a href="https://www.youtube.com/watch?v=BOuxHPDvCkw&ab_channel=EmileTimothy" class="auxiliary">link</a>]<br>
+    Caltech SFP Fall Seminar Day Presentations 2021<br>
+    Niels Bohr Institute (Cosmic Dawn Center) Summer Research Talks 2021<br><br>
+  </li>
+
+  <li>
+    <strong>Cryogenic High-Q Mechanical Resonator</strong><br>
+    Srijan Gupta, <u>Emile Anand</u>, Raymond Robie, Aaron Markowitz, Rana Adhikari (Sep 2020)<br>
+    [<a href="https://dcc-backup.ligo.org/public/0170/T2000513/003/Srijan_Emile_Presentation.pdf" class="auxiliary">link</a>]<br>
+    LIGO DCC. LIGO Voyager Research Talks, 2020.
+  </li>
+</ul>
+
+
+
+<br><br><br><br><br>
+
+
+
+
 
 <div class="footer">
     <a href="#" class="w3-button w3-white w3-padding-large w3-margin-bottom"><img src="up_arrow.png", style="width: 25px;height:25px";></i>To the top</a><br>

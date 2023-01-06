@@ -165,6 +165,28 @@ if (devtools.isOpen) {
     html {
       scroll-behavior: smooth;
     }
+
+  .single_indent{
+  text-indent: 50px;
+}
+.double_indent{
+  text-indent: 100px;
+}
+.triple_indent{
+  text-indent: 150px;
+}
+
+.quadruple_indent{
+  text-indent: 200px;
+}
+
+.pentaple_indent{
+  text-indent: 250px;
+}
+
+.hexaple_indent{
+  text-indent: 300px;
+}
     </style>
 
 <div class="background_image">
@@ -172,7 +194,7 @@ if (devtools.isOpen) {
     <div>
         <div style="float: left"><a href="../index.html"><img src="Pictures/icons/logo_background_nobackground.png", alt="Main Page", style="width:100px;height:100px";></a></div>
         <div>
-            <div id="hed1"><br><h2>Projects</h2></div>
+            <div id="hed1"><br><h2>Blog</h2></div>
             <div id="hed2"><a href="../index.html"><div class="x"><img src="Pictures/icons/x-mark.png", style="width:30px;height:30px;float:right";><img src="Pictures/icons/x-mark-2.png", class="img-top", style="width:30px;height:30px;float:right";></a></div></div>
         </div>
     </div>
@@ -182,8 +204,8 @@ if (devtools.isOpen) {
 <div class="navbar">
   <a href="../index.html">Home</a>
   <a href="../about-me.html">About Me</a>
-  <a href="../projects.html" class="active">Projects</a>
-  <a href="../blog.html">Blog</a>
+  <a href="../projects.html">Projects</a>
+  <a href="../blog.html" class="active">Blog</a>
   <a href="../talks.html">Talks</a>
   <a href="../publications.html">Publications</a>
   <a href="../outreach.html">Extracurricular</a>
@@ -211,14 +233,14 @@ if (devtools.isOpen) {
   font-weight: bold;
   margin: 0 auto; /* Center the text container */
   padding: 10px;
-  width: 45%;
+  width: 60%;
   text-align: center; /* Center text */
   position: absolute; /* Position text */
   top: 25%; /* Position text in the middle */
   left: 50%; /* Position text in the middle */
   transform: translate(-50%, -50%); /* Position text in the middle */
-  mix-blend-mode: screen; /* This makes the cutout text possible */
-  font-family: "Oswald", sans-serif;
+/*  mix-blend-mode: screen;  This makes the cutout text possible 
+*/  font-family: "Oswald", sans-serif;
   text-shadow: 3px 3px 3px #ababab;
 }
 
@@ -235,7 +257,7 @@ if (devtools.isOpen) {
 }
 
 .image-container {
-  background-image: url("ProjectPictures/code.png"); /* The image used - important! */
+  background-image: url("blog_pics/prob.avif"); /* The image used - important! */
   background-size: cover;
   position: relative; /* Needed to position the cutout text in the middle of the image */
   height: 70%; /* Some height */
@@ -243,54 +265,34 @@ if (devtools.isOpen) {
 </style>
 
 <div class="image-container">
-  <div class="text">Programming a Klotski Board in OCaml </div>
+  <div class="text">Using Martingales to Derive Robust Concentration Inequalities for Probability Theory</div>
 </div>
 
+$$\DeclareMathOperator*{\EE}{\mathbb{E}}$$
 
 
 <div class="w3-row w3-padding">
-  <div class="w3-col l7 s12" style="float:none !important; margin:auto; position:relative; z-index:10; margin-top:-10%;">
+  <div class="w3-col l9 s12" style="float:none !important; margin:auto; position:relative; z-index:10; margin-top:-10%;">
     <div class="w3-container w3-white w3-margin w3-padding-large">
       <div class="w3">
-<p>In the winter quarter of my sophomore year at Caltech, I took CS 4 (Functional Programming) with Professor <a href="http://users.cms.caltech.edu/~mvanier/">Mike Vanier</a>. For one of our final assignments, we were asked to model a well-known puzzle, the Klotski board, in OCaml, and to then solve the puzzle using the DFS (depth-first search) and BFS (breadth-first search) algorithm. So, in this page, I'd like to describe (to some technical detail) how the program works, as well as the functors and functions that make it possible. Hope you enjoy i!
-</p>
+<p> 
+
+here <br><br>
       </div>
 
 
-<!-- <button class="collapsible"><strong>The Klotski Module</strong></button>
+<button class="collapsible"><strong>Lemma 1: ahh</strong></button>
   <div class="content">
-<br><h5 style="text-align:center;"><u>title1</u></h5>
-
-<p>text here<br><br></p>
-</div><br> -->
-
-<button class="collapsible"><strong>Coming Soon</strong></button>
-  <div class="content">
-<br><h5 style="text-align:center;"><u></u></h5>
-
-<p><br><br></p>
+<br>
+this is all xD.
 </div><br>
 
-
-
-<!-- <button class="collapsible"><strong>The Search Module</strong></button>
-  <div class="content">
-<br><h5 style="text-align:center;"><u>title1</u></h5>
-
-<p>text here<br><br></p>
-</div><br>
-
-<button class="collapsible"><strong>A Digression About Functors</strong></button>
-  <div class="content">
-<br><h5 style="text-align:center;"><u>title1</u></h5>
-
-<p>text here<br><br></p>
-</div><br> -->
-
+here some more.
 
     </div>
   </div>
 </div>
+
 
 <style>
 .rectangle {
