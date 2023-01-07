@@ -257,7 +257,7 @@ if (devtools.isOpen) {
 }
 
 .image-container {
-  background-image: url("blog_pics/prob.avif"); /* The image used - important! */
+  background-image: url("blog_pics/martingale.jpeg"); /* The image used - important! */
   background-size: cover;
   position: relative; /* Needed to position the cutout text in the middle of the image */
   height: 70%; /* Some height */
@@ -277,17 +277,158 @@ $$\DeclareMathOperator*{\EE}{\mathbb{E}}$$
       <div class="w3">
 <p> 
 
-here <br><br>
+
+There are many powerful concentration inequalities known in probability theory. A concentration inequality provides bounds on the probability that some random variable takes a value far from its expectations: some known concentration inequalities include Markov's inequality (which is technically not a concentration inequality, but allows the derivation of several true concentration inequalities), Chebyshev's inequality, Laplace's transform, Chernoff's inequality, and Hoeffding's inequality. These results show that the probability of a large deviation has a profile similar to the probability that a normal random variable exhibits a larg deviation: these methods are hallmarks of computational mathematics and statistics, and have numerous applications across algorithms, theoretical computer science, and analysis.<br><br>
+
+The point of this post is to talk about these concentration inequalities and how we can achieve some spectacular strengthenings using a mathematical structure called a <i>martingale</i>, which I will introduce, talk about, and derive in detail.<br><br>
+
+First, let me talk about the classical concentration inequalities that need to be strengthened. You might ask, what's the point of writing about this if I'm going to find stronger inequalities anyway? Well, we're trying to find specific things about these classical inequalities to criticize - we certainly can't do that unless we have a powerful understanding of these classical inequalities. As Sun Tzu (purportedly) said: "Keep your friends close, but your enemies closer."<br>
       </div>
 
-
-<button class="collapsible"><strong>Lemma 1: ahh</strong></button>
+<button class="collapsible"><strong>Markov's Inequality</strong></button>
   <div class="content">
 <br>
-this is all xD.
+
+We start with the most fundamental probabilistic inequality, Markov's inequality. Markov's inequality states that for a random variable \(X\) and any positive number \(a\), that:
+
+$$\boxed{\Pr(X\geq a) \leq \frac{\mathbb{E}[X]}{a}}$$
+
+To prove this, we can use the law of total expectations:
+
+$$
+\begin{align*}
+  \mathbb{E}[X] &= \EE[X | X\geq a] \Pr[X\geq a] + \EE[X | X< a] \Pr[X< a] \\
+  &\geq a\Pr[X \geq a]
+\end{align*}
+$$
+
+So, we have that \(\EE[X] \geq a\Pr[X\geq a]\). Dividing both sides by \(a\) yields that \(\Pr[X\geq a] \leq \frac{\EE[X]}{a}\).
+
 </div><br>
 
-here some more.
+
+<button class="collapsible"><strong>Chebyshev's Inequality</strong></button>
+  <div class="content">
+<br>
+We can get our first 'true' concentration inequality that bounds the probability that a random variable \(X\) takes a value far from its expectation, using Chebyshev's inequality. Specifically, for a random variable \(X\) with mean \(\mu\) and standard deviation \(\sigma\) (or variance \(\sigma^2\)), and for any real number \(k\), Chebyshev's inequality states that:
+
+$$\boxed{\Pr(|X-\mu|\geq k) \leq \frac{\sigma^2}{k^2}}$$
+
+To prove this, we can use Markov's inequality:
+
+$$\begin{align*}
+  \Pr(|X-\mu|\geq k) &= \Pr((X-\mu)^2\geq k^2) \\
+  &\leq \frac{\EE[(X-\mu)^2]}{k^2} \\
+  &= \frac{\sigma^2}{k^2}
+\end{align*}$$
+
+For the last equality, we used the fact that \(\EE[(X-\mu)^2] = \sigma^2\). So, we have that \(\Pr(|X-\mu|\geq k) \leq \frac{\sigma^2}{k^2}\).
+</div><br>
+
+
+<button class="collapsible"><strong>Laplace's transform</strong></button>
+  <div class="content">
+<br>
+Let \(X\) be a real random variable. Then, the moment-generating-function (MGF) of \(X\) is defined as \(m_X(\theta) = \EE[e^{\theta X}]\), and the cumulant-generating-function (CGF) of \(X\) is defined as \(\xi_X(\theta) = \log m_X(\theta) = \log \EE[e^{\theta X}]\). The MGF and CGF have some pretty cool properties (like, for instance, the MGF of a random variable can uniquely determine its distribution) that I'm not going to get into here. The reason I introduce the MGF and CGF though, is to write some 'Markov Inequality' properties using the MGF and CGF in a concentration-inequalitic form.<br><br>
+
+Specifically, the Laplace transform states that for any \(t\in\mathbb{R}\) that:
+
+$$\boxed{\Pr[X\geq t] \leq \exp(-\sup_{\theta>0} (\theta t - \xi_X(\theta)))}$$
+
+$$\boxed{\Pr[X\leq t] \leq \exp(-\sup_{\theta<0} (\theta t - \xi_X(\theta)))}$$
+
+Let \(\theta>0\). Then, the function \(x\mapsto e^{\theta x}\) is strictly increasing and strictly positive. Therefore, Markov's inequality then tells us that:
+
+$$ \Pr[X\geq t] = \Pr[e^{\theta X} \geq e^{\theta t}] \leq e^{-\theta t}\EE[e^{\theta X}] = e^{-\theta t} m_X(\theta)$$
+
+So, combining the terms on the right-hand-side in the exponent and recognizing the cumulant generating function, we arrive at the bound:
+
+$$ \Pr[X\geq t] \leq \exp(-(\theta t - \xi_X(\theta))) $$
+
+Since the parameter \(\theta>0\) is arbitrary, we can take the infimum of the right-hand side over \(\theta>0\). This leads to the first inequality in the statement. For the second inequality, fix \(\theta<0\) and note that \(x\mapsto e^{\theta x}\) is strictly decreasing and strictly positive. Thus,
+
+$$ \Pr[X\leq t] = \Pr[e^{\theta X} \geq e^{\theta t}]$$
+
+Following the argument in the same fashion yields the remainder of the claim.
+
+</div><br>
+
+
+<button class="collapsible"><strong>Chernoff's inequality</strong></button>
+  <div class="content">
+<br>
+
+For any series of random variables \(X_1, \dots, X_n\) with sample mean \(\overline{X}\) and expectation \(\theta\), Chernoff's inequality states that for any positive \(\epsilon\), that:
+
+$$\boxed{\Pr(\bar{X}>(1+\epsilon)\theta) < \exp(-n\theta((1+\epsilon)\log(1+\epsilon)-\epsilon))}$$
+
+$$\boxed{\Pr(\bar{X}<(1-\epsilon)\theta) < \exp(-\theta n \epsilon^2 / 2)}$$
+
+We'll prove each of these statements below. <br><br>
+
+
+For the first statement, we show that for any \(t\) and positive \(\beta\) with \(X\), \(\Pr[X\geq t]\leq \exp(-\sup_{\beta\geq 0}(-\beta t + \log m_{X}(\beta))\). To prove this, note that
+
+$$\begin{align*}
+    \Pr(X\geq t) &= \Pr(e^{\beta X}\geq e^{\beta t}) \quad \text{($e^{X}$ is a monotonically increasing function)} \\
+    &\leq e^{-\beta t}\EE[e^{\beta X}] \quad\text{Markov's inequality} \\
+    &= \exp(-\beta t + \log \EE[e^{\beta X}])
+\end{align*}
+$$
+
+Since this is true for all \(\beta\), we can write that
+
+$$\begin{align*}
+    \Pr(X> t) &< \exp (\inf_{\beta\geq 0} (-\beta t + \log m_X(\beta))) = \exp(-\sup\limits_{\beta\geq 0}(\beta t - \log m_X(\beta))
+\end{align*}$$
+
+
+We then find an expression for \(\log m_{X_i}(\beta)\) where \(m_{X_i}(\beta)\) is the MGF of \(X_i\) evaluated at \(\beta\). For \(X_i\in[0,1]\), note that the secant line of \(e^{\beta X_i}\) upper bounds \(e^{\beta X_i}\). To find the secant line, note that it has endpoints at (0, 1) and \((1, e^{\beta})\), so the equation of the secant line is \(y - 1 = (e^{\beta}-1)x \Rightarrow y = (e^{\beta}-1)x + 1\). So, \(e^{\beta X_i}\leq (e^{\beta}-1)X_i+1\). Then, by the monotonicity of the expectation, we get that \(\EE[e^{\beta X_i}] \leq \EE[(e^{\beta}-1)X_i+1]=1+\EE[(e^{\beta}-1)X_i]\) (by the linearity of expectations). Thus, we have that \(m_{X_i}(\beta)\) \(\leq 1 + \EE[(e^\beta-1)X_i]\). <br><br>
+
+Then, by the monotonicity of the logarithm, we get that \(\log m_{X_i}(\beta) \leq \log (1+\EE[(e^\beta-1)X_i]) \leq (e^\beta-1)\EE[X_i]\) since \(\log(1+x)\leq x\) for positive \(x\) and \((e^\beta-1)\EE[X_i] \geq 0\). Therefore, by independence, \(\log\EE[e^{\beta X}]=\log\EE[\prod_{i=1}^n e^{\beta X_i}] = \log \prod_{i=1}^n \)  \(\EE[e^{\theta X_i}]=\sum_{i=1}^n \log \EE[e^{\theta X_i}] \leq (e^\beta-1)\EE[X]\). So, we have that \(\Pr(X\geq t) \leq \exp(-\sup_{\beta\geq 0}(\beta t - (e^\beta-1)\EE[X]))\). \\
+
+Then, our goal is to bound \(\Pr(\bar{X}>(1+\epsilon)\theta)\). Since \(n\theta=\EE[X]\), note that if we set \(t = (1+\epsilon)n\theta\), we get:
+
+$$\begin{align*}
+    \Pr(\bar{X}>(1+\epsilon)\theta) &= \Pr\bigg(\frac{1}{n}\sum_{i=1}^n X_i > (1+\epsilon) \theta\bigg) = \Pr\bigg(\sum_{i=1}^n X_i > (1+\epsilon)n\theta\bigg) \\
+    &< \exp(-\sup\limits_{\beta\geq 0}(\beta(1+\epsilon)n\theta - (e^\beta-1)n\theta)) = \exp (\inf\limits_{\beta\geq 0}(-\beta(1+\epsilon)n\theta + (e^\beta-1)n\theta))
+\end{align*}$$
+
+The infimum of the expression occurs at \(\frac{d}{d\beta}(-\beta(1+\epsilon)n\theta + (e^\beta-1)n\theta) = 0 \Rightarrow -(1+\epsilon)n\theta+e^\beta n\theta = 0 \Rightarrow e^\beta = (1+\epsilon) \Rightarrow \beta = \log(1+\epsilon)\). Thus, if we set \(\beta=\log(1+\epsilon)\), we minimize the RHS of the above expression. So,
+
+$$\begin{align*}
+    \Pr(\bar{X}>(1+\epsilon)\theta) &< \exp (\log(1+\epsilon)(1+\epsilon)n\theta - (e^{\log(1+\epsilon)}-1)n\theta) = \exp(n\theta((1+\epsilon)\log(1+\epsilon) - \epsilon))
+\end{align*}$$
+
+Thus, we have shown that \(\boxed{\Pr(\bar{X}>(1+\epsilon)\theta) < \exp(-n\theta((1+\epsilon)\log(1+\epsilon)-\epsilon))}\)<br><br><br>
+
+
+Then, to tackle the second (lower) Chernoff inequality, we do the following:
+
+Similarly, note that for negative $\beta$, the monotonicity of \(e^X\) gives us that \(\Pr(\bar{X}<(1-\epsilon)\theta) = \Pr(e^{\beta X} > e^{n\beta(1-\epsilon)\theta})\). By Markov's inequality, this is atmost \(\exp(-n\theta\beta(1-\epsilon))\EE[e^{\beta X}]\). Using our previous formula for \(\EE[e^{\beta X}]=(e^\beta-1)\theta\), this evaluates to \(\Pr(X<(1-\epsilon)n\theta)< \exp(-n\theta\beta(1-\epsilon)+(e^\beta-1)\theta)\). Since this holds true for any \(\beta\), we can write that:
+$$
+\begin{align*}
+    \Pr(X<(1-\epsilon)n\theta) < \exp(-\inf_{\beta\leq 0} (-\beta(1+\epsilon)n\theta+(e^\beta-1)n\theta))
+\end{align*}
+$$
+By finding the derivative, the above expression is similarly minimized at \(\beta=\log(1-\epsilon)\).  This then yields
+$$
+\begin{align*}
+    \Pr(X<(1-\epsilon)n\theta) < \exp(-n\theta(1-\epsilon)\log(1-\epsilon)-\epsilon\theta n) &= \exp(-n\theta((1-\epsilon)\log(1-\epsilon) + \epsilon)
+\end{align*}
+$$
+
+Thus, the onus of the proof is to show that \(-n\theta((1-\epsilon)\log(1-\epsilon)+\epsilon)\leq -n\theta\epsilon^2/2\) which is the same thing as showing that  \(\forall\epsilon\in[0,1)\),  \(-(1-\epsilon)\log(1-\epsilon)-\epsilon\leq -\epsilon^2/2\). By L'Höpital's rule, the above clearly holds as \(\epsilon \to 0\). For other \(\epsilon \in [0,1)\), we consider \(t=1-\epsilon\). For this, \(\epsilon-\frac{\epsilon^2}{2} = \frac{1-t^2}{2}\). Then, it reduces to showing that \(-t\log t \leq \frac{1-t^2}{2}\) for \(t\in[0,1]\) which is a known truth. Thus, we have that:
+
+$$\begin{align*}
+    \Pr(\bar{X}<(1-\epsilon)\theta) < \exp(-n\theta((1-\epsilon)\log(1-\epsilon)+\epsilon)) \leq \exp(-\theta n\epsilon^2/2)
+\end{align*}
+$$
+
+Thus, we conclude that \(\boxed{\Pr(\bar{X}<(1-\epsilon)\theta) < \exp(-\theta n\epsilon^2/2)}\)
+
+</div><br>
+
 
     </div>
   </div>
