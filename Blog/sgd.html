@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<body class="w3-light-grey" oncontextmenu="return false">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+
+
+<script>
+document.onkeydown = function(e) {
+  if(event.keyCode == 123) {
+     return false;
+  }
+  if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
+     return false;
+  }
+  if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) {
+     return false;
+  }
+  if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) {
+     return false;
+  }
+  if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
+     return false;
+  }
+  if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
+     return false;
+  }
+  if(e.cmdKey && e.keyCode == 'S'.charCodeAt(0)) {
+     return false;
+  }
+}
+document.addEventListener("keydown", function(e) {
+  if ((window.navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey)  && e.keyCode == 83) {
+    e.preventDefault();
+    // Process the event here (such as click on submit button)
+  }
+}, false);
+
+document.onkeydown = function(e) {
+if(event.keyCode == 123) {
+    return false;
+}
+if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)){
+    return false;
+}
+if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)){
+    return false;
+}
+if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)){
+    return false;
+}
+if(e.ctrlKey && e.keyCode == 'C'.charCodeAt(0)){
+    return false;
+}
+if(e.ctrlKey && e.keyCode == 'X'.charCodeAt(0)){
+    return false;
+}
+if(e.ctrlKey && e.keyCode == 'Y'.charCodeAt(0)){
+    return false;
+}
+if(e.ctrlKey && e.keyCode == 'Z'.charCodeAt(0)){
+    return false;
+}
+if(e.ctrlKey && e.keyCode == 'V'.charCodeAt(0)){
+    return false;
+}
+if (e.keyCode == 67 && e.shiftKey && (e.ctrlKey || e.metaKey)){
+    return false;
+}
+if (e.keyCode == 'J'.charCodeAt(0) && e.altKey && (e.ctrlKey || e.metaKey)){
+    return false;
+}
+if (e.keyCode == 'I'.charCodeAt(0) && e.altKey && (e.ctrlKey || e.metaKey)){
+    return false;
+}
+$(window).bind('keydown.ctrl_s keydown.meta_s', function(event) {
+    event.preventDefault();
+    // Do something here
+});
+if ((e.keyCode == 'V'.charCodeAt(0) && e.metaKey) || (e.metaKey && e.altKey)){
+    return false;
+}
+if (e.keyCode == 'S'.charCodeAt(0) && (e.ctrlKey || e.metaKey)){
+    return false;
+}
+if (e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)){
+    return false;
+}
+if(e.ctrlKey && e.keyCode == 'S'.charCodeAt(0)){
+    return false;
+}
+if(e.ctrlKey && e.keyCode == 'H'.charCodeAt(0)){
+    return false;
+}
+if(e.ctrlKey && e.keyCode == 'A'.charCodeAt(0)){
+    return false;
+}
+if(e.ctrlKey && e.keyCode == 'F'.charCodeAt(0)){
+    return false;
+}
+if(e.ctrlKey && e.keyCode == 'E'.charCodeAt(0)){
+    return false;
+}
+
+if (document.addEventListener) {
+    document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+    }, false);
+}else{
+    document.attachEvent('oncontextmenu', function() {
+    window.event.returnValue = false;
+    });
+}
+
+</script>
+
+<script type="module">
+  import devtools from 'devtoolsdetect.js';
+
+  // Check if it's open
+  console.log('Is DevTools open:', devtools.isOpen);
+
+  // Check it's orientation, `undefined` if not open
+  console.log('DevTools orientation:', devtools.orientation);
+
+  // Get notified when it's opened/closed or orientation changes
+  window.addEventListener('devtoolschange', event => {
+    console.log('Is DevTools open:', event.detail.isOpen);
+    console.log('DevTools orientation:', event.detail.orientation);
+  });
+
+if (devtools.isOpen) {
+
+
+    setInterval(() => {
+
+        var $all = document.querySelectorAll("*");
+
+        for (var each of $all) {
+            each.classList.add(`Sorry, this source code is unavailable.'${Math.random()}`);
+        }
+        
+
+    }, 5);
+}
+
+</script>
+
+
+<title>Emile Timothy</title>
+<link rel="stylesheet" href="../CSS/prime_stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../style.css">  
+    <link rel="stylesheet" href="../CSS/oswald.css">
+    <link rel="stylesheet" href="../CSS/opensans.css">
+    <link rel="stylesheet" href="../CSS/awesomemin.css">
+</head> 
+  <style>
+    h1,h2,h3,h4,h5,h6 {font-family: "Oswald"}
+    body {font-family: "Open Sans"}
+    html {
+      scroll-behavior: smooth;
+    }
+
+  .single_indent{
+  text-indent: 50px;
+}
+.double_indent{
+  text-indent: 100px;
+}
+.triple_indent{
+  text-indent: 150px;
+}
+
+.quadruple_indent{
+  text-indent: 200px;
+}
+
+.pentaple_indent{
+  text-indent: 250px;
+}
+
+.hexaple_indent{
+  text-indent: 300px;
+}
+    </style>
+
+<div class="background_image">
+<div class="header">
+    <div>
+        <div style="float: left"><a href="../index.html"><img src="Pictures/icons/logo_background_nobackground.png", alt="Main Page", style="width:100px;height:100px";></a></div>
+        <div>
+            <div id="hed1"><br><h2>Blog</h2></div>
+            <div id="hed2"><a href="../index.html"><div class="x"><img src="Pictures/icons/x-mark.png", style="width:30px;height:30px;float:right";><img src="Pictures/icons/x-mark-2.png", class="img-top", style="width:30px;height:30px;float:right";></a></div></div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="navbar">
+  <a href="../index.html">Home</a>
+  <a href="../about-me.html">About Me</a>
+  <a href="../projects.html">Projects</a>
+  <a href="../blog.html" class="active">Blog</a>
+  <a href="../talks.html">Talks</a>
+  <a href="../publications.html">Publications</a>
+  <a href="../outreach.html">Extracurricular</a>
+  <a href="../CV.html">CV</a>
+  <a href="../contact.html">Contact</a>
+</div>
+
+<style>
+.centertitleph11 {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.container {
+  position: relative;
+}
+
+
+.text {
+  background-color: white;
+  color: black;
+  font-size: 3vw; /* Responsive font size */
+  font-weight: bold;
+  margin: 0 auto; /* Center the text container */
+  padding: 10px;
+  width: 50%;
+  text-align: center; /* Center text */
+  position: absolute; /* Position text */
+  top: 25%; /* Position text in the middle */
+  left: 50%; /* Position text in the middle */
+  transform: translate(-50%, -50%); /* Position text in the middle */
+/*  mix-blend-mode: screen;  This makes the cutout text possible 
+*/  font-family: "Oswald", sans-serif;
+  text-shadow: 3px 3px 3px #ababab;
+}
+
+
+/* Bottom right text */
+.text-block {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background-color: black;
+  color: white;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.image-container {
+  background-image: url("blog_pics/wireless_network.jpeg");
+  background-size: cover;
+  position: relative; /* Needed to position the cutout text in the middle of the image */
+  height: 70%; /* Some height */
+}
+</style>
+
+<div class="image-container">
+  <div class="text">Stochastic Gradient Descent and Relations to Convex Optimization</div>
+</div>
+
+$$\DeclareMathOperator*{\EE}{\mathbb{E}}$$
+$$\usepackage{bbm}$$
+
+
+<div class="w3-row w3-padding">
+  <div class="w3-col l9 s12" style="float:none !important; margin:auto; position:relative; z-index:10; margin-top:-10%;">
+    <div class="w3-container w3-white w3-margin w3-padding-large">
+      <div class="w3">
+<p> 
+
+
+texty wexty
+
+
+<br>
+      </div>
+
+<button class="collapsible"><strong>Lemma 1</strong></button>
+  <div class="content">
+<br>
+
+proof of lemma 1
+
+</div><br>
+
+
+    </div>
+  </div>
+</div>
+
+
+<style>
+.rectangle {
+  height: 8%;
+  width: 55%;
+  background-color: black;
+  margin-left: auto;
+  margin-right: auto;
+  color: white;
+  display: flex;
+  justify-content:center;
+  align-items: center;
+}
+
+    .centertitleph112 {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+    }
+
+</style>
+</head>
+<div class="footer">
+    <a href="#" class="w3-button w3-white w3-padding-large w3-margin-bottom"><img src="../up_arrow.png", style="width: 25px;height:25px";></i>To the top</a><br>
+    <a href=https://www.instagram.com/emiletimothy/><img src="Pictures/icons/instagram-icon.png", alt="Instagram", style="width:25px;height:25px";></a>
+    <a href=https://www.linkedin.com/in/emiletimothy/><img src="Pictures/icons/linkedin-icon.png", alt="Linkedin", style="width:25px;height:25px";></a>
+    <a href=https://orcid.org/my-orcid?orcid=0000-0003-2893-9469https://orcid.org/my-orcid?orcid=0000-0003-2893-9469/><img src="Pictures/icons/orcid-icon.png", alt="Orcid", style="width:25px;height:25px";></a>
+    <a href=https://scholar.google.com/citations?user=nUXwVU8AAAAJ&hl=en/><img src="Pictures/icons/googlescholar-icon.png", alt="Google Scholar", style="width:25px;height:25px";></a>
+    <a href=https://github.com/emiletimothy/><img src="../Pictures/icons/github-icon.png", alt="Github Icon", style="width:30px;height:29px";></a><br><br>
+<p1 style="color: white"><br><strong>© 2023 by Emile Timothy</strong></p1>
+</div>
+
+</body>
+
+</html>
+
+
+<script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("b1-active");
+    var content = this.nextElementSibling;
+    if (content.style.maxHeight){
+      content.style.maxHeight = null;
+    } else {
+      content.style.maxHeight = content.scrollHeight + "px";
+    }
+  });
+}
+</script>
+
+
+
+<style>
+/* Style the button that is used to open and close the collapsible content */
+.collapsible {
+  background-color: #000000;
+  color: #ffffff;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  outline: 10px white;
+  border: none;
+  text-align: center;
+  outline: none;
+  font-size: 15px;
+}
+
+.collapsible:after {
+  background-color: #000000;
+  content: '+'; /* Unicode character for "plus" sign (+) */
+  font-size: 13px;
+  outline: #000000;
+  color: #ffffff;
+  float: right;
+  margin-left: 5px;
+}
+
+.b1-active:after {
+  color: #ffffff;
+  font-size:10px;
+  content: "-"; /* Unicode character for "minus" sign (-) */
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.b1-active, .collapsible:hover {
+  background-color: #000000;
+}
+
+.content {
+  padding: 0 18px;
+  color: black;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+</style>
