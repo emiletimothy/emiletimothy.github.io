@@ -265,10 +265,11 @@ if (devtools.isOpen) {
 </style>
 
 <div class="image-container">
-  <div class="text">Using Martingales to Derive Robust Concentration Inequalities for Probability Theory</div>
+  <div class="text">Using Martingales to Derive Robust Concentration Inequalities in Probability Theory</div>
 </div>
 
 $$\DeclareMathOperator*{\EE}{\mathbb{E}}$$
+$$\usepackage{bbm}$$
 
 
 <div class="w3-row w3-padding">
@@ -280,16 +281,16 @@ $$\DeclareMathOperator*{\EE}{\mathbb{E}}$$
 
 There are many powerful concentration inequalities known in probability theory. A concentration inequality provides bounds on the probability that some random variable takes a value far from its expectations: some known concentration inequalities include Markov's inequality (which is technically not a concentration inequality, but allows the derivation of several true concentration inequalities), Chebyshev's inequality, Laplace's transform, Chernoff's inequality, and Hoeffding's inequality. These results show that the probability of a large deviation has a profile similar to the probability that a normal random variable exhibits a larg deviation: these methods are hallmarks of computational mathematics and statistics, and have numerous applications across algorithms, theoretical computer science, and analysis.<br><br>
 
-The point of this post is to talk about these concentration inequalities and how we can achieve some spectacular strengthenings using a mathematical structure called a <i>martingale</i>, which I will introduce, talk about, and derive in detail.<br><br>
+The point of this post is to talk about these concentration inequalities and how we can achieve some spectacular strengthenings for an interesting mathematical structure called a <i>martingale</i>, which I will introduce, talk about, and derive in detail.<br><br>
 
-First, let me talk about the classical concentration inequalities that need to be strengthened. You might ask, what's the point of writing about this if I'm going to find stronger inequalities anyway? Well, we're trying to find specific things about these classical inequalities to criticize - we certainly can't do that unless we have a powerful understanding of these classical inequalities. As Sun Tzu (purportedly) said: "Keep your friends close, but your enemies closer."<br>
+First, let me talk about the classical concentration inequalities that need to be strengthened. You might ask, what's the point of writing about this if I'm going to find stronger inequalities anyway? Well, we're trying to find specific things about these classical inequalities to criticize - we certainly can't do that unless we have a powerful understanding of these classical inequalities. Recall the wise words of Sun Tzu: "Keep your friends close, but your enemies closer."<br>
       </div>
 
 <button class="collapsible"><strong>Markov's Inequality</strong></button>
   <div class="content">
 <br>
 
-We start with the most fundamental probabilistic inequality, Markov's inequality. Markov's inequality states that for a random variable \(X\) and any positive number \(a\), that:
+We start with the most fundamental probabilistic inequality, Markov's inequality. Markov's inequality states that for a positive random variable \(X\) and any positive number \(a\), that:
 
 $$\boxed{\Pr(X\geq a) \leq \frac{\mathbb{E}[X]}{a}}$$
 
@@ -476,7 +477,225 @@ $$\Pr(|S_n - \EE[S_n]| \geq t) \leq 2\exp\left(-\frac{2t^2}{\sum_{i=1}^n (b_i - 
 
 </div><br>
 
+Now that I've described these concentration inequalities, I'm going to start picking flaws about them in the martingale setting. But firstly, what is the martingale setting? What is a martingale? Informally, a martingale is a special kind of stochastic process with the property that martingale randmo variables are linked to each other by means of assumptions about their conditional expectations. At each time, the conditional expectation of the next random variable in the sequence is related to the current value of the sequence. Among other things, a martingale can model sequences of repeated games where the player's strategy may depend on the past (a common example is gambling). Other, more mathematical, applications of martingales include predictions, filtering, adaptive learning, decision making, and randomized algorithms.<br><br>
 
+To formally describe a martingale, we need to talk about filtrations, adapted processes, and \(\sigma\)-algebras:<br><br>
+
+<u>Definition 1 (\(\sigma\)-algebras)</u>: Given a set \(\Omega\), the sigma algebra (or \(\sigma\)-algebra) of \(\Omega\) is a collection of subsets of \(\Omega\) that are closed under complement, countable unions, and include the empty set \( \emptyset \). \(\sigma\)-algebras contain knowledge about the world - in a particular time, we can collect all the events that have been determined so far. Therefore, a small \(\sigma\)-algebra contains less information than a larger \(\sigma\)-algebra that contains it. This is the intuition that allows us to develop the formalization necessary to understand martingales.<br><br>
+
+<u>Definition 2 (filtrations)</u>: Fix a probability space \((\Omega, \mathcal{F}, \mathbb{P})\). A discrete time filtration is an increasing sequence of \(\sigma\)-algebras on \(\Omega\):
+
+$$ \mathcal{F}_0 \subseteq \mathcal{F}_1 \subseteq \mathcal{F}_2 \subseteq \dots \subseteq \mathcal{F}_\infty \subseteq \mathcal{F}$$
+
+The fact that the \(\sigma\)-algebras are increasing reflects the accrual of knowledge over time (assuming that memory is never lost in this system). These filtrations can then be used to model random processes that have a fixed horizon. More generally, filtrations can arise from a sequence of events or from a sequence of random variables.<br><br>
+
+<u>Definition 3 (filtrations from a sequence of events)</u>: Given any sequence \(E_i:i\in\mathbb{N}\) of events belonging to the master \(\sigma\)-algebra \(\mathcal{F}\), we can define the \(\sigma\)-algebras for all \(k\in\mathbb{N}\):
+
+$$ \mathcal{F}_k := \sigma(E_1, \dots, E_k)$$
+
+Here, \(\mathcal{F}_0:=\{\emptyset, \Omega\}\) and \(\mathcal{F}_\infty := \sigma(\cup_{k=1}^\infty \mathcal{F}_k)\). Then, \((\mathcal{F}_k: k\in\mathbb{Z}_+)\) is a filtration. This filtration can be used to model a sequence of simple and not necessarily independent experiments where \(E_i\) is the event that the \(i\)th experiment succeeds. At time \(k\), we know the outcomes of the first \(k\) experiments.<br><br>
+
+<u>Definition 3 (filtrations from random variables)</u>: Given any sequence \(Z_i:i\in\mathbb{Z}\) of real random variables on \(\Omega\) that are \(\mathcal{F}\)-measurable, define the \(\sigma\) algebras for \(k\in\mathbb{Z}_+\):
+
+$$ \mathcal{F}_k := \sigma(Z_0, \dots, Z_k)$$
+
+Here, \(\mathcal{F}_\infty := \sigma(\cup_{k=1}^\infty \mathcal{F}_k)\). Then, \((\mathcal{F}_k: k\in\mathbb{Z}_+)\) is a filtration. This filtration models a sequence \(Z_0, Z_1, Z_2, \dots\) of numerical observations (not necessarily independent), although there is no need for the measurements to be alike or independent from each other. At time \(k\), we know the outcomes of the first \(k\) experiments.<br><br>
+
+
+<u>Definition 4 (adapted process)</u>: Fix a probability space \(\Omega, \mathcal{F},\mathbb{P}\) and a filtration \((\mathcal{F}_k: k\in\mathbb{Z}_+)\). We say that a sequence \((X_k: k\in\mathbb{Z}_+)\) of real random variables is adapted to the filtration if \(X_k\) is \(\mathcal{F}_k\)-measurable for each index \(k\in\mathbb{Z}_+\). In other words, the \(k\)th random variable \(X_k\) in the adapted sequence is completely determined by the information we have available at time \(k\). An adapted process provides a very flexible model for describing random outcomes that evolve with time in a causal fashion (the future does not influence the past).<br><br>
+
+Now, we are truly ready to define a Martingale:<br><br>
+
+
+<u>Definition 5 (martingales)</u>: Martingales are adapted processes that are based on a single assumption about how the random variables evolve. Although the state of an adapted process is determined at time \(k\), the future values of the process remain random. A martingale is a random process that is indifferent about the future. Specifically, fix a probability sequence (\(\Omega, \mathcal{F}, \mathbb{P}\)) a filtration \((\mathcal{F}_k: k\in\mathbb{Z}_+)\). Then, a sequence \(X_k:k\in\mathbb{Z}\) of real random variables is called a (discrete-time) martingale with respect to the filtration when it satisfies three properties: <strong>adaptivity</strong>, <strong>integrability</strong>, and <strong>status-quo</strong>.<br><br>
+
+Adaptivity is when \((X_k)\) is adapted to the filtration for each \(k\in\mathbb{Z}_+\). Integrability is when \(\mathbb{E}[|X_k|] < \infty\) for each \(k\in\mathbb{Z}_+\). Status-Quo is when \(\EE[X_{k+1}|\mathcal{F}_k] = X_k\) almost surely for each \(k\in\mathbb{Z}_+\). In particular, for a martingale sequence, \(\EE[X_n] = \EE[X_0]\) for any \(n\in\mathbb{Z}_+\).<br><br>
+
+So, now that we've defined this special martingale setting, how does it tie in to concentration inequalities? I promised to find flaws about these concentration inequalities for martingales. So, here we are: the primary criticism about the classical concentration inequalities are that they are <strong>too</strong> weak to describe the behavior of martingales. Martingales have a variety of applications, from finance to theoretical computer science to gambling. Usually, stakeholders in these applications like to see strong provable guarantees - unfortunately, the concentration inequalities for martingales are simply too lose to describe their sure trajectories. <br><br>
+
+A remarkable feature of the martingale setting is that we can establish stronger results than we were able to achieve for independent sums. In particular, we can show that the entire trajectory of the martingale (up to a fixed time) is unlikely to deviate from its expectation. As a consequence, we can even enhance our results for independent sums.
+This type of result is called a maximal inequality, because it controls the maximum value of the martingale over a portion of its trajectory. <br><br>
+
+To cover more scope of the possibilities with this kind of math, I'm going to go ahead and further define two (variant) classes of martingales: submartingales and supermartingales.<br><br>
+
+<u>Definition 6 (submartingales)</u>: We say that the sequence \((X_k: k\in\mathbb{Z}_+)\) is a submartingale if it satisfies adaptivity and integrability. Additionally, it must also satisfy the property of increasing expectations: \(\EE[[X_{k+1} | \mathcal{F}_k] geq X_k\) almost surely for each \(k\in\mathbb{Z}_+\).<br><br>
+
+<u>Definition 7 (supermartingales)</u>: We say that the sequence \((X_k: k\in\mathbb{Z}_+)\) is a supermartingale if it satisfies adaptivity and integrability. Additionally, it must also satisfy the property of decreasing expectations: \(\EE[[X_{k+1} | \mathcal{F}_k] \leq X_k\) almost surely for each \(k\in\mathbb{Z}_+\).<br><br>
+
+The decreasing expectation property in supermartingales reflects a pessimistic view of the world. On average, tomorrow is worse than today. A supermartingale can be used to model a player’s total winnings in a game that is unfair to him (e.g., casino games from the player’s point of view). On the other hand, the increasing expectation in submartingales reflects an optimistic view of the world. On average, tomorrow is better than today. A submartingale can be used to model a player’s total winnings in a game that is unfair to her opponent (e.g., casino games from the casino’s point of view).<br><br>
+
+
+<button class="collapsible"><strong>Doob's Maximal Inequality versus Markov's Inequality</strong></button>
+  <div class="content">
+<br>
+
+Consider a positive submartingale \((X_k: k\in\mathbb{Z}_+)\). For each index \(N\in\mathbb{Z}_+\), 
+
+$$ \boxed{\mathbb{P}\left\{\sup_{0\leq k\leq N}X_k>t\right\}\leq \frac{\EE[X_n]}{t}}$$
+
+Before I prove it, let's quickly compare it to Markov's Inequality for \(\sup_{k\leq N}X_k\). Markov's Inequality says that
+
+$$ \mathbb{P}\left\{\sup_{k\leq N}X_k>t\right\}\leq \frac{\EE[\sup_{k\leq N}X_k]}{t}$$
+
+Now, the left-hand side of the Markov bound matches the left-hand side of Doob's inequality, but the right-hand side involves the expected supremum which is not quite strong and harder to compute. For submartingale processes, Doob’s inequality asserts that we can do better. Since the random variables in a submartingale are linked, we can control the entire trajectory (up to time \(N\)) by means of the expectation \(\EE[X_N]\) of the submartingale at the end of the time horizon.<br><br>
+
+To prove Doob's inequality, we define the following extended random variable
+
+$$ \tau := \inf\{k\leq N: X_k>t\} \in \mathbb{Z}_+ $$
+
+In other words, \(\tau\) is the first index \(k\) where the submartingale \(X_k\) surpasses the level \(t\). If this event does not occur by the fixed time \(N\), then we set \(\tau=\infty\). Then, consider the event that the submartingale surmounts the level \(t\) before time \(N\). That is,
+
+$$E := \{\sup_{k\leq N} X_k > t\}$$
+
+So, our task is to compute the probability of the excursion event \(E\). So,
+
+$$\EE[X_N] \geq \EE[X_{N\wedge \tau}] \geq \EE[X_{N\wedge \tau}\cdot {1}_E]$$
+
+This can be further bounded to
+
+$$ \EE[X_{N\wedge \tau}\cdot {1}_E] \geq \EE[X_{\tau}\cdot {1}_E] \geq \EE[\tau \cdot {1}_E]$$
+
+Since \(t\) is a constant, we can pull it out of the expectation to get \(\EE[1_E] = \Pr[E]\). So, we have that:
+
+$$\mathbb{P}\left\{\sup_{0\leq k\leq N}X_k>t\right\}\leq \frac{\EE[X_n]}{t}$$
+
+</div><br>
+
+
+
+<button class="collapsible"><strong>Convex Tranformation of Martingales using Jensen's Inequality</strong></button>
+  <div class="content">
+<br>
+
+For this section, we need to introduce Jensen's inequality for convex functions.<br><br>
+
+<u>Definition 8 (convex functions):</u> The function \(f:X\to\mathbb{R}\), where \(X\) is a convex subset of a real vector space, is called convex if and only if, for all \(0\leq t\leq 1\) and \(x_1, x_2 \in X\): 
+
+$$ f(tx_1 + (1-t)x_2) \leq tf(x_1) + (1-t)f(x_2)$$
+
+<u>Definition 9 (Jensen's inequality):</u> if \(X\) is a random variable and \(\varphi\) is a convex function, then
+$$ \varphi(\EE[X]) \leq \EE[\varphi(X)]$$ 
+
+Then, using Jensen's inequality on martingales, we get that for any index \(k\in\mathbb{Z}_+\) that:
+
+$$ \boxed{\EE[\varphi(X_{k+1})|\mathcal{F}_k] \geq \varphi(\EE[X_{k+1}|\mathcal{F}_k]) = \varphi(X_k)}$$
+
+
+</div><br>
+
+<button class="collapsible"><strong>Kolmogorov's Maximal Inequality versus Chebyshev's Inequality</strong></button>
+  <div class="content">
+<br>
+
+Recall Chebyshev's inequality which stated that
+
+$$\Pr(|X-\mu|\geq k) \leq \frac{\sigma^2}{k^2}$$
+
+Similarly, applying Doob's inequality gives a maximal inequality for squared deviations. <br><br>
+
+Consider a martingale sequence \((X_k: k\in\mathbb{Z}_+)\) in \(L_2\). So, for each index \(N\in \mathbb{Z}_+\), the Kolmogorov maximal inequality yields that for all \(t>0\):
+
+$$\boxed{\mathbb{P}\left\{\max_{k\leq N}(X_k - \EE[X_k])^2 > t\right\} \leq \frac{\text{Var}[X_N]}{t^2}}$$
+
+</div><br>
+
+
+<button class="collapsible"><strong>The Exponential Maximal Inequality versus the Laplace Transform Method</strong></button>
+  <div class="content">
+<br>
+
+Recall the Laplace transform which states that for any \(t\in\mathbb{R}\):
+
+$$\Pr[X\geq t] \leq \exp(-\sup_{\theta>0} (\theta t - \xi_X(\theta)))$$
+
+$$\Pr[X\leq t] \leq \exp(-\sup_{\theta<0} (\theta t - \xi_X(\theta)))$$
+
+Let \((X_k : k\in\mathbb{Z}_+)\) in \(L_\infty\) be a bounded submartingale sequence. For each index \(N\in\mathbb{Z}_+\), the exponential maximal inequality states that:
+
+$$ \boxed{\mathbb{P}\left\{\max_{k\leq N} X_k > t\right\} \leq \exp\left(−\sup_{\theta>0}(\theta t − \xi_{X_N}(\theta))\right)}$$
+
+As usual, \(\xi_X(\theta):=\log \EE[e^{\theta X}]\) denotes the cumulant generating function.
+
+The proof for this relies on Doob's inequality. Let \(\theta>0\). Then, since the exponential function mapping \(x\mapsto e^{\theta x}\) is convex and strictly increasing, we have that:
+
+$$ \mathbb{P}\left\{\max_{k\leq N} X_k > t\right\} = \mathbb{P}\left\{\max_{k\leq N} e^{\theta X_k} > e^{\theta t}\right\} \leq e^{-\theta t}\EE[e^{\theta X_N}]$$
+
+Then, converting this to CFG form, we get the exponential maximal inequality, that:
+
+$$\mathbb{P}\left\{\max_{k\leq N} X_k > t\right\} \leq \exp\left(−\sup_{\theta>0}(\theta t − \xi_{X_N}(\theta))\right)$$
+
+</div><br>
+
+<button class="collapsible"><strong>The Hoeffding-Azuma Maximal Inequality versus the Hoeffding Inequality</strong></button>
+  <div class="content">
+<br>
+
+As a particular example of the exponential maximal inequality, we now derive a very useful concentration inequality for submartingales with bounded increments.
+
+Let \(X_1, \dots, X_n\) be independent random variables such that \(a_i\leq X_i\leq b_i\) almost surely. Consider the sum of these random variables: \(S_n = X_1 + \dots + X_n\). Recall then, that Hoeffding's theorem states that, for all \(t>0\),
+
+$$\Pr(S_n - \EE[S_n] \geq t) \leq \exp\left(-\frac{2t^2}{\sum_{i=1}^n (b_i - a_i)^2}\right)$$
+
+$$\Pr(|S_n - \EE[S_n]| \geq t) \leq 2\exp\left(-\frac{2t^2}{\sum_{i=1}^n (b_i - a_i)^2}\right)$$
+
+Now, instead consider a martingale sequence \((X_k: k\in\mathbb{Z}_+)\) whose difference sequence is bounded in the sense that for \(k\in\mathbb{N}\), we have that:
+
+$$ |\Delta_k| := |X_k - X_{k-1}| \leq a_k$$
+
+Then, for all \(t>0\), the Hoeffding–Azuma maximal inequality states that:
+
+$$ \boxed{\mathbb{P}\left\{\max_{k\leq N} |X_k - X_0| > t\right\} \leq 2e^{-t^2/2v_N} }$$
+
+Here, \(v_N = \sum_{k=1}^N a_k^2\).<br><br>
+
+To prove the Hoeffding–Azuma maximal inequality, we first need to prove the Hoeffding–Azuma lemma, which states that
+
+$$ \xi_{X_N - X_0}(\theta) \leq \theta^2 v_N / 2$$
+
+We need to express \(X_N - X_0\) as a telescoping sum of the difference sequence:
+
+$$ m(\theta) := \EE[e^{\theta (X_N - X_0)}] = \EE[e^{\theta \Delta_{N}} e^{\theta \Delta_{N-1}}\cdot e^{\theta \Delta_1}]$$
+
+To bound the expectation, we repeatedly condition using the tower rule:
+
+$$
+\begin{align*}
+m(\theta) &= \EE[\EE[e^{\theta \Delta_N} | \mathcal{F}_{N-1}]\cdots e^{\theta \Delta_{N-1}}\cdots e^{\theta \Delta_1}] \\
+&\leq e^{\theta^2 a^2_N/2} \cdot \EE[e^{\theta \Delta_{N-2}}\cdots e^{\theta \Delta_1}] \\
+&\leq e^{\theta^2(a_N^2 + a_{N-1}^2 + \cdots a_1^2)/2} \\
+&= e^{\theta^2 v_N^2 / 2}
+\end{align*}
+$$
+
+The first step follows from the pull-through rule and the fact that \(X_0, \dots, X_{N-1}\) are all bounded and \(\mathcal{F}_{N-1}\)-measurable. At each step \(k=N,\dots, 1\), we have invoked the Hoeffding CGF bound, conditional on \(\mathcal{F}_{k-1}\). This action is legal because \(\EE[\Delta_k|\mathcal{F}_{k-1}] = 0\) by the martingale property and \(|\Delta k| \leq a_k\) by assumption. Finally, taking the logarithm to complete the proof.<br><br>
+
+We now have all the machinery needed to complete the proof of the Hoeffding–Azuma maximal inequality. So, note that the Hoeffding–Azuma lemma and the exponential maximal inequality yields that:
+
+$$ \mathbb{P}\left\{\max_{k\leq N} X_k>t\right\} =\mathbb{P}\left\{\max_{k\leq N} e^{\theta X_k} > e^{\theta t}\right\} \leq e^{-\theta t} \cdot \EE[e^{\theta X_N}]$$
+
+Then, writing the inequality using the cumulant generating function and then optimizing over all possible \(\theta>0\) yields the Hoeffding-Azuma maximal inequality, that:
+
+$$\mathbb{P}\left\{\max_{k\leq N} |X_k - X_0| > t\right\} \leq 2e^{-t^2/2v_N} $$
+
+where \(v_N = \sum_{k=1}^N a_k^2\).
+
+
+</div><br>
+
+
+<button class="collapsible"><strong>Ville's Maximal Inequality for supermartingales versus Markov's Inequality</strong></button>
+  <div class="content">
+<br>
+
+Fix a probability space and a filtration. Consider a positive supermartingale \((X_k: k\in\mathbb{Z}_+)\). Then for all \(t>0\), we have:
+
+$$ \mathbb{P}\left\{\sup_{k\geq 0} X_k > t\right\}\leq\frac{\EE[X_0]}{t}$$
+
+We emphasize that Ville’s maximal inequality controls the entire infinite trajectory of the supermartingale in terms of its initial value \(\EE[X_0]\).
+
+</div><br>
+
+So that's it! Martingales are pretty cool, they yield some <strong>STRONG</strong> concentration inequalities!
 
     </div>
   </div>
