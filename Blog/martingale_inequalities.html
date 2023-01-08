@@ -426,8 +426,56 @@ $$\begin{align*}
 $$
 
 Thus, we conclude that \(\boxed{\Pr(\bar{X}<(1-\epsilon)\theta) < \exp(-\theta n\epsilon^2/2)}\)
+</div><br>
+
+
+<button class="collapsible"><strong>Hoeffding's Inequality</strong></button>
+  <div class="content">
+<br>
+
+Let \(X_1, \dots, X_n\) be independent random variables such that \(a_i\leq X_i\leq b_i\) almost surely. Consider the sum of these random variables: \(S_n = X_1 + \dots + X_n\). Then, Hoeffding's theorem states that, for all \(t>0\),
+
+$$ \boxed{\Pr(S_n - \EE[S_n] \geq t) \leq \exp\left(-\frac{2t^2}{\sum_{i=1}^n (b_i - a_i)^2}\right)}$$
+
+$$\boxed{\Pr(|S_n - \EE[S_n]| \geq t) \leq 2\exp\left(-\frac{2t^2}{\sum_{i=1}^n (b_i - a_i)^2}\right)}$$
+
+To prove this, we use Hoeffding's lemma: let \(X\) be a random variable such that \(X\in[a,b]\) almost surely. Hoeffding's lemma states that:
+
+$$ \EE\left[e^{s(X-\EE[X])}\right] \leq \exp\left(\frac{1}{8}s^2 (b-a)^2\right)$$
+
+So, going back to our original setting: for \(s, t > 0\), we can exponentiate the initial probability function with the map \(x \mapsto e^{sx}\):
+<!-- , Markov's inequality and the independence of \(X_i\) implies that: -->
+
+$$ \Pr(S_n - \EE[S_n] \geq t) = \Pr(\exp(s(S_n - \EE[S_n])) \geq e^{st})$$
+
+We can bound this probability using Markov's inequality:
+
+$$\Pr(\exp(s(S_n - \EE[S_n])) \geq e^{st}) \leq \frac{\EE[\exp(s(S_n - \EE[S_n]))]}{e^{st}}$$
+
+Since \(X_1, \dots, X_n\) are independent, we can decompose this further to:
+
+$$\frac{\EE[\exp(s(S_n - \EE[S_n]))]}{e^{st}} = e^{-st} \prod_{i=1}^n \EE[\exp(s(X_i - \EE[X_i]))]$$
+
+Since \(X_i\) and \(\EE[X_i]\) take values between \([a_i, b_i]\), we can further bound this inequality by:
+
+$$\frac{\EE[\exp(s(S_n - \EE[S_n]))]}{e^{st}} = e^{-st} \prod_{i=1}^n \exp\left(\frac{s^2(b_i - a_i)^2}{8}\right)$$
+
+Simplifying this, we get:
+
+$$ \Pr(S_n - \EE[S_n] \geq t) \leq \exp\left(-st + \frac{s^2}{8}\sum_{i=1}^n (b_i - a_i)^2\right)$$
+
+Setting \(s = 4t/\sum_{i=1}^n (b_i -a_i)^2\) gives us the first equation.<br><br>
+
+For the second result, note that:
+
+$$\Pr(|S_n - \EE[S_n]| \geq t) = \Pr(S_n - \EE[S_n] \geq t) + \Pr(S_n-\EE[S_n] \leq -t)$$
+
+Using the first result twice (setting the RHS to \(t\) and \(-t\) respectively) gives us that:
+
+$$\Pr(|S_n - \EE[S_n]| \geq t) \leq 2\exp\left(-\frac{2t^2}{\sum_{i=1}^n (b_i - a_i)^2}\right)$$
 
 </div><br>
+
 
 
     </div>
