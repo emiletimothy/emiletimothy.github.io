@@ -50,7 +50,7 @@ h5 {
   <a href="blog.html">Blog</a>
   <a href="talks.html">Talks</a>
   <a href="publications.html">Publications</a>
-  <a href="extracurriscular.html" class="active">Extracurricular</a>
+  <a href="extracurricular.html" class="active">Extracurricular</a>
   <a href="CV.html">CV</a>
   <a href="contact.html">Contact</a>
 </div>
@@ -61,106 +61,79 @@ h5 {
   box-sizing: border-box;
 }
 
-.img-container {
-  float: left;
-  width: 100.00%;
-  padding: 5px;
-  display:inline-block;
-}
-
-.clearfix::after {
+/*.clearfix::after {
   content: "";
   clear: both;
   display: table;
-}
+}*/
 
 .container {
-  position: relative;
-  max-width: 50%; /* Maximum width */
-  margin: 5px auto; /* Center it */
-  float:left;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); 
+  grid-template-columns: repeat (3, 2vw);
+  grid-gap: 5px;
 }
-
-.container .content {
-  position: absolute; /* Position the background text */
-  bottom: 0; /* At the bottom. Use top:0 to append it to the top */
-  background: rgb(0, 0, 0); /* Fallback color */
-  background: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
-  color: #f1f1f1; /* Grey text */
-  width: 50%; /* Full width */
-  padding: 10px; /* Some padding */
+.container > img {
+    max-width: 100%;
+}
+.grid-item{
+    position: relative;
+    height: 425px;
+    object-fit: cover;
+}
+.content{
+    position: absolute; /* Position the background text */
+    bottom: 0; /* At the bottom. Use top:0 to append it to the top */
+    background: rgb(0, 0, 0); /* Fallback color */
+    background: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
+    color: #f1f1f1; /* Grey text */
+    width: 50%; /* Full width */
+    padding: 10px;
 }
 
 </style>
 </head>
 <body>
-
-<div class="clearfix">
-  <div class="img-container">
-<!-- teaching0.png -->
-<!-- teach_pic.jpg -->
     <div class="container">
-        <img src="Pictures/teaching0.jpg" alt="Italy" style="width:100%">
+        <div class = "grid-item">
+        <img src = "Pictures/teaching0.jpg"  alt="Teaching">
         <div class="content">
             <h1> Teaching</h1>
             <p>See my teaching experience!</p>
-        </div>
-    </div>
-<!-- suriname_school.png -->
-<!-- un_meeting.jpg -->
-    <div class="container">
-        <img src="Pictures/suriname_school.png" alt="Italy" style="width:100%">
+        </div> </div>
+        <div class = "grid-item">
+        <img src = "Pictures/suriname_school.png"  alt="Outreach" style="object-position: -20px -50px">
         <div class="content">
             <h1> Outreach</h1>                                                  
             <p>See my work on advocacy for the UN Sustainable Development Agenda!</p>
-        </div>
-    </div>
-</div></div>
-
-<div class="clearfix">
-  <div class="img-container">
-
-    <div class="container">
-        <img src="Pictures/leader_pic.jpg" alt="Italy" style="width:99%">
+        </div> </div>
+        <div class = "grid-item">
+        <img src = "Pictures/leader_pic.jpg" alt="Leadership and Equity">
         <div class="content">
             <h1> Leadership and Equity</h1>
             <p>See my leadership statement!</p>
-        </div>
-    </div>
-
-
-    <div class="container">
-        <img src="Pictures/playing_piano2.jpg" alt="Italy" style="width:100%">
+        </div></div>
+        <div class = "grid-item">
+        <img src = "Pictures/playing_piano2.jpg"  alt="Music">
         <div class="content">
             <h1> Music</h1>                                                  
             <p>See what I'm playing on the piano and what I'm listening to!</p>
-        </div>
-    </div>
-
-</div></div>
-
-
-<div class="clearfix">
-  <div class="img-container">
-
-    <div class="container">
-        <img src="Pictures/sciacs.jpg" alt="Italy" style="width:100%">
+        </div></div>
+        <div class = "grid-item">
+        <img src = "Pictures/sciacs.jpg" height = "425px" alt="Athletics">
         <div class="content">
             <h1> Athletics </h1>
             <p>See some of my athletic updates!</p>
-        </div>
-    </div>
-
-
-    <div class="container">
-        <img src="Pictures/languages0.png" alt="Italy" style="width:100%">
+        </div></div>
+        <div class = "grid-item">
+        <img src = "Pictures/languages0.png" height = "425px" alt="Languages">
         <div class="content">
             <h1> Languages</h1>                                                  
             <p>Watch me on my sporadic quests to learn new languages!</p>
-        </div>
+        </div></div>
     </div>
+</div>
 
-</div></div>
 
 
 <br><br>
